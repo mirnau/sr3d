@@ -1,2 +1,4 @@
 # sr3d
-A Shadowrun 3d Homebrew System
+
+A Shadowrun 3d Homebrew System for Foundry
+
