@@ -1,0 +1,48 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+    </header>
+
+    <div id="body">
+        <table>
+            <tr>
+                <th>{{localize 'sr3d.item.weapon.conceal'}}</th>
+                <th>{{localize 'sr3d.item.weapon.ammo'}}</th>
+                <th>{{localize "sr3d.item.weapon.mode"}}</th>
+                <th>{{localize "sr3d.item.weapon.damage"}}</th>
+                <th>{{localize "sr3d.item.weapon.range"}}</th>
+                <th>{{localize "sr3d.item.weapon.weight"}}</th>
+                <th>{{localize "sr3d.item.weapon.legal"}}</th>
+                <th>{{localize "sr3d.item.weapon.recoilComp"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <input name ="data.weight" type="text" value="{{data.weight}}" placeholder="{{ localize 'sr3d.item.weapon.weight' }}">
+                    <input name ="data.conceal" type="text" value="{{data.conceal}}" data-dtype="Number">
+                </td>
+                <td>
+                    <input name ="data.ammo" type="text" value="{{data.ammo}}" data-dtype="Number">              
+                </td>
+                <td>
+                    <input name ="data.mode" type="text" value="{{data.mode}}" data-dtype="Number">
+                </td>
+                <td>
+                    <input name ="data.damage" type="text" value="{{data.damage}}" data-dtype="Number">
+                </td>
+                <td>
+                    <input name ="data.range" type="text" value="{{data.range}}" data-dtype="Number">
+                </td>
+                <td>
+                    <input name ="data.weight" type="text" value="{{data.weight}}" data-dtype="Number">
+                </td>
+                <td>
+                    <input name ="data.legal" type="text" value="{{data.legal}}" data-dtype="String">
+                </td>
+                <td>
+                    <input name ="data.recoilComp" type="text" value="{{data.recoilComp}}" data-dtype="Number">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

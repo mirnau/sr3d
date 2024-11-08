@@ -1,0 +1,234 @@
+{
+    "Actor": {
+        "types": [
+            "playerCharacter"
+        ],
+        
+        "templates": {
+
+            "race": {
+                "maxAge": 0,
+                "modifiers": {
+                    "strength": 0,
+                    "quickness": 0,
+                    "body": 0,
+                    "charisma": 0,
+                    "intelligence": 0,
+                    "wisdom": 0
+                },
+                "selectVision": "select",
+                "description": ""
+            },
+
+            "character": {
+                "names": [
+                    {
+                        "alias": ""
+                    }
+                ],
+                "pronouns": "",
+                "age": 0,
+                "looks": "",
+                "quote": "",
+                "ratsrace":{
+   
+                    "income": [
+                        {
+                            "post": 0
+                        }
+                    ],
+   
+                    "expenses": [
+                        {
+                            "post": 0
+                        }
+                    ],
+   
+                    "debts": [
+                        {
+                            "creditor": "",
+                            "interestPerMonth": 0.0,
+                            "debt": 0.0
+                        }
+                    ],
+
+                    "illiquidAssets": 0.0
+                }
+            },
+
+            "attributes": {
+                "body": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "quickness": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "strength": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "charisma": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "intelligence":{
+                    "base": 0,
+                    "mod": 0
+                },
+                "willpower":{
+                    "base": 0,
+                    "mod": 0
+                }
+            },
+
+            "skill": [
+                {
+                    "name": "",
+                    "baseValue": 0,
+                    "modValue" : 0,
+                    "special": ""
+                }
+            ],
+
+            "movement": {
+                "walking": 0, 
+                "running": 0 
+            },
+
+            "karma": {
+                "goodKarma": 0,
+                "karmaPool": 0,
+                "miraculousSurvival": false
+            },
+
+            "damageTracker": {
+                "stun": 0,
+                "physical": 0,
+                "overflow": 0
+            },
+        
+            "languageSkills": [
+                {
+                    "name": "",
+                    "read": 0,
+                    "write": 0
+                }
+            ]
+        }
+    },
+
+    "playerCharacter":{
+        "templates": [
+            "character",
+            "race",
+            "attributes",
+            "skill",
+            "skill",
+            "langaugeSkills",
+            "movement",
+            "damageTracker"
+        ]
+    },
+
+    "Item": {
+        "types": [
+            "weapon", 
+            "vehicle",
+            "vehicleMods",
+            "rocket",
+            "ammunition",
+            "apparel",
+            "creditStick",
+            "enhancer",
+            "cyberwear",
+            "misc"
+        ],
+        
+        "templates": {
+            "base": {
+                "availability": "00:00",
+                "cost": 0,
+                "streetIndex": 0.0,
+                "description": "Description"
+            },
+            "commonModifiable": {
+                "conceal": 0,
+                "legal": "select",
+                "weight": 0.0
+            }
+        },
+
+        "vehicle": {
+            "templates": ["base"],
+            "handling": "0/0",
+            "speed": 0,
+            "acceleration": 0,
+            "body": 0,
+            "armor": 0,
+            "sig": 0,
+            "autoNavigation": 0,
+            "pilot": 0,
+            "sensor": 0,
+            "cargo": 0,
+            "load": 0,
+            "seating": 0
+        },
+
+        "vehicleMods": {
+            "templates": ["base"],
+            "cfCost": 0,
+            "recoilComp": 0
+        },
+        
+        "weapon": {
+            "templates": ["base", "commonModifiable"],
+            "ammo": "0(a)",
+            "mode": "select",
+            "damage": "select",
+            "range": 0,
+            "recoilComp": 0.0
+        },
+
+        "rocket": {
+            "templates": ["base", "commonModifiable"],
+            "damage": 0,
+            "intelligence": 0,
+            "blast": "0/0"
+        },
+        
+        "ammunition": {
+            "templates": ["base"],
+            "weight": 0.0
+        },
+
+        "apparel": {
+            "templates": ["base", "commonModifiable"],
+            "balisitc": 0,
+            "impact": 0
+        },
+
+        "creditStick": {
+            "templates": ["base"],
+            "transactionLimit": 0,
+            "rating": 0
+        },
+        
+        "enhancer": {
+            "templates": ["base"],
+            "statModifier": "stat", 
+            "modifier": 0.0
+        },
+
+        "cyberwear": {
+            "templates": ["base"],
+            "essence": 0.0
+        },
+
+        "misc": {
+            "templates": ["base"],
+            "rating": 0
+        }
+    }
+}

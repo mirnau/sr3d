@@ -1,0 +1,12 @@
+<form class="{{cssClass}}" autocomplete="off" style="background-color: #f0e68c;">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1>
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/>
+        </h1>
+    </header>
+    <div id="svelte-component"></div> <!-- This is where your Svelte app will mount -->
+    
+    <!-- Load your Svelte bundle here -->
+    <script type="module" src="module/svelte-bundle.js"></script>
+</form>

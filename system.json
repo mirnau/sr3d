@@ -1,0 +1,33 @@
+{
+    "name": "sr3d",
+    "title": "Shadowrun Third Edition Homebrew",
+    "description": "An unofficial fan system for Shadowrun Third Edition",
+    "authors": [
+            {
+                "name": "Otterbeast"
+            }   
+        ],
+    "version": "0.01",
+    "compatibility": {
+        "minimum" : "12.331",
+        "verified": "12.331"
+      },
+    "esmodules": [
+        "sr3d.js"
+    ],
+    "styles": [
+        "sr3d.css"
+    ],
+    "packs": [
+
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "primaryTokenAttribute": "wounds",
+    "initiative": "1d6 + @reaction"
+}
