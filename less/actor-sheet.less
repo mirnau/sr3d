@@ -1,47 +1,33 @@
-
 .sr3d.sheet.character {
-   
-    min-width: @componentWidth * 2;
+    min-width: @component-width*2;
     min-height: 800px;
     max-width: 1200px;
     background: @transparent;
-    border:0px;
 
     .window-content {
-        padding: 0;
-        margin: 0;
-        border-width: 0px;
         background: @transparent;
     }
 
     form {
         background: @transparent;
-        display: flex;
-        flex-direction: row;
-        
     }
 
     .sheet-content {
         display: flex;
         flex-wrap: wrap;
         background: @transparent;
-        gap: 5px;
+        gap: 1em;
 
-        .portrait {
-            width: 250px;
-            height: 250px;
+        .portrait { 
+            width: 100%;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
             object-position: center;
-
-            .clipped-corners(15px, 15px, 30px, 15px); 
-
+        
+            .clipped-corners(15px, 15px, 30px, 15px);
+        
             border: 0px;
             box-sizing: border-box;
-        }
-        
-        .full-width-item {
-            flex: 1 1 100%;
-            max-width: 100%;
         }
     }
 }

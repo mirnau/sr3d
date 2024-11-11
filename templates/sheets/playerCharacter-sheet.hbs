@@ -4,6 +4,7 @@
         <!-- Image Section -->
         <div class="sheet-component">
             <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+            <div class="red-box"></div>
         </div>
 
         <!-- Name Section -->
@@ -11,7 +12,7 @@
             <h1>{{actor.name}}</h1>
             <select name="HardcodedSelector">
                 {{#each config.races as |race|}}
-                <option value="{{race}}">{{race}}</option>
+                <option value="{{race}}">{{localize race}}</option>
                 {{/each}}
             </select>
             <p>Pronouns: {{system.pronouns}}</p>
@@ -22,7 +23,9 @@
 
         <!-- Attributes Section -->
         <div class="sheet-component">
-            {{> "systems/sr3d/templates/components/attributes.hbs"}}
+                {{#each config.attributes as | a |}}
+                <option >{{localize a}}</option>
+                {{/each}}
         </div>
 
         <!-- Dice Pools Section -->
@@ -36,12 +39,12 @@
         </div>
 
         <!-- Health Section -->
-        <div class="full-width-item health">
+        <div class="sheet-component greedy health">
             <p>Health Goes here</p>
         </div>
 
         <!-- Dice and Budget Section -->
-        <div class="sheet-component greedy">
+        <div class="sheet-component">
             <h1>Skills</h1>
         </div>
         <div class="sheet-component">

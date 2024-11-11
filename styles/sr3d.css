@@ -1,6 +1,6 @@
 .sr3d.sheet.item form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .sr3d.sheet.item .sheet-content {
   height: 100%;
@@ -15,37 +15,27 @@
   min-height: 800px;
   max-width: 1200px;
   background: transparent;
-  border: 0px;
 }
 .sr3d.sheet.character .window-content {
-  padding: 0;
-  margin: 0;
-  border-width: 0px;
   background: transparent;
 }
 .sr3d.sheet.character form {
   background: transparent;
-  display: flex;
-  flex-direction: column;
 }
 .sr3d.sheet.character .sheet-content {
   display: flex;
   flex-wrap: wrap;
   background: transparent;
-  gap: 5px;
+  gap: 1em;
 }
 .sr3d.sheet.character .sheet-content .portrait {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
   clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
   border: 0px;
   box-sizing: border-box;
-}
-.sr3d.sheet.character .sheet-content .full-width-item {
-  flex: 1 1 100%;
-  max-width: 100%;
 }
 @font-face {
   font-family: 'VT323';
@@ -57,7 +47,7 @@ body {
   font-family: 'VT323', monospace;
   font-size: 16px;
   line-height: 1.2;
-  color: white;
+  color: #33ff00;
 }
 body h1,
 body h2,
@@ -66,7 +56,7 @@ body h4 {
   font-family: 'VT323', monospace;
   margin: 0.5em 0;
   line-height: 1.2;
-  color: white;
+  color: #33ff00;
 }
 body h1 h1,
 body h2 h1,
@@ -107,17 +97,27 @@ body h4 h4 {
 .sheet-component {
   box-sizing: border-box;
   padding: 10px;
-  flex: 0 0 300px;
-  max-width: 300px;
-  min-height: 200px;
-  background: #565a77;
+  flex: 1 1 300px;
+  background: #3e4053;
+  position: relative;
   clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
 }
-.sheet-component .greedy {
-  flex: 1 1 400px;
-  max-width: 100%;
+.sheet-component .proportional {
+  aspect-ratio: 1 / 1;
 }
-.attribute {
-  width: 30%;
-  box-shadow: 4px;
+.sheet-component .health {
+  flex: 1 1 100%;
+}
+.sheet-component .red-box {
+  position: absolute;
+  bottom: -50px;
+  /* Adjust these values to control the position of the box */
+  right: 50px;
+  width: 150px;
+  /* Set the size of the red box */
+  height: 100px;
+  background-color: red;
+  z-index: 2;
+  /* Ensures the box appears above the image */
+  clip-path: none;
 }

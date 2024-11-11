@@ -1,18 +1,28 @@
 .sheet-component {
-
     box-sizing: border-box;
     padding: 10px;
+    flex: 1 1 300px; // Initial size of 300px, will grow and shrink proportionally
+    background: @background-color;
+    position: relative;
 
-    flex: 0 0 300px;
-    max-width: 300px;
-    min-height: 200px;
-
-    .greedy {
-        flex: 1 1 400px;
-        max-width: 100%;
+    .proportional {
+        aspect-ratio: 1 / 1; // Adjust this based on your design needs (e.g., 16 / 9)
     }
 
-    background: @background-color;
+    .clipped-corners(15px, 15px, 30px, 15px); // Assuming this is a mixin for corner styling
 
-    .clipped-corners(15px, 15px, 30px, 15px);
+    .health {
+        flex: 1 1 100%;
+    }
+
+    .red-box {
+        position: absolute;
+        bottom: -50px; /* Adjust these values to control the position of the box */
+        right: 50px;
+        width: 150px; /* Set the size of the red box */
+        height: 100px;
+        background-color: red;
+        z-index: 2; /* Ensures the box appears above the image */
+        clip-path: none; 
+    }
 }
