@@ -1,0 +1,130 @@
+.sr3d.sheet.item form {
+  display: flex;
+  flex-direction: column;
+}
+.sr3d.sheet.item .sheet-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sr3d.sheet.item .sheet-content .editor {
+  height: 100%;
+}
+.sr3d.sheet.character {
+  min-width: 400px;
+  min-height: 800px;
+  background: transparent;
+}
+.sr3d.sheet.character .window-content {
+  padding: 0;
+  margin: 0;
+  border-width: 0px;
+  background: transparent;
+}
+.sr3d.sheet.character form {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+.sr3d.sheet.character .sheet-content {
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(30deg, #ff97a8, #5dd8d2);
+  gap: 1rem;
+  height: 100%;
+  /* Apply the 45-degree clipped corner mixin with a corner size of 20px */
+  clip-path: polygon(20px 0px, calc(100% - 20px) 0px, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0px calc(100% - 20px), 0px 20px);
+}
+.sr3d.sheet.character .sheet-content .image-frame {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.sr3d.sheet.character .sheet-content .portrait {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  /* Apply the 45-degree clipped corner mixin with a smaller corner size */
+  clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
+  /* Smaller corner size for a different look */
+  border: 2px solid #d400ff;
+  box-sizing: border-box;
+}
+.sr3d.sheet.character .sheet-content .grid-item {
+  flex: 1 1 200px;
+  max-width: 300px;
+  min-height: 200px;
+  box-sizing: border-box;
+}
+.sr3d.sheet.character .sheet-content .grid-item .greedy {
+  flex: 1 1 400px;
+  max-width: 100%;
+}
+.sr3d.sheet.character .sheet-content .health {
+  min-height: 150px;
+  background-color: antiquewhite;
+}
+.sr3d.sheet.character .sheet-content .full-width-item {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+/* Font Face for VT323 */
+@font-face {
+  font-family: 'VT323';
+  src: url('fonts/VT323/VT323-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  line-height: 1.2;
+}
+body h1,
+body h2,
+body h3,
+body h4 {
+  font-family: 'VT323', monospace;
+  margin: 0.5em 0;
+  line-height: 1.2;
+}
+body h1 h1,
+body h2 h1,
+body h3 h1,
+body h4 h1 {
+  font-size: 3rem;
+  font-style: bold;
+  margin-bottom: 0em;
+}
+body h1 h2,
+body h2 h2,
+body h3 h2,
+body h4 h2 {
+  font-size: 2.5rem;
+  font-style: bold;
+  margin-bottom: 0em;
+}
+body h1 h3,
+body h2 h3,
+body h3 h3,
+body h4 h3 {
+  font-size: 2rem;
+  font-style: bold;
+  margin-bottom: 0em;
+}
+body h1 h4,
+body h2 h4,
+body h3 h4,
+body h4 h4 {
+  font-size: 1.5rem;
+  font-style: bold;
+  margin-bottom: 0em;
+}
+.sr3d.sheet {
+  background: transparent;
+  border-width: 0px;
+  shape-outside: none;
+}

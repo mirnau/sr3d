@@ -1,12 +1,91 @@
-<form class="{{cssClass}}" autocomplete="off" style="background-color: #f0e68c;">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1>
-            <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/>
-        </h1>
-    </header>
-    <div id="svelte-component"></div> <!-- This is where your Svelte app will mount -->
-    
-    <!-- Load your Svelte bundle here -->
-    <script type="module" src="module/svelte-bundle.js"></script>
+<form class="{{cssClass}} grid-container" autocomplete="off">
+    <div class="sheet-content">
+
+        <!-- Image Section -->
+        <div class="grid-item image-frame">
+            <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        </div>
+
+        <!-- Name Section -->
+        <div class="grid-item">
+            <h1>{{actor.name}}</h1>
+            <select name="HardcodedSelector">
+                {{#each config.races as |race|}}
+                <option value="{{race}}">{{race}}</option>
+                {{/each}}
+            </select>
+            <p>Pronouns: {{system.pronouns}}</p>
+            <p>Age: {{system.age}}</p>
+            <p>Looks: {{system.looks}}</p>
+            <p>Quote: "{{system.quote}}"</p>
+        </div>
+
+        <!-- Attributes Section -->
+        <div class="grid-item">
+            {{> "systems/sr3d/templates/components/attributes.hbs"}}
+        </div>
+
+        <!-- Dice Pools Section -->
+        <div class="grid-item">
+            {{> "systems/sr3d/templates/components/dice-pools.hbs"}}
+        </div>
+
+        <!-- Movement Section -->
+        <div class="grid-item">
+            {{> "systems/sr3d/templates/components/movement.hbs"}}
+        </div>
+
+        <!-- Health Section -->
+        <div class="full-width-item health">
+            <p>Health Goes here</p>
+        </div>
+
+        <!-- Dice and Budget Section -->
+        <div class="grid-item">
+            <h1>Skills</h1>
+        </div>
+        <div class="grid-item greedy">
+            <h2>Budget</h2>
+            <p>Income: {{system.budget.income}}</p>
+            <p>Expenses: {{system.budget.expenses}}</p>
+            <p>Debts: {{system.budget.debts}}</p>
+        </div>
+
+        <!-- Tabs Navigation and Content Sections -->
+        <div class="grid-item">
+            <div class="sheet-tabs">
+                <nav class="tabs">
+                    <a class="item" data-tab="inventory">Inventory</a>
+                    <a class="item" data-tab="weapons">Weapons</a>
+                    <a class="item" data-tab="magic">Magic</a>
+                    <a class="item" data-tab="vehicles">Vehicles</a>
+                </nav>
+            </div>
+            <div class="tab-content">
+                <section class="tab" data-tab="inventory">
+                    {{#if system.inventory.weapons.length}}
+                    <ul class="inventory-list">
+                        {{#each system.inventory.weapons as |weapon|}}
+                        {{> "systems/sr3d/templates/components/inventory.hbs" weapon=weapon}}
+                        {{/each}}
+                    </ul>
+                    {{else}}
+                    <p>No weapons available.</p>
+                    {{/if}}
+                </section>
+                <section class="tab" data-tab="weapons">
+                    <h2>Weapons</h2>
+                    <p>Weapons content goes here...</p>
+                </section>
+                <section class="tab" data-tab="magic">
+                    <h2>Magic</h2>
+                    <p>Magic content goes here...</p>
+                </section>
+                <section class="tab" data-tab="vehicles">
+                    <h2>Vehicles</h2>
+                    <p>Vehicles content goes here...</p>
+                </section>
+            </div>
+        </div>
+    </div>
 </form>

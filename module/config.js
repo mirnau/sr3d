@@ -15,6 +15,27 @@ sr3d.complexActions = {
     astralProjection: "sr3d.complexActions.astralProjection"
 };
 
+sr3d.races = {
+    troll: "sr3d.actor.races.troll",
+    elf: "sr3d.actor.races.elf",
+    dwarf: "sr3d.actor.races.dwarf",
+    orc: "sr3d.actor.races.orc",
+    human: "sr3d.actor.races.human"
+};
+
+sr3d.metahuman = {
+    name: "sr3d.item.metahuman.name",
+    maxAge: "sr3d.item.metahuman.maxAge",
+    strength: "sr3d.item.metahuman.strength",
+    quickness: "sr3d.item.metahuman.quickness",
+    body: "sr3d.item.metahuman.body",
+    charisma: "sr3d.item.metahuman.charisma",
+    intelligence: "sr3d.item.metahuman.intelligence",
+    willpower: "sr3d.item.metahuman.willpower",
+    selectVision: "sr3d.item.metahuman.selectVision",
+    description: "sr3d.item.metahuman.description",
+}
+
 sr3d.weapon = {
     conceal: "sr3d.item.weapon.conceal",
     ammo: "sr3d.item.weapon.ammo",
@@ -51,7 +72,7 @@ sr3d.race = {
     body: "sr3d.actor.race.body",
     charisma: "sr3d.actor.race.charisma",
     intelligence: "sr3d.actor.race.intelligence",
-    wisdom: "sr3d.actor.race.wisdom",
+    willpower: "sr3d.actor.race.willpower",
     selectVision: "sr3d.actor.race.selectVision",
     description: "sr3d.actor.race.description"
 };
@@ -80,8 +101,20 @@ sr3d.attributes = {
     body: "sr3d.actor.attributes.body",
     charisma: "sr3d.actor.attributes.charisma",
     intelligence: "sr3d.actor.attributes.intelligence",
-    wisdom: "sr3d.actor.attributes.wisdom"
+    willpower: "sr3d.actor.attributes.willpower",
+    magic: "sr3d.actor.attributes.magic",
+    initiative: "sr3d.actor.attributes.initiative",
+    essence: "sr3d.actor.attributes.essence",
+    reaction: "sr3d.actor.attributes.reaction"
 };
+
+sr3d.dicepools = {
+    combat: "sr3d.actor.dicepools.combat",
+    astral: "sr3d.actor.dicepools.astral",
+    hacking: "sr3d.actor.dicepools.hacking",
+    control: "sr3d.actor.dicepools.control",
+    spell: "sr3d.actor.dicepools.spell"
+}
 
 sr3d.skills = "sr3d.actor.skills";
 

@@ -42,7 +42,6 @@
                 "interestPerMonth": "Montly Interest Rate",
                 "illiquidAssets": "Illiquid Assets"
             },
-
             "attributes": {
                 "attributes": "Attributes",
                 "strength": "Strength",
@@ -50,38 +49,43 @@
                 "body": "Body",
                 "charisma": "Charisma",
                 "intelligence": "Intelligence",
-                "wisdom": "Wisdom"
+                "willpower": "Willpower",
+                "initiative": "initiative",
+                "reaction": "Reaction",
+                "magic": "Magic",
+                "essence": "Essence"
             },
-
+            "dicepools": {
+                "combat": "Combat",
+                "astral": "Astral",
+                "hacking": "Hacking",
+                "control": "Control",
+                "spell": "Spell"
+            },
             "skills": "Skill",
             "movement": {
                 "movement": "Movement",
                 "walking": "Walking Speed",
                 "running": "RunningSpeed"
             },
-
             "karma": {
                 "karma": "Karma",
                 "karmaPool": "Karma Pool",
                 "goodKarma": "Good Karma"
             },
-
             "damageTracker": {
                 "damageTracker": "Damage Tracker",
                 "stun": "Stun",
                 "physical": "physical",
                 "owerflow": "overflow"
             },
-
             "languageSkills": {
                 "name": "Name",
                 "read": "Read",
                 "write": "Write"
             },
-
             "playerCharacter": "Player Character"
         },
-
         "item": {
             "weapon": {
                 "conceal": "Conceal",
@@ -92,6 +96,18 @@
                 "weight": "Weight",
                 "legal": "Legal",
                 "recoilComp": "Recoil Compensation"
+            },
+            "metahuman": {
+                "name": "Name",
+                "maxAge": "Max Age",
+                "strength": "Strength",
+                "quickness": "Quickness",
+                "body": "Body",
+                "charisma": "Charisma",
+                "intelligence": "Intelligence",
+                "willpower": "Willpower",
+                "selectVision": "Vision Type",
+                "description": "Description"
             },
             "vehicle": {
                 "handling": "Handling",

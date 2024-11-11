@@ -16,7 +16,7 @@
         "sr3d.js"
     ],
     "styles": [
-        "sr3d.css"
+        "styles/sr3d.css"
     ],
     "packs": [
 

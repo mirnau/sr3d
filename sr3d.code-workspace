@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "D:/Program Files/Foundry Virtual Tabletop/resources/app"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "sr3d",
+		"emeraldwalk.runonsave": {
+			"commands": [
+				{
+					"match": "\\.less$",
+					"cmd": "lessc less/sr3d.less styles/sr3d.css",
+					"message": "Compiling LESS file...",
+					"messageAfter": "LESS compilation complete."
+				}
+			]
+		}
+	}
+}

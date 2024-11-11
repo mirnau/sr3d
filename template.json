@@ -1,61 +1,44 @@
 {
     "Actor": {
-        "types": [
-            "playerCharacter"
-        ],
-        
+        "types": ["playerCharacter"],
         "templates": {
-
             "race": {
-                "maxAge": 0,
+                "name": "Human",
+                "maxAge": 100,
                 "modifiers": {
                     "strength": 0,
                     "quickness": 0,
                     "body": 0,
                     "charisma": 0,
                     "intelligence": 0,
-                    "wisdom": 0
+                    "willpower": 0
                 },
                 "selectVision": "select",
                 "description": ""
             },
-
             "character": {
-                "names": [
-                    {
-                        "alias": ""
-                    }
-                ],
-                "pronouns": "",
+                "names": [{
+                    "alias": ""
+                }],
+                "pronouns": "Them/They",
                 "age": 0,
-                "looks": "",
-                "quote": "",
-                "ratsrace":{
-   
-                    "income": [
-                        {
-                            "post": 0
-                        }
-                    ],
-   
-                    "expenses": [
-                        {
-                            "post": 0
-                        }
-                    ],
-   
-                    "debts": [
-                        {
-                            "creditor": "",
-                            "interestPerMonth": 0.0,
-                            "debt": 0.0
-                        }
-                    ],
-
+                "looks": "Handsome I bet",
+                "quote": "Alea iacta es",
+                "ratsrace": {
+                    "income": [{
+                        "post": 0
+                    }],
+                    "expenses": [{
+                        "post": 0
+                    }],
+                    "debts": [{
+                        "creditor": "",
+                        "interestPerMonth": 0.0,
+                        "debt": 0.0
+                    }],
                     "illiquidAssets": 0.0
                 }
             },
-
             "attributes": {
                 "body": {
                     "base": 0,
@@ -73,68 +56,44 @@
                     "base": 0,
                     "mod": 0
                 },
-                "intelligence":{
+                "intelligence": {
                     "base": 0,
                     "mod": 0
                 },
-                "willpower":{
+                "willpower": {
                     "base": 0,
                     "mod": 0
                 }
-            },
-
-            "skill": [
-                {
-                    "name": "",
-                    "baseValue": 0,
-                    "modValue" : 0,
-                    "special": ""
-                }
+            }
+        },
+        "playerCharacter": {
+            "templates": [
+                "character",
+                "race",
+                "attributes"
             ],
-
+            "skills": [], 
+            "languageSkills": [],
             "movement": {
-                "walking": 0, 
-                "running": 0 
+                "walking": 0,
+                "running": 0
             },
-
             "karma": {
                 "goodKarma": 0,
                 "karmaPool": 0,
                 "miraculousSurvival": false
             },
-
             "damageTracker": {
                 "stun": 0,
                 "physical": 0,
                 "overflow": 0
-            },
-        
-            "languageSkills": [
-                {
-                    "name": "",
-                    "read": 0,
-                    "write": 0
-                }
-            ]
+            }
         }
-    },
-
-    "playerCharacter":{
-        "templates": [
-            "character",
-            "race",
-            "attributes",
-            "skill",
-            "skill",
-            "langaugeSkills",
-            "movement",
-            "damageTracker"
-        ]
     },
 
     "Item": {
         "types": [
-            "weapon", 
+            "weapon",
             "vehicle",
             "vehicleMods",
             "rocket",
@@ -143,15 +102,15 @@
             "creditStick",
             "enhancer",
             "cyberwear",
-            "misc"
+            "misc",
+            "metahuman"
         ],
-        
         "templates": {
-            "base": {
+            "commodity": {
                 "availability": "00:00",
                 "cost": 0,
                 "streetIndex": 0.0,
-                "description": "Description"
+                "description": "Enter your description"
             },
             "commonModifiable": {
                 "conceal": 0,
@@ -159,9 +118,36 @@
                 "weight": 0.0
             }
         },
+        "weapon": {
+            "templates": [
+                "commodity",
+                "commonModifiable"
+            ],
+            "ammo": "0(a)",
+            "mode": "select",
+            "damage": "select",
+            "range": 0,
+            "recoilComp": 0.0
+        },
+        "metahuman": {
+            "name": "Type of Meta Human",
+            "maxAge": 0,
+            "modifiers": {
+                "strength": 0,
+                "quickness": 0,
+                "body": 0,
+                "charisma": 0,
+                "intelligence": 0,
+                "willpower": 0
+            },
+            "selectVision": "select",
+            "description": "Enter your description"
+        },
 
         "vehicle": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "handling": "0/0",
             "speed": 0,
             "acceleration": 0,
@@ -175,59 +161,60 @@
             "load": 0,
             "seating": 0
         },
-
         "vehicleMods": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "cfCost": 0,
             "recoilComp": 0
         },
-        
-        "weapon": {
-            "templates": ["base", "commonModifiable"],
-            "ammo": "0(a)",
-            "mode": "select",
-            "damage": "select",
-            "range": 0,
-            "recoilComp": 0.0
-        },
-
         "rocket": {
-            "templates": ["base", "commonModifiable"],
+            "templates": [
+                "commodity",
+                "commonModifiable"
+            ],
             "damage": 0,
             "intelligence": 0,
             "blast": "0/0"
         },
-        
         "ammunition": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "weight": 0.0
         },
-
         "apparel": {
-            "templates": ["base", "commonModifiable"],
-            "balisitc": 0,
+            "templates": [
+                "commodity",
+                "commonModifiable"
+            ],
+            "ballistic": 0,
             "impact": 0
         },
-
         "creditStick": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "transactionLimit": 0,
             "rating": 0
         },
-        
         "enhancer": {
-            "templates": ["base"],
-            "statModifier": "stat", 
+            "templates": [
+                "commodity"
+            ],
+            "statModifier": "stat",
             "modifier": 0.0
         },
-
         "cyberwear": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "essence": 0.0
         },
-
         "misc": {
-            "templates": ["base"],
+            "templates": [
+                "commodity"
+            ],
             "rating": 0
         }
     }
