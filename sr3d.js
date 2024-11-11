@@ -20,7 +20,7 @@ async function AsyncRegisterComponentTemplates() {
 Hooks.once("init", function() {
     console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
     
-    // Language Config
+    // NOTE: Language Config
     CONFIG.sr3d = sr3d;
    
     Items.unregisterSheet("core", ItemSheet);
@@ -32,7 +32,7 @@ Hooks.once("init", function() {
     AsyncRegisterComponentTemplates();
 
 
-    // NOTE: for repeating html elements n times
+    // NOTE: for repeating HTML-elements n times
     Handlebars.registerHelper("repeat", function(n, content) {
         let result ="";
         for (let i = 0; i < n; ++i)

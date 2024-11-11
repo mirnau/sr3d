@@ -30,7 +30,7 @@ export default class SR3DActorSheet extends ActorSheet {
         ctx.cssClass = "actorSheet";
 
         // INFO: Filter and categorize items based on their type
-        
+
         ctx.inventory = {
             weapons: ctx.actor.items.filter(item => item.type === "weapon"),
             armor: ctx.actor.items.filter(item => item.type === "armor"),
@@ -39,5 +39,11 @@ export default class SR3DActorSheet extends ActorSheet {
         };
 
         return ctx;
+    }
+
+    activeListenerts(html) {
+        super.activeListenerts(html);
+        
+        // TODO: Sheet interactivity
     }
 }

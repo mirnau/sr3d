@@ -1,83 +1,42 @@
-// Define a mixin for 45-degree clipped corners with a fixed offset
-.clipped-corners(@corner-size: 20px) {
-    clip-path: polygon(
-        @corner-size 0px, 
-        calc(100% - @corner-size) 0px, 
-        100% @corner-size, 
-        100% calc(100% - @corner-size), 
-        calc(100% - @corner-size) 100%, 
-        @corner-size 100%, 
-        0px calc(100% - @corner-size), 
-        0px @corner-size
-    );
-}
 
 .sr3d.sheet.character {
    
-    min-width: 400px;
-    min-height: 800px; 
-    background: transparent;
+    min-width: @componentWidth * 2;
+    min-height: 800px;
+    max-width: 1200px;
+    background: @transparent;
+    border:0px;
 
     .window-content {
         padding: 0;
         margin: 0;
         border-width: 0px;
-        background: transparent;
+        background: @transparent;
     }
 
     form {
-        background: transparent;
+        background: @transparent;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         
     }
 
     .sheet-content {
         display: flex;
         flex-wrap: wrap;
-        background: linear-gradient(30deg, rgb(255, 151, 168), rgb(93, 216, 210));
-        gap: 1rem;
-        height: 100%;
-
-        /* Apply the 45-degree clipped corner mixin with a corner size of 20px */
-        .clipped-corners(20px);
-
-        .image-frame {
-            width: 200px;
-            height: 200px;
-            margin: 10px;
-            overflow: hidden;
-            position: relative;
-        }
+        background: @transparent;
+        gap: 5px;
 
         .portrait {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             object-fit: cover;
             object-position: center;
 
-            /* Apply the 45-degree clipped corner mixin with a smaller corner size */
-            .clipped-corners(15px); /* Smaller corner size for a different look */
+            .clipped-corners(15px, 15px, 30px, 15px); 
 
-            border: 2px solid #d400ff;
+            border: 0px;
             box-sizing: border-box;
-        }
-
-        .grid-item {
-            flex: 1 1 200px;
-            max-width: 300px;
-            min-height: 200px;
-            box-sizing: border-box;
-
-            .greedy {
-                flex: 1 1 400px;
-                max-width: 100%;
-            }
-        }
-
-        .health {
-            min-height: 150px;
-            background-color: antiquewhite;
         }
         
         .full-width-item {

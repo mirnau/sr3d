@@ -1,0 +1,18 @@
+.sheet-component {
+
+    box-sizing: border-box;
+    padding: 10px;
+
+    flex: 0 0 300px;
+    max-width: 300px;
+    min-height: 200px;
+
+    .greedy {
+        flex: 1 1 400px;
+        max-width: 100%;
+    }
+
+    background: @background-color;
+
+    .clipped-corners(15px, 15px, 30px, 15px);
+}
