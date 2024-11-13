@@ -1,9 +1,11 @@
 <form class="{{cssClass}} grid-container" autocomplete="off">
-    <div class="sheet-content">
+    <div class="sheet-masonry-grid">
 
         <!-- Image Section -->
-        <div class="sheet-component">
-            <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="sheet-component proportional">
+            <div class="inner-background proportional">
+                <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+            </div>
             <div class="red-box"></div>
         </div>
 

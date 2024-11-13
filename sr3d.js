@@ -31,7 +31,6 @@ Hooks.once("init", function() {
 
     AsyncRegisterComponentTemplates();
 
-
     // NOTE: for repeating HTML-elements n times
     Handlebars.registerHelper("repeat", function(n, content) {
         let result ="";
@@ -43,3 +42,27 @@ Hooks.once("init", function() {
         return result;
     })
 });
+
+Hooks.on("renderSR3DActorSheet", (app, html, data) => {
+    console.log("MASONRY | Initializing after SR3DActorSheet render");
+
+    const gridElement = html[0].querySelector('.sheet-masonry-grid');
+    
+    if (!gridElement) {
+        console.error(`${app.constructor.name} | .sheet-masonry-grid was not found in the rendered HTML.`);
+        return;
+    }
+
+    // Get the column width from the CSS variable and parse it as an integer
+    const columnWidth = parseInt(getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(), 10);
+
+    // Initialize Masonry with the retrieved column width
+    new Masonry(gridElement, {
+        itemSelector: '.sheet-component',
+        columnWidth: columnWidth,
+        gutter: 10
+    });
+
+    console.log("MASONRY | Masonry grid initialized successfully.");
+});
+

@@ -1,0 +1,30 @@
+.sheet-component {
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 30%;
+    min-width: 300px;
+    margin-bottom: 10px;
+    background: @background-color;
+
+    .clipped-corners(1rem, 1rem, 2rem, 1rem);
+
+    .proportional {
+        aspect-ratio: 1 / 1;
+        overflow: hidden; /* Ensure overflow is hidden on the outer container */
+    }
+
+    .inner-background {
+        background: @background-color;
+        .clipped-corners(15px, 15px, 30px, 15px);
+    }
+
+    .portrait {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+        border: 0;
+        box-sizing: border-box;
+
+        .clipped-corners(1rem, 1rem, 2rem, 1rem);
+    }
+}

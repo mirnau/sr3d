@@ -1,41 +1,44 @@
-.sr3d.sheet.item form {
-  display: flex;
-  flex-direction: row;
-}
-.sr3d.sheet.item .sheet-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.sr3d.sheet.item .sheet-content .editor {
-  height: 100%;
-}
 .sr3d.sheet.character {
   min-width: 400px;
   min-height: 800px;
   max-width: 1200px;
   background: transparent;
 }
-.sr3d.sheet.character .window-content {
-  background: transparent;
-}
+.sr3d.sheet.character .window-content,
 .sr3d.sheet.character form {
   background: transparent;
 }
-.sr3d.sheet.character .sheet-content {
-  display: flex;
-  flex-wrap: wrap;
+.sr3d.sheet.character .sheet-masonry-grid {
+  --masonry-column-width: 30%;
+  margin: 20 auto;
+  padding: 10px;
   background: transparent;
-  gap: 1em;
 }
-.sr3d.sheet.character .sheet-content .portrait {
-  width: 100%;
+.sheet-component {
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 30%;
+  min-width: 300px;
+  margin-bottom: 10px;
+  background: #3e4053;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sheet-component .proportional {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  /* Ensure overflow is hidden on the outer container */
+}
+.sheet-component .inner-background {
+  background: #3e4053;
+  clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
+}
+.sheet-component .portrait {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
-  clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
-  border: 0px;
+  border: 0;
   box-sizing: border-box;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 @font-face {
   font-family: 'VT323';
@@ -93,31 +96,4 @@ body h4 h4 {
 .sr3d.sheet {
   border-width: 0px;
   shape-outside: none;
-}
-.sheet-component {
-  box-sizing: border-box;
-  padding: 10px;
-  flex: 1 1 300px;
-  background: #3e4053;
-  position: relative;
-  clip-path: polygon(15px 0px, calc(100% - 15px) 0px, 100% 15px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 15px 100%, 0px calc(100% - 15px), 0px 15px);
-}
-.sheet-component .proportional {
-  aspect-ratio: 1 / 1;
-}
-.sheet-component .health {
-  flex: 1 1 100%;
-}
-.sheet-component .red-box {
-  position: absolute;
-  bottom: -50px;
-  /* Adjust these values to control the position of the box */
-  right: 50px;
-  width: 150px;
-  /* Set the size of the red box */
-  height: 100px;
-  background-color: red;
-  z-index: 2;
-  /* Ensures the box appears above the image */
-  clip-path: none;
 }
