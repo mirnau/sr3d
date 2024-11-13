@@ -41,9 +41,9 @@ export default class SR3DActorSheet extends ActorSheet {
         return ctx;
     }
 
-    activeListenerts(html) {
-        super.activeListenerts(html);
+    activateListeners(html) {
+        super.activateListeners(html);
         
-        // TODO: Sheet interactivity
+        // Your sheet interactivity code here (e.g., click handlers, input changes)
     }
 }
