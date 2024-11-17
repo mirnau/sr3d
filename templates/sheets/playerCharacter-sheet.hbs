@@ -18,117 +18,134 @@
 
 
         <div class="sheet-component">
-                <div class="inner-background-container">
-                    <!-- Fake shadow (behind inner background) -->
-                    <div class="fake-shadow"></div>
-                    <!-- Inner content -->
-                    <div class="inner-background">
-                        <h1>{{actor.name}}</h1>
-                        <select name="HardcodedSelector">
-                            {{#each config.races as |race|}}
-                            <option value="{{race}}">{{localize race}}</option>
-                            {{/each}}
-                        </select>
-                        <p>Pronouns: {{system.pronouns}}</p>
-                        <p>Age: {{system.age}}</p>
-                        <p>Looks: {{system.looks}}</p>
-                        <p>Quote: "{{system.quote}}"</p>
-                    </div>
+            <div class="inner-background-container">
+                <!-- Fake shadow (behind inner background) -->
+                <div class="fake-shadow"></div>
+                <!-- Inner content -->
+                <div class="inner-background">
+                    <h1>{{actor.name}}</h1>
+                    <select name="HardcodedSelector">
+                        {{#each config.races as |race|}}
+                        <option value="{{race}}">{{localize race}}</option>
+                        {{/each}}
+                    </select>
+                    <p>Pronouns: {{system.pronouns}}</p>
+                    <p>Age: {{system.age}}</p>
+                    <p>Looks: {{system.looks}}</p>
+                    <p>Quote: "{{system.quote}}"</p>
                 </div>
+            </div>
         </div>
 
 
         <!-- Attributes Section -->
         <div class="sheet-component">
-                <div class="inner-background-container">
-                    <!-- Fake shadow (behind inner background) -->
-                    <div class="fake-shadow"></div>
-                    <!-- Inner content -->
-                    <div class="inner-background">
-                        {{#each config.attributes as | a |}}
-                        <option>{{localize a}}</option>
-                        {{/each}}
-                    </div>
+            <div class="inner-background-container">
+                <!-- Fake shadow (behind inner background) -->
+                <div class="fake-shadow"></div>
+                <!-- Inner content -->
+                <div class="inner-background">
+                    {{#each config.attributes as | a |}}
+                    <option>{{localize a}}</option>
+                    {{/each}}
                 </div>
+            </div>
         </div>
 
         <!-- Dice Pools Section -->
         <div class="sheet-component">
-            
-                <div class="inner-background-container">
-                    <div class="fake-shadow"></div>
-                    <div class="inner-background">
-                        {{> "systems/sr3d/templates/components/dice-pools.hbs"}}
-                    </div>
-            
+
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    {{> "systems/sr3d/templates/components/dice-pools.hbs"}}
+                </div>
+
             </div>
         </div>
 
         <!-- Movement Section -->
         <div class="sheet-component">
-                <div class="inner-background-container">
-                    <div class="fake-shadow"></div>
-                    <div class="inner-background">
-                        {{> "systems/sr3d/templates/components/movement.hbs"}}
-                    </div>
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    {{> "systems/sr3d/templates/components/movement.hbs"}}
+                </div>
             </div>
         </div>
 
         <!-- Health Section -->
         <div class="sheet-component greedy health">
-                <div class="inner-background-container">
-                    <div class="fake-shadow"></div>
-                    <div class="inner-background">
-                        <p>Health Goes here</p>
-                    </div>
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <p>Health Goes here</p>
+                </div>
             </div>
         </div>
 
-        <!-- Dice and Budget Section -->
-        <div class="sheet-component">
-            <h1>Skills</h1>
+        <!-- Health Section -->
+        <div class="sheet-component greedy health">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h1>Skills</h1>
+                </div>
+            </div>
         </div>
-        <div class="sheet-component">
-            <h2>Budget</h2>
-            <p>Income: {{system.budget.income}}</p>
-            <p>Expenses: {{system.budget.expenses}}</p>
-            <p>Debts: {{system.budget.debts}}</p>
+
+        <!-- Health Section -->
+        <div class="sheet-component greedy health">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h2>Budget</h2>
+                    <p>Income: {{system.budget.income}}</p>
+                    <p>Expenses: {{system.budget.expenses}}</p>
+                    <p>Debts: {{system.budget.debts}}</p>
+                </div>
+            </div>
         </div>
 
         <!-- Tabs Navigation and Content Sections -->
-        <div class="sheet-component ">
-            <div class="sheet-tabs">
-                <nav class="tabs">
-                    <a class="item" data-tab="inventory">Inventory</a>
-                    <a class="item" data-tab="weapons">Weapons</a>
-                    <a class="item" data-tab="magic">Magic</a>
-                    <a class="item" data-tab="vehicles">Vehicles</a>
-                </nav>
-            </div>
-            <div class="tab-content">
-                <section class="tab" data-tab="inventory">
-                    {{#if system.inventory.weapons.length}}
-                    <ul class="inventory-list">
-                        {{#each system.inventory.weapons as |weapon|}}
-                        {{> "systems/sr3d/templates/components/inventory.hbs" weapon=weapon}}
-                        {{/each}}
-                    </ul>
-                    {{else}}
-                    <p>No weapons available.</p>
-                    {{/if}}
-                </section>
-                <section class="tab" data-tab="weapons">
-                    <h2>Weapons</h2>
-                    <p>Weapons content goes here...</p>
-                </section>
-                <section class="tab" data-tab="magic">
-                    <h2>Magic</h2>
-                    <p>Magic content goes here...</p>
-                </section>
-                <section class="tab" data-tab="vehicles">
-                    <h2>Vehicles</h2>
-                    <p>Vehicles content goes here...</p>
-                </section>
+        <div class="sheet-component greedy health">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="sheet-tabs">
+                        <nav class="tabs">
+                            <a class="item" data-tab="inventory">Inventory</a>
+                            <a class="item" data-tab="weapons">Weapons</a>
+                            <a class="item" data-tab="magic">Magic</a>
+                            <a class="item" data-tab="vehicles">Vehicles</a>
+                        </nav>
+                    </div>
+                    <div class="tab-content">
+                        <section class="tab" data-tab="inventory">
+                            {{#if system.inventory.weapons.length}}
+                            <ul class="inventory-list">
+                                {{#each system.inventory.weapons as |weapon|}}
+                                {{> "systems/sr3d/templates/components/inventory.hbs" weapon=weapon}}
+                                {{/each}}
+                            </ul>
+                            {{else}}
+                            <p>No weapons available.</p>
+                            {{/if}}
+                        </section>
+                        <section class="tab" data-tab="weapons">
+                            <h2>Weapons</h2>
+                            <p>Weapons content goes here...</p>
+                        </section>
+                        <section class="tab" data-tab="magic">
+                            <h2>Magic</h2>
+                            <p>Magic content goes here...</p>
+                        </section>
+                        <section class="tab" data-tab="vehicles">
+                            <h2>Vehicles</h2>
+                            <p>Vehicles content goes here...</p>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
