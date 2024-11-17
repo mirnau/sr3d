@@ -1,48 +1,87 @@
 <form class="{{cssClass}} grid-container" autocomplete="off">
     <div class="sheet-masonry-grid">
 
-        <!-- Image Section -->
-        <div class="sheet-component proportional">
-            <div class="inner-background proportional">
-                <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="sheet-component">
+            <div class="proportional">
+                <div class="inner-background-container">
+                    <!-- Fake shadow (behind inner background) -->
+                    <div class="fake-shadow"></div>
+                    <!-- Inner content -->
+                    <div class="inner-background">
+                        <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                        <div class="red-box"></div>
+                    </div>
+                </div>
             </div>
-            <div class="red-box"></div>
         </div>
 
-        <!-- Name Section -->
+
+
         <div class="sheet-component">
-            <h1>{{actor.name}}</h1>
-            <select name="HardcodedSelector">
-                {{#each config.races as |race|}}
-                <option value="{{race}}">{{localize race}}</option>
-                {{/each}}
-            </select>
-            <p>Pronouns: {{system.pronouns}}</p>
-            <p>Age: {{system.age}}</p>
-            <p>Looks: {{system.looks}}</p>
-            <p>Quote: "{{system.quote}}"</p>
+                <div class="inner-background-container">
+                    <!-- Fake shadow (behind inner background) -->
+                    <div class="fake-shadow"></div>
+                    <!-- Inner content -->
+                    <div class="inner-background">
+                        <h1>{{actor.name}}</h1>
+                        <select name="HardcodedSelector">
+                            {{#each config.races as |race|}}
+                            <option value="{{race}}">{{localize race}}</option>
+                            {{/each}}
+                        </select>
+                        <p>Pronouns: {{system.pronouns}}</p>
+                        <p>Age: {{system.age}}</p>
+                        <p>Looks: {{system.looks}}</p>
+                        <p>Quote: "{{system.quote}}"</p>
+                    </div>
+                </div>
         </div>
+
 
         <!-- Attributes Section -->
         <div class="sheet-component">
-                {{#each config.attributes as | a |}}
-                <option >{{localize a}}</option>
-                {{/each}}
+                <div class="inner-background-container">
+                    <!-- Fake shadow (behind inner background) -->
+                    <div class="fake-shadow"></div>
+                    <!-- Inner content -->
+                    <div class="inner-background">
+                        {{#each config.attributes as | a |}}
+                        <option>{{localize a}}</option>
+                        {{/each}}
+                    </div>
+                </div>
         </div>
 
         <!-- Dice Pools Section -->
         <div class="sheet-component">
-            {{> "systems/sr3d/templates/components/dice-pools.hbs"}}
+            
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        {{> "systems/sr3d/templates/components/dice-pools.hbs"}}
+                    </div>
+            
+            </div>
         </div>
 
         <!-- Movement Section -->
         <div class="sheet-component">
-            {{> "systems/sr3d/templates/components/movement.hbs"}}
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        {{> "systems/sr3d/templates/components/movement.hbs"}}
+                    </div>
+            </div>
         </div>
 
         <!-- Health Section -->
         <div class="sheet-component greedy health">
-            <p>Health Goes here</p>
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        <p>Health Goes here</p>
+                    </div>
+            </div>
         </div>
 
         <!-- Dice and Budget Section -->

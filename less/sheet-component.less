@@ -1,29 +1,53 @@
 .sheet-component {
     box-sizing: border-box;
-    padding: 1rem;
     width: 30%;
     min-width: 300px;
     margin-bottom: 10px;
-    background: @background-color;
-
-    .clipped-corners(1rem, 1rem, 2rem, 1rem);
+    background: @transparent;
 
     .proportional {
         aspect-ratio: 1 / 1;
         overflow: hidden; /* Ensure overflow is hidden on the outer container */
     }
 
+    .inner-background-container {
+        box-sizing: border-box;
+        position: relative; /* Positioning context for both inner-background and fake-shadow */
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+    }
+
     .inner-background {
+        box-sizing: border-box;
+        padding: 1rem;
         background: @background-color;
+        width: 100%;
+        height: 100%;
         .clipped-corners(15px, 15px, 30px, 15px);
     }
 
+    .fake-shadow {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        background-color: magenta;
+        width: calc(100% - 2rem); /* Same calculation as inner-background */
+        height: calc(100% - 2rem); /* Same calculation as inner-background */
+        z-index: -1; /* Push behind other elements */
+        filter: blur(20px);
+        .clipped-corners(15px, 15px, 30px, 15px);
+
+    }
+        
+    
     .portrait {
         aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: center;
         border: 0;
         box-sizing: border-box;
+        z-index: 1;
 
         .clipped-corners(1rem, 1rem, 2rem, 1rem);
     }
