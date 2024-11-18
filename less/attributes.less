@@ -1,0 +1,22 @@
+.attribute-masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); /* Responsive masonry */
+    gap: 1rem; /* Spacing between cards */
+    width: 100%; /* Ensure it adjusts to its container */
+
+    .attribute-card {
+
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+        text-align: center;
+        background: @primary-color;
+
+        .attribute-name {
+            background-color: @secondary-color;
+        }
+
+        .attribute-value{
+
+        }
+
+    }
+}

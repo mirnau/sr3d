@@ -45,9 +45,8 @@
                 <div class="fake-shadow"></div>
                 <!-- Inner content -->
                 <div class="inner-background">
-                    {{#each config.attributes as | a |}}
-                    <option>{{localize a}}</option>
-                    {{/each}}
+                    {{> "systems/sr3d/templates/components/attributes.hbs"}}
+      
                 </div>
             </div>
         </div>
