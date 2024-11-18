@@ -58,7 +58,8 @@ Hooks.on("renderSR3DActorSheet", (app, html, data) => {
     const masonryInstance = new Masonry(gridElement, {
         itemSelector: '.sheet-component',
         columnWidth: parseInt(getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(), 10),
-        gutter: 10
+        originLeft: true,
+        gutter: 10,
     });
 
     // Adjust column width and re-layout after resizing

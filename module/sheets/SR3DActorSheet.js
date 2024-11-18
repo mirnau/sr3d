@@ -7,7 +7,7 @@ export default class SR3DActorSheet extends ActorSheet {
         return foundry.utils.mergeObject(super.defaultOptions, {
             template: "systems/sr3d/templates/sheets/playerCharacter-sheet.hbs",
             classes: ["sr3d", "sheet", "character"],
-            width: 1200,
+            width: 1300,
             height: 600,
             tabs: [
                 {

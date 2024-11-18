@@ -1,7 +1,7 @@
 .sr3d.sheet.character {
   min-width: 22rem;
   min-height: 800px;
-  max-width: 1200px;
+  max-width: 1400px;
   background: transparent;
 }
 .sr3d.sheet.character .window-content,
@@ -88,6 +88,7 @@
 .sr3d.sheet.character h4,
 .sr3d.sheet.character h5,
 .sr3d.sheet.character h6 {
+  text-transform: uppercase;
   font-family: 'VT323', monospace;
   margin: 0.5em 0;
   line-height: 1.2;
@@ -120,7 +121,15 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   text-align: center;
   background: #1a1b26;
+  transition: transform 0.3s ease-in-out;
+  /* Smooth transition on hover */
 }
 .attribute-masonry-grid .attribute-card .attribute-name {
   background-color: #c3e88d;
+}
+.attribute-masonry-grid .attribute-card:hover {
+  transform: scale(1.1);
+  /* Enlarge the card slightly on hover */
+  z-index: 10;
+  /* Ensure it appears above neighboring cards */
 }
