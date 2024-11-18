@@ -75,52 +75,33 @@
   font-weight: normal;
   font-style: normal;
 }
-body {
+.sr3d.sheet.character {
   font-family: 'VT323', monospace;
   font-size: 16px;
   line-height: 1.2;
   color: #c8d3f5;
+  /* Set font color */
 }
-body h1,
-body h2,
-body h3,
-body h4 {
+.sr3d.sheet.character h1,
+.sr3d.sheet.character h2,
+.sr3d.sheet.character h3,
+.sr3d.sheet.character h4,
+.sr3d.sheet.character h5,
+.sr3d.sheet.character h6 {
   font-family: 'VT323', monospace;
   margin: 0.5em 0;
   line-height: 1.2;
   color: #ff5370;
+  border: none;
 }
-body h1 h1,
-body h2 h1,
-body h3 h1,
-body h4 h1 {
-  font-size: 3rem;
-  font-style: bold;
-  margin-bottom: 0em;
-}
-body h1 h2,
-body h2 h2,
-body h3 h2,
-body h4 h2 {
-  font-size: 2.5rem;
-  font-style: bold;
-  margin-bottom: 0em;
-}
-body h1 h3,
-body h2 h3,
-body h3 h3,
-body h4 h3 {
-  font-size: 2rem;
-  font-style: bold;
-  margin-bottom: 0em;
-}
-body h1 h4,
-body h2 h4,
-body h3 h4,
-body h4 h4 {
-  font-size: 1.5rem;
-  font-style: bold;
-  margin-bottom: 0em;
+.sr3d.sheet.character p,
+.sr3d.sheet.character span,
+.sr3d.sheet.character a,
+.sr3d.sheet.character div,
+.sr3d.sheet.character button,
+.sr3d.sheet.character input,
+.sr3d.sheet.character textarea {
+  font-family: 'VT323', monospace;
 }
 .sr3d.sheet {
   border-width: 0px;

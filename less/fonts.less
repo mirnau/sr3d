@@ -5,44 +5,24 @@
     font-style: normal;
 }
 
-@base-font-size: 16px;
-@line-height: 1.2;
-@font-color: @text-color;  // Added a variable for font color
-
-body {
+.sr3d.sheet.character {
+    @base-font-size: 16px;
+    @line-height: 1.2;
+    
     font-family: 'VT323', monospace;
     font-size: @base-font-size;
     line-height: @line-height;
-    color: @text-color;  // Set font color to white
-
-    h1, h2, h3, h4{
+    color: @text-color; /* Set font color */
+    
+    h1, h2, h3, h4, h5, h6 {
         font-family: 'VT323', monospace;
         margin: 0.5em 0;
         line-height: 1.2;
-        color: @highlight-color;  // Set font color for headings as well
+        color: @highlight-color;
+        border: none;
+    }
 
-        h1 {
-            font-size: 3rem;
-            font-style: bold;
-            margin-bottom: 0.0em;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            font-style: bold;
-            margin-bottom: 0.0em;
-        }
-        
-        h3 {
-            font-size: 2rem;
-            font-style: bold;
-            margin-bottom: 0.0em;
-        }
-        
-        h4 {
-            font-size: 1.5rem;
-            font-style: bold;
-            margin-bottom: 0.0em;
-        }
+    p, span, a, div, button, input, textarea {
+        font-family: 'VT323', monospace;
     }
 }
