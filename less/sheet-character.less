@@ -1,5 +1,5 @@
 .sr3d.sheet.character {
-    min-width: @component-width;
+    min-width: @masonry-column-width;
     min-height: 800px;
     max-width: 1200px;
     background: @transparent;
@@ -15,10 +15,7 @@
         background: @transparent;
 
         /* Use CSS variable for column width */
-        grid-template-columns: repeat(auto-fit, minmax(var(--masonry-column-width, 200px), 1fr));
-
-        /* Initial default column width */
-        --masonry-column-width: @component-unit;
+        grid-template-columns: repeat(auto-fit, minmax(var(@masonry-column-width, 200px), 1fr));
 
         .doubleWidth {
             grid-column: span 2;
