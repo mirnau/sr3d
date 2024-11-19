@@ -177,8 +177,13 @@
             "skills": "Skills",
             
             "skill": {
+                "placeholder": "Hold my beer...",
                 "name": "Skill",
+                "activeSkill": "Active Skill",
+                "languageSkill": "Language Skill",
+                "knowledgeSkill": "Knowledge Skill",
                 "specialization": "Specialization",
+                "specializations": "Specializations",
                 "linkedAttribute": "Linked Attribute",
                 "langauge": "Language",
                 "read": "Read",

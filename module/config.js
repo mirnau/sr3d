@@ -124,8 +124,13 @@ sr3d.dicepools = {
 sr3d.skills = "sr3d.item.skills.skills";
 
 sr3d.skills = {
+    placerholder: "sr3d.item.skill.placeholder",
     name: "sr3d.item.skill.name",
+    activeSkill: "sr3d.item.skill.activeSkill",
+    knowledgeSkill: "sr3d.item.skill.knowledgeSkill",
+    languageSkill: "sr3d.item.skill.languageSkill",
     specialization: "sr3d.item.skill.specialization",
+    specializations: "sr3d.item.skill.specializations",
     linkedAttribute: "sr3d.item.skill.linkedAttribute",
     langauge: "sr3d.item.skill.langauge",
     read: "sr3d.item.skill.read",

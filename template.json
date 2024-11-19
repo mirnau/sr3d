@@ -123,10 +123,7 @@
             "cyberwear",
             "misc",
             "metahuman",
-            "skill",
-            "langaugeSkill",
-            "knowledgeSkill"
-
+            "skill"
         ],
         "templates": {
             "commodity": {
@@ -240,28 +237,31 @@
             "rating": 0
         },
         "skill": {
-            "name": "",
-            "value": 0,
-            "specialization": [],
-            "linkedAttribute": ""
-        },
-        "knowledgeSkill": {
-            "name": "",
-            "value": 0,
-            "specialization": [],
-            "linkedAttribute": ""
-        },
-        "languageSkill": {
-            "language": "Language",
-            "specialization": [],
-            "speach": 0,
-            "reading": 0,
-            "writing":0
-        },
-        "specialization": {
-            "specialization": "",
-            "specializationValue": 0
+            "skillType": "activeSkill",
+            "activeSkill": {
+                "value": 0,
+                "linkedAttribute": "",
+                "specializations": []
+            },
+            "knowledgeSkill": {
+                "value": 0,
+                "linkedAttribute": "",
+                "specializations": []
+            },
+            "languageSkill": {
+                "speach": {
+                    "base": 0,
+                    "specializations": []
+                },
+                "read": {
+                    "base": 0,
+                    "specializations": []
+                },
+                "write": {
+                    "base": 0,
+                    "specializations": []
+                }
+            }
         }
-
     }
 }

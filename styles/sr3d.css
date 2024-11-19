@@ -151,3 +151,24 @@
 .sr3d.sheet.character .skills .skill-item .skill-value {
   width: 3ch;
 }
+.specialization-value,
+.specialization-add,
+.specialization-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Adjust spacing between elements */
+}
+.specialization-container label {
+  margin-right: 10px;
+  /* Space between label and action icons */
+}
+.specialization-container a {
+  color: inherit;
+  /* Ensure the icons inherit color from the theme */
+  text-decoration: none;
+  /* Remove underline */
+  font-size: 1.2em;
+  /* Adjust icon size */
+  cursor: pointer;
+}
