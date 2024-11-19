@@ -11,6 +11,11 @@
             "none": "",
             "astralProjection": "Astral Projection"
         },
+
+        "sheet": {
+            "addSkill": "Add a skill",
+            "newItem": "New item"
+        },
         "actor": {
             "race": {
                 "race": "Race",
@@ -62,7 +67,7 @@
                 "control": "Control",
                 "spell": "Spell"
             },
-            "skills": "Skill",
+            
             "movement": {
                 "movement": "Movement",
                 "walking": "Walking Speed",
@@ -167,6 +172,18 @@
                 "conceal": "Conceal",
                 "legal": "Legal Status",
                 "weight": "Weight"
+            },
+            
+            "skills": "Skills",
+            
+            "skill": {
+                "name": "Skill",
+                "specialization": "Specialization",
+                "linkedAttribute": "Linked Attribute",
+                "langauge": "Language",
+                "read": "Read",
+                "speech": "Speech",
+                "write": "Write"
             }
         }
     }

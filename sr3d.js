@@ -8,10 +8,10 @@ async function AsyncRegisterComponentTemplates() {
     const basePath = "systems/sr3d/templates/components/";
     const paths = [
         "attributes.hbs",
+        "skills.hbs",
         "dice-pools.hbs",
         "movement.hbs",
         "weapon.hbs",
-        "inventory.hbs"
     ].map(filename => basePath + filename);
 
     return loadTemplates(paths);
@@ -41,6 +41,8 @@ Hooks.once("init", function() {
 
         return result;
     })
+
+    Handlebars.registerHelper("ifEquals", (arg1, arg2, options) => arg1 === arg2 ? options.fn(this) : options.inverse(this));
 });
 
 Hooks.on("renderSR3DActorSheet", (app, html, data) => {

@@ -133,3 +133,21 @@
   z-index: 10;
   /* Ensure it appears above neighboring cards */
 }
+.sr3d.sheet.character .skills {
+  display: flex;
+  flex-direction: column;
+}
+.sr3d.sheet.character .skills h1 {
+  display: flex;
+  flex-direction: row;
+}
+.sr3d.sheet.character .skills h1 .form-create {
+  margin-left: auto;
+}
+.sr3d.sheet.character .skills .skill-item {
+  display: flex;
+  flex-direction: row;
+}
+.sr3d.sheet.character .skills .skill-item .skill-value {
+  width: 3ch;
+}

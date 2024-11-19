@@ -28,7 +28,7 @@ export default class SR3DActorSheet extends ActorSheet {
         ctx.system = ctx.actor.system;
         ctx.config = CONFIG.sr3d;
         ctx.cssClass = "actorSheet";
-
+    
         // INFO: Filter and categorize items based on their type
 
         ctx.inventory = {
@@ -44,6 +44,21 @@ export default class SR3DActorSheet extends ActorSheet {
     activateListeners(html) {
         super.activateListeners(html);
         
-        // Your sheet interactivity code here (e.g., click handlers, input changes)
+        html.find(".item-create").click(this._onItemCreate.bind(this));
+        
+        // Preserving original functionalty such as drag and drop
+        super.activateListeners(html);
+    }
+
+    _onItemCreate(event) {
+        event.preventDefault();
+        let element = event.currentTraget;
+
+        let itemData = {
+            name: game.i18n.localize("sr3d.sheet.newItem"),
+            type: element.dataset.type
+        };
+
+        return this.actor.createOwnedItem(itemData);
     }
 }

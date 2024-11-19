@@ -1,6 +1,8 @@
 {
     "Actor": {
-        "types": ["playerCharacter"],
+        "types": [
+            "playerCharacter"
+        ],
         "templates": {
             "race": {
                 "name": "Human",
@@ -17,25 +19,33 @@
                 "description": ""
             },
             "character": {
-                "names": [{
-                    "alias": ""
-                }],
+                "names": [
+                    {
+                        "alias": ""
+                    }
+                ],
                 "pronouns": "Them/They",
                 "age": 0,
                 "looks": "Handsome I bet",
                 "quote": "Alea iacta es",
                 "ratsrace": {
-                    "income": [{
-                        "post": 0
-                    }],
-                    "expenses": [{
-                        "post": 0
-                    }],
-                    "debts": [{
-                        "creditor": "",
-                        "interestPerMonth": 0.0,
-                        "debt": 0.0
-                    }],
+                    "income": [
+                        {
+                            "post": 0
+                        }
+                    ],
+                    "expenses": [
+                        {
+                            "post": 0
+                        }
+                    ],
+                    "debts": [
+                        {
+                            "creditor": "",
+                            "interestPerMonth": 0.0,
+                            "debt": 0.0
+                        }
+                    ],
                     "illiquidAssets": 0.0
                 }
             },
@@ -72,8 +82,18 @@
                 "race",
                 "attributes"
             ],
-            "skills": [], 
-            "languageSkills": [],
+            "skills": {
+                "template": "skill",
+                "items": []
+            },
+            "knowledgeSkills": {
+                "template": "knowledgeSkill",
+                "items": []
+            },
+            "languageSkills": {
+                "template": "languageSkill",
+                "items": []
+            },
             "movement": {
                 "walking": 0,
                 "running": 0
@@ -90,7 +110,6 @@
             }
         }
     },
-
     "Item": {
         "types": [
             "weapon",
@@ -103,7 +122,11 @@
             "enhancer",
             "cyberwear",
             "misc",
-            "metahuman"
+            "metahuman",
+            "skill",
+            "langaugeSkill",
+            "knowledgeSkill"
+
         ],
         "templates": {
             "commodity": {
@@ -143,7 +166,6 @@
             "selectVision": "select",
             "description": "Enter your description"
         },
-
         "vehicle": {
             "templates": [
                 "commodity"
@@ -216,6 +238,30 @@
                 "commodity"
             ],
             "rating": 0
+        },
+        "skill": {
+            "name": "",
+            "value": 0,
+            "specialization": [],
+            "linkedAttribute": ""
+        },
+        "knowledgeSkill": {
+            "name": "",
+            "value": 0,
+            "specialization": [],
+            "linkedAttribute": ""
+        },
+        "languageSkill": {
+            "language": "Language",
+            "specialization": [],
+            "speach": 0,
+            "reading": 0,
+            "writing":0
+        },
+        "specialization": {
+            "specialization": "",
+            "specializationValue": 0
         }
+
     }
 }

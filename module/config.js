@@ -1,5 +1,10 @@
 export const sr3d = {};
 
+sr3d.sheet ={
+    addSkill: "sr3d.sheet.addSkill",
+    newItem: "sr3d.sheet.newItem"
+}
+
 sr3d.freeActions = {
     none: "",
     activateCyberware: "sr3d.freeActions.activateCyberware"
@@ -116,7 +121,17 @@ sr3d.dicepools = {
     spell: "sr3d.actor.dicepools.spell"
 }
 
-sr3d.skills = "sr3d.actor.skills";
+sr3d.skills = "sr3d.item.skills.skills";
+
+sr3d.skills = {
+    name: "sr3d.item.skill.name",
+    specialization: "sr3d.item.skill.specialization",
+    linkedAttribute: "sr3d.item.skill.linkedAttribute",
+    langauge: "sr3d.item.skill.langauge",
+    read: "sr3d.item.skill.read",
+    write: "sr3d.item.skill.write",
+    speech: "sr3d.item.skill.speech"
+}
 
 sr3d.movement = {
     movement: "sr3d.actor.movement.movement",
@@ -135,12 +150,6 @@ sr3d.damageTracker = {
     stun: "sr3d.actor.damageTracker.stun",
     physical: "sr3d.actor.damageTracker.physical",
     overflow: "sr3d.actor.damageTracker.owerflow"
-};
-
-sr3d.languageSkills = {
-    name: "sr3d.actor.languageSkills.name",
-    read: "sr3d.actor.languageSkills.read",
-    write: "sr3d.actor.languageSkills.write"
 };
 
 sr3d.playerCharacter = "sr3d.actor.playerCharacter";

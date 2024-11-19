@@ -1,0 +1,23 @@
+<section class="skills">
+  <h1>
+    {{localize "sr3d.item.skills.skills"}}
+    <a class="item-create" data-type="skill" title="{{localize "sr3d.sheet.addSkill"}}">
+      <i class="fas fa-square-plus"></i>
+    </a>
+  </h1>
+  <div class="skill-list">
+    {{#each system.skills.items as |skill|}}
+      <div class="skill">
+        <p>{{skill.name}}: {{skill.value}} {{skill.specialization}}: {{skill.value}}
+
+        <!-- Editable linked attribute dropdown -->
+        
+        <select name="data.skills.items.[{{@index}}].linkedAttribute">
+          {{#each ../attributes}} <!-- Assuming attributes are passed as a context -->
+          <option value="{{this}}" {{#ifEquals this ../skill.linkedAttribute}}selected{{/ifEquals}}>{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+    {{/each}}
+  </div>
+</section>
