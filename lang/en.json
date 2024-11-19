@@ -177,6 +177,7 @@
             "skills": "Skills",
             
             "skill": {
+                "purchaseSkills": "Purchase Skillpoint",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",
                 "activeSkill": "Active Skill",
