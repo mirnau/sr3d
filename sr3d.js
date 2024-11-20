@@ -49,14 +49,13 @@ Hooks.on("renderSR3DActorSheet", (app, html, data) => {
     console.log("MASONRY | Initializing after SR3DActorSheet render");
 
     const gridElement = html[0].querySelector('.sheet-masonry-grid');
-    const formElement = html[0].querySelector('form'); // Target the form resizing
+    const formElement = html[0].querySelector('form');
 
     if (!gridElement || !formElement) {
         console.error(`${app.constructor.name} | .sheet-masonry-grid or form not found.`);
         return;
     }
 
-    // Initialize Masonry
     const masonryInstance = new Masonry(gridElement, {
         itemSelector: '.sheet-component',
         columnWidth: parseInt(getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(), 10),
@@ -64,7 +63,7 @@ Hooks.on("renderSR3DActorSheet", (app, html, data) => {
         gutter: 10,
     });
 
-    // Adjust column width and re-layout after resizing
+    // INFO: Adjust column width and re-layout after resizing
     const adjustColumnWidth = () => {
         const formWidth = formElement.clientWidth;
         let columnWidth;
@@ -79,22 +78,16 @@ Hooks.on("renderSR3DActorSheet", (app, html, data) => {
             columnWidth = "300px";
         }
 
-        // Update the CSS variable
-        gridElement.style.setProperty('--masonry-column-width', columnWidth);
-
-        // Force Masonry to recalculate layout
         masonryInstance.layout();
     };
 
-    // Observe for resizing
     const resizeObserver = new ResizeObserver(() => {
         adjustColumnWidth();
-        masonryInstance.layout();  // Ensure layout recalculates after width change
+        masonryInstance.layout();  
     });
 
     resizeObserver.observe(formElement);
-
-    // Initial layout
+    
     adjustColumnWidth();
     masonryInstance.layout();
 });

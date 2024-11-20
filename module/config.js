@@ -124,6 +124,7 @@ sr3d.dicepools = {
 sr3d.skills = "sr3d.item.skills.skills";
 
 sr3d.skills = {
+    purchaseSkills: "sr3d.item.skill.purchaseSkills",
     placerholder: "sr3d.item.skill.placeholder",
     name: "sr3d.item.skill.name",
     activeSkill: "sr3d.item.skill.activeSkill",
