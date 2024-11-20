@@ -12,6 +12,9 @@ async function AsyncRegisterComponentTemplates() {
         "dice-pools.hbs",
         "movement.hbs",
         "weapon.hbs",
+        "active-skill.hbs",
+        "knowledge-skill.hbs",
+        "language-skill.hbs"
     ].map(filename => basePath + filename);
 
     return loadTemplates(paths);
