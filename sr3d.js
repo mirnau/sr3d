@@ -20,25 +20,24 @@ async function AsyncRegisterComponentTemplates() {
     return loadTemplates(paths);
 };
 
-Hooks.once("init", function() {
+Hooks.once("init", function () {
     console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
-    
+
     // NOTE: Language Config
     CONFIG.sr3d = sr3d;
-   
+
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sr3d", SR3DItemSheet, { makeDefault: true });
-    
+
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sr3d", SR3DActorSheet, { makeDefault: true });
 
     AsyncRegisterComponentTemplates();
 
     // NOTE: for repeating HTML-elements n times
-    Handlebars.registerHelper("repeat", function(n, content) {
-        let result ="";
-        for (let i = 0; i < n; ++i)
-        {
+    Handlebars.registerHelper("repeat", function (n, content) {
+        let result = "";
+        for (let i = 0; i < n; ++i) {
             result += content.fn(i);
         }
 
@@ -48,51 +47,60 @@ Hooks.once("init", function() {
     Handlebars.registerHelper("ifEquals", (arg1, arg2, options) => arg1 === arg2 ? options.fn(this) : options.inverse(this));
 });
 
+let masonryInstance;
+let resizeObserver;
+
 Hooks.on("renderSR3DActorSheet", (app, html, data) => {
-    console.log("MASONRY | Initializing after SR3DActorSheet render");
+    console.log("MASONRY | Initializing after sheet render");
 
-    const gridElement = html[0].querySelector('.sheet-masonry-grid');
-    const formElement = html[0].querySelector('form');
-
-    if (!gridElement || !formElement) {
-        console.error(`${app.constructor.name} | .sheet-masonry-grid or form not found.`);
-        return;
+    const gridElement = html[0]?.querySelector('.sheet-masonry-grid');
+    if (gridElement) {
+        initializeMasonry(gridElement);
     }
-
-    const masonryInstance = new Masonry(gridElement, {
-        itemSelector: '.sheet-component',
-        columnWidth: parseInt(getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(), 10),
-        originLeft: true,
-        gutter: 10,
-    });
-
-    // INFO: Adjust column width and re-layout after resizing
-    const adjustColumnWidth = () => {
-        const formWidth = formElement.clientWidth;
-        let columnWidth;
-        
-        if (formWidth < 600) {
-            columnWidth = "150px";
-        } else if (formWidth < 900) {
-            columnWidth = "200px";
-        } else if (formWidth < 1200) {
-            columnWidth = "250px";
-        } else {
-            columnWidth = "300px";
-        }
-
-        masonryInstance.layout();
-    };
-
-    const resizeObserver = new ResizeObserver(() => {
-        adjustColumnWidth();
-        masonryInstance.layout();  
-    });
-
-    resizeObserver.observe(formElement);
-    
-    adjustColumnWidth();
-    masonryInstance.layout();
 });
 
+Hooks.on("createItem", (item, options, userId) => {
+    const actor = item.parent;
 
+    if (actor?.sheet?.rendered && game.user.id === userId) {
+        console.log("MASONRY | Reinitializing after item creation");
+
+        const gridElement = actor.sheet.element[0]?.querySelector('.sheet-masonry-grid');
+        if (gridElement) {
+            initializeMasonry(gridElement);
+        }
+    }
+});
+
+function initializeMasonry(gridElement) {
+    if (gridElement) {
+        
+        if (gridElement.masonryInstance) {
+            gridElement.masonryInstance.destroy();
+        }
+       
+        const columnWidth = parseInt(
+            getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(),
+            10
+        );
+        
+        const masonryInstance = new Masonry(gridElement, {
+            itemSelector: '.sheet-component',
+            columnWidth: columnWidth,
+            originLeft: true,
+            gutter: 10,
+        });
+       
+        gridElement.masonryInstance = masonryInstance;
+        
+        const resizeObserver = new ResizeObserver(() => {
+            masonryInstance.layout();
+        });
+
+        resizeObserver.observe(gridElement);
+       
+        masonryInstance.layout();
+
+        console.log("MASONRY | Initialized with column width:", columnWidth);
+    }
+}

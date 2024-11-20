@@ -88,11 +88,28 @@ export default class SR3DActorSheet extends ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
+
         html.find(".item-create").click(this._onItemCreate.bind(this));
         html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
-
-        
+        html.find(".edit-skill").click(this._onEditSkill.bind(this));
     }
+
+    _onEditSkill(event) {
+        event.preventDefault();
+      
+        const skillId = event.currentTarget.dataset.id;
+      
+        const skill = this.actor.items.get(skillId);
+      
+        if (skill) {
+          // Open the item sheet
+          skill.sheet.render(true);
+        } else {
+          // Handle error if skill is not found
+          ui.notifications.error("Skill not found.");
+          console.error("Skill not found:", skillId);
+        }
+      }
 
     _onDeleteSkill(event) {
         event.preventDefault();
@@ -150,9 +167,12 @@ export default class SR3DActorSheet extends ActorSheet {
     
         // Add specific default data for skill types (optional)
         if (skillType === "activeSkill") {
-            itemData.system.activeSkill = { linkedAttribute: "", value: 0, specializations: [] };
+            itemData.system.activeSkill = { linkedAttribute: "Body", value: 0, specializations: [] };
+
         } else if (skillType === "knowledgeSkill") {
-            itemData.system.knowledgeSkill = { linkedAttribute: "", value: 0, specializations: [] };
+
+            itemData.system.knowledgeSkill = { linkedAttribute: "Intelligence", value: 0, specializations: [] };
+
         } else if (skillType === "languageSkill") {
             itemData.system.languageSkill = {
                 speach: { base: 0, specializations: [] },
