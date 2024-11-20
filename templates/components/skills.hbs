@@ -16,9 +16,9 @@
       <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
       {{#each this}}
       <div class="skill-card">
-        {{this.name}} (Rating: {{this.system.activeSkill.value}})
+        {{this.name}} {{this.system.activeSkill.value}} {{this.system.activeSkill.linkedAttribute}}
         <div class="icons">
-           <a class="delete-skill" data-id="{{this._id}}">
+          <a class="delete-skill" data-id="{{this._id}}">
             <i class="fa-solid fa-trash-can"></i>
           </a>
           <a>
@@ -44,24 +44,30 @@
       </a>
     </h2>
     {{#each skills.knowledge}}
-    <div class="skill-card">
-      {{this.name}} (Rating: {{this.system.knowledgeSkill.value}})
-      <div class="icons">
-         <a class="delete-skill" data-id="{{this._id}}">
-          <i class="fa-solid fa-trash-can"></i>
-        </a>
-        <a>
-          <i class="fa-solid fa-cart-plus"></i>
-        </a>
-         <a class="edit-skill" data-id="{{this._id}}">
-          <i class="fas fa-pen-to-square"></i>
-        </a>
-        <a>
-          <i class="fa-solid fa-circle-check"></i>
-        </a>
+    <div class="skill-category">
+      <h3>{{@key}}</h3> <!-- Optional: Category Header -->
+      {{#each this}}
+      <div class="knowledge-card">
+        {{this.name}} {{this.system.knowledgeSkill.value}} {{this.system.knowledgeSkill.linkedAttribute}}
+        <div class="icons">
+          <a class="delete-skill" data-id="{{this._id}}">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+          <a>
+            <i class="fa-solid fa-cart-plus"></i>
+          </a>
+          <a class="edit-skill" data-id="{{this._id}}">
+            <i class="fas fa-pen-to-square"></i>
+          </a>
+          <a>
+            <i class="fa-solid fa-circle-check"></i>
+          </a>
+        </div>
       </div>
+      {{/each}}
     </div>
     {{/each}}
+
 
     <!-- Language Skills -->
     <h2>{{localize "sr3d.item.skill.languageSkills"}}
@@ -79,8 +85,8 @@
           <h3>{{name}}</h3>
         </div>
         <div class="icons">
-           <a class="delete-skill" data-id="{{id}}">
-           <i class="fa-solid fa-trash-can"></i></a>
+          <a class="delete-skill" data-id="{{id}}">
+            <i class="fa-solid fa-trash-can"></i></a>
           <a class="edit-skill" data-id="{{id}}"><i class="fas fa-pen-to-square"></i></a>
         </div>
       </div>

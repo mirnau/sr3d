@@ -167,11 +167,11 @@ export default class SR3DActorSheet extends ActorSheet {
     
         // Add specific default data for skill types (optional)
         if (skillType === "activeSkill") {
-            itemData.system.activeSkill = { linkedAttribute: "Body", value: 0, specializations: [] };
+            itemData.system.activeSkill = { linkedAttribute: "", value: 0, specializations: [] };
 
         } else if (skillType === "knowledgeSkill") {
 
-            itemData.system.knowledgeSkill = { linkedAttribute: "Intelligence", value: 0, specializations: [] };
+            itemData.system.knowledgeSkill = { linkedAttribute: "", value: 0, specializations: [] };
 
         } else if (skillType === "languageSkill") {
             itemData.system.languageSkill = {

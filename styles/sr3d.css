@@ -162,7 +162,7 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .skills-section .skill-card {
-  background-color: #ff5370;
+  background-color: #f4a370;
   min-height: 2rem;
   box-sizing: border-box;
   padding: 0.25rem 0.5rem;
@@ -186,8 +186,33 @@
   margin-left: 0.5rem;
   /* Adds space between icons */
 }
+.skills-section .knowledge-card {
+  background-color: #977ad7;
+  min-height: 2rem;
+  box-sizing: border-box;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  /* Enables flexbox for layout */
+  justify-content: space-between;
+  /* Distribute content and icons */
+  align-items: center;
+  /* Align vertically */
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.skills-section .knowledge-card .icons {
+  display: flex;
+  /* Ensures icons are laid out in a row */
+  gap: 0.25rem;
+  /* Space between icons */
+}
+.skills-section .knowledge-card a {
+  color: #1a1b26;
+  margin-left: 0.5rem;
+  /* Adds space between icons */
+}
 .skills-section .language-card {
-  background-color: #c3e88d;
+  background-color: #3e4053;
   box-sizing: border-box;
   padding: 0.5rem;
   margin-bottom: 0.5rem;

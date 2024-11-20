@@ -45,8 +45,9 @@
     background-color: @primary-color;
     padding: 1rem;
 
+
     .skill-card {
-        background-color: @highlight-color;
+        background-color: @accent-apricot;
         min-height: 2rem;
         box-sizing: border-box;
         padding: 0.25rem 0.5rem;
@@ -55,6 +56,30 @@
         justify-content: space-between; /* Distribute content and icons */
         align-items: center; /* Align vertically */
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+        
+        .icons {
+            display: flex; /* Ensures icons are laid out in a row */
+            gap: 0.25rem; /* Space between icons */
+        }
+        
+        a {
+            color: @primary-color;
+            margin-left: 0.5rem; /* Adds space between icons */
+        }
+    }
+
+    .knowledge-card {
+        background-color: @purple-medium;
+        min-height: 2rem;
+        box-sizing: border-box;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.5rem;
+        display: flex; /* Enables flexbox for layout */
+        justify-content: space-between; /* Distribute content and icons */
+        align-items: center; /* Align vertically */
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
         
         .icons {
             display: flex; /* Ensures icons are laid out in a row */
@@ -68,7 +93,7 @@
     }
 
     .language-card {
-        background-color: @secondary-color;
+        background-color: @background-color;
         box-sizing: border-box;
         padding: 0.5rem;
         margin-bottom: 0.5rem;

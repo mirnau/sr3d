@@ -21,12 +21,15 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.config = CONFIG.sr3d;
 
         Hooks.on("createItem", async (item, options, userId) => {
-            if (item.type === "skill" && item.system.skill?.activeSkill?.value === undefined) {
-                await item.update({ "system.skill.activeSkill.value": 0 });
-                console.log(`Initialized activeSkill.value to 0 for ${item.name}`);
-            }
+            if (item.type === "skill") {
+                // Check for Active Skills
+                if (item.system.skill?.activeSkill?.value === undefined) {
+                    await item.update({ "system.skill.activeSkill.value": 0 });
+                    console.log(`Initialized activeSkill.value to 0 for ${item.name}`);
+                }
+             }
         });
-
+    
         // Only apply the dialog logic for items of type 'skill' and not yet initialized
         if (this.item.type === "skill" && !ctx.system.initialized) {
             await this._showSkillTypeDialog();
@@ -83,14 +86,56 @@ export default class SR3DItemSheet extends ItemSheet {
         });
     }
 
-
-    activateListeners(html) {
+     activateListeners(html) {
         super.activateListeners(html);
-
+    
+        // Bind specialization event handlers
         html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
         html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
+    
+        // Bind linked attribute dropdown listeners
+        html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
+        html.find('select[name="system.skill.knowledgeSkill.linkedAttribute"]').on('change', this._onKnowledgeSkillLinkedAttributeChange.bind(this));
     }
-
+    
+    // Handler for Active Skill linked attribute changes
+    async _onActiveSkillLinkedAttributeChange(event) {
+        const dropdown = event.currentTarget;
+        const selectedAttribute = dropdown.value;
+    
+        // Update the item directly
+        await this.item.update({
+            "system.activeSkill.linkedAttribute": selectedAttribute
+        });
+    
+        console.log(`Updated Active Skill linkedAttribute to: ${selectedAttribute}`);
+    
+        // Notify the parent actor sheet to re-sort and re-render
+        const actor = this.item.parent;
+        if (actor && actor.sheet.rendered) {
+            actor.sheet.render(); // Trigger a re-render of the actor sheet
+        }
+    }
+    
+    // Handler for Knowledge Skill linked attribute changes
+    async _onKnowledgeSkillLinkedAttributeChange(event) {
+        const dropdown = event.currentTarget;
+        const selectedAttribute = dropdown.value;
+    
+        // Update the item directly
+        await this.item.update({
+            "system.knowledgeSkill.linkedAttribute": selectedAttribute
+        });
+    
+        console.log(`Updated Knowledge Skill linkedAttribute to: ${selectedAttribute}`);
+    
+        // Notify the parent actor sheet to re-sort and re-render
+        const actor = this.item.parent;
+        if (actor && actor.sheet.rendered) {
+            actor.sheet.render(); // Trigger a re-render of the actor sheet
+        }
+    }
+    
 
     _resolveSpecializationsPath(skillType, subfield = null) {
         if (skillType === "languageSkill" && subfield) {
@@ -101,101 +146,102 @@ export default class SR3DItemSheet extends ItemSheet {
 
     async _onAddSpecialization(event) {
         event.preventDefault();
-    
+
         // Locate the button and the fieldset
         const element = event.currentTarget;
         const fieldset = element.closest('fieldset[data-skill-type]'); // Ensure we target the right fieldset
-    
+
         // Debugging to check if fieldset is found
         if (!fieldset) {
             console.error("Could not find parent fieldset with data-skill-type.");
             ui.notifications.error("Failed to add specialization: Missing fieldset context.");
             return;
         }
-    
+
         const skillType = fieldset.dataset.skillType;
         const subSkill = fieldset.dataset.subSkill || null;
-    
+
         // Debugging skillType and subSkill
         console.log("Skill Type:", skillType);
         console.log("Sub-Skill:", subSkill);
-    
+
         const specializationsPath = this._resolveSpecializationsPath(skillType, subSkill);
-    
+
         if (!specializationsPath) {
             ui.notifications.error("Unable to determine specializations path.");
             return;
         }
-    
+
         let specializations = foundry.utils.getProperty(this.object, specializationsPath) || [];
         if (typeof specializations === "object" && !Array.isArray(specializations)) {
             specializations = Object.values(specializations);
         }
-    
+
         // Retrieve the specialization name from the input field
         const inputField = element.previousElementSibling;
         let specializationName = inputField?.value?.trim() || "A New Skill Specialization";
-    
+
         const newSpecialization = { name: specializationName, value: 0 };
         specializations.push(newSpecialization);
-    
+
         const updatedData = {};
         foundry.utils.setProperty(updatedData, specializationsPath, specializations);
         await this.object.update(updatedData);
-    
+
         inputField.value = '';
         ui.notifications.info("Specialization added successfully.");
     }
-    
-    
+
+
     async _onDeleteSpecialization(event) {
         event.preventDefault();
-    
+
         const button = event.currentTarget; // Get the clicked button
         const container = button.closest(".specialization-container"); // Locate the container for the specialization
         const index = parseInt(container.dataset.index, 10); // Retrieve the specialization index
-    
+
         // Resolve skill type and sub-skill (if applicable)
         const fieldset = button.closest("fieldset[data-skill-type]");
         const skillType = fieldset.dataset.skillType;
         const subSkill = fieldset.dataset.subSkill || null; // Resolve sub-skill if present
-    
+
         // Resolve the specializations path
         const specializationsPath = this._resolveSpecializationsPath(skillType, subSkill);
-    
+
         console.log("Resolved Path:", specializationsPath);
-    
+
         // Fetch current specializations
         let specializations = foundry.utils.getProperty(this.object, specializationsPath);
-    
+
         // Ensure the specializations are in array form
         if (typeof specializations === "object" && !Array.isArray(specializations)) {
             console.warn("Specializations is an object. Converting to array.");
             specializations = Object.values(specializations);
         }
-    
+
         if (!Array.isArray(specializations)) {
             ui.notifications.error("Specializations data structure is invalid. Cannot delete.");
             return;
         }
-    
+
         console.log("Specializations Before Deletion:", specializations);
-    
+
         // Validate the index and delete the specialization
         if (index >= 0 && index < specializations.length) {
             specializations = [...specializations.slice(0, index), ...specializations.slice(index + 1)];
             console.log("Specializations After Deletion:", specializations);
-    
+
             // Update the item with the new specializations array
             const updatedData = {};
             foundry.utils.setProperty(updatedData, specializationsPath, specializations);
             await this.object.update(updatedData);
-    
+
             ui.notifications.info("Specialization deleted successfully.");
         } else {
             ui.notifications.warn("Invalid specialization index. Cannot delete.");
         }
     }
+
 
     _resolveSpecializationsPath(skillType, subSkill = null) {
         const skillPathMap = {
@@ -207,7 +253,7 @@ export default class SR3DItemSheet extends ItemSheet {
                 write: "system.skill.languageSkill.write.specializations"
             }
         };
-    
+
         // Handle language skills with sub-skills
         if (skillType === "languageSkill") {
             if (!subSkill) {
@@ -216,12 +262,12 @@ export default class SR3DItemSheet extends ItemSheet {
             }
             return skillPathMap.languageSkill[subSkill] || null;
         }
-    
+
         // Handle activeSkill and knowledgeSkill
         if (skillPathMap[skillType]) {
             return skillPathMap[skillType];
         }
-    
+
         console.error("Unknown skill type:", skillType);
         return null;
     }

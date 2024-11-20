@@ -78,15 +78,10 @@ function initializeMasonry(gridElement) {
         if (gridElement.masonryInstance) {
             gridElement.masonryInstance.destroy();
         }
-       
-        const columnWidth = parseInt(
-            getComputedStyle(gridElement).getPropertyValue('--masonry-column-width').trim(),
-            10
-        );
         
         const masonryInstance = new Masonry(gridElement, {
             itemSelector: '.sheet-component',
-            columnWidth: columnWidth,
+     
             originLeft: true,
             gutter: 10,
         });
@@ -100,7 +95,5 @@ function initializeMasonry(gridElement) {
         resizeObserver.observe(gridElement);
        
         masonryInstance.layout();
-
-        console.log("MASONRY | Initialized with column width:", columnWidth);
     }
 }
