@@ -1,23 +1,104 @@
 <section class="skills">
   <h1>
     {{localize "sr3d.item.skills.skills"}}
-    <a class="item-create" data-type="skill" title="{{localize "sr3d.sheet.addSkill"}}">
-      <i class="fas fa-square-plus"></i>
-    </a>
   </h1>
-  <div class="skill-list">
-    {{#each system.skills.items as |skill|}}
-      <div class="skill">
-        <p>{{skill.name}}: {{skill.value}} {{skill.specialization}}: {{skill.value}}
 
-        <!-- Editable linked attribute dropdown -->
-        
-        <select name="data.skills.items.[{{@index}}].linkedAttribute">
-          {{#each ../attributes}} <!-- Assuming attributes are passed as a context -->
-          <option value="{{this}}" {{#ifEquals this ../skill.linkedAttribute}}selected{{/ifEquals}}>{{this}}</option>
-          {{/each}}
-        </select>
+  <div class="skills-section">
+    <!-- Active Skills -->
+    <h2>{{localize "sr3d.item.skill.activeSkills"}}
+      <a class="item-create" data-type="skill" data-skill-type="activeSkill" title="{{localize "
+        sr3d.sheet.addSkill"}}">
+        <i class="fas fa-square-plus"></i>
+      </a>
+    </h2>
+    {{#each skills.active}}
+    <div class="skill-category">
+      <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
+      {{#each this}}
+      <div class="skill-card">
+        {{this.name}} (Rating: {{this.system.activeSkill.value}})
+        <div class="icons">
+           <a class="delete-skill" data-id="{{this._id}}">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+          <a>
+            <i class="fa-solid fa-cart-plus"></i>
+          </a>
+          <a>
+            <i class="fas fa-pen-to-square"></i>
+          </a>
+          <a>
+            <i class="fa-solid fa-circle-check"></i>
+          </a>
+        </div>
       </div>
+      {{/each}}
+    </div>
+    {{/each}}
+
+    <!-- Knowledge Skills -->
+    <h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
+      <a class="item-create" data-type="skill" data-skill-type="knowledgeSkill" title="{{localize "
+        sr3d.sheet.addSkill"}}">
+        <i class="fas fa-square-plus"></i>
+      </a>
+    </h2>
+    {{#each skills.knowledge}}
+    <div class="skill-card">
+      {{this.name}} (Rating: {{this.system.knowledgeSkill.value}})
+      <div class="icons">
+         <a class="delete-skill" data-id="{{this._id}}">
+          <i class="fa-solid fa-trash-can"></i>
+        </a>
+        <a>
+          <i class="fa-solid fa-cart-plus"></i>
+        </a>
+        <a>
+          <i class="fas fa-pen-to-square"></i>
+        </a>
+        <a>
+          <i class="fa-solid fa-circle-check"></i>
+        </a>
+      </div>
+    </div>
+    {{/each}}
+
+    <!-- Language Skills -->
+    <h2>{{localize "sr3d.item.skill.languageSkills"}}
+      <a class="item-create" data-type="skill" data-skill-type="languageSkill" title="{{localize "
+        sr3d.sheet.addSkill"}}">
+        <i class="fas fa-square-plus"></i>
+      </a>
+    </h2>
+
+    {{#each skills.language}}
+    <div class="language-card">
+      <!-- Main Skill Name -->
+      <div class="language-skill-line">
+        <div class="language-skill-name">
+          <h3>{{name}}</h3>
+        </div>
+        <div class="icons">
+           <a class="delete-skill" data-id="{{id}}">
+           <i class="fa-solid fa-trash-can"></i></a>
+          <a><i class="fas fa-pen-to-square"></i></a>
+        </div>
+      </div>
+
+      <!-- Subskills -->
+      {{#each subskills}}
+      <div class="language-skill-line">
+        <div class="language-info">
+          <div class="subskill-name">{{@key}}</div>
+          <div class="subskill-value">{{this}}</div>
+        </div>
+        <div class="icons">
+          <a><i class="fa-solid fa-cart-plus"></i></a>
+          <a><i class="fa-solid fa-circle-check"></i></a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
     {{/each}}
   </div>
 </section>

@@ -1,22 +1,22 @@
 .attribute-masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); /* Responsive masonry */
-    gap: 1rem; /* Spacing between cards */
-    width: 100%; /* Ensure it adjusts to its container */
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 1rem; 
+    width: 100%; 
 
     .attribute-card {
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
         text-align: center;
         background: @primary-color;
-        transition: transform 0.3s ease-in-out; /* Smooth transition on hover */
+        transition: transform 0.3s ease-in-out;
 
         .attribute-name {
             background-color: @secondary-color;
         }
 
         &:hover {
-            transform: scale(1.1); /* Enlarge the card slightly on hover */
-            z-index: 10; /* Ensure it appears above neighboring cards */
+            transform: scale(1.1);
+            z-index: 10;
         }
     }
 }

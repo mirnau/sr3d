@@ -106,27 +106,21 @@
 .attribute-masonry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-  /* Responsive masonry */
   gap: 1rem;
-  /* Spacing between cards */
   width: 100%;
-  /* Ensure it adjusts to its container */
 }
 .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   text-align: center;
   background: #1a1b26;
   transition: transform 0.3s ease-in-out;
-  /* Smooth transition on hover */
 }
 .attribute-masonry-grid .attribute-card .attribute-name {
   background-color: #c3e88d;
 }
 .attribute-masonry-grid .attribute-card:hover {
   transform: scale(1.1);
-  /* Enlarge the card slightly on hover */
   z-index: 10;
-  /* Ensure it appears above neighboring cards */
 }
 .sr3d.sheet.character .skills {
   display: flex;
@@ -161,4 +155,97 @@
   text-decoration: none;
   font-size: 1.2em;
   cursor: pointer;
+}
+.skills-section {
+  background-color: #1a1b26;
+  padding: 1rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.skills-section .skill-card {
+  background-color: #ff5370;
+  min-height: 2rem;
+  box-sizing: border-box;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  /* Enables flexbox for layout */
+  justify-content: space-between;
+  /* Distribute content and icons */
+  align-items: center;
+  /* Align vertically */
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.skills-section .skill-card .icons {
+  display: flex;
+  /* Ensures icons are laid out in a row */
+  gap: 0.25rem;
+  /* Space between icons */
+}
+.skills-section .skill-card a {
+  color: #1a1b26;
+  margin-left: 0.5rem;
+  /* Adds space between icons */
+}
+.skills-section .language-card {
+  background-color: #c3e88d;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  /* Flexbox for overall layout */
+  flex-direction: column;
+  /* Align items vertically */
+  gap: 0.5rem;
+  /* Space between skill rows */
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  /* Main Skill Name and Icons */
+}
+.skills-section .language-card .language-skill-line {
+  display: flex;
+  /* Horizontal layout for name and icons */
+  justify-content: space-between;
+  /* Push name to left, icons to right */
+  align-items: center;
+  /* Vertical alignment */
+  padding: 0.125rem 0;
+  /* Spacing between rows */
+}
+.skills-section .language-card .language-skill-line .language-skill-name {
+  flex: 1;
+  /* Occupy remaining space to push icons right */
+  text-align: left;
+}
+.skills-section .language-card .language-skill-line .subskill-name {
+  flex: 1;
+  /* Occupy remaining space to push icons right */
+  text-align: left;
+}
+.skills-section .language-card .language-skill-line .subskill-value {
+  font-style: bold;
+}
+.skills-section .language-card .language-skill-line .language-info {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  display: flex;
+  /* Horizontal layout for name and icons */
+  justify-content: space-between;
+  /* Push name to left, icons to right */
+  align-items: center;
+  /* Vertical alignment */
+  background-color: #82aaff;
+  width: 66%;
+  min-height: 1.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.skills-section .language-card .language-skill-line .icons {
+  display: flex;
+  /* Horizontal layout for icons */
+  gap: 0.5rem;
+  /* Space between icons */
+}
+.skills-section .language-card .language-skill-line a {
+  color: #1a1b26;
+  cursor: pointer;
+  text-decoration: none;
+  /* Optional: No underline for links */
 }

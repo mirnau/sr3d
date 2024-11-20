@@ -1,8 +1,5 @@
 export default class SR3DActorSheet extends ActorSheet {
 
-    // NOTE: I might extend with other classes later for easier handling of 
-    // NPCs and mooks. 
-
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             template: "systems/sr3d/templates/sheets/playerCharacter-sheet.hbs",
@@ -13,7 +10,7 @@ export default class SR3DActorSheet extends ActorSheet {
                 {
                     navSelector: ".sheet-tabs .tabs",
                     contentSelector: ".tab-content",
-                    initial: "inventory"                 
+                    initial: "inventory"
                 }
             ]
         });
@@ -24,41 +21,152 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     async getData() {
-        const ctx = super.getData();
-        ctx.system = ctx.actor.system;
-        ctx.config = CONFIG.sr3d;
-        ctx.cssClass = "actorSheet";
-    
-        // INFO: Filter and categorize items based on their type
+        try {
+            const ctx = super.getData();
+            ctx.system = ctx.actor.system;
+            ctx.config = CONFIG.sr3d;
+            ctx.cssClass = "actorSheet";
 
-        ctx.inventory = {
-            weapons: ctx.actor.items.filter(item => item.type === "weapon"),
-            armor: ctx.actor.items.filter(item => item.type === "armor"),
-            consumables: ctx.actor.items.filter(item => item.type === "consumable"),
-            others: ctx.actor.items.filter(item => !["weapon", "armor", "consumable"].includes(item.type))
-        };
+            ctx.skills = {
+                active: this._categorizeAndSortSkills(
+                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "activeSkill"),
+                    (item) => item.system.activeSkill.linkedAttribute
+                ),
+                knowledge: this._categorizeAndSortSkills(
+                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "knowledgeSkill"),
+                    (item) => item.system.knowledgeSkill.linkedAttribute
+                ),
+                language: this._sortSkillsByName(
+                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "languageSkill")
+                ),
+            };
 
-        return ctx;
+            ctx.skills.language = ctx.actor.items
+            .filter((item) => item.type === "skill" && item.system.skillType === "languageSkill")
+            .map((skill) => ({
+              id: skill.id,  
+              name: skill.name, // The name of the language skill
+              subskills: {
+                Speech: skill.system.languageSkill.speach.base, // Base value for Speech
+                Read: skill.system.languageSkill.read.base, // Base value for Read
+                Write: skill.system.languageSkill.write.base, // Base value for Write
+              },
+            }));
+
+            ctx.inventory = {
+                weapons: ctx.actor.items.contents.filter(item => item.type === "weapon"),
+                armor: ctx.actor.items.contents.filter(item => item.type === "armor"),
+                consumables: ctx.actor.items.contents.filter(item => item.type === "consumable"),
+                others: ctx.actor.items.contents.filter(item => !["weapon", "armor", "consumable"].includes(item.type))
+            };
+
+            return ctx;
+        } catch (error) {
+            console.error("Error in SR3DActorSheet.getData:", error);
+            return super.getData();
+        }
+    }
+
+    _categorizeAndSortSkills(skills, keyFn) {
+        const categories = skills.reduce((acc, skill) => {
+            const category = keyFn(skill) || "uncategorized";
+            if (!acc[category]) acc[category] = [];
+            acc[category].push(skill);
+            return acc;
+        }, {});
+
+        Object.keys(categories).forEach((key) => {
+            categories[key].sort((a, b) => a.name.localeCompare(b.name));
+        });
+
+        return categories;
+    }
+
+    _sortSkillsByName(skills) {
+        return skills.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-        
         html.find(".item-create").click(this._onItemCreate.bind(this));
+        html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
+
         
-        // Preserving original functionalty such as drag and drop
-        super.activateListeners(html);
     }
+
+    _onDeleteSkill(event) {
+        event.preventDefault();
+      
+        // Get the skill ID from the clicked element
+        const skillId = event.currentTarget.dataset.id;
+        console.log("Skill ID:", skillId); // Log the skill ID
+      
+        // Fetch the skill using the ID
+        const skill = this.actor.items.get(skillId);
+      
+        if (skill) {
+          console.log("Skill Found:", skill); // Log the skill if found
+          // Confirm deletion
+          const confirmed = window.confirm(`Are you sure you want to delete "${skill.name}"?`);
+          if (!confirmed) return;
+      
+          // Delete the skill
+          skill.delete().then(() => {
+            ui.notifications.info(`${skill.name} has been deleted.`);
+          }).catch((error) => {
+            ui.notifications.error("An error occurred while deleting the skill.");
+            console.error(error);
+          });
+        } else {
+          console.error("Skill not found:", skillId); // Log missing skill
+          ui.notifications.error("Skill not found.");
+        }
+      }
+      
+      
 
     _onItemCreate(event) {
         event.preventDefault();
-        let element = event.currentTraget;
-
-        let itemData = {
+    
+        // Get the clicked element and skill type
+        const element = event.currentTarget;
+        const skillType = element.dataset.skillType; // Retrieve the skill type (e.g., activeSkill)
+        const itemType = element.dataset.type; // Retrieve the item type (always "skill" here)
+    
+        // Ensure the skill type is valid
+        if (!itemType || !skillType) {
+            console.error("Invalid item or skill type specified:", { itemType, skillType });
+            return;
+        }
+    
+        // Prepare the item data
+        const itemData = {
             name: game.i18n.localize("sr3d.sheet.newItem"),
-            type: element.dataset.type
+            type: itemType,
+            system: {
+                skillType: skillType // Set the specific skill type
+            }
         };
-
-        return this.actor.createOwnedItem(itemData);
+    
+        // Add specific default data for skill types (optional)
+        if (skillType === "activeSkill") {
+            itemData.system.activeSkill = { linkedAttribute: "", value: 0, specializations: [] };
+        } else if (skillType === "knowledgeSkill") {
+            itemData.system.knowledgeSkill = { linkedAttribute: "", value: 0, specializations: [] };
+        } else if (skillType === "languageSkill") {
+            itemData.system.languageSkill = {
+                speach: { base: 0, specializations: [] },
+                read: { base: 0, specializations: [] },
+                write: { base: 0, specializations: [] }
+            };
+        }
+    
+        // Create the item
+        return this.actor.createEmbeddedDocuments("Item", [itemData]).then(() => {
+            ui.notifications.info(`Created new ${skillType}`);
+        }).catch((error) => {
+            console.error("Error creating item:", error);
+            ui.notifications.error(`Failed to create new ${skillType}. Check console for details.`);
+        });
     }
 }

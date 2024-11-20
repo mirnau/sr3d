@@ -26,16 +26,101 @@
 .specialization-container {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .specialization-container label {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .specialization-container a {
-    color: inherit; 
+    color: inherit;
     text-decoration: none;
     font-size: 1.2em;
     cursor: pointer;
+}
+
+.skills-section {
+
+    background-color: @primary-color;
+    padding: 1rem;
+
+    .skill-card {
+        background-color: @highlight-color;
+        min-height: 2rem;
+        box-sizing: border-box;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.5rem;
+        display: flex; /* Enables flexbox for layout */
+        justify-content: space-between; /* Distribute content and icons */
+        align-items: center; /* Align vertically */
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+        
+        .icons {
+            display: flex; /* Ensures icons are laid out in a row */
+            gap: 0.25rem; /* Space between icons */
+        }
+        
+        a {
+            color: @primary-color;
+            margin-left: 0.5rem; /* Adds space between icons */
+        }
+    }
+
+    .language-card {
+        background-color: @secondary-color;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: flex; /* Flexbox for overall layout */
+        flex-direction: column; /* Align items vertically */
+        gap: 0.5rem; /* Space between skill rows */
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+    
+        /* Main Skill Name and Icons */
+        .language-skill-line {
+            display: flex; /* Horizontal layout for name and icons */
+            justify-content: space-between; /* Push name to left, icons to right */
+            align-items: center; /* Vertical alignment */
+            padding: 0.125rem 0; /* Spacing between rows */
+    
+            .language-skill-name {
+                flex: 1; /* Occupy remaining space to push icons right */
+                text-align: left;
+            }
+            .subskill-name {
+                flex: 1; /* Occupy remaining space to push icons right */
+                text-align: left;
+            }
+
+            .subskill-value {
+                font-style: bold;
+            }
+
+            .language-info {
+                box-sizing: border-box;
+                padding: 0.5rem;
+                display: flex; /* Horizontal layout for name and icons */
+                justify-content: space-between; /* Push name to left, icons to right */
+                align-items: center; /* Vertical alignment */
+                background-color: @accent-color;
+                width: 66%;
+                min-height: 1.5rem; 
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+            }
+    
+            .icons {
+                display: flex; /* Horizontal layout for icons */
+                gap: 0.5rem; /* Space between icons */
+            }
+    
+            a {
+                color: @primary-color;
+                cursor: pointer;
+                text-decoration: none; /* Optional: No underline for links */
+            }
+        }
+    }
+
+    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 }
