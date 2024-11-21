@@ -1,4 +1,4 @@
-import {defaultImages} from "../helpers/ItemImagePaths.js"
+import { defaultImages } from "../helpers/ItemImagePaths.js"
 
 export default class SR3DItemSheet extends ItemSheet {
 
@@ -21,7 +21,7 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.attributes = ["Body", "Quickness", "Strength", "Intelligence", "Willpower", "Charisma"];
         ctx.system = ctx.item.system;
         ctx.config = CONFIG.sr3d;
-    
+
         // Only apply the dialog logic for items of type 'skill' and not yet initialized
         if (this.item.type === "skill" && !ctx.system.initialized) {
             await this._showSkillTypeDialog();
@@ -55,80 +55,81 @@ export default class SR3DItemSheet extends ItemSheet {
                         label: "Confirm",
                         callback: async (html) => {
                             const selectedType = html.find('input[name="skillType"]:checked').val();
-            
+    
                             // Update the skill type and corresponding icon
                             await this.item.update({
                                 "system.skillType": selectedType,
                                 img: defaultImages.skill[selectedType] || defaultImages.default,
+                                "system.initialized": true
                             });
-            
-                            // Optionally refresh the sheet to reflect the changes
-                            if (this.rendered) this.render(false);
+    
+                            resolve(); // Resolve the promise when confirmed
                         },
                     },
                     cancel: {
                         label: "Cancel",
                         callback: () => {
                             console.log("Skill type selection canceled.");
+                            resolve(); // Still resolve, so `getData()` isn't blocked
                         },
                     },
                 },
                 default: "confirm",
             }).render(true);
-            
         });
     }
-
-     activateListeners(html) {
-        super.activateListeners(html);
     
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
         // Bind specialization event handlers
         html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
         html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
-    
+
         // Bind linked attribute dropdown listeners
         html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
         html.find('select[name="system.skill.knowledgeSkill.linkedAttribute"]').on('change', this._onKnowledgeSkillLinkedAttributeChange.bind(this));
     }
-    
+
     // Handler for Active Skill linked attribute changes
     async _onActiveSkillLinkedAttributeChange(event) {
         const dropdown = event.currentTarget;
         const selectedAttribute = dropdown.value;
-    
+
         // Update the item directly
         await this.item.update({
             "system.activeSkill.linkedAttribute": selectedAttribute
         });
-    
+
         console.log(`Updated Active Skill linkedAttribute to: ${selectedAttribute}`);
-    
+
         // Notify the parent actor sheet to re-sort and re-render
         const actor = this.item.parent;
         if (actor && actor.sheet.rendered) {
             actor.sheet.render(); // Trigger a re-render of the actor sheet
         }
     }
-    
+
     // Handler for Knowledge Skill linked attribute changes
     async _onKnowledgeSkillLinkedAttributeChange(event) {
         const dropdown = event.currentTarget;
         const selectedAttribute = dropdown.value;
-    
+
         // Update the item directly
         await this.item.update({
             "system.knowledgeSkill.linkedAttribute": selectedAttribute
         });
-    
+
         console.log(`Updated Knowledge Skill linkedAttribute to: ${selectedAttribute}`);
-    
+
         // Notify the parent actor sheet to re-sort and re-render
         const actor = this.item.parent;
         if (actor && actor.sheet.rendered) {
             actor.sheet.render(); // Trigger a re-render of the actor sheet
         }
     }
-    
+
 
     _resolveSpecializationsPath(skillType, subfield = null) {
         if (skillType === "languageSkill" && subfield) {

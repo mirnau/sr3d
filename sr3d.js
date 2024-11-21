@@ -1,7 +1,7 @@
 console.log("sr3d | sr3d.js loaded");
 
 //import { sr3d } from "./module/config.js";
-import {defaultImages} from "./module/helpers/ItemImagePaths.js";
+import {defaultImages} from "./module/helpers/ItemImagePaths.js"
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 
@@ -74,16 +74,6 @@ function registerHooks() {
     
     });
    
-    
-
-    Hooks.on("deleteItem", (item, options, userId) => {
-        // Check if the deleted item has an open sheet
-        if (item.sheet && item.sheet.rendered) {
-            console.log(`sr3d | Closing sheet for deleted item: ${item.name}`);
-            item.sheet.close(); // Close the open sheet
-        }
-    });
-    
     Hooks.on("renderSR3DActorSheet", (app, html, data) => {
         console.log("MASONRY | Initializing after sheet render");
 
