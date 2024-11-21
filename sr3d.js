@@ -1,6 +1,7 @@
 console.log("sr3d | sr3d.js loaded");
 
-import { sr3d } from "./module/config.js";
+//import { sr3d } from "./module/config.js";
+import {defaultImages} from "./module/helpers/ItemImagePaths.js";
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 
@@ -44,38 +45,44 @@ function initializeMasonry(gridElement) {
 }
 
 function registerHooks() {
-    
+
     Hooks.on("preCreateItem", async (item, options, userId) => {
-        if (!item.img || item.img === "icons/svg/item-bag.svg") {
-            const defaultImages = {
-                metahuman: "path/to/metahuman-icon.png",
-                weapon: "path/to/weapon-icon.png",
-                default: "icons/svg/item-bag.svg",
-            };
-
-            const img = defaultImages[item.type] || defaultImages.default;
-            item.updateSource({ img });
-        }
-    });
-
-    Hooks.on("createItem", async (item, options, userId) => {
-        const actor = item.parent;
-
-        if (item.type === "skill") {
-            if (item.system.skill?.activeSkill?.value === undefined) {
-                await item.update({ "system.skill.activeSkill.value": 0 });
-                console.log(`Initialized activeSkill.value to 0 for ${item.name}`);
+    
+        // Handle Metahuman Type
+        if (item.type === "metahuman") {
+            if (!item.img || item.img === defaultImages.default) {
+                item.updateSource({ img: defaultImages.metahuman });
             }
+            return; // No additional logic for metahuman
         }
+    
+        // Handle Weapon Type
+        if (item.type === "weapon") {
+            if (!item.img || item.img === defaultImages.default) {
+                item.updateSource({ img: defaultImages.weapon });
+            }
+            return; // No additional logic for weapon
+        }
+ 
+        // Handle Weapon Type
+        if (item.type === "skill") {
+            if (!item.img || item.img === defaultImages.default) {
+                item.updateSource({ img: defaultImages.skill.default });
+            }
+            return; // No additional logic for weapon
+        }
+    
+    });
+   
+    
 
-        // Reinitialize Masonry for actor sheets
-        if (actor?.sheet?.rendered && game.user.id === userId) {
-            console.log("MASONRY | Reinitializing after item creation");
-            const gridElement = actor.sheet.element[0]?.querySelector('.sheet-masonry-grid');
-            if (gridElement) initializeMasonry(gridElement);
+    Hooks.on("deleteItem", (item, options, userId) => {
+        // Check if the deleted item has an open sheet
+        if (item.sheet && item.sheet.rendered) {
+            console.log(`sr3d | Closing sheet for deleted item: ${item.name}`);
+            item.sheet.close(); // Close the open sheet
         }
     });
-
     
     Hooks.on("renderSR3DActorSheet", (app, html, data) => {
         console.log("MASONRY | Initializing after sheet render");

@@ -1,3 +1,5 @@
+import {defaultImages} from "../helpers/ItemImagePaths.js"
+
 export default class SR3DItemSheet extends ItemSheet {
 
     static get defaultOptions() {
@@ -33,46 +35,47 @@ export default class SR3DItemSheet extends ItemSheet {
             new Dialog({
                 title: "Select Skill Type",
                 content: `
-                    <form>
-                        <fieldset>
-                            <legend>Choose Skill Type</legend>
-                            <label>
-                                <input type="radio" name="skillType" value="activeSkill" checked> Active Skill
-                            </label>
-                            <label>
-                                <input type="radio" name="skillType" value="knowledgeSkill"> Knowledge Skill
-                            </label>
-                            <label>
-                                <input type="radio" name="skillType" value="languageSkill"> Language Skill
-                            </label>
-                        </fieldset>
-                    </form>
+                <form>
+                    <fieldset>
+                        <legend>Choose Skill Type</legend>
+                        <label>
+                            <input type="radio" name="skillType" value="activeSkill" checked> Active Skill
+                        </label>
+                        <label>
+                            <input type="radio" name="skillType" value="knowledgeSkill"> Knowledge Skill
+                        </label>
+                        <label>
+                            <input type="radio" name="skillType" value="languageSkill"> Language Skill
+                        </label>
+                    </fieldset>
+                </form>
                 `,
                 buttons: {
                     confirm: {
                         label: "Confirm",
-                        callback: (html) => {
+                        callback: async (html) => {
                             const selectedType = html.find('input[name="skillType"]:checked').val();
-                            if (selectedType) {
-                                // Update the item's skillType and set initialized to true
-                                this.object.update({
-                                    "system.skillType": selectedType,
-                                    "system.initialized": true
-                                });
-                            }
-                            resolve(selectedType);
-                        }
+            
+                            // Update the skill type and corresponding icon
+                            await this.item.update({
+                                "system.skillType": selectedType,
+                                img: defaultImages.skill[selectedType] || defaultImages.default,
+                            });
+            
+                            // Optionally refresh the sheet to reflect the changes
+                            if (this.rendered) this.render(false);
+                        },
                     },
                     cancel: {
                         label: "Cancel",
                         callback: () => {
-                            // Delete the item if canceled
-                            this.object.delete().then(() => resolve());
-                        }
-                    }
+                            console.log("Skill type selection canceled.");
+                        },
+                    },
                 },
-                default: "confirm"
+                default: "confirm",
             }).render(true);
+            
         });
     }
 
