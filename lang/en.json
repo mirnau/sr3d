@@ -103,15 +103,19 @@
                 "recoilComp": "Recoil Compensation"
             },
             "metahuman": {
-                "name": "Name",
-                "maxAge": "Max Age",
-                "strength": "Strength",
-                "quickness": "Quickness",
-                "body": "Body",
-                "charisma": "Charisma",
-                "intelligence": "Intelligence",
-                "willpower": "Willpower",
-                "selectVision": "Vision Type",
+                "name": "Metahuman Type",
+                "lifespan": "Lifeespan",
+                "average": "Average",
+                "max": "Max",
+                "height": "Height",
+                "weight": "Weight",
+                "modifiers": "Modifiers",
+                "attributeLimits": "Attribute Limits",
+                "vision": "Vision",
+                "visionType": "Vision Type",
+                "normal": "Normal",
+                "lowlight": "Low-light",
+                "thermographic": "Thermographic",
                 "description": "Description"
             },
             "vehicle": {

@@ -150,8 +150,21 @@
             "recoilComp": 0.0
         },
         "metahuman": {
-            "name": "Type of Meta Human",
-            "maxAge": 0,
+            "name": "",
+            "lifespan": {
+                "average":0,
+                "max": 0
+            },
+            "physical": {
+                "height": {
+                    "min": 0,
+                    "max": 0
+                },
+                "weight": {
+                    "min": 0,
+                    "max": 0
+                }
+            },
             "modifiers": {
                 "strength": 0,
                 "quickness": 0,
@@ -160,8 +173,23 @@
                 "intelligence": 0,
                 "willpower": 0
             },
-            "selectVision": "select",
-            "description": "Enter your description"
+            "attributeLimits": {
+                "strength": 0,
+                "quickness": 0,
+                "body": 0,
+                "charisma": 0,
+
+                "intelligence": 0,
+                "willpower": 0
+            },
+            "vision": {
+                "visionType": "",
+                "description": "",
+                "rules": {
+                    "darknessPenaltyNegation": ""
+                }
+            },
+            "description": ""
         },
         "vehicle": {
             "templates": [

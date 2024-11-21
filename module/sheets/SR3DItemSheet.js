@@ -19,16 +19,6 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.attributes = ["Body", "Quickness", "Strength", "Intelligence", "Willpower", "Charisma"];
         ctx.system = ctx.item.system;
         ctx.config = CONFIG.sr3d;
-
-        Hooks.on("createItem", async (item, options, userId) => {
-            if (item.type === "skill") {
-                // Check for Active Skills
-                if (item.system.skill?.activeSkill?.value === undefined) {
-                    await item.update({ "system.skill.activeSkill.value": 0 });
-                    console.log(`Initialized activeSkill.value to 0 for ${item.name}`);
-                }
-             }
-        });
     
         // Only apply the dialog logic for items of type 'skill' and not yet initialized
         if (this.item.type === "skill" && !ctx.system.initialized) {

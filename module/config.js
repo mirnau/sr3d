@@ -30,14 +30,18 @@ sr3d.races = {
 
 sr3d.metahuman = {
     name: "sr3d.item.metahuman.name",
-    maxAge: "sr3d.item.metahuman.maxAge",
-    strength: "sr3d.item.metahuman.strength",
-    quickness: "sr3d.item.metahuman.quickness",
-    body: "sr3d.item.metahuman.body",
-    charisma: "sr3d.item.metahuman.charisma",
-    intelligence: "sr3d.item.metahuman.intelligence",
-    willpower: "sr3d.item.metahuman.willpower",
-    selectVision: "sr3d.item.metahuman.selectVision",
+    lifespan: "sr3d.item.metahuman.lifespan",
+    average: "sr3d.item.metahuman.average",
+    max: "sr3d.item.metahuman.max",
+    height: "sr3d.item.metahuman.height",
+    weight: "sr3d.item.metahuman.weight",
+    modifiers: "sr3d.item.metahuman.modifiers",
+    attributeLimits: "sr3d.item.metahuman.attributeLimits",
+    vision: "sr3d.item.metahuman.vision",
+    visionType: "sr3d.item.metahuman.visionType",
+    normal: "sr3d.item.metahuman.normal",
+    lowlight: "sr3d.item.metahuman.lowlight",
+    thermographic: "sr3d.item.metahuman.thermographic",
     description: "sr3d.item.metahuman.description",
 }
 
