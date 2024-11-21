@@ -22,8 +22,9 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.system = ctx.item.system;
         ctx.config = CONFIG.sr3d;
 
-        // Only apply the dialog logic for items of type 'skill' and not yet initialized
         if (this.item.type === "skill" && !ctx.system.initialized) {
+            console.log("Showing skill type dialog for uninitialized skill.");
+    
             await this._showSkillTypeDialog();
         }
 
@@ -35,20 +36,20 @@ export default class SR3DItemSheet extends ItemSheet {
             new Dialog({
                 title: "Select Skill Type",
                 content: `
-                <form>
-                    <fieldset>
-                        <legend>Choose Skill Type</legend>
-                        <label>
-                            <input type="radio" name="skillType" value="activeSkill" checked> Active Skill
-                        </label>
-                        <label>
-                            <input type="radio" name="skillType" value="knowledgeSkill"> Knowledge Skill
-                        </label>
-                        <label>
-                            <input type="radio" name="skillType" value="languageSkill"> Language Skill
-                        </label>
-                    </fieldset>
-                </form>
+                    <form>
+                        <fieldset>
+                            <legend>Choose Skill Type</legend>
+                            <label>
+                                <input type="radio" name="skillType" value="activeSkill" checked> Active Skill
+                            </label>
+                            <label>
+                                <input type="radio" name="skillType" value="knowledgeSkill"> Knowledge Skill
+                            </label>
+                            <label>
+                                <input type="radio" name="skillType" value="languageSkill"> Language Skill
+                            </label>
+                        </fieldset>
+                    </form>
                 `,
                 buttons: {
                     confirm: {
@@ -68,9 +69,12 @@ export default class SR3DItemSheet extends ItemSheet {
                     },
                     cancel: {
                         label: "Cancel",
-                        callback: () => {
+                        callback: async () => {
                             console.log("Skill type selection canceled.");
-                            resolve(); // Still resolve, so `getData()` isn't blocked
+                            
+                            await this.item.delete();
+    
+                            resolve(null); // Pass `null` to indicate that rendering should stop
                         },
                     },
                 },
@@ -78,7 +82,6 @@ export default class SR3DItemSheet extends ItemSheet {
             }).render(true);
         });
     }
-    
 
     activateListeners(html) {
         super.activateListeners(html);
