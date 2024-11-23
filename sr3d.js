@@ -1,15 +1,9 @@
 console.log("sr3d | sr3d.js loaded");
 
-//import { sr3d } from "./module/config.js";
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
-import { closeDeletedSheet } from "./module/hooks/renderSR3DItemSheet/closeDeletedSheet.js";
-
-
-console.log("Import successful:", onItemCreateIconChange);
-
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
@@ -34,7 +28,9 @@ function registerHooks() {
         init: "init",
         preCreateItem: "preCreateItem",
         renderSR3DActorSheet: "renderSR3DActorSheet",
-        renderSR3DItemSheet: "renderSR3DItemSheet"
+        renderSR3DItemSheet: "renderSR3DItemSheet",
+        createActor: "createActor"
+
     }
 
     const register = {
@@ -43,11 +39,8 @@ function registerHooks() {
     }
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
-    console.log(`sr3d | ${hooks.preCreateItem} registered with handler ${onItemCreateIconChange.name}`);
+    Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
 
-    Hooks.on(hooks.renderSR3DActorSheet,  initializeMasonrlyLayout);
-    Hooks.on(hooks.renderSR3DItemSheet, closeDeletedSheet);
-    
     Hooks.once(hooks.init, function () {
         console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
 

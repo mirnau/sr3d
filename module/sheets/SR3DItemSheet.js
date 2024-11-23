@@ -23,13 +23,42 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.config = CONFIG.sr3d;
         ctx.isOwned = Boolean(this.item.parent);
 
-        if (this.item.type === "skill" && !ctx.system.initialized) {
-            console.log("Showing skill type dialog for uninitialized skill.");
-    
-            await this._showSkillTypeDialog();
+        return ctx;
+    }
+
+    async render(force = false, options = {}) {
+        // Check if the item is a skill
+        if (this.item.type === "skill") {
+            // Check if the flag exists
+            let isInitialized = this.item.getFlag("sr3d", "initialized");
+
+            // If the flag doesn't exist, initialize it
+            if (isInitialized === undefined) {
+                console.log("Flag 'initialized' not found. Creating and setting it to false.");
+                await this.item.setFlag("sr3d", "initialized", false);
+                isInitialized = false; // Explicitly set the variable
+            }
+
+            // If the flag is false, show the dialog
+            if (!isInitialized) {
+                console.log("Skill is not initialized. Showing skill type dialog.");
+                const dialogResult = await this._showSkillTypeDialog();
+
+                // If the dialog is canceled, delete the item and prevent rendering
+                if (!dialogResult) {
+                    console.log(`Skill creation canceled for item: ${this.item.name}. Deleting item.`);
+                    await this.item.delete();
+                    return; // Halt rendering by exiting the `render` method
+                }
+
+                // Set the flag to true after the dialog is completed
+                await this.item.setFlag("sr3d", "initialized", true);
+                console.log("Skill has been initialized. Flag set to true.");
+            }
         }
 
-        return ctx;
+        // Call the parent `render` method to continue rendering if initialized
+        return super.render(force, options);
     }
 
     async _showSkillTypeDialog() {
@@ -57,14 +86,14 @@ export default class SR3DItemSheet extends ItemSheet {
                         label: "Confirm",
                         callback: async (html) => {
                             const selectedType = html.find('input[name="skillType"]:checked').val();
-    
+
                             // Update the skill type and corresponding icon
                             await this.item.update({
                                 "system.skillType": selectedType,
                                 img: defaultImages.skill[selectedType] || defaultImages.default,
                                 "system.initialized": true
                             });
-    
+
                             resolve(); // Resolve the promise when confirmed
                         },
                     },
@@ -72,9 +101,9 @@ export default class SR3DItemSheet extends ItemSheet {
                         label: "Cancel",
                         callback: async () => {
                             console.log("Skill type selection canceled.");
-                            
+
                             await this.item.delete();
-    
+
                             resolve(null); // Pass `null` to indicate that rendering should stop
                         },
                     },

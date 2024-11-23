@@ -50,7 +50,7 @@ export function initializeMasonrlyLayout(app, html, data) {
     ///////////////////////////////////// INJECTION HACK END /////////////////////////////////////
 }// Utility function to initialize Masonry
 
-export function initializeMasonry(gridElement) {
+function initializeMasonry(gridElement) {
     if (!gridElement) return;
 
     if (gridElement.masonryInstance) {
