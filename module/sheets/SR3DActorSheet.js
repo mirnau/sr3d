@@ -61,10 +61,12 @@ export default class SR3DActorSheet extends ActorSheet {
             };
 
             return ctx;
+
         } catch (error) {
             console.error("Error in SR3DActorSheet.getData:", error);
             return super.getData();
         }
+
     }
 
     _categorizeAndSortSkills(skills, keyFn) {

@@ -21,6 +21,7 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.attributes = ["Body", "Quickness", "Strength", "Intelligence", "Willpower", "Charisma"];
         ctx.system = ctx.item.system;
         ctx.config = CONFIG.sr3d;
+        ctx.isOwned = Boolean(this.item.parent);
 
         if (this.item.type === "skill" && !ctx.system.initialized) {
             console.log("Showing skill type dialog for uninitialized skill.");

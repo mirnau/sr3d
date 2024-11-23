@@ -178,9 +178,13 @@
                 "weight": "Weight"
             },
             
-            "skills": "Skills",
             
             "skill": {
+                "attributePoints": "Attribute Points",
+                "activePoints":"Active Skill Points",
+                "knowledgePoints":"Knowledge Skill Points",
+                "languagePoints":"Language Skill Points",
+                "skills": "Skills",
                 "purchaseSkills": "Purchase Skillpoint",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",

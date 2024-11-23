@@ -82,6 +82,13 @@
                 "race",
                 "attributes"
             ],
+            "creation": {
+                "attributePoints": 0,
+                "activePoints": 0,
+                "knowledgePoints": 0,
+                "languagePoints": 0,
+                "complete": false
+            },
             "skills": {
                 "template": "skill",
                 "items": []

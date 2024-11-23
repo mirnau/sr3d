@@ -125,11 +125,14 @@ sr3d.dicepools = {
     spell: "sr3d.actor.dicepools.spell"
 }
 
-sr3d.skills = "sr3d.item.skills.skills";
-
 sr3d.skills = {
+    attributePoints: "sr3d.item.skill.attributePoints",
+    activePoints: "sr3d.item.skill.activePoints",
+    knowledgePoints: "sr3d.item.skill.knowledgePoints",
+    languagePoints: "sr3d.item.skill.languagePoints", 
+    skills: "sr3d.item.skill.skills",
     purchaseSkills: "sr3d.item.skill.purchaseSkills",
-    placerholder: "sr3d.item.skill.placeholder",
+    placeholder: "sr3d.item.skill.placeholder", 
     name: "sr3d.item.skill.name",
     activeSkill: "sr3d.item.skill.activeSkill",
     knowledgeSkill: "sr3d.item.skill.knowledgeSkill",
@@ -140,11 +143,12 @@ sr3d.skills = {
     specialization: "sr3d.item.skill.specialization",
     specializations: "sr3d.item.skill.specializations",
     linkedAttribute: "sr3d.item.skill.linkedAttribute",
-    langauge: "sr3d.item.skill.langauge",
+    language: "sr3d.item.skill.language",
     read: "sr3d.item.skill.read",
     write: "sr3d.item.skill.write",
     speech: "sr3d.item.skill.speech"
-}
+};
+
 
 sr3d.movement = {
     movement: "sr3d.actor.movement.movement",
