@@ -1,4 +1,5 @@
 <form class="{{cssClass}} grid-container actor-sheet" autocomplete="off">
+
     <div class="sheet-masonry-grid">
 
         <div class="sheet-component">
@@ -14,8 +15,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="sheet-component">
             <div class="inner-background-container">
@@ -37,17 +36,12 @@
             </div>
         </div>
 
-
         <!-- Attributes Section -->
         <div class="sheet-component">
             <div class="inner-background-container">
-                <!-- Fake shadow (behind inner background) -->
-                <div class="fake-shadow"></div>
-                <!-- Inner content -->
                 <div class="inner-background">
                     <h1>{{localize "sr3d.actor.attributes.attributes"}}</h1>
                     {{> "systems/sr3d/templates/components/attributes.hbs"}}
-
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
             "playerCharacter"
         ],
         "templates": {
-            "race": {
+            "metahuman": {
                 "name": "Human",
                 "maxAge": 100,
                 "modifiers": {
@@ -31,12 +31,18 @@
                 "ratsrace": {
                     "income": [
                         {
-                            "post": 0
+                            "post": {
+                                "amount": 0.0,
+                                "recurrent": false
+                            }
                         }
                     ],
                     "expenses": [
                         {
-                            "post": 0
+                            "post": {
+                                "amount": 0.0,
+                                "recurrent": false
+                            }
                         }
                     ],
                     "debts": [
@@ -79,9 +85,15 @@
         "playerCharacter": {
             "templates": [
                 "character",
-                "race",
+                "metahuman",
                 "attributes"
             ],
+            "creation": {
+                "attributePoints": 0,
+                "activePoints": 0,
+                "knowledgePoints": 0,
+                "languagePoints": 0
+            },
             "skills": {
                 "template": "skill",
                 "items": []
@@ -123,7 +135,8 @@
             "cyberwear",
             "misc",
             "metahuman",
-            "skill"
+            "skill",
+            "magicTradition"
         ],
         "templates": {
             "commodity": {
@@ -150,8 +163,21 @@
             "recoilComp": 0.0
         },
         "metahuman": {
-            "name": "Type of Meta Human",
-            "maxAge": 0,
+            "name": "",
+            "lifespan": {
+                "average":0,
+                "max": 0
+            },
+            "physical": {
+                "height": {
+                    "min": 0,
+                    "max": 0
+                },
+                "weight": {
+                    "min": 0,
+                    "max": 0
+                }
+            },
             "modifiers": {
                 "strength": 0,
                 "quickness": 0,
@@ -160,8 +186,23 @@
                 "intelligence": 0,
                 "willpower": 0
             },
-            "selectVision": "select",
-            "description": "Enter your description"
+            "attributeLimits": {
+                "strength": 0,
+                "quickness": 0,
+                "body": 0,
+                "charisma": 0,
+
+                "intelligence": 0,
+                "willpower": 0
+            },
+            "vision": {
+                "visionType": "",
+                "description": "",
+                "rules": {
+                    "darknessPenaltyNegation": ""
+                }
+            },
+            "priority": ""
         },
         "vehicle": {
             "templates": [
@@ -262,6 +303,13 @@
                     "specializations": []
                 }
             }
+        },
+        "magicTradition": {
+            "type": "",
+            "focus": "",
+            "drainResistanceAttribute": "",
+            "totem": "",
+            "priority":""
         }
     }
 }

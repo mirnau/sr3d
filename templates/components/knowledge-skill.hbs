@@ -5,23 +5,23 @@
             <input type="number" name="system.skill.knowledgeSkill.value"
                 value="{{system.skill.knowledgeSkill.value}}" />
         </label>
-        <label>
-            {{localize "sr3d.item.skill.linkedAttribute"}}
-            <select name="system.skill.knowledgeSkill.linkedAttribute">
-                {{#each attributes}}
-                <option value="{{this}}" {{#if (eq this
-                    ../system.skill.knowledgeSkill.linkedAttribute)}}selected{{/if}}>
-                    {{this}}
-                </option>
-                {{/each}}
-            </select>
-        </label>
+        <fieldset data-item-id="{{this._id}}">
+                <legend>{{localize "sr3d.item.skill.linkedAttribute"}}</legend>
+                <select name="system.skill.knowledgeSkill.linkedAttribute">
+                    {{#each attributes}}
+                    <option value="{{this}}" {{#if (eq this
+                        ../system.skill.knowledgeSkill.linkedAttribute)}}selected{{/if}}>
+                        {{this}}
+                    </option>
+                    {{/each}}
+                </select>
+        </fieldset>
 
         <!-- Specializations Section -->
         <fieldset>
             <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
             <div class="specialization-add">
-                <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}"
+                <input type="text" placeholder="{{localize "sr3d.item.skill.placeholder"}}"
                     class="specialization-name" />
                 <a class="add-specialization" title="{{localize 'Add Specialization'}}">
                     <i class="fas fa-square-plus"></i>
@@ -42,7 +42,7 @@
                     <a class="delete-specialization" title="Delete Specialization">
                         <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
+                    <a class="buy-skill" title="{{localize "sr3d.item.skill.purchaseSkills"}}">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                     <a class="undo" title="Undo">

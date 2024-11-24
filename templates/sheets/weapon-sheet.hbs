@@ -1,32 +1,44 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}" /></h1>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" /></h1>
     </header>
 
     <div class="sheet-content">
-        <table>
-            <tr>
-                <th>{{localize 'sr3d.item.weapon.conceal'}}</th>
-                <th>{{localize 'sr3d.item.weapon.ammo'}}</th>
-                <th>{{localize "sr3d.item.weapon.mode"}}</th>
-                <th>{{localize "sr3d.item.weapon.damage"}}</th>
-                <th>{{localize "sr3d.item.weapon.range"}}</th>
-                <th>{{localize "sr3d.item.weapon.weight"}}</th>
-                <th>{{localize "sr3d.item.weapon.legal"}}</th>
-                <th>{{localize "sr3d.item.weapon.recoilComp"}}</th>
-            </tr>
-            <tr>
-                <td><input name="system.conceal" type="text" value="{{system.conceal}}" data-dtype="Number"></td>
-                <td><input name="system.ammo" type="text" value="{{system.ammo}}" data-dtype="String"></td>
-                <td><input name="system.mode" type="text" value="{{system.mode}}" data-dtype="String"></td>
-                <td><input name="system.damage" type="text" value="{{system.damage}}" data-dtype="String"></td>
-                <td><input name="system.range" type="text" value="{{system.range}}" data-dtype="Number"></td>
-                <td><input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"></td>
-                <td><input name="system.legal" type="text" value="{{system.legal}}" data-dtype="String"></td>
-                <td><input name="system.recoilComp" type="text" value="{{system.recoilComp}}" data-dtype="Number"></td>
-            </tr>
-        </table>
-    {{editor system.description owner=owner button=true editabe=editable}}
+        <div class="field-group">
+            <label for="conceal">{{localize 'sr3d.item.weapon.conceal'}}</label>
+            <input id="conceal" name="system.conceal" type="text" value="{{system.conceal}}" data-dtype="Number" />
+        </div>
+        <div class="field-group">
+            <label for="ammo">{{localize 'sr3d.item.weapon.ammo'}}</label>
+            <input id="ammo" name="system.ammo" type="text" value="{{system.ammo}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="mode">{{localize "sr3d.item.weapon.mode"}}</label>
+            <input id="mode" name="system.mode" type="text" value="{{system.mode}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="damage">{{localize "sr3d.item.weapon.damage"}}</label>
+            <input id="damage" name="system.damage" type="text" value="{{system.damage}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="range">{{localize "sr3d.item.weapon.range"}}</label>
+            <input id="range" name="system.range" type="text" value="{{system.range}}" data-dtype="Number" />
+        </div>
+        <div class="field-group">
+            <label for="weight">{{localize "sr3d.item.weapon.weight"}}</label>
+            <input id="weight" name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number" />
+        </div>
+        <div class="field-group">
+            <label for="legal">{{localize "sr3d.item.weapon.legal"}}</label>
+            <input id="legal" name="system.legal" type="text" value="{{system.legal}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="recoilComp">{{localize "sr3d.item.weapon.recoilComp"}}</label>
+            <input id="recoilComp" name="system.recoilComp" type="text" value="{{system.recoilComp}}" data-dtype="Number" />
+        </div>
+        <div class="editor-field">
+            {{editor system.description owner=owner button=true editable=editable}}
+        </div>
     </div>
 </form>

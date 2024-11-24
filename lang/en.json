@@ -16,6 +16,10 @@
             "addSkill": "Add a skill",
             "newItem": "New item"
         },
+
+        "characterCreation": {
+            "instruction": "Humans are weighted at 64% and magic users at 4%."
+        },
         "actor": {
             "race": {
                 "race": "Race",
@@ -100,19 +104,25 @@
                 "range": "Range",
                 "weight": "Weight",
                 "legal": "Legal",
-                "recoilComp": "Recoil Compensation"
+                "recoilComp": "Recoil Compensation",
+                "newWeapon": "New Weapon" 
             },
             "metahuman": {
-                "name": "Name",
-                "maxAge": "Max Age",
-                "strength": "Strength",
-                "quickness": "Quickness",
-                "body": "Body",
-                "charisma": "Charisma",
-                "intelligence": "Intelligence",
-                "willpower": "Willpower",
-                "selectVision": "Vision Type",
-                "description": "Description"
+                "name": "Metahuman Type",
+                "lifespan": "Lifeespan",
+                "average": "Average",
+                "max": "Max",
+                "height": "Height",
+                "weight": "Weight",
+                "modifiers": "Modifiers",
+                "attributeLimits": "Attribute Limits",
+                "vision": "Vision",
+                "visionType": "Vision Type",
+                "normal": "Normal",
+                "lowlight": "Low-light",
+                "thermographic": "Thermographic",
+                "description": "Description",
+                "newMetaHuman": "New Metahuman"
             },
             "vehicle": {
                 "handling": "Handling",
@@ -174,9 +184,14 @@
                 "weight": "Weight"
             },
             
-            "skills": "Skills",
             
             "skill": {
+                "newSkill": "New Skill",
+                "attributePoints": "Attribute Points",
+                "activePoints":"Active Skill Points",
+                "knowledgePoints":"Knowledge Skill Points",
+                "languagePoints":"Language Skill Points",
+                "skills": "Skills",
                 "purchaseSkills": "Purchase Skillpoint",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",
@@ -193,6 +208,14 @@
                 "read": "Read",
                 "speech": "Speech",
                 "write": "Write"
+            },
+
+            "magicTradition": {
+                "type": "Type of Mage",
+                "focus": "Focus",
+                "drainResistanceAttribute": "Drain Resistance Attribute",
+                "totem": "Totem Animal",
+                "newMagicTradition": "New Magic Tradition"
             }
         }
     }

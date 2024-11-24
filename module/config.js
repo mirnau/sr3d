@@ -5,6 +5,10 @@ sr3d.sheet ={
     newItem: "sr3d.sheet.newItem"
 }
 
+sr3d.characterCreation = {
+    instruction: "sr3d.characterCreation.instruction"
+}
+
 sr3d.freeActions = {
     none: "",
     activateCyberware: "sr3d.freeActions.activateCyberware"
@@ -30,15 +34,20 @@ sr3d.races = {
 
 sr3d.metahuman = {
     name: "sr3d.item.metahuman.name",
-    maxAge: "sr3d.item.metahuman.maxAge",
-    strength: "sr3d.item.metahuman.strength",
-    quickness: "sr3d.item.metahuman.quickness",
-    body: "sr3d.item.metahuman.body",
-    charisma: "sr3d.item.metahuman.charisma",
-    intelligence: "sr3d.item.metahuman.intelligence",
-    willpower: "sr3d.item.metahuman.willpower",
-    selectVision: "sr3d.item.metahuman.selectVision",
+    lifespan: "sr3d.item.metahuman.lifespan",
+    average: "sr3d.item.metahuman.average",
+    max: "sr3d.item.metahuman.max",
+    height: "sr3d.item.metahuman.height",
+    weight: "sr3d.item.metahuman.weight",
+    modifiers: "sr3d.item.metahuman.modifiers",
+    attributeLimits: "sr3d.item.metahuman.attributeLimits",
+    vision: "sr3d.item.metahuman.vision",
+    visionType: "sr3d.item.metahuman.visionType",
+    normal: "sr3d.item.metahuman.normal",
+    lowlight: "sr3d.item.metahuman.lowlight",
+    thermographic: "sr3d.item.metahuman.thermographic",
     description: "sr3d.item.metahuman.description",
+    newMetaHuman: "sr3d.item.metahuman.newMetaHuman"
 }
 
 sr3d.weapon = {
@@ -49,7 +58,8 @@ sr3d.weapon = {
     range: "sr3d.item.weapon.range",
     weight: "sr3d.item.weapon.weight",
     legal: "sr3d.item.weapon.legal",
-    recoilComp: "sr3d.item.weapon.recoilComp"
+    recoilComp: "sr3d.item.weapon.recoilComp",
+    newWeapon: "sr3d.item.weapon.newWeapon"
 };
 
 sr3d.vehicle = {
@@ -121,11 +131,15 @@ sr3d.dicepools = {
     spell: "sr3d.actor.dicepools.spell"
 }
 
-sr3d.skills = "sr3d.item.skills.skills";
-
 sr3d.skills = {
+    newSkill: "sr3D.item.skill.newSkill",
+    attributePoints: "sr3d.item.skill.attributePoints",
+    activePoints: "sr3d.item.skill.activePoints",
+    knowledgePoints: "sr3d.item.skill.knowledgePoints",
+    languagePoints: "sr3d.item.skill.languagePoints", 
+    skills: "sr3d.item.skill.skills",
     purchaseSkills: "sr3d.item.skill.purchaseSkills",
-    placerholder: "sr3d.item.skill.placeholder",
+    placeholder: "sr3d.item.skill.placeholder", 
     name: "sr3d.item.skill.name",
     activeSkill: "sr3d.item.skill.activeSkill",
     knowledgeSkill: "sr3d.item.skill.knowledgeSkill",
@@ -136,11 +150,21 @@ sr3d.skills = {
     specialization: "sr3d.item.skill.specialization",
     specializations: "sr3d.item.skill.specializations",
     linkedAttribute: "sr3d.item.skill.linkedAttribute",
-    langauge: "sr3d.item.skill.langauge",
+    language: "sr3d.item.skill.language",
     read: "sr3d.item.skill.read",
     write: "sr3d.item.skill.write",
     speech: "sr3d.item.skill.speech"
+};
+
+
+sr3d.magicTradition = {
+    type: "sr3d.item.magicTradtion.type",
+    focus: "sr3d.item.magicTradtion.focus",
+    drainResistanceAttribute: "sr3d.item.magicTradtion.drainResistanceAttribute",
+    totem: "sr3d.item.magicTradtion.totem",
+    newMagicTradition: "sr3d.item.magicTradition.newMagicTradition"
 }
+
 
 sr3d.movement = {
     movement: "sr3d.actor.movement.movement",

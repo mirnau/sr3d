@@ -1,0 +1,43 @@
+<form class="{{cssClass}}" data-form="sheet" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+        <h1>
+            <input 
+                name="name" 
+                type="text" 
+                value="{{item.name}}" 
+                placeholder="{{localize 'Name'}}" 
+            />
+        </h1>
+        <div class="form-group">
+            <label for="priority-select">Select Priority</label>
+            <select name="system.priority" id="priority-select" class="priority-select">
+                <option value="A" {{#if (eq system.priority "A")}}selected{{/if}}>A</option>
+                <option value="B" {{#if (eq system.priority "B")}}selected{{/if}}>B</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="sheet-content">
+        <div class="field-group">
+            <label for="type">{{localize 'sr3d.item.magicTradition.type'}}</label>
+            <input id="type" name="system.type" type="text" value="{{system.type}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="focus">{{localize 'sr3d.item.magicTradition.focus'}}</label>
+            <input id="focus" name="system.focus" type="text" value="{{system.focus}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="drainResistAttribute">{{localize 'sr3d.item.magicTradition.drainResistanceAttribute'}}</label>
+            <input id="drainResistAttribute" name="system.drainResistAttribute" type="text"
+                value="{{system.drainResistAttribute}}" data-dtype="String" />
+        </div>
+        <div class="field-group">
+            <label for="totem">{{localize 'sr3d.item.magicTradition.totem'}}</label>
+            <input id="totem" name="system.totem" type="text" value="{{system.totem}}" data-dtype="String" />
+        </div>
+        <div class="editor-field">
+            {{editor system.description owner=owner button=true editable=editable}}
+        </div>
+    </div>
+</form>
