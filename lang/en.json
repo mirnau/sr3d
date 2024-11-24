@@ -16,6 +16,10 @@
             "addSkill": "Add a skill",
             "newItem": "New item"
         },
+
+        "characterCreation": {
+            "instruction": "Humans are weighted at 64% and magic users at 4%."
+        },
         "actor": {
             "race": {
                 "race": "Race",
@@ -182,6 +186,7 @@
             
             
             "skill": {
+                "newSkill": "New Skill",
                 "attributePoints": "Attribute Points",
                 "activePoints":"Active Skill Points",
                 "knowledgePoints":"Knowledge Skill Points",

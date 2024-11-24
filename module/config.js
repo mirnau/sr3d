@@ -5,6 +5,10 @@ sr3d.sheet ={
     newItem: "sr3d.sheet.newItem"
 }
 
+sr3d.characterCreation = {
+    instruction: "sr3d.characterCreation.instruction"
+}
+
 sr3d.freeActions = {
     none: "",
     activateCyberware: "sr3d.freeActions.activateCyberware"
@@ -128,6 +132,7 @@ sr3d.dicepools = {
 }
 
 sr3d.skills = {
+    newSkill: "sr3D.item.skill.newSkill",
     attributePoints: "sr3d.item.skill.attributePoints",
     activePoints: "sr3d.item.skill.activePoints",
     knowledgePoints: "sr3d.item.skill.knowledgePoints",

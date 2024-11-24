@@ -2,6 +2,7 @@ console.log("sr3d | sr3d.js loaded");
 
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
+import SR3DActor from "./module/actors/SR3DActor.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 
@@ -49,6 +50,8 @@ function registerHooks() {
 
         Actors.unregisterSheet(register.core, ActorSheet);
         Actors.registerSheet(register.sr3d, SR3DActorSheet, { makeDefault: true });
+
+        CONFIG.Actor.documentClass = SR3DActor;
 
         AsyncRegisterComponentTemplates();
 

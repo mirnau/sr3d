@@ -63,7 +63,7 @@ export default class SR3DItemSheet extends ItemSheet {
 
     async _showSkillTypeDialog() {
         const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
-
+    
         return new Promise((resolve) => {
             new Dialog({
                 title: "Select Skill Type",
@@ -73,32 +73,39 @@ export default class SR3DItemSheet extends ItemSheet {
                         label: "Confirm",
                         callback: async (html) => {
                             const selectedType = html.find('input[name="skillType"]:checked').val();
-
+                            console.log("Confirm button clicked, selectedType:", selectedType);
+    
+                            if (!selectedType) {
+                                ui.notifications.error("You must select a skill type.");
+                                resolve(null); // Fail gracefully if no type is selected
+                                return;
+                            }
+    
                             // Update the skill type and corresponding icon
                             await this.item.update({
                                 "system.skillType": selectedType,
                                 img: defaultImages.skill[selectedType] || defaultImages.default,
                                 "system.initialized": true
                             });
-
-                            resolve(); // Resolve the promise when confirmed
+    
+                            console.log("Skill successfully updated with type:", selectedType);
+                            resolve(true); // Resolve with success
                         },
                     },
                     cancel: {
                         label: "Cancel",
                         callback: async () => {
-                            console.log("Skill type selection canceled.");
-
+                            console.log("Cancel button clicked. Deleting item:", this.item.name);
                             await this.item.delete();
-
-                            resolve(null); // Pass `null` to indicate that rendering should stop
+                            resolve(null); // Resolve with cancellation
                         },
                     },
                 },
-                default: "confirm",
+                default: "confirm", // Ensure Confirm is default
             }).render(true);
         });
     }
+    
 
     activateListeners(html) {
         super.activateListeners(html);
@@ -140,7 +147,7 @@ export default class SR3DItemSheet extends ItemSheet {
     async _updateObject(event, formData) {
         console.log("Form Data Submitted:", formData);
     
-        if (!formData['system.priority']) {
+        if (this.item.type === "skill" && !formData['system.priority']) {
             console.error("Priority path is missing in formData.");
         }
     
