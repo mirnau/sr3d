@@ -43,6 +43,7 @@ sr3d.metahuman = {
     lowlight: "sr3d.item.metahuman.lowlight",
     thermographic: "sr3d.item.metahuman.thermographic",
     description: "sr3d.item.metahuman.description",
+    newMetaHuman: "sr3d.item.metahuman.newMetaHuman"
 }
 
 sr3d.weapon = {
@@ -53,7 +54,8 @@ sr3d.weapon = {
     range: "sr3d.item.weapon.range",
     weight: "sr3d.item.weapon.weight",
     legal: "sr3d.item.weapon.legal",
-    recoilComp: "sr3d.item.weapon.recoilComp"
+    recoilComp: "sr3d.item.weapon.recoilComp",
+    newWeapon: "sr3d.item.weapon.newWeapon"
 };
 
 sr3d.vehicle = {
@@ -148,6 +150,15 @@ sr3d.skills = {
     write: "sr3d.item.skill.write",
     speech: "sr3d.item.skill.speech"
 };
+
+
+sr3d.magicTradition = {
+    type: "sr3d.item.magicTradtion.type",
+    focus: "sr3d.item.magicTradtion.focus",
+    drainResistanceAttribute: "sr3d.item.magicTradtion.drainResistanceAttribute",
+    totem: "sr3d.item.magicTradtion.totem",
+    newMagicTradition: "sr3d.item.magicTradition.newMagicTradition"
+}
 
 
 sr3d.movement = {

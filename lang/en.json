@@ -100,7 +100,8 @@
                 "range": "Range",
                 "weight": "Weight",
                 "legal": "Legal",
-                "recoilComp": "Recoil Compensation"
+                "recoilComp": "Recoil Compensation",
+                "newWeapon": "New Weapon" 
             },
             "metahuman": {
                 "name": "Metahuman Type",
@@ -116,7 +117,8 @@
                 "normal": "Normal",
                 "lowlight": "Low-light",
                 "thermographic": "Thermographic",
-                "description": "Description"
+                "description": "Description",
+                "newMetaHuman": "New Metahuman"
             },
             "vehicle": {
                 "handling": "Handling",
@@ -201,6 +203,14 @@
                 "read": "Read",
                 "speech": "Speech",
                 "write": "Write"
+            },
+
+            "magicTradition": {
+                "type": "Type of Mage",
+                "focus": "Focus",
+                "drainResistanceAttribute": "Drain Resistance Attribute",
+                "totem": "Totem Animal",
+                "newMagicTradition": "New Magic Tradition"
             }
         }
     }

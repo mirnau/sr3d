@@ -1,65 +1,64 @@
-<form>
-  <h2>Assign Priorities</h2>
+<!-- Metahuman Selection -->
+<div class="form-group">
+  <label for="metahuman-select">Select Metahuman:</label>
+  <select class="priority-select" name="metahuman" id="metahuman-select">
+    {{#each metahumans}}
+    <option value="{{priority}}" {{#if default}}selected{{/if}}>
+      {{name}} (Priority: {{priority}})
+    </option>
+    {{/each}}
+  </select>
+</div>
 
-  <!-- Race Priority -->
-  <div class="form-group">
-    <label for="race-priority">Race Priority</label>
-    <select name="race" class="priority-select">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
+<!-- Magic Tradition Selection -->
+<div class="form-group">
+  <label for="magicTradition-select">Select Magic Tradition:</label>
+  <select class="priority-select" name="system.magicTradition.priority" id="magicTradition-select">
+    {{#each magicTraditions}}
+    <option value="{{priority}}" {{#if default}}selected{{/if}}>
+      {{name}} (Priority: {{priority}})
+    </option>
+    {{/each}}
+  </select>
+</div>
+
+<!-- Priority Tables -->
+<div class="priority-selection">
+  <label for="attribute-priority">Attribute Priority:</label>
+  <select class="priority-select" id="attribute-priority" name="attributePriority">
+    {{#each attributePriorities}}
+    <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
+    {{/each}}
+  </select>
+</div>
+
+<div class="priority-selection">
+  <label for="skills-priority">Skills Priority:</label>
+  <select class="priority-select" id="skills-priority" name="skillsPriority">
+    {{#each skillsPriorities}}
+    <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
+    {{/each}}
+  </select>
+</div>
+
+<div class="priority-selection">
+  <label for="resources-priority">Resources Priority:</label>
+  <select class="priority-select" id="resources-priority" name="resourcesPriority">
+    {{#each resourcesPriorities}}
+    <option value="{{@key}}">{{@key}} ({{currency this}})</option>
+    {{/each}}
+  </select>
+</div>
+
+<div class="priority-utilities">
+  <div class="priority-random">
+    <a class="priority-randomizer" title="{{localize 'Randomize'}}">
+      <i class="fas fa-shuffle"></i> Randomize
+    </a>
   </div>
-
-  <!-- Magic Priority -->
-  <div class="form-group">
-    <label for="magic-priority">Magic Priority</label>
-    <select name="magic" class="priority-select">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
+  <div class="priority-reset">
+    <a class="priority-reset" title="{{localize 'Reset'}}">
+      <i class="fas fa-rotate-left"></i> Reset
+    </a>
   </div>
-
-  <!-- Attributes Priority -->
-  <div class="form-group">
-    <label for="attributes-priority">Attributes Priority</label>
-    <select name="attributes" class="priority-select">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
-  </div>
-
-  <!-- Skills Priority -->
-  <div class="form-group">
-    <label for="skills-priority">Skills Priority</label>
-    <select name="skills" class="priority-select">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
-  </div>
-
-  <!-- Resources Priority -->
-  <div class="form-group">
-    <label for="resources-priority">Resources Priority</label>
-    <select name="resources" class="priority-select">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
-  </div>
-
-  <p><strong>Note:</strong> Each priority can only be used once.</p>
-</form>
+</div>

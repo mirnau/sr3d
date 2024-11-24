@@ -62,25 +62,12 @@ export default class SR3DItemSheet extends ItemSheet {
     }
 
     async _showSkillTypeDialog() {
+        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
+
         return new Promise((resolve) => {
             new Dialog({
                 title: "Select Skill Type",
-                content: `
-                    <form>
-                        <fieldset>
-                            <legend>Choose Skill Type</legend>
-                            <label>
-                                <input type="radio" name="skillType" value="activeSkill" checked> Active Skill
-                            </label>
-                            <label>
-                                <input type="radio" name="skillType" value="knowledgeSkill"> Knowledge Skill
-                            </label>
-                            <label>
-                                <input type="radio" name="skillType" value="languageSkill"> Language Skill
-                            </label>
-                        </fieldset>
-                    </form>
-                `,
+                content: htmlTemplate,
                 buttons: {
                     confirm: {
                         label: "Confirm",
@@ -123,7 +110,45 @@ export default class SR3DItemSheet extends ItemSheet {
         // Bind linked attribute dropdown listeners
         html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
         html.find('select[name="system.skill.knowledgeSkill.linkedAttribute"]').on('change', this._onKnowledgeSkillLinkedAttributeChange.bind(this));
+        html.find('select[name="system.metahuman.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
+        html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
     }
+
+    _onDynamicPriorityChange(event) {
+        event.preventDefault();
+    
+        // Determine the correct field from the name attribute
+        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magicTradition.priority"
+        const selectedPriority = event.target.value;
+    
+        // Update the correct field dynamically
+        this.item.update({
+            [fieldName]: selectedPriority // Use computed property name to dynamically set the field
+        }).then(() => {
+            console.log(`Successfully updated ${fieldName} to: ${selectedPriority}`);
+            console.log("Updated item data:", this.item.system);
+    
+            // Re-render the sheet to reflect the changes
+            this.render();
+            ui.notifications.info(`Priority updated to: ${selectedPriority}`);
+        }).catch(err => {
+            console.error(`Failed to update ${fieldName}:`, err);
+            ui.notifications.error('Could not update priority. Check the console for details.');
+        });
+    }
+
+    async _updateObject(event, formData) {
+        console.log("Form Data Submitted:", formData);
+    
+        if (!formData['system.priority']) {
+            console.error("Priority path is missing in formData.");
+        }
+    
+        await this.object.update(formData);
+    }
+    
+    
+    
 
     // Handler for Active Skill linked attribute changes
     async _onActiveSkillLinkedAttributeChange(event) {

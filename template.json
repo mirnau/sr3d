@@ -129,7 +129,8 @@
             "cyberwear",
             "misc",
             "metahuman",
-            "skill"
+            "skill",
+            "magicTradition"
         ],
         "templates": {
             "commodity": {
@@ -195,7 +196,7 @@
                     "darknessPenaltyNegation": ""
                 }
             },
-            "description": ""
+            "priority": ""
         },
         "vehicle": {
             "templates": [
@@ -296,6 +297,13 @@
                     "specializations": []
                 }
             }
+        },
+        "magicTradition": {
+            "type": "",
+            "focus": "",
+            "drainResistanceAttribute": "",
+            "totem": "",
+            "priority":""
         }
     }
 }

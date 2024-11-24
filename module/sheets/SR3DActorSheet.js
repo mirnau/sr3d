@@ -1,3 +1,5 @@
+import Randomizer from './Randomizer.js';
+
 export default class SR3DActorSheet extends ActorSheet {
 
     static get defaultOptions() {
@@ -101,8 +103,48 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     async _showCharacterCreationDialog() {
-        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/character-creation-dialog.hbs');
-
+        // Fetch all items of type "metahuman" and "magicTradition"
+        const metahumans = game.items.filter(item => item.type === "metahuman");
+        const magicTraditions = game.items.filter(item => item.type === "magicTradition");
+    
+        // Generate allMetahumans array
+        const allMetahumans = [
+            { priority: "E", name: "Human", default: true },
+            ...metahumans.map(metahuman => ({
+                priority: metahuman.system.priority || "N/A",
+                name: metahuman.name || "Unknown",
+                default: false,
+            }))
+        ];
+       
+        // Generate allMagicTraditions array
+        const allMagicTraditions = [
+            { priority: "C", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            { priority: "D", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            { priority: "E", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            ...magicTraditions.map(tradition => ({
+                priority: tradition.system.priority,
+                name: tradition.name,
+                default: false,
+            }))
+        ];
+    
+        // Data for priority tables
+        const attributePriorities = { A: 30, B: 27, C: 24, D: 21, E: 18 };
+        const skillsPriorities = { A: 50, B: 40, C: 34, D: 30, E: 27 };
+        const resourcesPriorities = { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 };
+    
+        const dialogData = {
+            metahumans: allMetahumans,
+            magicTraditions: allMagicTraditions,
+            attributePriorities,
+            skillsPriorities,
+            resourcesPriorities,
+        };
+    
+        // Render template
+        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/character-creation-dialog.hbs', dialogData);
+    
         return new Promise((resolve) => {
             new Dialog({
                 title: "Character Creation",
@@ -110,27 +152,159 @@ export default class SR3DActorSheet extends ActorSheet {
                 buttons: {
                     ok: {
                         label: "OK",
-                        callback: () => {
+                        callback: async () => {
                             ui.notifications.info("Character creation confirmed!");
-                            resolve(true); // Resolve successfully
+                            resolve(true);
                         }
                     },
                     cancel: {
                         label: "Cancel",
                         callback: () => {
                             ui.notifications.warn("Character creation canceled.");
-                            resolve(false); // Resolve as canceled
+                            resolve(false);
                         }
                     }
                 },
                 default: "ok",
-                close: () => {
-                    resolve(false); // Ensure the promise resolves if the dialog is closed
+                render: (html) => {
+                    console.log("Dialog rendered. Setting up priority selection listeners.");
+                    this._setupPrioritySelectionListeners(html);
                 }
-            }).render(true);
+            }, { render: this }).render(true);
         });
     }
+    
+    _setupPrioritySelectionListeners(html) {
+        const prioritySelectors = html.find('.priority-select'); // Use the provided `html` context
+        const okButton = html.find('button.default'); // Locate the "OK" button
+        const randomizeButton = html.find('.priority-randomizer'); // Randomize button
+        const resetButton = html.find('.priority-reset'); // Reset button
+    
+        // Initialize the Randomizer
+        const randomizer = new Randomizer();
+    
+        // Randomize function
+        const randomizePriorities = () => {
+            try {
+                const randomCombination = randomizer.generatePriorityCombination();
+    
+                // Update the dropdowns
+                prioritySelectors.each((_, select) => {
+                    const fieldName = $(select).attr("name");
+    
+                    // Assign the correct priority to each field
+                    if (fieldName.includes("magic")) {
+                        select.value = randomCombination.magic;
+                    } else if (fieldName.includes("metahuman")) {
+                        select.value = randomCombination.metahuman;
+                    } else if (fieldName.includes("attribute")) {
+                        select.value = randomCombination.attribute;
+                    } else if (fieldName.includes("skills")) {
+                        select.value = randomCombination.skills;
+                    } else if (fieldName.includes("resources")) {
+                        select.value = randomCombination.resources;
+                    }
+                });
+    
+                updateDropdowns(); // Recalculate and update after randomization
+            } catch (error) {
+                console.error("Error generating random priorities:", error);
+            }
+        };
+    
+        // Reset function
+        const resetPriorities = () => {
+            prioritySelectors.each((_, select) => {
+                select.value = ""; // Clear all dropdowns
+            });
+            updateDropdowns(); // Recalculate and update after reset
+        };
+    
+        // Function to validate dropdown combinations
+        const isValidCombination = () => {
+            const selectedValues = new Set();
+            let isValid = true;
+    
+            prioritySelectors.each((_, select) => {
+                const value = select.value;
+                if (value) {
+                    if (selectedValues.has(value)) {
+                        isValid = false; // Duplicate found
+                    } else if (Randomizer.VALID_PRIORITIES.includes(value)) {
+                        selectedValues.add(value);
+                    }
+                } else {
+                    isValid = false; // Empty selection
+                }
+            });
+    
+            return isValid;
+        };
+    
+        // Function to update the button and dropdown states
+        const updateDropdowns = () => {
+            const selectedValues = new Set();
+    
+            // Collect selected values
+            prioritySelectors.each((_, select) => {
+                const value = select.value;
+                if (Randomizer.VALID_PRIORITIES.includes(value)) {
+                    selectedValues.add(value);
+                }
+            });
+    
+            // Update all dropdowns
+            prioritySelectors.each((_, select) => {
+                const options = select.querySelectorAll('option');
+                options.forEach(opt => {
+                    const optionValue = opt.value;
+                    if (Randomizer.VALID_PRIORITIES.includes(optionValue)) {
+                        if (selectedValues.has(optionValue) && select.value !== optionValue) {
+                            // Grey out and disable options that are selected in other dropdowns
+                            opt.disabled = true;
+                            opt.style.backgroundColor = "grey";
+                            opt.style.color = "white"; // Optional: Change text color for better visibility
+                        } else {
+                            // Enable options that are not selected elsewhere
+                            opt.disabled = false;
+                            opt.style.backgroundColor = "";
+                            opt.style.color = "";
+                        }
+                    }
+                });
+            });
+    
+            // Update OK button state
+            const isValid = isValidCombination(); // Ensure no duplicates and all filled
+            if (isValid) {
+                okButton.prop('disabled', false).css({ backgroundColor: "", color: "" });
+            } else {
+                okButton.prop('disabled', true).css({ backgroundColor: "grey", color: "white" });
+            }
+        };
+    
+        // Attach event listeners
+        prioritySelectors.each((_, select) => {
+            $(select).on('change', updateDropdowns); // Recalculate on dropdown change
+        });
+        randomizeButton.on('click', (event) => {
+            event.preventDefault(); // Prevent default anchor behavior
+            randomizePriorities(); // Randomize priorities
+        });
+        resetButton.on('click', (event) => {
+            event.preventDefault(); // Prevent default anchor behavior
+            resetPriorities(); // Reset priorities
+        });
+    
+        // Initial call to set up dropdown and button states on render
+        resetPriorities();
+    }
+    
 
+
+    
+    
+    
     _categorizeAndSortSkills(skills, keyFn) {
         const categories = skills.reduce((acc, skill) => {
             const category = keyFn(skill) || "uncategorized";
@@ -203,8 +377,6 @@ export default class SR3DActorSheet extends ActorSheet {
             ui.notifications.error("Skill not found.");
         }
     }
-
-
 
     _onItemCreate(event) {
         event.preventDefault();

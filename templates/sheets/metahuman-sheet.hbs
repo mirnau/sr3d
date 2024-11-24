@@ -1,7 +1,22 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" data-form="sheet" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize "sr3d.item.metahuman.name"}}" /></h1>
+        <div class="form-group">
+            <label for="priority-select">Select Priority</label>
+
+            <h1>
+                <input 
+                    name="name" 
+                    type="text" 
+                    value="{{item.name}}" 
+                    placeholder="{{localize "sr3d.item.metahuman.name"}}" 
+                />
+            </h1>
+            <select name="system.priority" id="priority-select" class="priority-select">
+                <option value="C" {{#if (eq system.priority "C")}}selected{{/if}}>C</option>
+                <option value="D" {{#if (eq system.priority "D")}}selected{{/if}}>D</option>
+            </select>
+        </div>
     </header>
 
     <div class="sheet-content">
@@ -52,12 +67,17 @@
                     <th>{{localize "sr3d.actor.attributes.willpower"}}</th>
                 </tr>
                 <tr>
-                    <td><input name="system.modifiers.strength" type="number" value="{{system.modifiers.strength}}" /></td>
-                    <td><input name="system.modifiers.quickness" type="number" value="{{system.modifiers.quickness}}" /></td>
+                    <td><input name="system.modifiers.strength" type="number" value="{{system.modifiers.strength}}" />
+                    </td>
+                    <td><input name="system.modifiers.quickness" type="number" value="{{system.modifiers.quickness}}" />
+                    </td>
                     <td><input name="system.modifiers.body" type="number" value="{{system.modifiers.body}}" /></td>
-                    <td><input name="system.modifiers.charisma" type="number" value="{{system.modifiers.charisma}}" /></td>
-                    <td><input name="system.modifiers.intelligence" type="number" value="{{system.modifiers.intelligence}}" /></td>
-                    <td><input name="system.modifiers.willpower" type="number" value="{{system.modifiers.willpower}}" /></td>
+                    <td><input name="system.modifiers.charisma" type="number" value="{{system.modifiers.charisma}}" />
+                    </td>
+                    <td><input name="system.modifiers.intelligence" type="number"
+                            value="{{system.modifiers.intelligence}}" /></td>
+                    <td><input name="system.modifiers.willpower" type="number" value="{{system.modifiers.willpower}}" />
+                    </td>
                 </tr>
             </table>
         </fieldset>
@@ -75,12 +95,18 @@
                     <th>{{localize "sr3d.actor.attributes.willpower"}}</th>
                 </tr>
                 <tr>
-                    <td><input name="system.attribute.strength" type="number" value="{{system.attributeLimits.strength}}" /></td>
-                    <td><input name="system.attribute.quickness" type="number" value="{{system.attributeLimits.quickness}}" /></td>
-                    <td><input name="system.attribute.body" type="number" value="{{system.attributeLimits.body}}" /></td>
-                    <td><input name="system.attribute.charisma" type="number" value="{{system.attributeLimits.charisma}}" /></td>
-                    <td><input name="system.attribute.intelligence" type="number" value="{{system.attributeLimits.intelligence}}" /></td>
-                    <td><input name="system.attribute.willpower" type="number" value="{{system.attributeLimits.willpower}}" /></td>
+                    <td><input name="system.attribute.strength" type="number"
+                            value="{{system.attributeLimits.strength}}" /></td>
+                    <td><input name="system.attribute.quickness" type="number"
+                            value="{{system.attributeLimits.quickness}}" /></td>
+                    <td><input name="system.attribute.body" type="number" value="{{system.attributeLimits.body}}" />
+                    </td>
+                    <td><input name="system.attribute.charisma" type="number"
+                            value="{{system.attributeLimits.charisma}}" /></td>
+                    <td><input name="system.attribute.intelligence" type="number"
+                            value="{{system.attributeLimits.intelligence}}" /></td>
+                    <td><input name="system.attribute.willpower" type="number"
+                            value="{{system.attributeLimits.willpower}}" /></td>
                 </tr>
             </table>
         </fieldset>
@@ -91,17 +117,20 @@
             <div>
                 <label>{{localize "sr3d.item.metahuman.visionType"}}:</label>
                 <select name="system.vision.visionType">
-                    <option value="normal" {{#if (eq system.vision.visionType "normal")}}selected{{/if}}>{{localize "sr3d.item.metahuman.normal"}}</option>
-                    <option value="lowlight" {{#if (eq system.vision.visionType "lowlight")}}selected{{/if}}>{{localize "sr3d.item.metahuman.lowlight"}}</option>
-                    <option value="thermographic" {{#if (eq system.vision.visionType "thermographic")}}selected{{/if}}>{{localize "sr3d.item.metahuman.thermographic"}}</option>
+                    <option value="normal" {{#if (eq system.vision.visionType "normal" )}}selected{{/if}}>{{localize
+                        "sr3d.item.metahuman.normal"}}</option>
+                    <option value="lowlight" {{#if (eq system.vision.visionType "lowlight" )}}selected{{/if}}>{{localize
+                        "sr3d.item.metahuman.lowlight"}}</option>
+                    <option value="thermographic" {{#if (eq system.vision.visionType "thermographic" )}}selected{{/if}}>
+                        {{localize "sr3d.item.metahuman.thermographic"}}</option>
                 </select>
             </div>
             <div>
             </div>
         </fieldset>
         <fieldset>
-                <legend>{{localize "sr3d.item.metahuman.description"}}:</legend>
-        {{editor system.description owner=owner button=true editable=editable}}
+            <legend>{{localize "sr3d.item.metahuman.description"}}:</legend>
+            {{editor system.description owner=owner button=true editable=editable}}
         </fieldset>
     </div>
 </form>
