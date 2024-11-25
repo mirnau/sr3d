@@ -52,4 +52,38 @@ export class ActorDataService {
     static _sortSkillsByName(skills) {
         return skills.sort((a, b) => a.name.localeCompare(b.name));
     }
+
+    // NOTE: Character Creation starts here
+
+    static getAllMetaHumans(metahumans) {
+        return [
+            { priority: "E", name: "Human", default: true },
+            ...metahumans.map(metahuman => ({
+                priority: metahuman.system.priority || "N/A",
+                name: metahuman.name || "Unknown",
+                default: false,
+            }))
+        ];
+    }
+
+    static getAllMagicTraditions(magicTraditions) {
+        return [
+            { priority: "C", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            { priority: "D", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            { priority: "E", name: "Unawakened", default: true }, // Hardcoded Unawakened
+            ...magicTraditions.map(tradition => ({
+                priority: tradition.system.priority,
+                name: tradition.name,
+                default: false,
+            }))
+        ];
+    }
+
+    static getPriorities() {
+        return {
+            attributePriorities: { A: 30, B: 27, C: 24, D: 21, E: 18 },
+            skillsPriorities: { A: 50, B: 40, C: 34, D: 30, E: 27 },
+            resourcesPriorities: { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 }
+        };
+    }
 }

@@ -1,8 +1,6 @@
 import Randomizer from './Randomizer.js';
 import { ActorDataService } from '../services/ActorDataService.js';
-import { CharacterCreationService}  from '../services/CharacterCreationService.js'
-import { showCharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js'
-
+import { randomInRange } from './Utilities.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -75,39 +73,16 @@ export default class SR3DActorSheet extends ActorSheet {
         const metahumans = game.items.filter(item => item.type === "metahuman");
         const magicTraditions = game.items.filter(item => item.type === "magicTradition");
 
-        // Generate allMetahumans array
-        const allMetahumans = [
-            { priority: "E", name: "Human", default: true },
-            ...metahumans.map(metahuman => ({
-                priority: metahuman.system.priority || "N/A",
-                name: metahuman.name || "Unknown",
-                default: false,
-            }))
-        ];
-
-        // Generate allMagicTraditions array
-        const allMagicTraditions = [
-            { priority: "C", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            { priority: "D", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            { priority: "E", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            ...magicTraditions.map(tradition => ({
-                priority: tradition.system.priority,
-                name: tradition.name,
-                default: false,
-            }))
-        ];
+        const allMetahumans = ActorDataService.getAllMetaHumans(metahumans);
+        const allMagicTraditions = ActorDataService.getAllMagicTraditions(magicTraditions);
 
         // Data for priority tables
-        const attributePriorities = { A: 30, B: 27, C: 24, D: 21, E: 18 };
-        const skillsPriorities = { A: 50, B: 40, C: 34, D: 30, E: 27 };
-        const resourcesPriorities = { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 };
+        const priorities = ActorDataService.getPriorities();
 
         const dialogData = {
             metahumans: allMetahumans,
             magicTraditions: allMagicTraditions,
-            attributePriorities,
-            skillsPriorities,
-            resourcesPriorities,
+            ...priorities
         };
 
         // Render template
@@ -127,20 +102,16 @@ export default class SR3DActorSheet extends ActorSheet {
                             const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
                             const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
 
-                            // Priority tables
-                            const attributePriorities = { A: 30, B: 27, C: 24, D: 21, E: 18 };
-                            const skillsPriorities = { A: 50, B: 40, C: 34, D: 30, E: 27 };
-                            const resourcesPriorities = { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 };
+                            const priorities = ActorDataService.getPriorities();
 
                             // Define "unawakened" priorities
-                            const unawakenedPriorities = ["C", "D", "E"];
-
+                            
                             // Assign selected points and resources
                             const systemUpdates = {
-                                "system.creation.attributePoints": attributePriorities[selectedAttributePriority],
-                                "system.creation.activePoints": skillsPriorities[selectedSkillsPriority],
+                                "system.creation.attributePoints": priorities.attributePriorities[selectedAttributePriority],
+                                "system.creation.activePoints": priorities.skillsPriorities[selectedSkillsPriority],
                                 "system.ratsrace.income.post": {
-                                    amount: resourcesPriorities[selectedResourcesPriority],
+                                    amount: priorities.resourcesPriorities[selectedResourcesPriority],
                                     recurrent: false
                                 }
                             };
@@ -153,6 +124,8 @@ export default class SR3DActorSheet extends ActorSheet {
                                 }
                             }
 
+                            const unawakenedPriorities = ["C", "D", "E"];
+                            
                             // Create magicTradition instance if not unawakened
                             if (!unawakenedPriorities.includes(selectedMagicTradition)) {
                                 const magicTraditionItem = game.items.find(item => item.type === "magicTradition" && item.system.priority === selectedMagicTradition);
@@ -332,25 +305,6 @@ export default class SR3DActorSheet extends ActorSheet {
         resetPriorities();
     }
 
-    _categorizeAndSortSkills(skills, keyFn) {
-        const categories = skills.reduce((acc, skill) => {
-            const category = keyFn(skill) || "uncategorized";
-            if (!acc[category]) acc[category] = [];
-            acc[category].push(skill);
-            return acc;
-        }, {});
-
-        Object.keys(categories).forEach((key) => {
-            categories[key].sort((a, b) => a.name.localeCompare(b.name));
-        });
-
-        return categories;
-    }
-
-    _sortSkillsByName(skills) {
-        return skills.sort((a, b) => a.name.localeCompare(b.name));
-    }
-
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -390,7 +344,6 @@ export default class SR3DActorSheet extends ActorSheet {
         }
     }
 
-
     // Decrement Attribute Method
     _decrementAttribute(attribute) {
         const system = this.actor.system; // Access actor's system data
@@ -412,7 +365,6 @@ export default class SR3DActorSheet extends ActorSheet {
             decrementButton.classList.remove("disabled");
         }
     }
-
 
     _onEditSkill(event) {
         event.preventDefault();
@@ -493,7 +445,7 @@ export default class SR3DActorSheet extends ActorSheet {
 
         } else if (skillType === "languageSkill") {
             itemData.system.languageSkill = {
-                speach: { base: 0, specializations: [] },
+                speech: { base: 0, specializations: [] },
                 read: { base: 0, specializations: [] },
                 write: { base: 0, specializations: [] }
             };
@@ -509,6 +461,4 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 }
 
-function randomInRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
