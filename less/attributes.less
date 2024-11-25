@@ -6,12 +6,63 @@
 
     .attribute-card {
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+        position: relative; // Required for absolute positioning of child elements
         text-align: center;
         background: @primary-color;
+        min-height: 6rem;
         transition: transform 0.3s ease-in-out;
 
         .attribute-name {
             background-color: @secondary-color;
+            margin-bottom: 0.25rem; // Optional spacing
+        }
+
+        .horizontal-section {
+            position: absolute; // Make it absolutely positioned
+            top: 60%; // Move to vertical center
+            left: 50%; // Move to horizontal center
+            transform: translate(-50%, -50%); // Adjust to center itself
+            display: flex; // Flexbox for horizontal alignment
+            align-items: center; // Vertically align items in the horizontal section
+            justify-content: space-between; // Distribute buttons and value evenly
+            gap: 0.125rem; // Space between elements
+            padding: 0.25rem;
+
+            .decrement-attribute,
+            .increment-attribute {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 1.2rem;
+                color: magenta;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+
+                &:hover {
+                    transform: scale(1.2); // Emphasized scaling on hover
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Enhanced shadow for more depth
+                    filter: brightness(1.15); // Slightly brighten for more interactivity
+                    z-index: 10; // Ensure the element appears on top
+                }
+            
+                &:active {
+                    transform: scale(1.15); // Slightly smaller scale for "pressed" effect
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); // Reduce shadow to mimic button press
+                    filter: brightness(1); // Reset brightness on press
+                }
+
+                a.decrement-attribute.disabled {
+                    color: grey;
+                    pointer-events: none;
+                    opacity: 0.5;
+                }
+            }
+
+            .attribute-value {
+                text-align: center;
+            }
         }
 
         &:hover {

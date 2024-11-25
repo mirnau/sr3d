@@ -387,7 +387,62 @@ export default class SR3DActorSheet extends ActorSheet {
         html.find(".item-create").click(this._onItemCreate.bind(this));
         html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
+
+        // Increment attribute
+        html.find('.increment-attribute').click((event) => {
+            const attribute = event.currentTarget.dataset.attribute;
+            this._incrementAttribute(attribute);
+        });
+
+        // Decrement attribute
+        html.find('.decrement-attribute').click((event) => {
+            const attribute = event.currentTarget.dataset.attribute;
+            this._decrementAttribute(attribute);
+        });
     }
+
+    // Increment Attribute Method
+    _incrementAttribute(attribute) {
+        const basePath = `system.${attribute}.base`; // Path to the attribute base
+        const pointsPath = `system.creation.attributePoints`; // Path to attributePoints
+
+        // Ensure there are enough attribute points
+        if (this.actor.system.creation.attributePoints > 0) {
+            const updates = {
+                [basePath]: this.actor.system[attribute].base + 1, // Increment attribute base
+                [pointsPath]: this.actor.system.creation.attributePoints - 1 // Decrement attribute points
+            };
+
+            // Update the actor with the specific paths
+            this.actor.update(updates).then(() => this._updateButtons(attribute));
+        } else {
+            ui.notifications.warn("Not enough attribute points!");
+        }
+    }
+
+
+    // Decrement Attribute Method
+    _decrementAttribute(attribute) {
+        const system = this.actor.system; // Access actor's system data
+        if (system[attribute].base > 0) {
+            system[attribute].base -= 1; // Decrease base value
+            system.creation.attributePoints += 1; // Increase available points
+            this.actor.update({ system }).then(() => this._updateButtons(attribute)); // Update actor data
+        } else {
+            ui.notifications.warn("Attribute cannot go below 0!");
+        }
+    }
+
+    // Update Button States
+    _updateButtons(attribute) {
+        const decrementButton = document.querySelector(`[data-attribute="${attribute}"].decrement-attribute`);
+        if (this.actor.system[attribute].base === 0) {
+            decrementButton.classList.add("disabled");
+        } else {
+            decrementButton.classList.remove("disabled");
+        }
+    }
+
 
     _onEditSkill(event) {
         event.preventDefault();

@@ -67,7 +67,7 @@
 }
 @font-face {
   font-family: 'VT323';
-  src: url('fonts/VT323/VT323-Regular.ttf') format('truetype');
+  src: url('../fonts/VT323/VT323-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -112,12 +112,60 @@
 }
 .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
   text-align: center;
   background: #1a1b26;
+  min-height: 6rem;
   transition: transform 0.3s ease-in-out;
 }
 .attribute-masonry-grid .attribute-card .attribute-name {
   background-color: #c3e88d;
+  margin-bottom: 0.25rem;
+}
+.attribute-masonry-grid .attribute-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
+.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: magenta;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
+.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
+.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
+.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.attribute-masonry-grid .attribute-card .horizontal-section .attribute-value {
+  text-align: center;
 }
 .attribute-masonry-grid .attribute-card:hover {
   transform: scale(1.1);
@@ -300,7 +348,6 @@
   z-index: 0;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   animation: colorPulse 3s ease-in-out infinite;
-  animation-delay: 0s;
 }
 .attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(1) {
   animation-delay: 0s;

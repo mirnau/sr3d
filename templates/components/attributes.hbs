@@ -1,122 +1,149 @@
 <div class="attribute-masonry-grid">
+    
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.body"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.body"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.body.base}}/{{system.body.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute" data-attribute="body" class="{{#if (eq system.body.base 0)}}disabled{{/if}}">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.body.base}}/{{system.body.mod}}</h1>
+            </div>
+            <a class="increment-attribute" data-attribute="body">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.quickness"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.quickness"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.quickness.base}}/{{system.quickness.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute decrement-quickness">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.quickness.base}}/{{system.quickness.mod}}</h1>
+            </div>
+            <a class="increment-attribute increment-quickness">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.strength"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.strength"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.strength.base}}/{{system.strength.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute decrement-strength">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.strength.base}}/{{system.strength.mod}}</h1>
+            </div>
+            <a class="increment-attribute increment-strength">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.reaction"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.charisma"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.reaction.base}}/{{system.reaction.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute decrement-charisma">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.charisma.base}}/{{system.charisma.mod}}</h1>
+            </div>
+            <a class="increment-attribute increment-charisma">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.initiative"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.intelligence"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.initiative.base}}/{{system.initiative.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute decrement-intelligence">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.intelligence.base}}/{{system.intelligence.mod}}</h1>
+            </div>
+            <a class="increment-attribute increment-intelligence">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.charisma"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.willpower"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.charisma.base}}/{{system.charisma.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <a class="decrement-attribute decrement-willpower">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+            <div class="attribute-value">
+                <h1>{{system.willpower.base}}/{{system.willpower.mod}}</h1>
+            </div>
+            <a class="increment-attribute increment-willpower">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.intelligence"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.reaction"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.intelligence.base}}/{{system.intelligence.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <div class="attribute-value">
+                <h1>{{system.reaction.base}}/{{system.reaction.mod}}</h1>
+            </div>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.willpower"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.initiative"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.willpower.base}}/{{system.willpower.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <div class="attribute-value">
+                <h1>{{system.initiative.base}}/{{system.initiative.mod}}</h1>
+            </div>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.magic"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.magic"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.magic.base}}/{{system.magic.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <div class="attribute-value">
+                <h1>{{system.magic.base}}/{{system.magic.mod}}</h1>
+            </div>
         </div>
     </div>
+
     <div class="attribute-card">
         <div class="attribute-name">
-            <h3>
-                {{localize "sr3d.actor.attributes.essence"}}
-            </h3>
+            <h3>{{localize "sr3d.actor.attributes.essence"}}</h3>
         </div>
-        <div class="attribute-value">
-            <h1>
-                {{system.essence.base}}/{{system.essence.mod}}
-            </h1>
+        <div class="horizontal-section">
+            <div class="attribute-value">
+                <h1>{{system.essence.base}}</h1>
+            </div>
         </div>
     </div>
 </div>

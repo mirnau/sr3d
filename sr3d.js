@@ -5,6 +5,8 @@ import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
+import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
+import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
@@ -30,7 +32,8 @@ function registerHooks() {
         preCreateItem: "preCreateItem",
         renderSR3DActorSheet: "renderSR3DActorSheet",
         renderSR3DItemSheet: "renderSR3DItemSheet",
-        createActor: "createActor"
+        createActor: "createActor",
+        updateActor: "updateActor"
 
     }
 
@@ -40,6 +43,8 @@ function registerHooks() {
     }
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
+    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
+    Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
 
     Hooks.once(hooks.init, function () {

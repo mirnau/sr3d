@@ -79,7 +79,23 @@
                 "willpower": {
                     "base": 0,
                     "mod": 0
+                },
+                "initiative": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "reaction": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "magic": {
+                    "base": 0,
+                    "mod": 0
+                },
+                "essence": {
+                    "base": 0
                 }
+                
             }
         },
         "playerCharacter": {
