@@ -10,6 +10,7 @@ import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActo
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
+
     const basePath = "systems/sr3d/templates/components/";
     const paths = [
         "attributes.hbs",
@@ -19,7 +20,7 @@ async function AsyncRegisterComponentTemplates() {
         "weapon.hbs",
         "active-skill.hbs",
         "knowledge-skill.hbs",
-        "language-skill.hbs"
+        "language-skill.hbs",
     ].map(filename => basePath + filename);
 
     return loadTemplates(paths);
@@ -48,6 +49,7 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
 
     Hooks.once(hooks.init, function () {
+        
         console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
 
         Items.unregisterSheet(register.core, ItemSheet);

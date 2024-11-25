@@ -1,4 +1,8 @@
 import Randomizer from './Randomizer.js';
+import { ActorDataService } from '../services/ActorDataService.js';
+import { CharacterCreationService}  from '../services/CharacterCreationService.js'
+import { showCharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js'
+
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -23,51 +27,17 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     async getData() {
-        try {
-            const ctx = super.getData();
-            ctx.system = ctx.actor.system;
-            ctx.config = CONFIG.sr3d;
-            ctx.cssClass = "actorSheet";
 
-            ctx.skills = {
-                active: this._categorizeAndSortSkills(
-                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "activeSkill"),
-                    (item) => item.system.activeSkill.linkedAttribute
-                ),
-                knowledge: this._categorizeAndSortSkills(
-                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "knowledgeSkill"),
-                    (item) => item.system.knowledgeSkill.linkedAttribute
-                ),
-                language: this._sortSkillsByName(
-                    ctx.actor.items.contents.filter((item) => item.type === "skill" && item.system.skillType === "languageSkill")
-                ),
-            };
+        const ctx = super.getData();
+        ctx.system = ctx.actor.system;
+        ctx.config = CONFIG.sr3d;
+        ctx.cssClass = "actorSheet";
 
-            ctx.skills.language = ctx.actor.items
-                .filter((item) => item.type === "skill" && item.system.skillType === "languageSkill")
-                .map((skill) => ({
-                    id: skill.id,
-                    name: skill.name, // The name of the language skill
-                    subskills: {
-                        Speech: skill.system.languageSkill.speach.base, // Base value for Speech
-                        Read: skill.system.languageSkill.read.base, // Base value for Read
-                        Write: skill.system.languageSkill.write.base, // Base value for Write
-                    },
-                }));
+        ctx.skills = ActorDataService.prepareSkills(ctx.actor.items.contents);
+        ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
+        ctx.inventory = ActorDataService.prepareInventory(ctx.actor.items.contents);
 
-            ctx.inventory = {
-                weapons: ctx.actor.items.contents.filter(item => item.type === "weapon"),
-                armor: ctx.actor.items.contents.filter(item => item.type === "armor"),
-                consumables: ctx.actor.items.contents.filter(item => item.type === "consumable"),
-                others: ctx.actor.items.contents.filter(item => !["weapon", "armor", "consumable"].includes(item.type))
-            };
-
-            return ctx;
-
-        } catch (error) {
-            console.error("Error in SR3DActorSheet.getData:", error);
-            return super.getData();
-        }
+        return ctx;
     }
 
     async render(force = false, options = {}) {

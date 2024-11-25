@@ -23,13 +23,13 @@
             <h3>{{localize "sr3d.actor.attributes.quickness"}}</h3>
         </div>
         <div class="horizontal-section">
-            <a class="decrement-attribute decrement-quickness">
+            <a class="decrement-attribute" data-attribute="quickness" class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             <div class="attribute-value">
                 <h1>{{system.quickness.base}}/{{system.quickness.mod}}</h1>
             </div>
-            <a class="increment-attribute increment-quickness">
+            <a class="increment-attribute" data-attribute="quickness">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>
         </div>
@@ -40,13 +40,13 @@
             <h3>{{localize "sr3d.actor.attributes.strength"}}</h3>
         </div>
         <div class="horizontal-section">
-            <a class="decrement-attribute decrement-strength">
+            <a class="decrement-attribute" data-attribute="strength" class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             <div class="attribute-value">
                 <h1>{{system.strength.base}}/{{system.strength.mod}}</h1>
             </div>
-            <a class="increment-attribute increment-strength">
+            <a class="increment-attribute" data-attribute="strength">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>
         </div>
@@ -57,13 +57,13 @@
             <h3>{{localize "sr3d.actor.attributes.charisma"}}</h3>
         </div>
         <div class="horizontal-section">
-            <a class="decrement-attribute decrement-charisma">
+            <a class="decrement-attribute" data-attribute="charisma" class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             <div class="attribute-value">
                 <h1>{{system.charisma.base}}/{{system.charisma.mod}}</h1>
             </div>
-            <a class="increment-attribute increment-charisma">
+            <a class="increment-attribute" data-attribute="charisma">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>
         </div>
@@ -74,30 +74,31 @@
             <h3>{{localize "sr3d.actor.attributes.intelligence"}}</h3>
         </div>
         <div class="horizontal-section">
-            <a class="decrement-attribute decrement-intelligence">
+            <a class="decrement-attribute" data-attribute="intelligence" class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             <div class="attribute-value">
                 <h1>{{system.intelligence.base}}/{{system.intelligence.mod}}</h1>
             </div>
-            <a class="increment-attribute increment-intelligence">
+            <a class="increment-attribute" data-attribute="intelligence">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>
         </div>
     </div>
 
+ 
     <div class="attribute-card">
         <div class="attribute-name">
             <h3>{{localize "sr3d.actor.attributes.willpower"}}</h3>
         </div>
         <div class="horizontal-section">
-            <a class="decrement-attribute decrement-willpower">
+            <a class="decrement-attribute" data-attribute="willpower" class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             <div class="attribute-value">
                 <h1>{{system.willpower.base}}/{{system.willpower.mod}}</h1>
             </div>
-            <a class="increment-attribute increment-willpower">
+            <a class="increment-attribute" data-attribute="willpower">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>
         </div>

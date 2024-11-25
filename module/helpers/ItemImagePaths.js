@@ -9,4 +9,5 @@ export const defaultImages = {
         default: "auto-repair-svgrepo-com.svg",
     },
     default: "icons/svg/item-bag.svg",
+    playerCharacterActor: "defaultCharacter.jpg",
 };

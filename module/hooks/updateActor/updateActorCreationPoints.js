@@ -25,4 +25,3 @@ export function updateCreationPointValues(app, html) {
         }
     }
 }
-
