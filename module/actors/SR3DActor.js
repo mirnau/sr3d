@@ -7,8 +7,8 @@ export default class SR3DActor extends Actor {
     if (this.type === "playerCharacter") {
       const character = this.system;
       this._prepareDerivedStatsPlayerCharacter(character);
-      this._updateAttributeMods(character);
-      this._updateDerivedAttributes(character);
+      //this._updateAttributeMods(character);
+      //this._updateDerivedAttributes(character);
     }
   }
 

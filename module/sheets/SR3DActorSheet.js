@@ -78,46 +78,37 @@ export default class SR3DActorSheet extends ActorSheet {
         // Increment attribute
         html.find('.increment-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
-            this._incrementAttribute(attribute);
+            this._adjustAttribute(attribute, 1);
         });
 
         // Decrement attribute
         html.find('.decrement-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
-            this._decrementAttribute(attribute);
+            this._adjustAttribute(attribute, -1);
         });
     }
 
-    // Increment Attribute Method
-    _incrementAttribute(attribute) {
-        const basePath = `system.${attribute}.base`; // Path to the attribute base
-        const pointsPath = `system.creation.attributePoints`; // Path to attributePoints
-
-        // Ensure there are enough attribute points
-        if (this.actor.system.creation.attributePoints > 0) {
-            const updates = {
-                [basePath]: this.actor.system[attribute].base + 1, // Increment attribute base
-                [pointsPath]: this.actor.system.creation.attributePoints - 1 // Decrement attribute points
-            };
-
-            // Update the actor with the specific paths
-            this.actor.update(updates).then(() => this._updateButtons(attribute));
-        } else {
+    _adjustAttribute(attribute, amount) {
+        const system = this.actor.system; 
+        const currentBase = system[attribute].base;
+        const currentPoints = system.creation.attributePoints;
+    
+        if (amount > 0 && currentPoints < amount) {
             ui.notifications.warn("Not enough attribute points!");
+            return;
         }
-    }
-
-    // Decrement Attribute Method
-    _decrementAttribute(attribute) {
-        const system = this.actor.system; // Access actor's system data
-        if (system[attribute].base > 0) {
-            system[attribute].base -= 1; // Decrease base value
-            system.creation.attributePoints += 1; // Increase available points
-            this.actor.update({ system }).then(() => this._updateButtons(attribute)); // Update actor data
-        } else {
+    
+        if (amount < 0 && currentBase + amount < 0) {
             ui.notifications.warn("Attribute cannot go below 0!");
+            return;
         }
+    
+        system[attribute].base += amount;
+        system.creation.attributePoints -= amount;
+    
+        this.actor.update({ system }).then(() => this._updateButtons(attribute));
     }
+    
 
     // Update Button States
     _updateButtons(attribute) {
