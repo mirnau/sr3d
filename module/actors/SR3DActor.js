@@ -32,7 +32,7 @@ export default class SR3DActor extends Actor {
       character.magic.base = 6;
     }
 
-    character.creation.knowledgePoints = character.intelligence.base * 20;
+    character.creation.knowledgePoints = character.intelligence.base * 5;
     character.creation.languageSkills = Math.floor(character.intelligence.base * 1.5);
   }
 
