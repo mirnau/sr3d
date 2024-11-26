@@ -6,12 +6,12 @@
         </div>
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
-            <a class="decrement-attribute" data-attribute="body" class="{{#if (eq system.body.base 0)}}disabled{{/if}}">
+            <a class="decrement-attribute" data-attribute="body" class="{{#if (eq system.body.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.body.base}}/{{system.body.mod}}</h1>
+                <h1>{{system.body.total}}/{{system.body.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="body">
@@ -28,12 +28,12 @@
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="decrement-attribute" data-attribute="quickness"
-                class="{{#if (eq system.quickness.base 0)}}disabled{{/if}}">
+                class="{{#if (eq system.quickness.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.quickness.base}}/{{system.quickness.mod}}</h1>
+                <h1>{{system.quickness.total}}/{{system.quickness.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="quickness">
@@ -50,12 +50,12 @@
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="decrement-attribute" data-attribute="strength"
-                class="{{#if (eq system.strength.base 0)}}disabled{{/if}}">
+                class="{{#if (eq system.strength.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.strength.base}}/{{system.strength.mod}}</h1>
+                <h1>{{system.strength.total}}/{{system.strength.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="strength">
@@ -72,12 +72,12 @@
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="decrement-attribute" data-attribute="charisma"
-                class="{{#if (eq system.charisma.base 0)}}disabled{{/if}}">
+                class="{{#if (eq system.charisma.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.charisma.base}}/{{system.charisma.mod}}</h1>
+                <h1>{{system.charisma.total}}/{{system.charisma.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="charisma">
@@ -94,12 +94,12 @@
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="decrement-attribute" data-attribute="intelligence"
-                class="{{#if (eq system.intelligence.base 0)}}disabled{{/if}}">
+                class="{{#if (eq system.intelligence.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.intelligence.base}}/{{system.intelligence.mod}}</h1>
+                <h1>{{system.intelligence.total}}/{{system.intelligence.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="intelligence">
@@ -116,12 +116,12 @@
         <div class="horizontal-section">
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="decrement-attribute" data-attribute="willpower"
-                class="{{#if (eq system.willpower.base 0)}}disabled{{/if}}">
+                class="{{#if (eq system.willpower.total 0)}}disabled{{/if}}">
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
             {{/if}}
             <div class="attribute-value">
-                <h1>{{system.willpower.base}}/{{system.willpower.mod}}</h1>
+                <h1>{{system.willpower.total}}/{{system.willpower.mod}}</h1>
             </div>
             {{#if (not actor.flags.sr3d.attributesDone)}}
             <a class="increment-attribute" data-attribute="willpower">
@@ -138,7 +138,7 @@
         </div>
         <div class="horizontal-section">
             <div class="attribute-value">
-                <h1>{{system.reaction.base}}/{{system.reaction.mod}}</h1>
+                <h1>{{system.reaction.total}}/{{system.reaction.mod}}</h1>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@
         </div>
         <div class="horizontal-section">
             <div class="attribute-value">
-                <h1>{{system.initiative.base}}/{{system.initiative.mod}}</h1>
+                <h1>{{system.initiative.total}}/{{system.initiative.mod}}</h1>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
         </div>
         <div class="horizontal-section">
             <div class="attribute-value">
-                <h1>{{system.magic.base}}/{{system.magic.mod}}</h1>
+                <h1>{{system.magic.total}}/{{system.magic.mod}}</h1>
             </div>
         </div>
     </div>
@@ -171,7 +171,7 @@
         </div>
         <div class="horizontal-section">
             <div class="attribute-value">
-                <h1>{{system.essence.base}}</h1>
+                <h1>{{system.essence.total}}</h1>
             </div>
         </div>
     </div>

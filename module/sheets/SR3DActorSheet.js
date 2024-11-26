@@ -2,6 +2,7 @@ import Randomizer from './Randomizer.js';
 import { ActorDataService } from '../services/ActorDataService.js';
 import { randomInRange } from './Utilities.js';
 import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
+import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -79,47 +80,31 @@ export default class SR3DActorSheet extends ActorSheet {
         // Increment attribute
         html.find('.increment-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
-            this._adjustAttribute(attribute, 1);
-        });
+
+        
+        this.actor.adjustAttribute(attribute, 1);
+        this._updateButtons(attribute);
+
+    });
 
         // Decrement attribute
         html.find('.decrement-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
-            this._adjustAttribute(attribute, -1);
+            this.actor.adjustAttribute(attribute, -1);
+            this._updateButtons(attribute);
         });
     }
-
-    _adjustAttribute(attribute, amount) {
-        const system = this.actor.system; 
-        const currentBase = system[attribute].base;
-        const currentPoints = system.creation.attributePoints;
-    
-        if (amount > 0 && currentPoints < amount) {
-            new LockAttributesDialog(this.actor).render(true);
-            return;
-        }
-    
-        if (amount < 0 && currentBase + amount < 0) {
-            ui.notifications.warn("Attribute cannot go below 0!");
-            return;
-        }
-    
-        system[attribute].base += amount;
-        system.creation.attributePoints -= amount;
-    
-        this.actor.update({ system }).then(() => this._updateButtons(attribute));
-    }
-    
 
     // Update Button States
     _updateButtons(attribute) {
         const decrementButton = document.querySelector(`[data-attribute="${attribute}"].decrement-attribute`);
-        if (this.actor.system[attribute].base === 0) {
+        if (this.actor.system[attribute].value === 0) {
             decrementButton.classList.add("disabled");
         } else {
             decrementButton.classList.remove("disabled");
         }
     }
+
 
     _onEditSkill(event) {
         event.preventDefault();
@@ -200,9 +185,9 @@ export default class SR3DActorSheet extends ActorSheet {
 
         } else if (skillType === "languageSkill") {
             itemData.system.languageSkill = {
-                speech: { base: 0, specializations: [] },
-                read: { base: 0, specializations: [] },
-                write: { base: 0, specializations: [] }
+                speech: { value: 0, specializations: [] },
+                read: { value: 0, specializations: [] },
+                write: { value: 0, specializations: [] }
             };
         }
 
@@ -217,7 +202,7 @@ export default class SR3DActorSheet extends ActorSheet {
 }
 
 
-async function showCharacterCreationDialog(game,actor) {
+async function showCharacterCreationDialog(game, actor) {
     // Fetch all items of type "metahuman" and "magicTradition"
     const metahumans = game.items.filter(item => item.type === "metahuman");
     const magicTraditions = game.items.filter(item => item.type === "magicTradition");
@@ -254,7 +239,7 @@ async function showCharacterCreationDialog(game,actor) {
                         const priorities = ActorDataService.getPriorities();
 
                         // Define "unawakened" priorities
-                        
+
                         // Assign selected points and resources
                         const systemUpdates = {
                             "system.creation.attributePoints": priorities.attributePriorities[selectedAttributePriority],
@@ -274,7 +259,7 @@ async function showCharacterCreationDialog(game,actor) {
                         }
 
                         const unawakenedPriorities = ["C", "D", "E"];
-                        
+
                         // Create magicTradition instance if not unawakened
                         if (!unawakenedPriorities.includes(selectedMagicTradition)) {
                             const magicTraditionItem = game.items.find(item => item.type === "magicTradition" && item.system.priority === selectedMagicTradition);
@@ -287,19 +272,8 @@ async function showCharacterCreationDialog(game,actor) {
                         await actor.update(systemUpdates);
 
                         // Force recalculation of derived stats
-                        actor.prepareData();
+                        actor.characterSetup();
 
-                        // Re-render the actor sheet to reflect changes
-                        if (actor.sheet.rendered) {
-                            actor.sheet.render(false);
-                        }
-
-                        // Notify the user
-                        ui.notifications.info("Character creation confirmed and stats recalculated!");
-                        resolve(true);
-
-                        // Notify the user
-                        ui.notifications.info("Character creation confirmed!");
                         resolve(true);
                     }
 

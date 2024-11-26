@@ -1,5 +1,3 @@
-console.log("sr3d | sr3d.js loaded");
-
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
@@ -8,6 +6,8 @@ import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/in
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
+import SR3DLog from "./module/SR3DLog.js";
+import { setFlags } from "./setFlags.js";
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
@@ -47,6 +47,7 @@ function registerHooks() {
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
+    Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
 
@@ -79,3 +80,5 @@ function registerHooks() {
 }
 
 registerHooks();
+
+SR3DLog.success("Initiation Complete", "sr3d.js");
