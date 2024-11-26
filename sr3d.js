@@ -7,6 +7,7 @@ import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreat
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
+import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
@@ -45,6 +46,7 @@ function registerHooks() {
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
+    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
 
