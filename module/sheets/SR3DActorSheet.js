@@ -1,6 +1,7 @@
 import Randomizer from './Randomizer.js';
 import { ActorDataService } from '../services/ActorDataService.js';
 import { randomInRange } from './Utilities.js';
+import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -94,7 +95,7 @@ export default class SR3DActorSheet extends ActorSheet {
         const currentPoints = system.creation.attributePoints;
     
         if (amount > 0 && currentPoints < amount) {
-            ui.notifications.warn("Not enough attribute points!");
+            new LockAttributesDialog(this.actor).render(true);
             return;
         }
     
