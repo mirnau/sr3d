@@ -6,15 +6,12 @@ export default class SR3DActor extends Actor {
     // Only prepare derived stats for player characters
     if (this.type === "playerCharacter") {
       const character = this.system;
-      this._prepareDerivedStatsPlayerCharacter(character);
+      this._attributeCreation(character);
     }
-  }
-
-
-  
+  }  
 
   /** Calculate derived stats */
-  _prepareDerivedStatsPlayerCharacter(character) {
+  _attributeCreation(character) {
 
     if (character.creation.attributePoints > 0) {
       
@@ -33,7 +30,7 @@ export default class SR3DActor extends Actor {
     }
 
     character.creation.knowledgePoints = character.intelligence.base * 5;
-    character.creation.languageSkills = Math.floor(character.intelligence.base * 1.5);
+    character.creation.languagePoints = Math.floor(character.intelligence.base * 1.5);
   }
 
   _updateAttributeMods(character) {
