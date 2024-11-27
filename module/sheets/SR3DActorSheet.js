@@ -231,7 +231,7 @@ async function showCharacterCreationDialog(game, actor) {
                     label: "OK",
                     callback: async (html) => {
                         const selectedMetahumanId = html.find('[name="metahuman"]').val();
-                        const selectedMagicTraditionId = html.find('[name="system.magicTradition.priority"]').val();
+                        const selectedMagicTraditionId = html.find('[name="magic"]').val();
                         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
                         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
                         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
@@ -250,15 +250,21 @@ async function showCharacterCreationDialog(game, actor) {
                         SR3DLog.inspect("selectedMagicTraditionId", "selectedMagicTraditionId");
 
                         if (selectedMetahumanId) {
-                            const metahumanItem = game.items.get(selectedMetahumanId);
-                            await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
-                            SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
+                            const metahumanItem = game.items.get(selectedMetahumanId) || null;
+                            if (metahumanItem){
+
+                                await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
+                                SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
+                            }
                         }
 
                         if (selectedMagicTraditionId) {
-                            const magicTraditionItem = game.items.get(selectedMagicTraditionId);
-                            await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
-                            SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
+                            const magicTraditionItem = game.items.get(selectedMagicTraditionId) || null;
+                            if(magicTraditionItem) {
+                                
+                                await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
+                                SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
+                            }
                         }
 
                         // Apply updates to the actor's system
@@ -462,11 +468,11 @@ function setupPrioritySelectionListeners(html) {
 
         // Assign the rest of the random priorities
         prioritySelectors.forEach((select, index) => {
-            select.value = selected[index]; // Third, fourth, and fifth strings for other priorities
-            select.dispatchEvent(new Event('change')); // Trigger change to update mutual exclusivity
+            select.value = selected[index]; 
+            select.dispatchEvent(new Event('change'));
         });
 
-        handleMutualExclusivity(); // Refresh exclusivity after randomization
+        handleMutualExclusivity();
     });
 
 

@@ -1,13 +1,15 @@
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
+import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
-import SR3DLog from "./module/SR3DLog.js";
 import { setFlags } from "./module/hooks/createActor/setFlags.js";
+import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
+import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
@@ -45,6 +47,8 @@ function registerHooks() {
     }
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
+    Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
+    Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.createActor, setFlags);

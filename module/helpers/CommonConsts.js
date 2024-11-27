@@ -4,3 +4,5 @@ export const flags = {
     attributesDone: "attributesDone",
     goblinizationApplied: "goblinizationApplied"
 };
+
+export const baseAttributes = ["body", "quickness", "strength", "charisma", "intelligence", "willpower"];

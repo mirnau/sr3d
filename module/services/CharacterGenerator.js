@@ -1,9 +1,9 @@
-export default class Randomizer {
+export default class CharacterGenerator {
     static VALID_PRIORITIES = ["A", "B", "C", "D", "E"];
 
     generatePriorityCombination() {
 
-        const priorities = [...Randomizer.VALID_PRIORITIES]; // Clone valid priorities
+        const priorities = [...CharacterGenerator.VALID_PRIORITIES]; // Clone valid priorities
         const combination = {};
 
         console.log(`sr3d | Randomizer | Initial Priorities: ${priorities.join(", ")}`);
