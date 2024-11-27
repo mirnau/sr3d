@@ -1,64 +1,108 @@
+import { flags } from '../helpers/CommonConsts.js'
+import SR3DLog from '../SR3DLog.js'
+import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
+
 export default class SR3DActor extends Actor {
-  /** Override the prepareData method */
-  prepareData() {
-    super.prepareData();
 
-    // Only prepare derived stats for player characters
-    if (this.type === "playerCharacter") {
-      const character = this.system;
-      this._prepareDerivedStatsPlayerCharacter(character);
-      this._updateAttributeMods(character);
-      this._updateDerivedAttributes(character);
+  adjustAttribute(attribute, amount) {
+
+    const system = this.system;
+    const value = system[attribute].value;
+    const currentPoints = system.creation.attributePoints;
+
+    if (amount > 0 && currentPoints < amount) {
+      new LockAttributesDialog(this).render(true);
+      return;
     }
+
+    if (amount < 0 && value + amount < 0) {
+      ui.notifications.warn("Attribute cannot go below 0!");
+      return;
+    }
+
+    if ((amount > 0) || (amount < 0 && system[attribute].value > 1)) {
+      system[attribute].value += amount;
+      system.creation.attributePoints -= amount;
+    }
+
+
+    this.update({ system: system });
+
+    this.recalculateAttribute();
   }
 
-  /** Calculate derived stats */
-  _prepareDerivedStatsPlayerCharacter(character) {
+  async recalculateAttribute() {
+    const character = this.system;
 
-    if (character.creation.attributePoints > 0) {
-      
-      const attributes = ["body", "quickness", "strength", "intelligence", "charisma", "willpower"];
+    let metahumanItem = this.items.find(item => item.type === "metahuman") || null;
 
-      // Ensure minimum base value and adjust attribute points
-      attributes.forEach((attr) => {
-        if (character[attr].base === 0) {
-          character[attr].base += 1;
-          character.creation.attributePoints -= 1;
-        }
-      });
+    if (metahumanItem) {
 
-      character.essence.base = 6;
-      character.magic.base = 6;
+      SR3DLog.info("Attribute adjustment for metahumanity", this.name);
+
+      character.body.meta = metahumanItem.system.modifiers.body;
+      character.quickness.meta = metahumanItem.system.modifiers.quickness;
+      character.strength.meta = metahumanItem.system.modifiers.strength;
+      character.charisma.meta = metahumanItem.system.modifiers.charisma;
+      character.intelligence.meta = metahumanItem.system.modifiers.intelligence;
+      character.willpower.meta = metahumanItem.system.modifiers.willpower;
     }
 
-    if (character.creation.knowledgePoints > 0) {
-      character.creation.knowledgePoints = character.intelligence.base * 20;
+    character.body.total = character.body.value + character.body.meta;
+    character.quickness.total = character.quickness.value + character.quickness.meta;
+    character.strength.total = character.strength.value + character.strength.meta;
+    character.charisma.total = character.charisma.value + character.charisma.meta;
+    character.intelligence.total = character.intelligence.value + character.intelligence.meta;
+    character.willpower.total = character.willpower.value + character.willpower.meta;
+    character.magic.total = character.magic.value;
+    character.essence.total = character.essence.value;
 
+    const attributesDone = this.getFlag(flags.namespace, flags.attributesDone);
+
+    if(!attributesDone || character.creation.attributePoints > 0) {
+
+      character.creation.knowledgePoints = character.intelligence.value * 5;
+      character.creation.languagePoints = Math.floor(character.intelligence.value * 1.5);
     }
 
-    if (character.creation.languagePoints > 0) {
-      character.creation.languageSkills = Math.floor(character.intelligence.base * 1.5);
+    character.body.mod = character.body.total;
+    character.quickness.mod = character.quickness.total;
+    character.strength.mod = character.strength.total;
+    character.charisma.mod = character.charisma.total;
+    character.intelligence.mod = character.intelligence.total;
+    character.willpower.mod = character.willpower.total;
 
-    }
+    character.reaction.total = Math.floor((character.quickness.mod + character.intelligence.mod) * 0.5);
+    character.reaction.total = Math.floor((character.quickness.mod + character.intelligence.mod) * 0.5);
 
-    if (character.creation.activePoints > 0) {
-    }
+
+    this.update({ system: character });
   }
 
-  _updateAttributeMods(character) {
+  characterSetup() {
 
-    character.body.mod = character.body.base;
-    character.quickness.mod = character.quickness.base;
-    character.strength.mod = character.strength.base;
-    character.charisma.mod = character.charisma.base;
-    character.intelligence.mod = character.intelligence.base;
-    character.willpower.mod = character.willpower.base;
+    SR3DLog.info("characterSetup entered", this.name);
+    const character = this.system
 
-    console.log("sr3d | TODO | update mod calulations in actor")
-  }
+    const attributes = [
+      "body",
+      "quickness",
+      "strength",
+      "intelligence",
+      "charisma",
+      "willpower"];
 
-  _updateDerivedAttributes(character) {
-    
-    character.reaction.base = Math.floor((character.quickness.mod + character.intelligence.mod)*0.5);
+    attributes.forEach((attr) => {
+      if (character[attr].value === 0) {
+        character[attr].value += 3;
+        character.creation.attributePoints -= 3;
+      }
+    });
+
+    character.essence.value = 6;
+    character.magic.value = 6;
+
+    this.recalculateAttribute();
+    this.update({ system: character });
   }
 }
