@@ -1,9 +1,9 @@
 <!-- Metahuman Selection -->
 <div class="form-group">
   <label for="metahuman-select">Select Metahuman:</label>
-  <select class="priority-select" name="metahuman" id="metahuman-select">
+  <select class="item-select" name="metahuman" id="metahuman-select">
     {{#each metahumans}}
-    <option value="{{priority}}" {{#if default}}selected{{/if}}>
+    <option value="{{foundryitemid}}" {{#if default}}selected{{/if}}>
       {{name}} (Priority: {{priority}})
     </option>
     {{/each}}
@@ -13,9 +13,9 @@
 <!-- Magic Tradition Selection -->
 <div class="form-group">
   <label for="magicTradition-select">Select Magic Tradition:</label>
-  <select class="priority-select" name="system.magicTradition.priority" id="magicTradition-select">
+  <select class="item-select" name="magic" id="magicTradition-select">
     {{#each magicTraditions}}
-    <option value="{{priority}}" {{#if default}}selected{{/if}}>
+    <option value="{{foundryitemid}}" {{#if default}}selected{{/if}}>
       {{name}} (Priority: {{priority}})
     </option>
     {{/each}}

@@ -81,11 +81,11 @@ export default class SR3DActorSheet extends ActorSheet {
         html.find('.increment-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
 
-        
-        this.actor.adjustAttribute(attribute, 1);
-        this._updateButtons(attribute);
 
-    });
+            this.actor.adjustAttribute(attribute, 1);
+            this._updateButtons(attribute);
+
+        });
 
         // Decrement attribute
         html.find('.decrement-attribute').click((event) => {
@@ -230,15 +230,11 @@ async function showCharacterCreationDialog(game, actor) {
                 ok: {
                     label: "OK",
                     callback: async (html) => {
-                        const selectedMetahuman = html.find('[name="metahuman"]').val();
-                        const selectedMagicTradition = html.find('[name="system.magicTradition.priority"]').val();
+                        const selectedMetahumanId = html.find('[name="metahuman"]').val();
+                        const selectedMagicTraditionId = html.find('[name="system.magicTradition.priority"]').val();
                         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
                         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
                         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
-
-                        const priorities = ActorDataService.getPriorities();
-
-                        // Define "unawakened" priorities
 
                         // Assign selected points and resources
                         const systemUpdates = {
@@ -250,22 +246,19 @@ async function showCharacterCreationDialog(game, actor) {
                             }
                         };
 
-                        // Create metahuman instance if not "human"
-                        if (selectedMetahuman !== "E") { // Assuming "E" corresponds to "Human"
-                            const metahumanItem = game.items.find(item => item.type === "metahuman" && item.system.priority === selectedMetahuman);
-                            if (metahumanItem) {
-                                await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
-                            }
+                        SR3DLog.inspect("selectedMetahumanId", selectedMetahumanId);
+                        SR3DLog.inspect("selectedMagicTraditionId", "selectedMagicTraditionId");
+
+                        if (selectedMetahumanId) {
+                            const metahumanItem = game.items.get(selectedMetahumanId);
+                            await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
+                            SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
                         }
 
-                        const unawakenedPriorities = ["C", "D", "E"];
-
-                        // Create magicTradition instance if not unawakened
-                        if (!unawakenedPriorities.includes(selectedMagicTradition)) {
-                            const magicTraditionItem = game.items.find(item => item.type === "magicTradition" && item.system.priority === selectedMagicTradition);
-                            if (magicTraditionItem) {
-                                await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
-                            }
+                        if (selectedMagicTraditionId) {
+                            const magicTraditionItem = game.items.get(selectedMagicTraditionId);
+                            await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
+                            SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
                         }
 
                         // Apply updates to the actor's system
@@ -296,134 +289,187 @@ async function showCharacterCreationDialog(game, actor) {
 }
 
 function setupPrioritySelectionListeners(html) {
-    const prioritySelectors = html.find('.priority-select');
+    const prioritySelectors = Array.from(html.find('.priority-select'));
+    const itemSelectors = Array.from(html.find('.item-select'));
     const okButton = html.find('button.default');
     const randomizeButton = html.find('.priority-randomizer');
     const resetButton = html.find('.priority-reset');
 
-    const randomizer = new Randomizer(); // Initialize the Randomizer
+    // Add empty default options to all dropdowns
+    [...prioritySelectors, ...itemSelectors].forEach(select => {
+        const emptyOption = document.createElement('option');
+        emptyOption.value = ""; // Empty value
+        emptyOption.textContent = "Select an option"; // Placeholder text
+        emptyOption.selected = true; // Make it the default selected option
+        select.prepend(emptyOption); // Add it to the beginning of the dropdown
+    });
 
-    // Randomize priority values for all selectors
-    const randomizePriorities = () => {
-        try {
-            const randomCombination = randomizer.generatePriorityCombination();
+    // Reset button listener to reset all fields to default ("")
+    resetButton.on('click', () => {
+        [...prioritySelectors, ...itemSelectors].forEach(select => {
+            select.value = ""; // Reset to the default empty option
+            select.dispatchEvent(new Event('change')); // Trigger change event to update logic
+        });
+        okButton.prop('disabled', true); // Disable OK button after reset
+    });
 
-            prioritySelectors.each((_, select) => {
-                const fieldName = $(select).attr("name");
-                const options = Array.from(select.options);
-
-                const priorityGroups = options.reduce((groups, option) => {
-                    if (Randomizer.VALID_PRIORITIES.includes(option.value)) {
-                        groups[option.value] = groups[option.value] || [];
-                        groups[option.value].push(option);
-                    }
-                    return groups;
-                }, {});
-
-                const assignRandomPriority = (priorityGroupKey) => {
-                    const candidates = priorityGroups[randomCombination[priorityGroupKey]] || [];
-                    if (candidates.length > 0) {
-                        const randomChoice = candidates[randomInRange(0, candidates.length - 1)];
-
-                        // Match and select the option based on the displayed text
-                        $(select).find('option').each((_, option) => {
-                            if (option.text === randomChoice.text) {
-                                option.selected = true;
-                            }
-                        });
-
-                        $(select).trigger('change');
-                    } else {
-                        console.warn(`No candidates found for ${priorityGroupKey} priority: ${randomCombination[priorityGroupKey]}`);
-                    }
-                };
-
-                if (fieldName.includes("magic")) {
-                    assignRandomPriority("magic");
-                } else if (fieldName.includes("metahuman")) {
-                    assignRandomPriority("metahuman");
-                } else if (fieldName.includes("attribute")) {
-                    select.value = randomCombination.attribute;
-                } else if (fieldName.includes("skills")) {
-                    select.value = randomCombination.skills;
-                } else if (fieldName.includes("resources")) {
-                    select.value = randomCombination.resources;
+    const handleMutualExclusivity = async () => {
+        const allSelectors = [...prioritySelectors, ...itemSelectors];
+    
+        // Step 1: Collect selected priorities
+        const selectedPriorities = new Set();
+    
+        // Add priorities from prioritySelectors
+        prioritySelectors.forEach(select => {
+            if (select.value !== "") selectedPriorities.add(select.value);
+        });
+    
+        // Fetch and add priorities from itemSelectors
+        const itemPriorityPromises = itemSelectors.map(async select => {
+            if (select.value !== "") {
+                const item = await game.items.get(select.value);
+                if (item && item.system.priority) {
+                    return item.system.priority; // Return valid priority from item lookup
                 }
-            });
-
-            updateDropdowns();
-        } catch (error) {
-            console.error("Error generating random priorities:", error);
-        }
-    };
-
-    // Reset all priorities to empty
-    const resetPriorities = () => {
-        prioritySelectors.each((_, select) => {
-            select.value = ""; // Clear all dropdowns
-        });
-        updateDropdowns(); // Recalculate states
-    };
-
-    // Validate if all selected priorities are unique and complete
-    const isValidCombination = () => {
-        const selectedValues = new Set();
-        return Array.from(prioritySelectors).every(select => {
-            const value = select.value;
-            if (!value || selectedValues.has(value) || !Randomizer.VALID_PRIORITIES.includes(value)) {
-                return false; // Invalid if empty, duplicate, or not valid
+                // Handle the fringe case: extract priority from the first character
+                if (/^[A-Z]-/.test(select.value)) { // Match "A-", "B-", etc.
+                    return select.value.charAt(0); // Extract the first character as priority
+                }
             }
-            selectedValues.add(value);
-            return true;
+            return null; // No value or no valid priority
         });
-    };
-
-    // Update the state of dropdowns and buttons
-    const updateDropdowns = () => {
-        const selectedValues = new Set();
-
-        // Collect currently selected values
-        prioritySelectors.each((_, select) => {
-            const value = select.value;
-            if (Randomizer.VALID_PRIORITIES.includes(value)) {
-                selectedValues.add(value);
-            }
+    
+        const itemPriorities = await Promise.all(itemPriorityPromises);
+        itemPriorities.filter(priority => priority !== null).forEach(priority => {
+            selectedPriorities.add(priority);
         });
-
-        // Update dropdown options
-        prioritySelectors.each((_, select) => {
-            Array.from(select.options).forEach(opt => {
-                const isOptionSelectedElsewhere = selectedValues.has(opt.value) && select.value !== opt.value;
-                const isValidOption = Randomizer.VALID_PRIORITIES.includes(opt.value);
-                if (isValidOption) {
-                    opt.disabled = isOptionSelectedElsewhere;
-                    opt.style.backgroundColor = isOptionSelectedElsewhere ? "grey" : "";
-                    opt.style.color = isOptionSelectedElsewhere ? "white" : "";
+    
+        console.debug("Selected Priorities:", Array.from(selectedPriorities));
+    
+        // Step 2: Disable conflicting options
+        allSelectors.forEach(select => {
+            Array.from(select.options).forEach(option => {
+                let optionPriority;
+    
+                if (prioritySelectors.includes(select)) {
+                    // PrioritySelectors directly use the option value as the priority
+                    optionPriority = option.value;
                 } else {
-                    opt.disabled = false;
+                    // For itemSelectors, resolve the item's priority
+                    const item = game.items.get(option.value);
+                    if (item && item.system.priority) {
+                        optionPriority = item.system.priority; // Valid priority from item
+                    } else if (/^[A-Z]-/.test(option.value)) {
+                        optionPriority = option.value.charAt(0); // Extract priority from pattern
+                    }
+                }
+    
+                const isCurrentSelection = select.value === option.value;
+    
+                if (optionPriority && selectedPriorities.has(optionPriority)) {
+                    option.disabled = !isCurrentSelection; // Disable if conflicting
+                    option.classList.toggle('disabled-option', !isCurrentSelection); // Add visual cue
+                } else {
+                    option.disabled = false; // Enable non-conflicting
+                    option.classList.remove('disabled-option'); // Remove visual cue
                 }
             });
         });
+    
+        // Step 3: Enable OK button only if all selectors have a valid value
+        const allSelected = allSelectors.every(select => select.value !== "");
+        okButton.prop('disabled', !allSelected);
+        okButton.toggleClass('disabled', !allSelected); // Optionally toggle visual disable
+    }
+    
+    // Attach change listeners to enforce exclusivity
+    [...prioritySelectors, ...itemSelectors].forEach(select => {
+        select.addEventListener('change', handleMutualExclusivity);
+    });
 
-        // Update OK button based on validity
-        const isValid = isValidCombination();
-        okButton.prop('disabled', !isValid).css({
-            backgroundColor: isValid ? "" : "grey",
-            color: isValid ? "" : "white"
+    randomizeButton.on('click', () => {
+        const random = new Randomizer();
+        const randomPriority = random.generatePriorityCombination();
+
+        const metahumanDropdown = html.find('[name="metahuman"] option');
+        const metahumanDropdownItems = Array.from(metahumanDropdown)
+            .filter(option => option.value !== "")
+            .map(option => {
+                const item = game.items.get(option.value);
+                return {
+                    id: option.value,
+                    priority: item?.system.priority || option.value.charAt(0),
+                    name: option.textContent
+                };
+            });
+
+        if (randomPriority.metahuman === "E") {
+
+            console.log("Random Priority (metahuman):", randomPriority.metahuman);
+            console.log("Metahuman Items:", metahumanDropdownItems);
+
+            const humanDropdownItem = metahumanDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.metahuman);
+
+            html.find('[name="metahuman"]').val(humanDropdownItem.id).change();
+
+        } else {
+            const randomMetahuman = metahumanDropdownItems.find(item => item.priority === randomPriority.metahuman);
+            const metahumanPriority = randomMetahuman?.priority;
+            const listOfAllDuplicatesWithTheSamePriority = metahumanDropdownItems.filter(item => item.priority === metahumanPriority);
+            const selection = listOfAllDuplicatesWithTheSamePriority[randomInRange(0, listOfAllDuplicatesWithTheSamePriority.length - 1)];
+            if (selection) {
+                html.find('[name="metahuman"]').val(selection.id).change();
+            }
+        }
+
+        const magicTraditionDropdown = html.find('[name="magic"] option');
+
+        const magicTraditionDropdownItems = Array.from(magicTraditionDropdown)
+            .filter(option => option.value !== "")
+            .map(option => {
+                const item = game.items.get(option.value);
+
+                return {
+                    id: option.value,
+                    priority: item?.system.priority || option.value.charAt(0),
+                    name: option.textContent
+                };
+            });
+
+        if (randomPriority.magic !== "A" || randomPriority.magic !== "B") {
+
+            console.log("Random Priority (magicTradition):", randomPriority.magic);
+            console.log("MagicTradition Items:", magicTraditionDropdownItems);
+            const unawakenedDropdownItem = magicTraditionDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.magic);
+            html.find('[name="magic"]').val(unawakenedDropdownItem.id).change();
+
+        } else {
+            // Handle awakened magicTraditions (may have duplicates)
+            const randomMagicTradition = magicTraditionDropdownItems.find(item => item.priority === randomPriority.magic);
+            const magicTraditionPriority = randomMagicTradition?.priority;
+            const listOfAllDuplicatesWithTheSamePriority = magicTraditionDropdownItems.filter(item => item.priority === magicTraditionPriority);
+            const selection = listOfAllDuplicatesWithTheSamePriority[randomInRange(0, listOfAllDuplicatesWithTheSamePriority.length - 1)];
+            if (selection) {
+                html.find('[name="magic"]').val(selection.id).change();
+            }
+        }
+
+        const selected = [
+            randomPriority.attribute,
+            randomPriority.skills,
+            randomPriority.resources
+        ]
+
+        // Assign the rest of the random priorities
+        prioritySelectors.forEach((select, index) => {
+            select.value = selected[index]; // Third, fourth, and fifth strings for other priorities
+            select.dispatchEvent(new Event('change')); // Trigger change to update mutual exclusivity
         });
-    };
 
-    // Attach event listeners
-    prioritySelectors.on('change', updateDropdowns);
-    randomizeButton.on('click', (event) => {
-        event.preventDefault();
-        randomizePriorities();
-    });
-    resetButton.on('click', (event) => {
-        event.preventDefault();
-        resetPriorities();
+        handleMutualExclusivity(); // Refresh exclusivity after randomization
     });
 
-    // Initialize by resetting priorities
-    resetPriorities();
+
+    // Initialize by disabling OK button
+    okButton.prop('disabled', true);
 }
