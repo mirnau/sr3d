@@ -1,5 +1,5 @@
-import { flags } from "./module/helpers/CommonConsts";
-import SR3DLog from "./module/SR3DLog";
+import { flags } from "../../helpers/CommonConsts.js"
+import SR3DLog from "../../SR3DLog.js"
 
 export function setFlags(actor, options, userId) {
 

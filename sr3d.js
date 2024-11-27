@@ -7,7 +7,7 @@ import { displayCreationPointSidebar } from "./module/injections/displayCreation
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
 import SR3DLog from "./module/SR3DLog.js";
-import { setFlags } from "./setFlags.js";
+import { setFlags } from "./module/hooks/createActor/setFlags.js";
 
 // Utility function to register templates
 async function AsyncRegisterComponentTemplates() {
