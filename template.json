@@ -12,6 +12,8 @@
                 ],
                 "pronouns": "Them/They",
                 "age": 0,
+                "weight": 0,
+                "height": 0,
                 "looks": "Handsome I bet",
                 "quote": "Alea iacta es",
                 "ratsrace": {
@@ -183,16 +185,19 @@
         "metahuman": {
             "name": "",
             "lifespan": {
-                "average":0,
+                "min":0,
+                "average": 0,
                 "max": 0
             },
             "physical": {
                 "height": {
                     "min": 0,
+                    "average": 0,
                     "max": 0
                 },
                 "weight": {
                     "min": 0,
+                    "average": 0,
                     "max": 0
                 }
             },

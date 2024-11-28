@@ -109,9 +109,12 @@
             },
             "metahuman": {
                 "name": "Metahuman Type",
-                "lifespan": "Lifeespan",
+                "lifespan": "Typical Shadowrunner Age-Range for Metahumans of this Kind",
+                "physical": "Typical Shadowrunner Stat-Ranges for Metahumans of this Kind",
                 "average": "Average",
+                "age": "Age",
                 "max": "Max",
+                "min": "Min",
                 "height": "Height",
                 "weight": "Weight",
                 "modifiers": "Modifiers",

@@ -38,7 +38,6 @@ function registerHooks() {
         renderSR3DItemSheet: "renderSR3DItemSheet",
         createActor: "createActor",
         updateActor: "updateActor"
-
     }
 
     const register = {

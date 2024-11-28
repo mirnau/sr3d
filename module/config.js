@@ -35,8 +35,11 @@ sr3d.races = {
 sr3d.metahuman = {
     name: "sr3d.item.metahuman.name",
     lifespan: "sr3d.item.metahuman.lifespan",
+    physical: "sr3d.item.metahuman.physical",
     average: "sr3d.item.metahuman.average",
     max: "sr3d.item.metahuman.max",
+    min: "sr3d.item.metahuman.min",
+    age: "sr3d.item.metahuman.age",
     height: "sr3d.item.metahuman.height",
     weight: "sr3d.item.metahuman.weight",
     modifiers: "sr3d.item.metahuman.modifiers",

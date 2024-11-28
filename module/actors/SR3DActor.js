@@ -58,10 +58,10 @@ export default class SR3DActor extends Actor {
     character.essence.total = character.essence.value;
 
     character.magic.total = character.magic.value;
-    
+
     const attributesDone = this.getFlag(flags.namespace, flags.attributesDone);
 
-    if(!attributesDone || character.creation.attributePoints > 0) {
+    if (!attributesDone || character.creation.attributePoints > 0) {
 
       character.creation.knowledgePoints = character.intelligence.value * 5;
       character.creation.languagePoints = Math.floor(character.intelligence.value * 1.5);
@@ -82,18 +82,18 @@ export default class SR3DActor extends Actor {
   }
 
   canGoblinizeTo(metaHumanItem) {
-  
+
     const character = this.system;
- 
+
     for (const a of baseAttributes) {
       if (metaHumanItem.system.modifiers[a] < 0 && character[a].value + metaHumanItem.system.modifiers[a] < 1) {
-          return false; // Prevent goblinization if the result would drop below 1
+        return false; // Prevent goblinization if the result would drop below 1
       }
-  }
-  
+    }
+
 
     return true; // All validations passed
-}
+  }
 
   awakenToMagic() {
     const character = this.system;
@@ -120,4 +120,6 @@ export default class SR3DActor extends Actor {
     this.recalculateAttribute();
     this.update({ system: character });
   }
+ 
 }
+
