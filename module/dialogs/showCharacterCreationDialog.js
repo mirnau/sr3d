@@ -1,7 +1,7 @@
 import { ActorDataService } from "../services/ActorDataService.js";
 import SR3DLog from "../SR3DLog.js";
 import Randomizer from "../sheets/Randomizer.js";
-import { randomInRange } from "../sheets/Utilities.js";
+import { getRandomBellCurveWithMode, lerpColor, randomInRange } from "../sheets/Utilities.js";
 
 export async function showCharacterCreationDialog(game, actor) {
     // Fetch all items of type "metahuman" and "magicTradition"
@@ -89,10 +89,10 @@ export async function showCharacterCreationDialog(game, actor) {
             render: (html) => {
 
                 _setupPrioritySelectionListeners(html);
-                _updateAgeSlider(html)
+                _updateAgeSlider(html, null)
 
-                html.find('.priority-randomizer').on('click', (event) => _onMetahumanChange(event, html));
-                html.find('.priority-reset').on('click', (event) => _updateAgeSlider(html, null));
+                //html.find('.priority-randomizer').on('click', (event) => _onMetahumanChange(event, html));
+                //html.find('.priority-reset').on('click', (event) => _updateAgeSlider(html, null));
 
             }
         }, { render: this }).render(true);
@@ -124,83 +124,90 @@ export function _setupPrioritySelectionListeners(html) {
         okButton.prop('disabled', true); // Disable OK button after reset
     });
 
-    const handleMutualExclusivity = async () => {
-        const allSelectors = [...prioritySelectors, ...itemSelectors];
-
-        // Step 1: Collect selected priorities
+    const collectSelectedPriorities = async () => {
         const selectedPriorities = new Set();
-
+    
         // Add priorities from prioritySelectors
         prioritySelectors.forEach(select => {
             if (select.value !== "") selectedPriorities.add(select.value);
         });
-
-        // Fetch and add priorities from itemSelectors
+    
+        // Add priorities from itemSelectors
         const itemPriorityPromises = itemSelectors.map(async (select) => {
             if (select.value !== "") {
                 const item = await game.items.get(select.value);
                 if (item && item.system.priority) {
-                    return item.system.priority; // Return valid priority from item lookup
+                    return item.system.priority; // Valid priority from item lookup
                 }
-                // Handle the fringe case: extract priority from the first character
-                if (/^[A-Z]-/.test(select.value)) { // Match "A-", "B-", etc.
-                    return select.value.charAt(0); // Extract the first character as priority
+                if (/^[A-Z]-/.test(select.value)) { // Extract priority from pattern
+                    return select.value.charAt(0);
                 }
             }
-            return null; // No value or no valid priority
+            return null;
         });
-
+    
         const itemPriorities = await Promise.all(itemPriorityPromises);
         itemPriorities.filter(priority => priority !== null).forEach(priority => {
             selectedPriorities.add(priority);
         });
-
-        console.debug("Selected Priorities:", Array.from(selectedPriorities));
-
-        // Step 2: Disable conflicting options
+    
+        return selectedPriorities;
+    };
+    
+    const updateOptionStates = (allSelectors, selectedPriorities) => {
         allSelectors.forEach(select => {
             Array.from(select.options).forEach(option => {
                 let optionPriority;
-
+    
                 if (prioritySelectors.includes(select)) {
-                    // PrioritySelectors directly use the option value as the priority
                     optionPriority = option.value;
                 } else {
-                    // For itemSelectors, resolve the item's priority
                     const item = game.items.get(option.value);
                     if (item && item.system.priority) {
-                        optionPriority = item.system.priority; // Valid priority from item
+                        optionPriority = item.system.priority;
                     } else if (/^[A-Z]-/.test(option.value)) {
-                        optionPriority = option.value.charAt(0); // Extract priority from pattern
+                        optionPriority = option.value.charAt(0);
                     }
                 }
-
+    
                 const isCurrentSelection = select.value === option.value;
-
+    
                 if (optionPriority && selectedPriorities.has(optionPriority)) {
-                    option.disabled = !isCurrentSelection; // Disable if conflicting
-                    option.classList.toggle('disabled-option', !isCurrentSelection); // Add visual cue
+                    option.disabled = !isCurrentSelection;
+                    option.classList.toggle('disabled-option', !isCurrentSelection);
                 } else {
-                    option.disabled = false; // Enable non-conflicting
-                    option.classList.remove('disabled-option'); // Remove visual cue
+                    option.disabled = false;
+                    option.classList.remove('disabled-option');
                 }
             });
         });
-
-        // Step 3: Enable OK button only if all selectors have a valid value
+    };
+    
+    const toggleOkButtonState = (allSelectors, okButton) => {
         const allSelected = allSelectors.every(select => select.value !== "");
         okButton.prop('disabled', !allSelected);
-        okButton.toggleClass('disabled', !allSelected); // Optionally toggle visual disable
+        okButton.toggleClass('disabled', !allSelected);
     };
+    
+    const _handleMutualExclusivity = async () => {
+        const allSelectors = [...prioritySelectors, ...itemSelectors];
+        const selectedPriorities = await collectSelectedPriorities();
+        console.debug("Selected Priorities:", Array.from(selectedPriorities));
+    
+        updateOptionStates(allSelectors, selectedPriorities);
+        toggleOkButtonState(allSelectors, okButton);
+    };
+    
 
     // Attach change listeners to enforce exclusivity
     [...prioritySelectors, ...itemSelectors].forEach(select => {
-        select.addEventListener('change', handleMutualExclusivity);
+        select.addEventListener('change', _handleMutualExclusivity);
     });
 
     randomizeButton.on('click', () => {
         const random = new Randomizer();
         const randomPriority = random.generatePriorityCombination();
+        let selectionId = "";
 
         const metahumanDropdown = html.find('[name="metahuman"] option');
         const metahumanDropdownItems = Array.from(metahumanDropdown)
@@ -219,16 +226,18 @@ export function _setupPrioritySelectionListeners(html) {
             console.log("Random Priority (metahuman):", randomPriority.metahuman);
             console.log("Metahuman Items:", metahumanDropdownItems);
 
-            const humanDropdownItem = metahumanDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.metahuman);
+            selectionId = metahumanDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.metahuman);
 
-            html.find('[name="metahuman"]').val(humanDropdownItem.id).change();
+            html.find('[name="metahuman"]').val(selectionId.id).change();
 
         } else {
             const randomMetahuman = metahumanDropdownItems.find(item => item.priority === randomPriority.metahuman);
+            SR3DLog.inspect("randomMetahuman", randomMetahuman);
             const metahumanPriority = randomMetahuman?.priority;
             const listOfAllDuplicatesWithTheSamePriority = metahumanDropdownItems.filter(item => item.priority === metahumanPriority);
             const selection = listOfAllDuplicatesWithTheSamePriority[randomInRange(0, listOfAllDuplicatesWithTheSamePriority.length - 1)];
             if (selection) {
+                // INFO: setting the dropdown to the assigned value
                 html.find('[name="metahuman"]').val(selection.id).change();
             }
         }
@@ -277,7 +286,9 @@ export function _setupPrioritySelectionListeners(html) {
             select.dispatchEvent(new Event('change'));
         });
 
-        handleMutualExclusivity();
+        _handleMutualExclusivity();
+
+        _updateAgeSlider(html, selectionId.id)
     });
 
 
@@ -285,62 +296,34 @@ export function _setupPrioritySelectionListeners(html) {
     okButton.prop('disabled', true);
 }
 
-function _getRandomBellCurveWithMode(min, max, mode) {
-    if (min >= max) {
-      throw new Error("The min value must be less than the max value.");
-    }
-    if (mode < min || mode > max) {
-      throw new Error("The mode value must be within the range of min and max.");
-    }
-
-    function randomNormal() {
-      let u = 0, v = 0;
-      while (u === 0) u = Math.random(); // Ensure u != 0
-      while (v === 0) v = Math.random(); // Ensure v != 0
-      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-    }
-
-    // Calculate the mean based on mode
-    const mean = mode;
-    const stdDev = (max - min) / 6; // Approximate standard deviation for 99.7% coverage
-
-    let value;
-    do {
-      value = randomNormal() * stdDev + mean;
-    } while (value < min || value > max); // Ensure the value is within bounds
-
-    const int = Math.floor(value);
-
-    return int;
-  }
-
-function _onMetahumanChange(event, html) {
-
-    const selectedMetahumanId = html.find("#metahuman-select").val(); // Get current dropdown value
+function _updateAgeSlider(html, selectionId) {
     
-    const selectedMetahumanItem = game.items.get(selectedMetahumanId) ?? null;
-    
-    _updateAgeSlider(html, selectedMetahumanItem);
-}
+    let selectedMetahumanItem = game.items.get(selectionId);
 
-
-function _updateAgeSlider(html, selectedMetahumanItem) {
+    if (selectedMetahumanItem == null) selectedMetahumanItem = null;
     // Initialize default age range and mode
-    let ageMin = 10, ageMax = 100, modeAge = 28;
+    let ageMin = 0, ageMax = 0, modeAge = 0;
 
     // Update age range based on the selected Metahuman item
     if (selectedMetahumanItem) {
         ageMin = selectedMetahumanItem.system.lifespan.min;
         ageMax = selectedMetahumanItem.system.lifespan.max;
     }
+    else {
+        ageMin= 10;
+        ageMax= 100;
+        modeAge = 30;
+    }
 
     // Generate a random age within the range
-    const randomAge = _getRandomBellCurveWithMode(ageMin, ageMax, modeAge);
+    const randomAge = getRandomBellCurveWithMode(ageMin, ageMax, modeAge);
 
     // Retrieve slider and associated elements
     const slider = html.find("#slider-age")[0];
     const ageValue = html.find("#age-value")[0];
     const lifeStage = html.find("#life-stage")[0];
+
+    slider.setAttribute("value", 0); // clear the value
 
     // Ensure slider's value, min, and max are updated correctly
     slider.setAttribute("min", ageMin); // Explicitly set min
@@ -359,14 +342,28 @@ function _updateAgeSlider(html, selectedMetahumanItem) {
     ];
 
     // Generate a gradient for the slider background
-    const generateGradient = () =>
-        stages
-            .map(stage => {
-                const startPercent = ((stage.start - ageMin) / (ageMax - ageMin)) * 100;
-                const endPercent = ((stage.end - ageMin) / (ageMax - ageMin)) * 100;
-                return `${stage.color} ${startPercent}%, ${stage.color} ${endPercent}%`;
-            })
-            .join(", ");
+    const generateGradient = () => {
+        const gradientSteps = stages.flatMap((stage, index, array) => {
+            const startPercent = ((stage.start - ageMin) / (ageMax - ageMin)) * 100;
+            const endPercent = ((stage.end - ageMin) / (ageMax - ageMin)) * 100;
+    
+            // Get neighboring colors
+            const prevColor = array[index - 1]?.color || stage.color; // Default to the current color if no previous
+            const nextColor = array[index + 1]?.color || stage.color; // Default to the current color if no next
+    
+            // Blend into previous and next colors
+            const blendedStartColor = lerpColor(prevColor, stage.color, 0.5); // Blend with previous at start
+            const blendedEndColor = lerpColor(stage.color, nextColor, 0.5);   // Blend with next at end
+    
+            // Return gradient stops for this stage
+            return [
+                `${blendedStartColor} ${startPercent}%`, // Start blending
+                `${blendedEndColor} ${endPercent}%`     // End blending
+            ];
+        });
+    
+        return gradientSteps.join(", ");
+    };
 
     // Update slider display and life stage
     const updateSlider = () => {

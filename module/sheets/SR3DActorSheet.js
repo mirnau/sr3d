@@ -52,6 +52,7 @@ export default class SR3DActorSheet extends ActorSheet {
         // If the creation is not completed, show the dialog
         if (!creationCompleted) {
             console.log("Character creation not completed. Showing creation dialog.");
+            
             const dialogResult = await showCharacterCreationDialog(game, this.actor);
 
             // If the dialog is canceled, delete the actor and prevent rendering
