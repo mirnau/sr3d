@@ -11,21 +11,21 @@ import { setFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 
-// Utility function to register templates
-async function AsyncRegisterComponentTemplates() {
+// NOTE: Any .hbs file from these folders will be registered
+async function registerTemplatesFromPathsAsync() {
+    const folders = [
+        "systems/sr3d/templates/components/",
+        "systems/sr3d/templates/injections/",
+        "systems/sr3d/templates/dialogs/"
+    ];
 
-    const basePath = "systems/sr3d/templates/components/";
-    const paths = [
-        "attributes.hbs",
-        "skills.hbs",
-        "dice-pools.hbs",
-        "movement.hbs",
-        "weapon.hbs",
-        "active-skill.hbs",
-        "knowledge-skill.hbs",
-        "language-skill.hbs",
+    const paths = [];
 
-    ].map(filename => basePath + filename);
+    for (const folder of folders) {
+        const fileList = await FilePicker.browse("data", folder);
+        const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
+        paths.push(...hbsFiles);
+    }
 
     return loadTemplates(paths);
 }
@@ -67,7 +67,7 @@ function registerHooks() {
 
         CONFIG.Actor.documentClass = SR3DActor;
 
-        AsyncRegisterComponentTemplates();
+        registerTemplatesFromPathsAsync();
 
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
