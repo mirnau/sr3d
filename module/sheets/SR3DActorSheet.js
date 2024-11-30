@@ -1,6 +1,6 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
-import { showCharacterCreationDialog } from '../dialogs/showCharacterCreationDialog.js';
+import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -38,6 +38,32 @@ export default class SR3DActorSheet extends ActorSheet {
         return ctx;
     }
 
+    async _showCharacterCreationDialog(actor) {
+        // Fetch all items of type "metahuman" and "magicTradition"
+        const metahumans = game.items.filter(item => item.type === "metahuman");
+        const magicTraditions = game.items.filter(item => item.type === "magicTradition");
+
+        const allMetahumans = ActorDataService.getAllMetaHumans(metahumans);
+        const allMagicTraditions = ActorDataService.getAllMagicTraditions(magicTraditions);
+
+        // Data for priority tables
+        const priorities = ActorDataService.getPriorities();
+
+        // Store instance properties
+        const dialogData = {
+            metahumans: allMetahumans,
+            magicTraditions: allMagicTraditions,
+            ...priorities
+        };
+        const content = await renderTemplate('systems/sr3d/templates/dialogs/character-creation-dialog.hbs', dialogData);
+
+        return new Promise((resolve) => {
+            new CharacterCreationDialog(dialogData, content, resolve).render(true);
+        });
+    }
+
+
+
     async render(force = false, options = {}) {
         // Check if the creation dialog is completed
         let creationCompleted = this.actor.getFlag("sr3d", "creationDialogCompleted");
@@ -52,8 +78,8 @@ export default class SR3DActorSheet extends ActorSheet {
         // If the creation is not completed, show the dialog
         if (!creationCompleted) {
             console.log("Character creation not completed. Showing creation dialog.");
-            
-            const dialogResult = await showCharacterCreationDialog(game, this.actor);
+
+            const dialogResult = await this._showCharacterCreationDialog(this.actor);
 
             // If the dialog is canceled, delete the actor and prevent rendering
             if (!dialogResult) {

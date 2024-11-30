@@ -18,7 +18,8 @@
         },
 
         "characterCreation": {
-            "instruction": "Humans are weighted at 64% and magic users at 4%."
+            "instruction": "Humans are weighted at 64% and magic users at 4%.",
+            "selectAnOption": "Select"
         },
         "actor": {
             "race": {

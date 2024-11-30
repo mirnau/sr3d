@@ -24,6 +24,7 @@ async function AsyncRegisterComponentTemplates() {
         "active-skill.hbs",
         "knowledge-skill.hbs",
         "language-skill.hbs",
+
     ].map(filename => basePath + filename);
 
     return loadTemplates(paths);

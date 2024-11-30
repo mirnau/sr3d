@@ -6,7 +6,8 @@ sr3d.sheet ={
 }
 
 sr3d.characterCreation = {
-    instruction: "sr3d.characterCreation.instruction"
+    instruction: "sr3d.characterCreation.instruction",
+    selectAnOption: "sr3d.characterCreation.selectAnOption"
 }
 
 sr3d.freeActions = {
