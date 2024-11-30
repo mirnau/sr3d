@@ -51,6 +51,7 @@ export default class SR3DActorSheet extends ActorSheet {
 
         // Store instance properties
         const dialogData = {
+            actor: this.actor,
             metahumans: allMetahumans,
             magicTraditions: allMagicTraditions,
             ...priorities

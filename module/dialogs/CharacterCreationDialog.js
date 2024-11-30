@@ -25,43 +25,54 @@ export class CharacterCreationDialog extends Dialog {
             },
             default: "ok",
             render: (html) => {
-
+                
                 const randomizeButton = html.find('.priority-randomizer');
                 const resetButton = html.find('.priority-reset');
                 const okButton = html.find('button.default');
-
+                
                 const prioritySelectors = Array.from(html.find('.priority-select'));
                 const itemSelectors = Array.from(html.find('.item-select'));
                 const allSelectors = [...prioritySelectors, ...itemSelectors];
                 const metahumanDropdown = html.find('[name="metahuman"] option');
                 const magicTraditionDropdown = html.find('[name="magic"] option');
-
+                
                 this._addEmptyDefaultToAllDropdowns(allSelectors);
-
-                //NOTE: Subscriptions
+                
+                okButton.prop('disabled', true);
+                
+                //NOTE: Subscriptions start from here
                 allSelectors.forEach(select => {
                     select.addEventListener('change', () => {
                         this._handleMutualExclusivity(allSelectors, prioritySelectors, itemSelectors);
                         this._toggleOkButtonState(allSelectors, okButton);
                     });
                 });
-
-                randomizeButton.on('click', this._randomizeAll.bind(this, metahumanDropdown, magicTraditionDropdown, prioritySelectors, html));
-                randomizeButton.on('click', this._updateAgeSlider.bind(this, html, metahumanDropdown));
-                randomizeButton.on('click', this._updatePhysicalSlider.bind(this, html, metahumanDropdown, "weight"));
-                randomizeButton.on('click', this._updatePhysicalSlider.bind(this, html, metahumanDropdown, "height"));
-                resetButton.on('click', this._resetFields.bind(this, allSelectors, okButton));
-                resetButton.on('click', this._updateAgeSlider.bind(this, html, metahumanDropdown));
-                resetButton.on('click', this._updatePhysicalSlider.bind(this, html, metahumanDropdown, "weight"));
-                resetButton.on('click', this._updatePhysicalSlider.bind(this, html, metahumanDropdown, "height"));
-
-                okButton.prop('disabled', true);
+                
+                const randomizeActions = [
+                    { method: this._randomizeAll, args: [metahumanDropdown, magicTraditionDropdown, prioritySelectors, html] },
+                    { method: this._updateAgeSlider, args: [html, metahumanDropdown] },
+                    { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "weight"] },
+                    { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "height"] },
+                ];
+                
+                randomizeActions.forEach(action => {
+                    randomizeButton.on('click', action.method.bind(this, ...action.args));
+                });
+                
+                const resetActions = [
+                    { method: this._resetFields, args: [allSelectors, okButton] },
+                    { method: this._updateAgeSlider, args: [html, metahumanDropdown] },
+                    { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "weight"] },
+                    { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "height"] },
+                ];
+                
+                resetActions.forEach(action => {
+                    resetButton.on('click', action.method.bind(this, ...action.args));
+                });
             }
         });
-
-        this.dialogData = dialogData; // Store data for later use
     }
-
+    
     _addEmptyDefaultToAllDropdowns(allSelectors) {
         allSelectors.forEach(select => {
             const emptyOption = document.createElement('option');
@@ -77,10 +88,9 @@ export class CharacterCreationDialog extends Dialog {
         okButton.prop('disabled', !allSelected);
         okButton.toggleClass('disabled', !allSelected);
     };
-    
+
 
     async _handleMutualExclusivity(allSelectors, prioritySelectors, itemSelectors) {
-
 
         const selectedPriorities = await this._collectSelectedPriorities(prioritySelectors, itemSelectors);
 
@@ -237,51 +247,57 @@ export class CharacterCreationDialog extends Dialog {
     }
 
     async _handleDialogSubmit(html, dialogData) {
-        const { actor } = this.dialogData; // Assuming actor is part of dialogData now
-        const { priorities } = dialogData;
-
-        // Extract selected values from the HTML
+    
+        // Fetch selected values from the HTML
         const selectedMetahumanId = html.find('[name="metahuman"]').val();
         const selectedMagicTraditionId = html.find('[name="magic"]').val();
         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
-
+    
         // Assign selected points and resources
         const systemUpdates = {
-            "system.creation.attributePoints": priorities.attributePriorities[selectedAttributePriority],
-            "system.creation.activePoints": priorities.skillsPriorities[selectedSkillsPriority],
+            "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
+            "system.creation.activePoints": dialogData.skillsPriorities[selectedSkillsPriority],
             "system.ratsrace.income.post": {
-                amount: priorities.resourcesPriorities[selectedResourcesPriority],
-                recurrent: false
-            }
+                amount: dialogData.resourcesPriorities[selectedResourcesPriority],
+                recurrent: false,
+            },
         };
-
-        // Log selected IDs for debugging
+    
+        // Log selected values for debugging
         SR3DLog.inspect("Selected Metahuman ID", selectedMetahumanId);
         SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicTraditionId);
-
+    
         // Handle Metahuman item creation
         if (selectedMetahumanId) {
-            await this._createItemOnActor(actor, selectedMetahumanId, "Metahuman");
+            const metahumanItem = game.items.get(selectedMetahumanId);
+            if (metahumanItem) {
+                await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
+                SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
+            }
         }
-
+    
         // Handle Magic Tradition item creation
         if (selectedMagicTraditionId) {
-            await this._createItemOnActor(actor, selectedMagicTraditionId, "Magic Tradition");
+            const magicTraditionItem = game.items.get(selectedMagicTraditionId);
+            if (magicTraditionItem) {
+                await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
+                SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
+            }
         }
-
+    
         // Apply updates to the actor's system
-        await actor.update(systemUpdates);
-
+        await dialogData.actor.update(systemUpdates);
+    
         // Force recalculation of derived stats
-        if (actor.characterSetup) {
-            actor.characterSetup();
+        if (dialogData.actor.characterSetup) {
+            dialogData.actor.characterSetup();
         }
-
-        SR3DLog.success("Character creation process completed successfully.", "Character Creation");
+    
+        SR3DLog.success("Character creation process completed successfully.", "CharacterCreationDialog");
     }
-
+    
     _updateAgeSlider(html, metahumanDropdown) {
         if (!metahumanDropdown) return;
 
