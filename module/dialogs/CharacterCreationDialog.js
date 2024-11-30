@@ -40,8 +40,10 @@ export class CharacterCreationDialog extends Dialog {
 
                 //NOTE: Subscriptions
                 allSelectors.forEach(select => {
-                    select.addEventListener('change', this._handleMutualExclusivity(allSelectors, prioritySelectors, itemSelectors));
-                    select.addEventListener('change', this._toggleOkButtonState(allSelectors, okButton));
+                    select.addEventListener('change', () => {
+                        this._handleMutualExclusivity(allSelectors, prioritySelectors, itemSelectors);
+                        this._toggleOkButtonState(allSelectors, okButton);
+                    });
                 });
 
                 randomizeButton.on('click', this._randomizeAll.bind(this, metahumanDropdown, magicTraditionDropdown, prioritySelectors, html));
@@ -75,6 +77,7 @@ export class CharacterCreationDialog extends Dialog {
         okButton.prop('disabled', !allSelected);
         okButton.toggleClass('disabled', !allSelected);
     };
+    
 
     async _handleMutualExclusivity(allSelectors, prioritySelectors, itemSelectors) {
 
