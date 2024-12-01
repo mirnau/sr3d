@@ -3,7 +3,10 @@ export const sr3d = {};
 sr3d.sheet ={
     addSkill: "sr3d.sheet.addSkill",
     newItem: "sr3d.sheet.newItem",
-    dossier: "sr3d.sheet.dossier"
+    dossier: "sr3d.sheet.dossier",
+    deleteSkill: "sr3d.sheet.deleteSkill",
+    purchaseSkills: "sr3d.sheet.purchaseSkills",
+    deleteSpecialisation: "sr3d.sheet.deleteSpecialisation"
 }
 
 sr3d.characterCreation = {
@@ -148,7 +151,6 @@ sr3d.skills = {
     knowledgePoints: "sr3d.item.skill.knowledgePoints",
     languagePoints: "sr3d.item.skill.languagePoints", 
     skills: "sr3d.item.skill.skills",
-    purchaseSkills: "sr3d.item.skill.purchaseSkills",
     placeholder: "sr3d.item.skill.placeholder", 
     name: "sr3d.item.skill.name",
     activeSkill: "sr3d.item.skill.activeSkill",

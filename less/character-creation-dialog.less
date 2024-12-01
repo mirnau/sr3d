@@ -1,92 +1,103 @@
-.slider-container {
-  position: relative;
-  width: 100%; /* Adjust as needed */
 
-  .life-stage-slider {
-    -webkit-appearance: none; /* Removes default styling */
-    appearance: none;
+
+  .slider-container {
+    position: relative;
     width: 100%;
-    height: 2rem; /* Adjust track height */
-    background: transparent; /* Ensure transparent background initially */
-    outline: none;
-    cursor: pointer;
+    /* Adjust as needed */
 
-    /* WebKit Custom track styling */
-    &::-webkit-slider-runnable-track {
-      height: 8px; /* Match track height */
-      background: linear-gradient(
-        to right,
-        #4caf50 13%,
-        #2196f3 20%,
-        #ffc107 40%,
-        #ff5722 60%,
-        #9c27b0 80%,
-        #ff5722 90%,
-        #9c27b0 100%
-      );
-      border: none;
-      border-radius: 5px; /* Smooth corners */
-      transition: background 0.3s ease-in-out; /* Optional smoothness */
-    }
-
-    /* Force gradient on hover, focus, and active states */
-    &:hover::-webkit-slider-runnable-track,
-    &:focus::-webkit-slider-runnable-track,
-    &:active::-webkit-slider-runnable-track {
-      background: linear-gradient(
-        to right,
-        #4caf50 13%,
-        #2196f3 20%,
-        #ffc107 40%,
-        #ff5722 60%,
-        #9c27b0 80%,
-        #ff5722 90%,
-        #9c27b0 100%
-      ) !important;
-      filter: brightness(1.1); /* Slightly emphasize during interaction */
-    }
-
-    /* WebKit Custom thumb styling */
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none; /* Removes default styling */
+    .life-stage-slider {
+      -webkit-appearance: none;
+      /* Removes default styling */
       appearance: none;
-      width: 16px;
-      height: 16px;
-      background: #000; /* Thumb color */
-      border-radius: 50%; /* Circular thumb */
+      width: 100%;
+      height: 2rem;
+      /* Adjust track height */
+      background: transparent;
+      /* Ensure transparent background initially */
+      outline: none;
       cursor: pointer;
-      border: 2px solid #fff; /* Optional: add a border for better visibility */
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
 
-    &::-webkit-slider-thumb:active {
-      transform: scale(1.2); /* Slightly enlarge thumb when active */
-      background: #4caf50; /* Optional: change thumb color on active */
-    }
+      /* WebKit Custom track styling */
+      &::-webkit-slider-runnable-track {
+        height: 8px;
+        /* Match track height */
+        background: linear-gradient(to right,
+            #4caf50 13%,
+            #2196f3 20%,
+            #ffc107 40%,
+            #ff5722 60%,
+            #9c27b0 80%,
+            #ff5722 90%,
+            #9c27b0 100%);
+        border: none;
+        border-radius: 5px;
+        /* Smooth corners */
+        transition: background 0.3s ease-in-out;
+        /* Optional smoothness */
+      }
 
-    /* Non-WebKit fallback track (if needed) */
-    &::-moz-range-track {
-      height: 8px;
-      background: linear-gradient(
-        to right,
-        #4caf50 13%,
-        #2196f3 20%,
-        #ffc107 40%,
-        #ff5722 60%,
-        #9c27b0 80%,
-        #ff5722 90%,
-        #9c27b0 100%
-      );
-      border: none;
-      border-radius: 5px;
-    }
+      /* Force gradient on hover, focus, and active states */
+      &:hover::-webkit-slider-runnable-track,
+      &:focus::-webkit-slider-runnable-track,
+      &:active::-webkit-slider-runnable-track {
+        background: linear-gradient(to right,
+            #4caf50 13%,
+            #2196f3 20%,
+            #ffc107 40%,
+            #ff5722 60%,
+            #9c27b0 80%,
+            #ff5722 90%,
+            #9c27b0 100%) !important;
+        filter: brightness(1.1);
+        /* Slightly emphasize during interaction */
+      }
 
-    /* Optional MS track styling */
-    &::-ms-track {
-      height: 8px;
-      background: transparent; /* Remove the default gray background */
-      border-color: transparent;
-      color: transparent;
+      /* WebKit Custom thumb styling */
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        /* Removes default styling */
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #000;
+        /* Thumb color */
+        border-radius: 50%;
+        /* Circular thumb */
+        cursor: pointer;
+        border: 2px solid #fff;
+        /* Optional: add a border for better visibility */
+        transition: transform 0.2s ease, background 0.3s ease;
+      }
+
+      &::-webkit-slider-thumb:active {
+        transform: scale(1.2);
+        /* Slightly enlarge thumb when active */
+        background: #4caf50;
+        /* Optional: change thumb color on active */
+      }
+
+      /* Non-WebKit fallback track (if needed) */
+      &::-moz-range-track {
+        height: 8px;
+        background: linear-gradient(to right,
+            #4caf50 13%,
+            #2196f3 20%,
+            #ffc107 40%,
+            #ff5722 60%,
+            #9c27b0 80%,
+            #ff5722 90%,
+            #9c27b0 100%);
+        border: none;
+        border-radius: 5px;
+      }
+
+      /* Optional MS track styling */
+      &::-ms-track {
+        height: 8px;
+        background: transparent;
+        /* Remove the default gray background */
+        border-color: transparent;
+        color: transparent;
+      }
     }
   }
-}

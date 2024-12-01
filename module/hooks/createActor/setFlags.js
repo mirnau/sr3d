@@ -5,7 +5,8 @@ export function setFlags(actor, options, userId) {
 
     SR3DLog.info("Initiating Flags", "setFlags.js");
 
-    game.setFlag(flags.namespace, flags.attributesDone, false);
-    game.setFlag(game, flags.isDossierPanelOpened, false);
+    actor.setFlag(flags.namespace, flags.attributesDone, false);
+    actor.setFlag(game, flags.isDossierPanelOpened, false);
+    actor.setFlag(flags.namespace, flags.isShoppingStateActive, true);
 
 }

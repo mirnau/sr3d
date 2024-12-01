@@ -15,7 +15,10 @@
         "sheet": {
             "addSkill": "Add a skill",
             "newItem": "New item",
-            "dossier": "Dossier"
+            "dossier": "Dossier",
+            "deleteSkill": "Delete Skill",
+            "purchaseSkills": "Purchase Skill Point",
+            "deleteSpecialisation": "Delete Specialisation"
         },
 
         "characterCreation": {
@@ -201,7 +204,6 @@
                 "knowledgePoints":"Knowledge Skill Points",
                 "languagePoints":"Language Skill Points",
                 "skills": "Skills",
-                "purchaseSkills": "Purchase Skillpoint",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",
                 "activeSkill": "Active Skill",

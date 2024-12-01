@@ -1,51 +1,68 @@
-.sr3d.sheet.character {
+.sr3d section.window-content {
+  background-color: red;
+}
+.sr3d img {
+  border: 0px;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d input[type="text"] {
+  border: 0;
+  background-color: transparent;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d input[type="text"]:focus {
+  background-color: violet;
+  box-shadow: 0 0 10px 3px violet;
+  outline: none;
+}
+.sr3d .sr3d.sheet.character {
   min-width: 22rem;
   min-height: 800px;
   max-width: 1400px;
   background: transparent;
 }
-.sr3d.sheet.character .window-content,
-.sr3d.sheet.character form {
+.sr3d .sr3d.sheet.character .window-content,
+.sr3d .sr3d.sheet.character form {
   position: relative;
   background: transparent;
 }
-.sr3d.sheet.character .sheet-masonry-grid {
+.sr3d .sr3d.sheet.character .sheet-masonry-grid {
   display: grid;
   gap: 1rem;
   background: transparent;
   /* Use CSS variable for column width */
   grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
 }
-.sr3d.sheet.character .sheet-masonry-grid .doubleWidth {
+.sr3d .sr3d.sheet.character .sheet-masonry-grid .doubleWidth {
   grid-column: span 2;
 }
-.sheet-component {
+.sr3d .sheet-component {
   box-sizing: border-box;
   width: 32%;
   min-width: 300px;
   margin-bottom: 10px;
   background: transparent;
 }
-.sheet-component .proportional {
+.sr3d .sheet-component .proportional {
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
-.sheet-component .inner-background-container {
+.sr3d .sheet-component .inner-background-container {
   box-sizing: border-box;
   position: relative;
   padding: 0.5rem;
   width: 100%;
   height: 100%;
 }
-.sheet-component .inner-background {
+.sr3d .sheet-component .inner-background {
   box-sizing: border-box;
   padding: 1rem;
-  background: #3e4053;
+  background: #2F3947;
   width: 100%;
   height: 100%;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sheet-component .fake-shadow {
+.sr3d .sheet-component .fake-shadow {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
@@ -56,7 +73,7 @@
   filter: blur(20px);
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sheet-component .portrait {
+.sr3d .sheet-component .portrait {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
@@ -71,58 +88,54 @@
   font-weight: normal;
   font-style: normal;
 }
-.sr3d.sheet.character {
+.sr3d .sr3d.sheet.character {
   font-family: 'VT323', monospace;
   font-size: 16px;
   line-height: 1.2;
   color: #c8d3f5;
   /* Set font color */
 }
-.sr3d.sheet.character h1,
-.sr3d.sheet.character h2,
-.sr3d.sheet.character h3,
-.sr3d.sheet.character h4,
-.sr3d.sheet.character h5,
-.sr3d.sheet.character h6 {
+.sr3d .sr3d.sheet.character h1,
+.sr3d .sr3d.sheet.character h2,
+.sr3d .sr3d.sheet.character h3,
+.sr3d .sr3d.sheet.character h4,
+.sr3d .sr3d.sheet.character h5,
+.sr3d .sr3d.sheet.character h6 {
   text-transform: uppercase;
   font-family: 'VT323', monospace;
   margin: 0.5em 0;
   line-height: 1.2;
-  color: #ff5370;
+  color: #ff285e;
   border: none;
 }
-.sr3d.sheet.character p,
-.sr3d.sheet.character span,
-.sr3d.sheet.character a,
-.sr3d.sheet.character div,
-.sr3d.sheet.character button,
-.sr3d.sheet.character input,
-.sr3d.sheet.character textarea {
+.sr3d .sr3d.sheet.character p,
+.sr3d .sr3d.sheet.character span,
+.sr3d .sr3d.sheet.character a,
+.sr3d .sr3d.sheet.character div,
+.sr3d .sr3d.sheet.character button,
+.sr3d .sr3d.sheet.character input,
+.sr3d .sr3d.sheet.character textarea {
   font-family: 'VT323', monospace;
 }
-.sr3d.sheet {
-  border-width: 0px;
-  shape-outside: none;
-}
-.attribute-masonry-grid {
+.sr3d .attribute-masonry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
   gap: 1rem;
   width: 100%;
 }
-.attribute-masonry-grid .attribute-card {
+.sr3d .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   position: relative;
   text-align: center;
-  background: #1a1b26;
+  background: #212b35;
   min-height: 6rem;
   transition: transform 0.3s ease-in-out;
 }
-.attribute-masonry-grid .attribute-card .attribute-name {
-  background-color: #c3e88d;
+.sr3d .attribute-masonry-grid .attribute-card .attribute-name {
+  background-color: #55a6b4;
   margin-bottom: 0.25rem;
 }
-.attribute-masonry-grid .attribute-card .horizontal-section {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
   position: absolute;
   top: 60%;
   left: 50%;
@@ -133,75 +146,75 @@
   gap: 0.125rem;
   padding: 0.25rem;
 }
-.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
-.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 1.5rem;
   height: 1.5rem;
   font-size: 1.2rem;
-  color: magenta;
+  color: #55a6b4;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
-.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
   transform: scale(1.2);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   filter: brightness(1.15);
   z-index: 10;
 }
-.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
-.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
   transform: scale(1.15);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   filter: brightness(1);
 }
-.attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
-.attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
   color: grey;
   pointer-events: none;
   opacity: 0.5;
 }
-.attribute-masonry-grid .attribute-card .horizontal-section .attribute-value {
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .attribute-value {
   text-align: center;
 }
-.attribute-masonry-grid .attribute-card:hover {
+.sr3d .attribute-masonry-grid .attribute-card:hover {
   transform: scale(1.1);
   z-index: 10;
 }
-.specialization-value,
-.specialization-add,
-.specialization-container {
+.sr3d .specialization-value,
+.sr3d .specialization-add,
+.sr3d .specialization-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.specialization-container label {
+.sr3d .specialization-container label {
   margin-right: 10px;
 }
-.specialization-container a {
+.sr3d .specialization-container a {
   color: inherit;
   text-decoration: none;
   font-size: 1.2em;
   cursor: pointer;
 }
-.sr3d.sheet.character .skills-actor-component {
+.sr3d .sr3d.sheet.character .skills-actor-component {
   display: flex;
   flex-direction: column;
   position: relative;
 }
-.skills-section {
-  background-color: #1a1b26;
+.sr3d .skills-section {
+  background-color: #212b35;
   padding: 1rem;
   text-transform: uppercase;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.skills-section .skill-specialization-card,
-.skills-section .skill-card,
-.skills-section .knowledge-card,
-.skills-section .language-card {
+.sr3d .skills-section .skill-specialization-card,
+.sr3d .skills-section .skill-card,
+.sr3d .skills-section .knowledge-card,
+.sr3d .skills-section .language-card {
   box-sizing: border-box;
   min-height: 2rem;
   margin-bottom: 0.25rem;
@@ -210,18 +223,18 @@
   gap: 0.5rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.skills-section .skill-specialization-card {
+.sr3d .skills-section .skill-specialization-card {
   background-color: #82aaff;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.skills-section .skill-specialization-card .specialization-name {
+.sr3d .skills-section .skill-specialization-card .specialization-name {
   font-weight: bold;
   flex: 1;
   text-align: left;
 }
-.skills-section .skill-specialization-card .specialization-value {
+.sr3d .skills-section .skill-specialization-card .specialization-value {
   font-size: 1.5rem;
   width: 20%;
   padding: 0.25rem;
@@ -230,20 +243,20 @@
   background-color: aqua;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.skills-section .skill-card {
+.sr3d .skills-section .skill-card {
   background-color: #f4a370;
   flex-direction: column;
 }
-.skills-section .skill-card .skill-details {
+.sr3d .skills-section .skill-card .skill-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.skills-section .skill-card .skill-name {
+.sr3d .skills-section .skill-card .skill-name {
   flex: 1;
   font-weight: bold;
 }
-.skills-section .skill-card .skill-value {
+.sr3d .skills-section .skill-card .skill-value {
   font-size: 1.5rem;
   width: 20%;
   padding: 0.25rem;
@@ -252,60 +265,60 @@
   background-color: aqua;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.skills-section .skill-card .icons {
+.sr3d .skills-section .skill-card .icons {
   display: flex;
   gap: 0.25rem;
 }
-.skills-section .knowledge-card {
+.sr3d .skills-section .knowledge-card {
   background-color: #977ad7;
   min-height: 2rem;
   justify-content: space-between;
   align-items: center;
 }
-.skills-section .knowledge-card .icons {
+.sr3d .skills-section .knowledge-card .icons {
   display: flex;
   gap: 0.25rem;
 }
-.skills-section .language-card {
-  background-color: #3e4053;
+.sr3d .skills-section .language-card {
+  background-color: #2F3947;
   flex-direction: column;
 }
-.skills-section .language-card .language-skill-line,
-.skills-section .language-card .language-info {
+.sr3d .skills-section .language-card .language-skill-line,
+.sr3d .skills-section .language-card .language-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.skills-section .language-card .language-skill-line {
+.sr3d .skills-section .language-card .language-skill-line {
   padding: 0.125rem 0;
 }
-.skills-section .language-card .language-skill-line .language-skill-name,
-.skills-section .language-card .language-skill-line .subskill-name {
+.sr3d .skills-section .language-card .language-skill-line .language-skill-name,
+.sr3d .skills-section .language-card .language-skill-line .subskill-name {
   flex: 1;
   text-align: left;
 }
-.skills-section .language-card .language-skill-line .subskill-value {
+.sr3d .skills-section .language-card .language-skill-line .subskill-value {
   font-style: bold;
 }
-.skills-section .language-card .language-info {
+.sr3d .skills-section .language-card .language-info {
   background-color: #82aaff;
   width: 66%;
   min-height: 1.5rem;
 }
-.skills-section .language-card .icons {
+.sr3d .skills-section .language-card .icons {
   display: flex;
   gap: 0.5rem;
 }
-.skills-section .language-card a {
-  color: #1a1b26;
+.sr3d .skills-section .language-card a {
+  color: #212b35;
   cursor: pointer;
   text-decoration: none;
 }
-.skills-section a {
-  color: #1a1b26;
+.sr3d .skills-section a {
+  color: #212b35;
   margin-left: 0.5rem;
 }
-.attribute-position {
+.sr3d .attribute-position {
   position: absolute;
   width: 100px;
   /* Fixed size for square */
@@ -313,19 +326,19 @@
   left: -3rem;
   z-index: 1;
 }
-.attribute-position:nth-of-type(1) {
+.sr3d .attribute-position:nth-of-type(1) {
   top: 5rem;
 }
-.attribute-position:nth-of-type(2) {
+.sr3d .attribute-position:nth-of-type(2) {
   top: calc(5rem + 4rem * 2);
 }
-.attribute-position:nth-of-type(3) {
+.sr3d .attribute-position:nth-of-type(3) {
   top: calc(5rem + 4rem * 4);
 }
-.attribute-position:nth-of-type(4) {
+.sr3d .attribute-position:nth-of-type(4) {
   top: calc(5rem + 4rem * 6);
 }
-.attribute-position .attribute-point-container {
+.sr3d .attribute-position .attribute-point-container {
   position: relative;
   width: 100%;
   /* Match the parent width */
@@ -334,7 +347,7 @@
   padding: 0;
   margin: 0;
 }
-.attribute-position .attribute-point-container .attribute-fake-shadow {
+.sr3d .attribute-position .attribute-point-container .attribute-fake-shadow {
   --offset: 0.5rem;
   /* Custom property for offset */
   position: absolute;
@@ -349,19 +362,19 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   animation: colorPulse 3s ease-in-out infinite;
 }
-.attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(1) {
+.sr3d .attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(1) {
   animation-delay: 0s;
   /* No delay */
 }
-.attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(2) {
+.sr3d .attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(2) {
   animation-delay: 0.5s;
   /* 0.5-second delay */
 }
-.attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(3) {
+.sr3d .attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(3) {
   animation-delay: 1s;
   /* 1-second delay */
 }
-.attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(4) {
+.sr3d .attribute-position .attribute-point-container .attribute-fake-shadow:nth-of-type(4) {
   animation-delay: 1.5s;
   /* 1.5-second delay */
 }
@@ -376,35 +389,35 @@
     background-color: magenta;
   }
 }
-.attribute-position .attribute-point-container .attribute-points {
+.sr3d .attribute-position .attribute-point-container .attribute-points {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: #ff5370;
+  background-color: #ff285e;
   box-sizing: border-box;
   padding: 0.5rem;
   z-index: 2;
   animation: colorPulse 3s ease-in-out infinite;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.attribute-position .attribute-point-container .attribute-points .attribute-point-text {
+.sr3d .attribute-position .attribute-point-container .attribute-points .attribute-point-text {
   text-transform: capitalize;
   font-size: 1rem;
 }
-.attribute-position .attribute-point-container .attribute-points .attribute-point-value {
+.sr3d .attribute-position .attribute-point-container .attribute-points .attribute-point-value {
   text-align: center;
   font-size: 2.5rem;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-.slider-container {
+.sr3d .slider-container {
   position: relative;
   width: 100%;
   /* Adjust as needed */
 }
-.slider-container .life-stage-slider {
+.sr3d .slider-container .life-stage-slider {
   -webkit-appearance: none;
   /* Removes default styling */
   appearance: none;
@@ -421,7 +434,7 @@
   /* Non-WebKit fallback track (if needed) */
   /* Optional MS track styling */
 }
-.slider-container .life-stage-slider::-webkit-slider-runnable-track {
+.sr3d .slider-container .life-stage-slider::-webkit-slider-runnable-track {
   height: 8px;
   /* Match track height */
   background: linear-gradient(to right, #4caf50 13%, #2196f3 20%, #ffc107 40%, #ff5722 60%, #9c27b0 80%, #ff5722 90%, #9c27b0 100%);
@@ -431,14 +444,14 @@
   transition: background 0.3s ease-in-out;
   /* Optional smoothness */
 }
-.slider-container .life-stage-slider:hover::-webkit-slider-runnable-track,
-.slider-container .life-stage-slider:focus::-webkit-slider-runnable-track,
-.slider-container .life-stage-slider:active::-webkit-slider-runnable-track {
+.sr3d .slider-container .life-stage-slider:hover::-webkit-slider-runnable-track,
+.sr3d .slider-container .life-stage-slider:focus::-webkit-slider-runnable-track,
+.sr3d .slider-container .life-stage-slider:active::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #4caf50 13%, #2196f3 20%, #ffc107 40%, #ff5722 60%, #9c27b0 80%, #ff5722 90%, #9c27b0 100%) !important;
   filter: brightness(1.1);
   /* Slightly emphasize during interaction */
 }
-.slider-container .life-stage-slider::-webkit-slider-thumb {
+.sr3d .slider-container .life-stage-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   /* Removes default styling */
   appearance: none;
@@ -453,22 +466,114 @@
   /* Optional: add a border for better visibility */
   transition: transform 0.2s ease, background 0.3s ease;
 }
-.slider-container .life-stage-slider::-webkit-slider-thumb:active {
+.sr3d .slider-container .life-stage-slider::-webkit-slider-thumb:active {
   transform: scale(1.2);
   /* Slightly enlarge thumb when active */
   background: #4caf50;
   /* Optional: change thumb color on active */
 }
-.slider-container .life-stage-slider::-moz-range-track {
+.sr3d .slider-container .life-stage-slider::-moz-range-track {
   height: 8px;
   background: linear-gradient(to right, #4caf50 13%, #2196f3 20%, #ffc107 40%, #ff5722 60%, #9c27b0 80%, #ff5722 90%, #9c27b0 100%);
   border: none;
   border-radius: 5px;
 }
-.slider-container .life-stage-slider::-ms-track {
+.sr3d .slider-container .life-stage-slider::-ms-track {
   height: 8px;
   background: transparent;
   /* Remove the default gray background */
   border-color: transparent;
   color: transparent;
+}
+.sr3d .sr3d.sheet.item {
+  background: transparent;
+}
+.sr3d .sr3d.sheet.item .window-content {
+  background-color: transparent;
+}
+.sr3d .sr3d.sheet.item .window-content form {
+  position: relative;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .window-content form img {
+  border: 0px;
+  margin: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .window-content form section {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+.sr3d .sr3d.sheet.item .window-content form .item-sheet-component {
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  margin-bottom: 10px;
+  background: transparent;
+}
+.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background-container {
+  box-sizing: border-box;
+  position: relative;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background {
+  box-sizing: border-box;
+  padding: 1rem;
+  background: #2F3947;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .fake-shadow {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background-color: #ff285e;
+  width: calc(100% - 1.5rem);
+  height: calc(100% - 1.5rem);
+  z-index: -1;
+  filter: blur(20px);
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .window-content header {
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+}
+.sr3d .editor {
+  height: 100%;
+}
+.sr3d .pulsing-green-cart {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  animation: pulse-color-scale 2s infinite ease-in-out;
+}
+.sr3d .pulsing-green-cart i {
+  font-size: 1.2em;
+  animation: pulse-color-scale 2s infinite ease-in-out;
+}
+@keyframes pulse-color-scale {
+  0%,
+  100% {
+    transform: scale(0.98);
+    color: #00FC00C0;
+    text-shadow: none;
+  }
+  50% {
+    transform: scale(1);
+    color: cyan;
+    text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  }
 }

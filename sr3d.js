@@ -11,6 +11,7 @@ import { setFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
+import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -32,7 +33,7 @@ async function registerTemplatesFromPathsAsync() {
 }
 
 function registerHooks() {
-    
+
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
@@ -41,45 +42,83 @@ function registerHooks() {
     Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
-    
-    const register = {
-        core: "core",
-        sr3d: "sr3d"
-    }
-    
+    Hooks.once(hooks.ready, scopeCssToProject);
+
+    Hooks.once("ready", () => {
+        const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
+        setTheme(savedTheme); // Apply the saved theme on startup
+    });
+      
+
     Hooks.once(hooks.init, function () {
-        
-        Items.unregisterSheet(register.core, ItemSheet);
-        Items.registerSheet(register.sr3d, SR3DItemSheet, { makeDefault: true });
-        
-        Actors.unregisterSheet(register.core, ActorSheet);
-        Actors.registerSheet(register.sr3d, SR3DActorSheet, { makeDefault: true });
-        
+
+        Items.unregisterSheet(flags.core, ItemSheet);
+        Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
+
+        Actors.unregisterSheet(flags.core, ActorSheet);
+        Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
+
         CONFIG.Actor.documentClass = SR3DActor;
-        
+
         registerTemplatesFromPathsAsync();
-        
+
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
         });
-        
+
         Handlebars.registerHelper("ifEquals", (arg1, arg2, options) =>
             arg1 === arg2 ? options.fn(this) : options.inverse(this)
-    );
-    
-    Handlebars.registerHelper("currency", function(value) {
-        return `¥${Number(value).toLocaleString()}`;
-    });
-    
-    Handlebars.registerHelper('multiply', (value, factor) => {
-        return (value * factor).toFixed(1); // Converts and limits to 2 decimal places
-    });
+        );
 
-    Handlebars.registerHelper("isDossierOpen", function(actor) {
-        return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);
+        Handlebars.registerHelper("currency", function (value) {
+            return `¥${Number(value).toLocaleString()}`;
+        });
+
+        Handlebars.registerHelper('multiply', (value, factor) => {
+            return (value * factor).toFixed(1); // Converts and limits to 1 decimal places
+        });
+
+        Handlebars.registerHelper("isDossierOpen", function (actor) {
+            return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);
+        });
+
+        Handlebars.registerHelper("isShoppingStateActive", function (actor) {
+            return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
+        });
+
+        const themeChoices = {
+            "chummer-dark": "Chummer Dark",
+            "chummer-light": "Chummer Light"
+        };
+
+        registerThemeSelectionFunctionality(themeChoices);
+
     });
-    
-});
+}
+
+function registerThemeSelectionFunctionality(themeChoices) {
+    game.settings.register("sr3d", "theme", {
+        name: "Theme", // Setting name
+        hint: "Choose your preferred theme for the SR3D system.", // Setting description
+        scope: "client", // Client-side setting (individual for each user)
+        config: true, // Exposed in the settings UI
+        type: String, // Data type
+        choices: themeChoices,
+        default: "chummer-dark", // Default value
+        onChange: theme => setTheme(theme)
+    });
+}
+
+function setTheme(theme) {
+    let themeLink = document.getElementById("theme-stylesheet");
+
+    if (themeLink) themeLink.remove();
+
+    themeLink = document.createElement("link");
+    themeLink.id = "theme-stylesheet";
+    themeLink.rel = "stylesheet";
+    themeLink.href = `systems/sr3d/styles/sr3d-${theme}.css`; // Ensure correct path
+    document.head.appendChild(themeLink);
 }
 
 registerHooks();

@@ -4,9 +4,20 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Less Compile",
+      "label": "Compile Chummer Dark",
       "type": "shell",
-      "command": "lessc less/sr3d.less styles/sr3d.css",
+      "command": "lessc less/themes/chummer-dark/styles.less styles/sr3d-chummer-dark.css",
+      "group": "build"
+    },
+    {
+      "label": "Compile Chummer Light",
+      "type": "shell",
+      "command": "lessc less/themes/chummer-light/styles.less styles/sr3d-chummer-light.css",
+      "group": "build"
+    },
+    {
+      "label": "Compile All Themes",
+      "dependsOn": ["Compile Chummer Dark", "Compile Chummer Light"],
       "group": "build"
     }
   ]

@@ -327,7 +327,8 @@
                     "base": 0,
                     "specializations": []
                 }
-            }
+            },
+            "description": ""
         },
         "magicTradition": {
             "type": "",

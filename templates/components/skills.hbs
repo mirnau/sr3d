@@ -21,15 +21,14 @@
             {{this.name}}
           </div>
           <div class="icons">
+            {{#if (isShoppingStateActive actor)}}
             <a class="delete-skill" data-id="{{this._id}}">
               <i class="fa-solid fa-trash-can"></i>
             </a>
-            <a>
-              <i class="fa-solid fa-cart-plus"></i>
-            </a>
             <a class="edit-skill" data-id="{{this._id}}">
-              <i class="fas fa-pen-to-square"></i>
+              <i class="fas fa-pen-to-square pulsing-green-cart"></i>
             </a>
+            {{/if}}
             <a>
               <i class="fa-solid fa-circle-check"></i>
             </a>
@@ -37,28 +36,29 @@
           <div class="skill-value">
             {{this.system.activeSkill.value}}
           </div>
-        </div>
 
-        <!-- Display Specializations -->
-        {{#if this.system.skill.activeSkill.specializations}}
-        <div class="specializations">
-          <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
-          {{#each this.system.skill.activeSkill.specializations}}
-          <div class="skill-specialization-card">
-            <div class"specialization-name">
-            {{this.name}}:
+          <!-- Display Specializations -->
+          {{#if this.system.skill.activeSkill.specializations}}
+          <div class="specializations">
+            <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
+            {{#each this.system.skill.activeSkill.specializations}}
+            <div class="skill-specialization-card">
+              <div class="specialization-name">
+                {{this.name}}:
+              </div>
+              <div class="specialization-value">
+                {{this.value}}
+              </div>
             </div>
-            <div class="specialization-value">
-             {{this.value}}
-            </div>
+            {{/each}}
           </div>
-          {{/each}}
+          {{/if}}
         </div>
-        {{/if}}
       </div>
       {{/each}}
     </div>
     {{/each}}
+
 
     <!-- Knowledge Skills -->
     <h2>{{localize "sr3d.item.skill.knowledgeSkill"}}

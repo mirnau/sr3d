@@ -1,20 +1,38 @@
-// Less configuration
-var gulp = require('gulp');
-var less = require('gulp-less');
+// Required plugins
+const gulp = require('gulp');
+const less = require('gulp-less');
+const path = require('path'); // For handling file paths
 
-gulp.task('less', function(cb) {
-  gulp
-    .src('less/sr3d.less') // Compile the main LESS file
-    .pipe(less())
-    .pipe(gulp.dest('./styles/'));
-  cb();
+// Paths
+const paths = {
+  allLess: 'less/**/*.less', // Watch all LESS files recursively in the less folder
+  themes: 'less/themes/*/styles.less', // Glob for all styles.less in theme subfolders
+  output: './styles/', // Output folder for compiled CSS
+};
+
+// LESS compilation task
+gulp.task('themes', () => {
+  return gulp
+    .src(paths.themes)
+    .pipe(less().on('error', function (err) {
+      console.error('Error in LESS compilation:', err.message);
+      this.emit('end');
+    }))
+    .pipe(gulp.dest((file) => {
+      // Extract the theme folder name
+      const themeName = path.basename(path.dirname(file.path));
+      // Set the destination file name
+      file.path = path.join(file.base, `sr3d-${themeName}.css`);
+      return paths.output;
+    }));
 });
 
-gulp.task(
-  'default',
-  gulp.series('less', function(cb) {
-    // Watch all .less files in the 'less' directory
-    gulp.watch('less/**/*.less', gulp.series('less'));
-    cb();
-  })
-);
+// Watch task
+gulp.task('watch', () => {
+  gulp.watch(paths.allLess, gulp.series('themes')).on('change', (file) => {
+    console.log(`File changed: ${file}`);
+  });
+});
+
+// Default task: Compile all themes and start watching
+gulp.task('default', gulp.series('themes', 'watch'));
