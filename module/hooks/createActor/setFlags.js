@@ -3,8 +3,9 @@ import SR3DLog from "../../SR3DLog.js"
 
 export function setFlags(actor, options, userId) {
 
-    SR3DLog.info("Initiating Flags", "hook: setFlags");
+    SR3DLog.info("Initiating Flags", "setFlags.js");
 
-    actor.getFlag(flags.namespace, flags.attributesDone, false);
+    game.setFlag(flags.namespace, flags.attributesDone, false);
+    game.setFlag(game, flags.isDossierPanelOpened, false);
 
 }

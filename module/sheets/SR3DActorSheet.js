@@ -1,6 +1,6 @@
 import { ActorDataService } from '../services/ActorDataService.js';
-import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
+import { flags } from '../helpers/CommonConsts.js'
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -102,12 +102,11 @@ export default class SR3DActorSheet extends ActorSheet {
         html.find(".item-create").click(this._onItemCreate.bind(this));
         html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
+        html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
 
         // Increment attribute
         html.find('.increment-attribute').click((event) => {
             const attribute = event.currentTarget.dataset.attribute;
-
-
             this.actor.adjustAttribute(attribute, 1);
             this._updateButtons(attribute);
 
@@ -120,6 +119,12 @@ export default class SR3DActorSheet extends ActorSheet {
             this._updateButtons(attribute);
         });
     }
+
+    // NOTE: This boolean is read in a hook in sr3d.js
+    _onDetailPanelOpened(_, event) {
+        this.actor.setFlag(flags.namespace, flags.isDossierPanelOpened, event.target.open);
+    }
+    
 
     // Update Button States
     _updateButtons(attribute) {

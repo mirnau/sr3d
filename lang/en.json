@@ -14,7 +14,8 @@
 
         "sheet": {
             "addSkill": "Add a skill",
-            "newItem": "New item"
+            "newItem": "New item",
+            "dossier": "Dossier"
         },
 
         "characterCreation": {
@@ -37,12 +38,16 @@
                 "description": "Description"
             },
             "character": {
+                "metahumanType": "Type of Metahumanity",
+                "name": "Name",
                 "character": "Character",
                 "alias": "Alias",
                 "pronouns": "Pronouns",
                 "age": "Age",
+                "height": "Height",
+                "weight": "Weight",
                 "looks": "Looks",
-                "Quote": "Quote",
+                "quote": "Quote",
                 "ratsrace": "Rat's Race",
                 "income": "Income",
                 "post": "Post",

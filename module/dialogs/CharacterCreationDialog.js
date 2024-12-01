@@ -1,6 +1,6 @@
 import SR3DLog from "../SR3DLog.js";
-import Prioritizer from "../sheets/Prioritizer.js";
-import { getRandomBellCurveWithMode, lerpColor, randomInRange } from "../sheets/Utilities.js";
+import Prioritizer from "../services/Prioritizer.js";
+import { getRandomBellCurveWithMode, randomInRange } from "../sheets/Utilities.js";
 
 export class CharacterCreationDialog extends Dialog {
     constructor(dialogData, content, resolve) {
@@ -25,21 +25,21 @@ export class CharacterCreationDialog extends Dialog {
             },
             default: "ok",
             render: (html) => {
-                
+
                 const randomizeButton = html.find('.priority-randomizer');
                 const resetButton = html.find('.priority-reset');
                 const okButton = html.find('button.default');
-                
+
                 const prioritySelectors = Array.from(html.find('.priority-select'));
                 const itemSelectors = Array.from(html.find('.item-select'));
                 const allSelectors = [...prioritySelectors, ...itemSelectors];
                 const metahumanDropdown = html.find('[name="metahuman"] option');
                 const magicTraditionDropdown = html.find('[name="magic"] option');
-                
+
                 this._addEmptyDefaultToAllDropdowns(allSelectors);
-                
+
                 okButton.prop('disabled', true);
-                
+
                 //NOTE: Subscriptions start from here
                 allSelectors.forEach(select => {
                     select.addEventListener('change', () => {
@@ -47,32 +47,32 @@ export class CharacterCreationDialog extends Dialog {
                         this._toggleOkButtonState(allSelectors, okButton);
                     });
                 });
-                
+
                 const randomizeActions = [
                     { method: this._randomizeAll, args: [metahumanDropdown, magicTraditionDropdown, prioritySelectors, html] },
                     { method: this._updateAgeSlider, args: [html, metahumanDropdown] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "weight"] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "height"] },
                 ];
-                
+
                 randomizeActions.forEach(action => {
                     randomizeButton.on('click', action.method.bind(this, ...action.args));
                 });
-                
+
                 const resetActions = [
                     { method: this._resetFields, args: [allSelectors, okButton] },
                     { method: this._updateAgeSlider, args: [html, metahumanDropdown] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "weight"] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "height"] },
                 ];
-                
+
                 resetActions.forEach(action => {
                     resetButton.on('click', action.method.bind(this, ...action.args));
                 });
             }
         });
     }
-    
+
     _addEmptyDefaultToAllDropdowns(allSelectors) {
         allSelectors.forEach(select => {
             const emptyOption = document.createElement('option');
@@ -247,14 +247,19 @@ export class CharacterCreationDialog extends Dialog {
     }
 
     async _handleDialogSubmit(html, dialogData) {
-    
+
         // Fetch selected values from the HTML
         const selectedMetahumanId = html.find('[name="metahuman"]').val();
         const selectedMagicTraditionId = html.find('[name="magic"]').val();
         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
-    
+
+        // Retrieve age, height, and weight values from sliders
+        const selectedAge = html.find('#slider-age').val();
+        const selectedHeight = html.find('#slider-height').val();
+        const selectedWeight = html.find('#slider-weight').val();
+
         // Assign selected points and resources
         const systemUpdates = {
             "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
@@ -263,12 +268,15 @@ export class CharacterCreationDialog extends Dialog {
                 amount: dialogData.resourcesPriorities[selectedResourcesPriority],
                 recurrent: false,
             },
+            "system.age": selectedAge,
+            "system.height": selectedHeight,
+            "system.weight": selectedWeight,
         };
-    
+
         // Log selected values for debugging
         SR3DLog.inspect("Selected Metahuman ID", selectedMetahumanId);
         SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicTraditionId);
-    
+
         // Handle Metahuman item creation
         if (selectedMetahumanId) {
             const metahumanItem = game.items.get(selectedMetahumanId);
@@ -277,7 +285,7 @@ export class CharacterCreationDialog extends Dialog {
                 SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
             }
         }
-    
+
         // Handle Magic Tradition item creation
         if (selectedMagicTraditionId) {
             const magicTraditionItem = game.items.get(selectedMagicTraditionId);
@@ -286,18 +294,18 @@ export class CharacterCreationDialog extends Dialog {
                 SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
             }
         }
-    
+
         // Apply updates to the actor's system
         await dialogData.actor.update(systemUpdates);
-    
+
         // Force recalculation of derived stats
         if (dialogData.actor.characterSetup) {
             dialogData.actor.characterSetup();
         }
-    
+
         SR3DLog.success("Character creation process completed successfully.", "CharacterCreationDialog");
     }
-    
+
     _updateAgeSlider(html, metahumanDropdown) {
         if (!metahumanDropdown) return;
 

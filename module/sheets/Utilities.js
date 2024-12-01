@@ -28,7 +28,9 @@ export function getRandomBellCurveWithMode(min, max, mode) {
     const int = Math.floor(value);
 
     return int;
-}export function lerpColor(color1, color2, t) {
+}
+
+export function lerpColor(color1, color2, t) {
     const c1 = parseInt(color1.slice(1), 16); // Convert hex to int
     const c2 = parseInt(color2.slice(1), 16);
 
@@ -41,4 +43,3 @@ export function getRandomBellCurveWithMode(min, max, mode) {
 
     return `rgb(${r}, ${g}, ${b})`;
 }
-

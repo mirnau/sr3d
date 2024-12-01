@@ -10,6 +10,8 @@
                         "alias": ""
                     }
                 ],
+                "metaHumanity": "Human",
+                "img": "systems/sr3d/textures/ai-generated/humans.webp",
                 "pronouns": "Them/They",
                 "age": 0,
                 "weight": 0,

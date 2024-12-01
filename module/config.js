@@ -2,7 +2,8 @@ export const sr3d = {};
 
 sr3d.sheet ={
     addSkill: "sr3d.sheet.addSkill",
-    newItem: "sr3d.sheet.newItem"
+    newItem: "sr3d.sheet.newItem",
+    dossier: "sr3d.sheet.dossier"
 }
 
 sr3d.characterCreation = {
@@ -97,12 +98,17 @@ sr3d.race = {
 };
 
 sr3d.character = {
+    
+    metahumanType: "sr3d.actor.character.metahumanType",
+    name: "sr3d.actor.character.name",
     character: "sr3d.actor.character.character",
     alias: "sr3d.actor.character.alias",
     pronouns: "sr3d.actor.character.pronouns",
     age: "sr3d.actor.character.age",
+    height: "sr3d.actor.character.height",
+    weight: "sr3d.actor.character.weight",
     looks: "sr3d.actor.character.looks",
-    quote: "sr3d.actor.character.Quote",
+    quote: "sr3d.actor.character.quote",
     ratsrace: "sr3d.actor.character.ratsrace",
     income: "sr3d.actor.character.income",
     post: "sr3d.actor.character.post",

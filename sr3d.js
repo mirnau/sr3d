@@ -10,6 +10,7 @@ import displayShoppingStateButton from "./module/injections/displayShoppingState
 import { setFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
+import { flags, hooks } from "./module/helpers/CommonConsts.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -31,21 +32,7 @@ async function registerTemplatesFromPathsAsync() {
 }
 
 function registerHooks() {
-
-    const hooks = {
-        init: "init",
-        preCreateItem: "preCreateItem",
-        renderSR3DActorSheet: "renderSR3DActorSheet",
-        renderSR3DItemSheet: "renderSR3DItemSheet",
-        createActor: "createActor",
-        updateActor: "updateActor"
-    }
-
-    const register = {
-        core: "core",
-        sr3d: "sr3d"
-    }
-
+    
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
@@ -54,33 +41,45 @@ function registerHooks() {
     Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
-
+    
+    const register = {
+        core: "core",
+        sr3d: "sr3d"
+    }
+    
     Hooks.once(hooks.init, function () {
         
-        console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
-
         Items.unregisterSheet(register.core, ItemSheet);
         Items.registerSheet(register.sr3d, SR3DItemSheet, { makeDefault: true });
-
+        
         Actors.unregisterSheet(register.core, ActorSheet);
         Actors.registerSheet(register.sr3d, SR3DActorSheet, { makeDefault: true });
-
+        
         CONFIG.Actor.documentClass = SR3DActor;
-
+        
         registerTemplatesFromPathsAsync();
-
+        
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
         });
-
+        
         Handlebars.registerHelper("ifEquals", (arg1, arg2, options) =>
             arg1 === arg2 ? options.fn(this) : options.inverse(this)
-        );
-
-        Handlebars.registerHelper("currency", function(value) {
-            return `¥${Number(value).toLocaleString()}`;
-        });
+    );
+    
+    Handlebars.registerHelper("currency", function(value) {
+        return `¥${Number(value).toLocaleString()}`;
     });
+    
+    Handlebars.registerHelper('multiply', (value, factor) => {
+        return (value * factor).toFixed(1); // Converts and limits to 2 decimal places
+    });
+
+    Handlebars.registerHelper("isDossierOpen", function(actor) {
+        return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);
+    });
+    
+});
 }
 
 registerHooks();
