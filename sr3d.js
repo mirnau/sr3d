@@ -23,14 +23,26 @@ async function registerTemplatesFromPathsAsync() {
 
     const paths = [];
 
-    for (const folder of folders) {
+    async function gatherFiles(folder) {
         const fileList = await FilePicker.browse("data", folder);
+
+        // Filter and collect .hbs files
         const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
         paths.push(...hbsFiles);
+
+        // Recursively process subfolders
+        for (const subFolder of fileList.dirs) {
+            await gatherFiles(subFolder);
+        }
+    }
+
+    for (const folder of folders) {
+        await gatherFiles(folder);
     }
 
     return loadTemplates(paths);
 }
+
 
 function registerHooks() {
 

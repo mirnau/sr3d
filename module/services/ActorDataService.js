@@ -33,7 +33,7 @@ export class ActorDataService {
                 id: skill.id,
                 name: skill.name,
                 subskills: {
-                    Speech: skill.system.languageSkill.speach.base,
+                    Speech: skill.system.languageSkill.speech.base,
                     Read: skill.system.languageSkill.read.base,
                     Write: skill.system.languageSkill.write.base,
                 },

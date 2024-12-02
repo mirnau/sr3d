@@ -1,28 +1,3 @@
-.specialization-value,
-.specialization-add,
-.specialization-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.specialization-container label {
-    margin-right: 10px;
-}
-
-.specialization-container a {
-    color: inherit;
-    text-decoration: none;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
-.sr3d.sheet.character .skills-actor-component {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
 .skills-section {
     background-color: @primary-color;
     padding: 1rem;
@@ -31,6 +6,7 @@
 
 
     .skill-specialization-card {
+        width: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -38,122 +14,144 @@
     }
 
     .skill-specialization-card,
-    .skill-card,
-    .knowledge-card,
-    .language-card {
+    .active-skill-container,
+    .knowledge-skill-container,
+    .language-card-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         box-sizing: border-box;
         min-height: 2rem;
         margin-bottom: 0.25rem;
         padding: 0.5rem;
-        display: flex;
+        background-color: @secondary-color;
+        justify-content: space-between; // Space between name and value
         gap: 0.5rem; // Space between rows or items
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-    }
 
-    .skill-specialization-card {
-        background-color: @tertiary-color;
-        display: flex; // Enables horizontal layout
-        justify-content: space-between; // Pushes items to edges
-        align-items: center; // Aligns items vertically
-    
-        .specialization-name {
-            font-weight: bold; // Makes the name stand out
-            flex: 1; // Ensures the name takes up available space
-            text-align: left; // Aligns text to the left
-        }
-    
-        .specialization-value {
-            font-size: 1.5rem;
-            width: 20%;
+        .core-skill {
             padding: 0.25rem;
-            font-weight: 900;
-            text-align: center; // Aligns the value to the right
-            background-color: @background-color;
-            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-        }
-    }
-
-    .skill-card {
-        background-color: @secondary-color;
-        flex-direction: column; // Align items vertically
-        .skill-details {
-            display: flex; // Horizontal alignment
-            justify-content: space-between; // Space between name and value
-            align-items: center; // Vertical alignment
-        }
-        .skill-name {
-            flex: 1; // Occupies available space
-            font-weight: bold;
-        }
-        .skill-value {
-            font-size: 1.5rem;
-            width: 20%;
-            padding: 0.25rem;
-            font-weight: 900;
-            text-align: center; // Aligns the value to the right
-            background-color: @highlight-color-secondary;
-            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-        }
-        .icons {
+            width: 100%;
             display: flex;
-            gap: 0.25rem; // Space between icons
-        }
-    }
+            flex-direction: row; // Ensure horizontal layout
+            align-items: center; // Align all children along the x-axis
+            justify-content: space-between; // Space between the skill name, icons, and value
+            position: relative;
 
-    .knowledge-card {
-        background-color: @purple-medium;
-        min-height: 2rem;
-        justify-content: space-between; // Horizontal alignment
-        align-items: center; // Vertical alignment
-        .icons {
-            display: flex;
-            gap: 0.25rem;
-        }
-    }
-
-    .language-card {
-        background-color: @background-color;
-        flex-direction: column; // Align items vertically
-
-        .language-skill-line,
-        .language-info {
-            display: flex; // Horizontal layout for name and icons
-            justify-content: space-between; // Push name to left, icons to right
-            align-items: center; // Vertical alignment
-        }
-
-        .language-skill-line {
-            padding: 0.125rem 0; // Spacing between rows
-            .language-skill-name,
-            .subskill-name {
-                flex: 1; // Occupies remaining space to push icons right
-                text-align: left;
+            h1,
+            h3,
+            h4 {
+                margin: 0rem;
             }
-            .subskill-value {
-                font-style: bold;
+
+            .checkmark {
+                position: absolute;
+                top: -0.25rem;
+                right: -0.25rem;
+            }
+
+            .knowledge-card,
+            .active-skill-card {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center; // Align icons and values in the same row
+                gap: 0.5rem; // Add space between skill name and icons
+                justify-content: center;
+
+                .skill-name {
+                    flex: 1; // Allow this to take up remaining space
+                }
+
+                .icons {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 0.25rem; // Space between icons
+                }
+
+                .skill-value {
+                    width: 3rem; // Adjust to fit the value display appropriately
+                    text-align: center;
+                    background-color: @primary-color;
+                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
+                }
             }
         }
 
-        .language-info {
-            background-color: @accent-color;
-            width: 66%;
-            min-height: 1.5rem;
+
+
+        .active-specialization-card-color-override {
+            background-color: @tertiary-color;
+            padding: 0.25rem;
+            flex-direction: row; // Children inside also aligned horizontally
         }
 
-        .icons {
-            display: flex;
-            gap: 0.5rem; // Space between icons
-        }
 
-        a {
-            color: @primary-color;
-            cursor: pointer;
-            text-decoration: none; // Optional: No underline for links
-        }
-    }
+        .specialisation-container {
+            width: 100%;
+            padding: 0px;
 
-    a {
-        color: @primary-color;
-        margin-left: 0.5rem; // Adds space between icons
+            .specializations {
+
+                .specialization-name {
+                    flex: 1; // Occupies available space
+                }
+
+                .specialization-value {
+
+                    h1,
+                    h3,
+                    h4 {
+                        margin: 0rem;
+                    }
+
+                    width: 3rem;
+                    text-align: center;
+                    background-color: @primary-color;
+                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                }
+            }
+
+
+
+            .language-card {
+                background-color: @background-color;
+                flex-direction: column; // Align items vertically
+
+                .language-skill-line,
+                .language-info {
+                    display: flex; // Horizontal layout for name and icons
+                    justify-content: space-between; // Push name to left, icons to right
+                    align-items: center; // Vertical alignment
+                }
+
+                .language-info {
+                    background-color: @accent-color;
+                    width: 66%;
+                    min-height: 1.5rem;
+                }
+
+                .language-skill-line {
+                    padding: 0.125rem 0; // Spacing between rows
+
+                    .language-skill-name,
+                    .subskill-name {
+                        flex: 1; // Occupies remaining space to push icons right
+                    }
+                }
+
+                .icons {
+                    display: flex;
+                    gap: 0.5rem; // Space between icons
+                }
+
+                a {
+                    color: @primary-color;
+                    cursor: pointer;
+                    text-decoration: none; // Optional: No underline for links
+                }
+            }
+        }
     }
 }

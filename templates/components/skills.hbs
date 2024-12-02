@@ -1,4 +1,4 @@
-<section class="skills-actor-component">
+<section>
   <h1>
     {{localize "sr3d.item.skill.skills"}}
   </h1>
@@ -11,57 +11,8 @@
         <i class="fas fa-square-plus"></i>
       </a>
     </h2>
-    {{#each skills.active}}
-    <div class="skill-category">
-      <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
-      {{#each this}}
-      <div class="skill-card">
-        <div class="skill-details">
-          <div class="main-skill-container">
-            <div class="skill-name">
-              {{this.name}}
-            </div>
-            <div class="icons">
-              {{#if (isShoppingStateActive actor)}}
-              <a class="delete-skill" data-id="{{this._id}}">
-                <i class="fa-solid fa-trash-can"></i>
-              </a>
-              <a class="edit-skill" data-id="{{this._id}}">
-                <i class="fas fa-pen-to-square pulsing-green-cart"></i>
-              </a>
-              {{/if}}
-              <a>
-                <i class="fa-solid fa-circle-check"></i>
-              </a>
-            </div>
-            <div class="skill-value">
-              {{this.system.activeSkill.value}}
-            </div>
-          </div>
-          <div class="specialisation-container">
-            <!-- Display Specializations -->
-            {{#if this.system.skill.activeSkill.specializations}}
-            <div class="specializations">
-              <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
-              {{#each this.system.skill.activeSkill.specializations}}
-              <div class="skill-specialization-card">
-                <div class="specialization-name">
-                  {{this.name}}:
-                </div>
-                <div class="specialization-value">
-                  {{this.value}}
-                </div>
-              </div>
-              {{/each}}
-            </div>
-            {{/if}}
-          </div>
-        </div>
-      </div>
-      {{/each}}
-    </div>
-    {{/each}}
-
+           
+      {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
 
     <!-- Knowledge Skills -->
     <h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
@@ -70,31 +21,8 @@
         <i class="fas fa-square-plus"></i>
       </a>
     </h2>
-    {{#each skills.knowledge}}
-    <div class="skill-category">
-      <h3>{{@key}}</h3> <!-- Optional: Category Header -->
-      {{#each this}}
-      <div class="knowledge-card">
-        {{this.name}} {{this.system.knowledgeSkill.value}} {{this.system.knowledgeSkill.linkedAttribute}}
-        <div class="icons">
-          <a class="delete-skill" data-id="{{this._id}}">
-            <i class="fa-solid fa-trash-can"></i>
-          </a>
-          <a>
-            <i class="fa-solid fa-cart-plus"></i>
-          </a>
-          <a class="edit-skill" data-id="{{this._id}}">
-            <i class="fas fa-pen-to-square"></i>
-          </a>
-          <a>
-            <i class="fa-solid fa-circle-check"></i>
-          </a>
-        </div>
-      </div>
-      {{/each}}
-    </div>
-    {{/each}}
-
+    
+    {{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
 
     <!-- Language Skills -->
     <h2>{{localize "sr3d.item.skill.languageSkills"}}
@@ -104,34 +32,7 @@
       </a>
     </h2>
 
-    {{#each skills.language}}
-    <div class="language-card">
-      <!-- Main Skill Name -->
-      <div class="language-skill-line">
-        <div class="language-skill-name">
-          <h3>{{name}}</h3>
-        </div>
-        <div class="icons">
-          <a class="delete-skill" data-id="{{id}}">
-            <i class="fa-solid fa-trash-can"></i></a>
-          <a class="edit-skill" data-id="{{id}}"><i class="fas fa-pen-to-square"></i></a>
-        </div>
-      </div>
+     {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
 
-      <!-- Subskills -->
-      {{#each subskills}}
-      <div class="language-skill-line">
-        <div class="language-info">
-          <div class="subskill-name">{{@key}}</div>
-          <div class="subskill-value">{{this}}</div>
-        </div>
-        <div class="icons">
-          <a><i class="fa-solid fa-cart-plus"></i></a>
-          <a><i class="fa-solid fa-circle-check"></i></a>
-        </div>
-      </div>
-      {{/each}}
-    </div>
-    {{/each}}
   </div>
 </section>

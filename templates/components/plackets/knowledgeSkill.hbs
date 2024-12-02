@@ -1,0 +1,65 @@
+<!-- The knowledge skill card in the skills secton of the character sheet-->
+
+{{#each this}}
+<div class="skill-category">
+  <h3>{{@key}}</h3> <!-- Optional: Category Header -->
+  {{#each this}}
+  <div class="knowledge-skill-container">
+    <div class="core-skill">
+      <div class="active-skill-card">
+
+        <div class="skill-name">
+          <h3>
+            {{this.name}}
+          </h3>
+        </div>
+
+        {{#if (isShoppingStateActive actor)}}
+        <div class="icons">
+          <h4>
+            <a class="edit-skill" data-id="{{this._id}}">
+              <i class="fas fa-pen-to-square pulsing-green-cart"></i>
+            </a>
+          </h4>
+        </div>
+
+        {{/if}}
+
+
+        <div class="skill-value">
+          <h1>
+            {{this.system.knowledgeSkill.value}}
+          </h1>
+        </div>
+      </div>
+      <div class="checkmark">
+        <a>
+          <i class="fa-solid fa-circle-check"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Display Specializations -->
+    {{#if this.system.skill.knowledgeSkill.specializations}}
+    <div class="specialisation-container">
+      <h4>{{localize "sr3d.item.skill.specializations"}}</h4>
+      <div class="specializations">
+        {{#each this.system.skill.knowledgeSkill.specializations}}
+        <div class="skill-specialization-card active-specialization-card-color-override">
+          <div class="specialization-name">
+            {{this.name}}
+          </div>
+          <div class="specialization-value">
+            <h1>
+              {{this.value}}
+            </h1>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+  {{/each}}
+</div>
+{{/each}}
