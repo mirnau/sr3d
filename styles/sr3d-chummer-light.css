@@ -47,6 +47,9 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
+.sr3d .sheet-component .proportional h4 {
+  color: #48a564;
+}
 .sr3d .sheet-component .inner-background-container {
   box-sizing: border-box;
   position: relative;
@@ -57,7 +60,7 @@
 .sr3d .sheet-component .inner-background {
   box-sizing: border-box;
   padding: 1rem;
-  background: #2F3947;
+  background: #283747;
   width: 100%;
   height: 100%;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -66,7 +69,7 @@
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
-  background-color: #82aaff;
+  background-color: #ff0095;
   width: calc(100% - 1.5rem);
   height: calc(100% - 1.5rem);
   z-index: -1;
@@ -88,34 +91,49 @@
   font-weight: normal;
   font-style: normal;
 }
-.sr3d .sr3d.sheet.character {
-  font-family: 'VT323', monospace;
-  font-size: 16px;
-  line-height: 1.2;
-  color: #c8d3f5;
-  /* Set font color */
-}
-.sr3d .sr3d.sheet.character h1,
-.sr3d .sr3d.sheet.character h2,
-.sr3d .sr3d.sheet.character h3,
-.sr3d .sr3d.sheet.character h4,
-.sr3d .sr3d.sheet.character h5,
-.sr3d .sr3d.sheet.character h6 {
+.sr3d h1,
+.sr3d h2,
+.sr3d h3,
+.sr3d h4,
+.sr3d h5,
+.sr3d h6 {
   text-transform: uppercase;
   font-family: 'VT323', monospace;
   margin: 0.5em 0;
   line-height: 1.2;
-  color: #ff285e;
   border: none;
 }
-.sr3d .sr3d.sheet.character p,
-.sr3d .sr3d.sheet.character span,
-.sr3d .sr3d.sheet.character a,
-.sr3d .sr3d.sheet.character div,
-.sr3d .sr3d.sheet.character button,
-.sr3d .sr3d.sheet.character input,
-.sr3d .sr3d.sheet.character textarea {
+.sr3d h1 {
+  color: #1df0ff;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+}
+.sr3d h2 {
+  color: #d13980;
+}
+.sr3d h3 {
+  color: #48a564;
+}
+.sr3d h4 {
+  color: #48a564;
+}
+.sr3d h5 {
+  color: #48a564;
+}
+.sr3d h6 {
+  color: #48a564;
+}
+.sr3d p,
+.sr3d span,
+.sr3d a,
+.sr3d div,
+.sr3d button,
+.sr3d input,
+.sr3d textarea {
   font-family: 'VT323', monospace;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #c8d3f5;
+  /* Set font color */
 }
 .sr3d .attribute-masonry-grid {
   display: grid;
@@ -132,7 +150,7 @@
   transition: transform 0.3s ease-in-out;
 }
 .sr3d .attribute-masonry-grid .attribute-card .attribute-name {
-  background-color: #55a6b4;
+  background-color: #145b68;
   margin-bottom: 0.25rem;
 }
 .sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
@@ -154,7 +172,7 @@
   width: 1.5rem;
   height: 1.5rem;
   font-size: 1.2rem;
-  color: #55a6b4;
+  color: #145b68;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -211,6 +229,12 @@
   text-transform: uppercase;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
+.sr3d .skills-section .skill-specialization-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
 .sr3d .skills-section .skill-specialization-card,
 .sr3d .skills-section .skill-card,
 .sr3d .skills-section .knowledge-card,
@@ -224,7 +248,7 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .skills-section .skill-specialization-card {
-  background-color: #82aaff;
+  background-color: #147b8d;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -240,11 +264,11 @@
   padding: 0.25rem;
   font-weight: 900;
   text-align: center;
-  background-color: aqua;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .skills-section .skill-card {
-  background-color: #f4a370;
+  background-color: #145b68;
   flex-direction: column;
 }
 .sr3d .skills-section .skill-card .skill-details {
@@ -262,7 +286,7 @@
   padding: 0.25rem;
   font-weight: 900;
   text-align: center;
-  background-color: aqua;
+  background-color: #d13980;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .skills-section .skill-card .icons {
@@ -280,7 +304,7 @@
   gap: 0.25rem;
 }
 .sr3d .skills-section .language-card {
-  background-color: #2F3947;
+  background-color: #283747;
   flex-direction: column;
 }
 .sr3d .skills-section .language-card .language-skill-line,
@@ -301,7 +325,7 @@
   font-style: bold;
 }
 .sr3d .skills-section .language-card .language-info {
-  background-color: #82aaff;
+  background-color: #ff0095;
   width: 66%;
   min-height: 1.5rem;
 }
@@ -383,7 +407,7 @@
     background-color: magenta;
   }
   50% {
-    background-color: blueviolet;
+    background-color: blueViolet;
   }
   100% {
     background-color: magenta;
@@ -396,7 +420,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: #ff285e;
+  background-color: #d13980;
   box-sizing: border-box;
   padding: 0.5rem;
   z-index: 2;
@@ -527,7 +551,7 @@
 .sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background {
   box-sizing: border-box;
   padding: 1rem;
-  background: #2F3947;
+  background: #283747;
   width: 100%;
   height: 100%;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -536,7 +560,7 @@
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
-  background-color: #ff285e;
+  background-color: #1df0ff;
   width: calc(100% - 1.5rem);
   height: calc(100% - 1.5rem);
   z-index: -1;

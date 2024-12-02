@@ -29,6 +29,14 @@
     text-transform: uppercase;
     .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
+
+    .skill-specialization-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
     .skill-specialization-card,
     .skill-card,
     .knowledge-card,
@@ -43,7 +51,7 @@
     }
 
     .skill-specialization-card {
-        background-color: @accent-color;
+        background-color: @tertiary-color;
         display: flex; // Enables horizontal layout
         justify-content: space-between; // Pushes items to edges
         align-items: center; // Aligns items vertically
@@ -60,13 +68,13 @@
             padding: 0.25rem;
             font-weight: 900;
             text-align: center; // Aligns the value to the right
-            background-color: aqua;
+            background-color: @background-color;
             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
         }
     }
 
     .skill-card {
-        background-color: @accent-apricot;
+        background-color: @secondary-color;
         flex-direction: column; // Align items vertically
         .skill-details {
             display: flex; // Horizontal alignment
@@ -83,7 +91,7 @@
             padding: 0.25rem;
             font-weight: 900;
             text-align: center; // Aligns the value to the right
-            background-color: aqua;
+            background-color: @highlight-color-secondary;
             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
         }
         .icons {

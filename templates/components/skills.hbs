@@ -17,42 +17,45 @@
       {{#each this}}
       <div class="skill-card">
         <div class="skill-details">
-          <div class="skill-name">
-            {{this.name}}
-          </div>
-          <div class="icons">
-            {{#if (isShoppingStateActive actor)}}
-            <a class="delete-skill" data-id="{{this._id}}">
-              <i class="fa-solid fa-trash-can"></i>
-            </a>
-            <a class="edit-skill" data-id="{{this._id}}">
-              <i class="fas fa-pen-to-square pulsing-green-cart"></i>
-            </a>
-            {{/if}}
-            <a>
-              <i class="fa-solid fa-circle-check"></i>
-            </a>
-          </div>
-          <div class="skill-value">
-            {{this.system.activeSkill.value}}
-          </div>
-
-          <!-- Display Specializations -->
-          {{#if this.system.skill.activeSkill.specializations}}
-          <div class="specializations">
-            <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
-            {{#each this.system.skill.activeSkill.specializations}}
-            <div class="skill-specialization-card">
-              <div class="specialization-name">
-                {{this.name}}:
-              </div>
-              <div class="specialization-value">
-                {{this.value}}
-              </div>
+          <div class="main-skill-container">
+            <div class="skill-name">
+              {{this.name}}
             </div>
-            {{/each}}
+            <div class="icons">
+              {{#if (isShoppingStateActive actor)}}
+              <a class="delete-skill" data-id="{{this._id}}">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+              <a class="edit-skill" data-id="{{this._id}}">
+                <i class="fas fa-pen-to-square pulsing-green-cart"></i>
+              </a>
+              {{/if}}
+              <a>
+                <i class="fa-solid fa-circle-check"></i>
+              </a>
+            </div>
+            <div class="skill-value">
+              {{this.system.activeSkill.value}}
+            </div>
           </div>
-          {{/if}}
+          <div class="specialisation-container">
+            <!-- Display Specializations -->
+            {{#if this.system.skill.activeSkill.specializations}}
+            <div class="specializations">
+              <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
+              {{#each this.system.skill.activeSkill.specializations}}
+              <div class="skill-specialization-card">
+                <div class="specialization-name">
+                  {{this.name}}:
+                </div>
+                <div class="specialization-value">
+                  {{this.value}}
+                </div>
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+          </div>
         </div>
       </div>
       {{/each}}

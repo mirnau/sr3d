@@ -1,33 +1,46 @@
-    @primary-color:         #212b35; // Dark background
-    @background-color:      #2F3947;
+@primary-color:                      #212b35; // Dark background
+@secondary-color:                    #145b68; // Soft green
+@tertiary-color:                     #8d6314; // Soft green
+@background-color:                   #283747;
 
 
-    @accent-color:          #82aaff; // Neon blue
-    @accent-apricot:        #f4a370;
-    @accent-dark-apricot:   #f59153;
-    @accent-purple-dark:    #3d265a;
-    @secondary-color:       #55a6b4; // Soft green
-    @highlight-color:       #ff285e; // Pink for highlights
-    @text-color:            #c8d3f5;
+    @accent-color:                   #ff0095; // Neon blue
+    @accent-apricot:                 #f4a370;
+    @accent-dark-apricot:            #f59153;
+    @highlight-color-primary:        #1df0ff; // Pink for highlights
+    @highlight-color-secondary:      #d13980; // Pink for highlights
+    @highlight-color-tertiary:       #48a564; // Pink for highlights
+    @text-color:                     #c8d3f5;
 
     //Main Window Background
     @transparent: transparent;
 
+    //Text
+    @h1-color: @highlight-color-primary;
+    @h2-color: @highlight-color-secondary;
+    @h3-color: @highlight-color-tertiary;
+    @h4-color: @highlight-color-tertiary;
+    @h5-color: @highlight-color-tertiary;
+    @h6-color: @highlight-color-tertiary;
+
+
     //Attribute Point Pulse Colors
-    @attribute-pulse-primary: magenta;
-    @attribute-pulse-secondary: blueViolet;
+    @attribute-pulse-primary:       magenta;
+    @attribute-pulse-secondary:     blueViolet;
 
     //Shopping-Cart Pulse Colors
-    @shopping-cart-primary: #00FC00C0;
-    @shopping-cart-secondary: cyan;
-    @shopping-cart-bloom-primary:#45d06b;
-    @shopping-cart-bloom-secondary:#e6ff8d;
-    
+    @shopping-cart-primary:         #00FC00C0;
+    @shopping-cart-secondary:       cyan;
 
-
-  
+    //Fake Bloom
+    @shopping-cart-bloom-primary:   #45d06b;
+    @shopping-cart-bloom-secondary: #e6ff8d;
+    @h1-color-bloom-primary:        0 0 10px @shopping-cart-bloom-primary, 0 0 20px @shopping-cart-bloom-secondary;
+    @h1-color-bloom-secondary:      0 0 10px @shopping-cart-bloom-primary, 0 0 20px @shopping-cart-bloom-secondary;
     
     @component-unit: 22rem;
+    @base-font-size: 14px; //1rem
+    @line-height: 1.2;
     @masonry-column-width: @component-unit;
     
     
