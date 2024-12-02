@@ -1,3 +1,9 @@
+{{#if (isShoppingStateActive actor)}}
 <a class="shopping-cart pulsing-green-cart" title="Toggle Shopping">
     <i class="fas fa-shopping-cart"></i> Shop Upgrades
 </a>
+{{else}}
+<a class="shopping-cart" title="Toggle Shopping">
+    <i class="fas fa-shopping-cart"></i> Shop Upgrades
+</a>
+{{/if}}

@@ -1,3 +1,5 @@
+import SR3DLog from "../SR3DLog.js";
+
 export class ActorDataService {
     static prepareSkills(contents) {
         return {
@@ -56,28 +58,40 @@ export class ActorDataService {
     // NOTE: Character Creation starts here
 
     static getAllMetaHumans(metahumans) {
+        console.log("Input metahumans data:", metahumans); // Log the input data
         return [
-            { priority: "E", name: "Human", default: true },
-            ...metahumans.map(metahuman => ({
-                priority: metahuman.system.priority || "N/A",
-                name: metahuman.name || "Unknown",
-                default: false,
-            }))
+            { priority: "E", name: "Human", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
+            ...metahumans.map(metahuman => {
+                const foundryitemid = metahuman.id; // Extract the ID
+     
+                return {
+                    foundryitemid, // Foundry's built-in object ID
+                    priority: metahuman.priority, // Extract priority from system data
+                    name: metahuman.name, // Use the object's name
+                };
+            })
         ];
     }
 
     static getAllMagicTraditions(magicTraditions) {
+        console.log("Input magicTraditions data:", magicTraditions); // Log the input data
         return [
-            { priority: "C", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            { priority: "D", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            { priority: "E", name: "Unawakened", default: true }, // Hardcoded Unawakened
-            ...magicTraditions.map(tradition => ({
-                priority: tradition.system.priority,
-                name: tradition.name,
-                default: false,
-            }))
+            { priority: "E", name: "Unawakened", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
+            { priority: "D", name: "Unawakened", foundryitemid: "D-foundryItemId" },
+            { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
+            ...magicTraditions.map(tradition => {
+                const foundryitemid = tradition.id; // Extract the ID
+    
+                return {
+                    foundryitemid, // Foundry's built-in object ID
+                    priority: tradition.priority, // Extract priority from system data
+                    name: tradition.name, // Use the object's name
+                };
+            })
         ];
     }
+    
+
 
     static getPriorities() {
         return {

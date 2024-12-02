@@ -3,35 +3,13 @@
     <div class="sheet-masonry-grid">
 
         <div class="sheet-component">
-            <div class="proportional">
-                <div class="inner-background-container">
-                    <!-- Fake shadow (behind inner background) -->
-                    <div class="fake-shadow"></div>
-                    <!-- Inner content -->
-                    <div class="inner-background">
-                        <img class="portrait" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-                        <div class="red-box"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sheet-component">
             <div class="inner-background-container">
                 <!-- Fake shadow (behind inner background) -->
                 <div class="fake-shadow"></div>
                 <!-- Inner content -->
                 <div class="inner-background">
-                    <h1>{{actor.name}}</h1>
-                    <select name="HardcodedSelector">
-                        {{#each config.races as |race|}}
-                        <option value="{{race}}">{{localize race}}</option>
-                        {{/each}}
-                    </select>
-                    <p>Pronouns: {{system.pronouns}}</p>
-                    <p>Age: {{system.age}}</p>
-                    <p>Looks: {{system.looks}}</p>
-                    <p>Quote: "{{system.quote}}"</p>
+                    <h1>{{localize "sr3d.sheet.dossier"}}</h1>
+                    {{> "systems/sr3d/templates/components/dossier.hbs"}}
                 </div>
             </div>
         </div>
@@ -39,9 +17,20 @@
         <!-- Attributes Section -->
         <div class="sheet-component">
             <div class="inner-background-container">
+                <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <h1>{{localize "sr3d.actor.attributes.attributes"}}</h1>
                     {{> "systems/sr3d/templates/components/attributes.hbs"}}
+                </div>
+            </div>
+        </div>
+
+        <!-- SKill Section -->
+        <div class="sheet-component greedy health">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    {{> "systems/sr3d/templates/components/skills.hbs"}}
                 </div>
             </div>
         </div>
@@ -74,16 +63,6 @@
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <p>Health Goes here</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Health Section -->
-        <div class="sheet-component greedy health">
-            <div class="inner-background-container">
-                <div class="fake-shadow"></div>
-                <div class="inner-background">
-                    {{> "systems/sr3d/templates/components/skills.hbs"}}
                 </div>
             </div>
         </div>

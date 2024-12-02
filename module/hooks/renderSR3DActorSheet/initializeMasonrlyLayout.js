@@ -23,6 +23,12 @@ function initializeMasonry(gridElement) {
     const resizeObserver = new ResizeObserver(() => masonryInstance.layout());
     resizeObserver.observe(gridElement);
 
+    gridElement.querySelectorAll('details').forEach((details) => {
+        details.addEventListener('toggle', () => {
+            masonryInstance.layout();
+        });
+    });
+
     masonryInstance.layout();
 }
 

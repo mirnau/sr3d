@@ -1,0 +1,64 @@
+<div class="dossier">
+
+    {{#if (isDossierOpen actor)}}
+    <div class="version-one">
+        <img src="{{system.img}}" />
+    </div>
+    {{else}}
+    <div class="version-two">
+        <img src="{{actor.img}}" data-edit="img" title="{{item.name}}"/>
+    </div>
+    {{/if}}
+
+    <details class="component-details">
+        <summary>Toggle View</summary>
+        <div>
+            <h3>
+                {{localize "sr3d.actor.character.metahumanType"}}:
+            </h3>
+            {{system.metaHumanity}}
+        </div>
+
+        <div>
+            <h3>
+                {{localize "sr3d.actor.character.age"}}: {{system.age}}
+            </h3>
+        </div>
+
+        <div>
+            <h3>
+                {{localize "sr3d.actor.character.height"}}: {{system.height}} cm ({{multiply
+                system.height 0.0328084}}
+                feet)
+            </h3>
+        </div>
+
+        <div>
+            <h3>
+                {{localize "sr3d.actor.character.weight"}}: {{system.weight}} kg ({{multiply
+                system.weight 0.157473}}
+                stones)
+            </h3>
+        </div>
+    </details>
+
+    <div>
+        <label for="actor-name">{{localize "sr3d.actor.character.name"}}</label>
+        <input type="text" id="actor-name" name="name" value="{{actor.name}}" />
+    </div>
+
+    <div>
+        <label for="pronouns">{{localize "sr3d.actor.character.pronouns"}}</label>
+        <input type="text" id="pronouns" name="system.pronouns" value="{{system.pronouns}}" />
+    </div>
+
+    <div>
+        <label for="looks">{{localize "sr3d.actor.character.looks"}}</label>
+        <input type="text" id="looks" name="system.looks" value="{{system.looks}}" />
+    </div>
+
+    <div>
+        <label for="quote">{{localize "sr3d.actor.character.quote"}}</label>
+        <input type="text" id="quote" name="system.quote" value="{{system.quote}}" />
+    </div>
+</div>

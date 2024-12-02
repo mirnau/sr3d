@@ -14,11 +14,16 @@
 
         "sheet": {
             "addSkill": "Add a skill",
-            "newItem": "New item"
+            "newItem": "New item",
+            "dossier": "Dossier",
+            "deleteSkill": "Delete Skill",
+            "purchaseSkills": "Purchase Skill Point",
+            "deleteSpecialisation": "Delete Specialisation"
         },
 
         "characterCreation": {
-            "instruction": "Humans are weighted at 64% and magic users at 4%."
+            "instruction": "Humans are weighted at 64% and magic users at 4%.",
+            "selectAnOption": "Select"
         },
         "actor": {
             "race": {
@@ -36,12 +41,16 @@
                 "description": "Description"
             },
             "character": {
+                "metahumanType": "Type of Metahumanity",
+                "name": "Name",
                 "character": "Character",
                 "alias": "Alias",
                 "pronouns": "Pronouns",
                 "age": "Age",
+                "height": "Height",
+                "weight": "Weight",
                 "looks": "Looks",
-                "Quote": "Quote",
+                "quote": "Quote",
                 "ratsrace": "Rat's Race",
                 "income": "Income",
                 "post": "Post",
@@ -109,9 +118,12 @@
             },
             "metahuman": {
                 "name": "Metahuman Type",
-                "lifespan": "Lifeespan",
+                "lifespan": "Typical Shadowrunner Age-Range for Metahumans of this Kind",
+                "physical": "Typical Shadowrunner Stat-Ranges for Metahumans of this Kind",
                 "average": "Average",
+                "age": "Age",
                 "max": "Max",
+                "min": "Min",
                 "height": "Height",
                 "weight": "Weight",
                 "modifiers": "Modifiers",
@@ -192,7 +204,6 @@
                 "knowledgePoints":"Knowledge Skill Points",
                 "languagePoints":"Language Skill Points",
                 "skills": "Skills",
-                "purchaseSkills": "Purchase Skillpoint",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",
                 "activeSkill": "Active Skill",

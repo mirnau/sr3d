@@ -1,69 +1,108 @@
-<!-- Metahuman Selection -->
-<div class="form-group">
-  <label for="metahuman-select">Select Metahuman:</label>
-  <select class="priority-select" name="metahuman" id="metahuman-select">
-    {{#each metahumans}}
-    <option value="{{priority}}" {{#if default}}selected{{/if}}>
-      {{name}} (Priority: {{priority}})
-    </option>
-    {{/each}}
-  </select>
+<div class="character-creation-dialog">
+
+
+<div class="slider-container">
+  <label for="slider-age">Age:</label>
+  <input class="life-stage-slider" type="range" id="slider-age" name="slider-age" min="0" max="100" step="1"
+    list="tickmarks" />
+  
+  <span id="age-value">0</span> <!-- Displays the current age -->
+  
+  <datalist id="tickmarks">
+    <option value="12" label="12%"></option>
+    <option value="20" label="20%"></option>
+    <option value="40" label="40%"></option>
+    <option value="66" label="66%"></option>
+    <option value="75" label="75%"></option>
+    <option value="90" label="90%"></option>
+  </datalist>
+
+  <div id="life-stage">Stage: Unknown</div> <!-- Displays the life stage -->
 </div>
 
-<!-- Magic Tradition Selection -->
-<div class="form-group">
-  <label for="magicTradition-select">Select Magic Tradition:</label>
-  <select class="priority-select" name="system.magicTradition.priority" id="magicTradition-select">
-    {{#each magicTraditions}}
-    <option value="{{priority}}" {{#if default}}selected{{/if}}>
-      {{name}} (Priority: {{priority}})
-    </option>
-    {{/each}}
-  </select>
-</div>
+    <div class="slider-container">
+      <label for="slider-height">
+        Height (cm): <span id="height-value">170</span>
+      </label>
+      <input type="range" id="slider-height" name="height" />
+    </div>
 
-<!-- Priority Tables -->
-<div class="priority-selection">
-  <label for="attribute-priority">Attribute Priority:</label>
-  <select class="priority-select" id="attribute-priority" name="attributePriority">
-    {{#each attributePriorities}}
-    <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
-    {{/each}}
-  </select>
-</div>
-
-<div class="priority-selection">
-  <label for="skills-priority">Skills Priority:</label>
-  <select class="priority-select" id="skills-priority" name="skillsPriority">
-    {{#each skillsPriorities}}
-    <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
-    {{/each}}
-  </select>
-</div>
-
-<div class="priority-selection">
-  <label for="resources-priority">Resources Priority:</label>
-  <select class="priority-select" id="resources-priority" name="resourcesPriority">
-    {{#each resourcesPriorities}}
-    <option value="{{@key}}">{{@key}} ({{currency this}})</option>
-    {{/each}}
-  </select>
-</div>
-<fieldset>
-  <legend>Info</legend>
-  <div class="expanation">
-    {{localize "sr3d.characterCreation.instruction"}}
+    <div class="slider-container">
+      <label for="slider-weight">
+        Weight (kg): <span id="weight-value">70</span>
+      </label>
+      <input type="range" id="slider-weight" name="weight" />
+    </div>
   </div>
-</fieldset>
-<div class="priority-utilities">
-  <div class="priority-random">
-    <a class="priority-randomizer" title="{{localize 'Randomize'}}">
-      <i class="fas fa-shuffle"></i> Randomize
-    </a>
+
+
+  <!-- Metahuman Selection -->
+  <div class="form-group">
+    <label for="metahuman-select">Select Metahuman:</label>
+    <select class="item-select" name="metahuman" id="metahuman-select">
+      {{#each metahumans}}
+      <option value="{{foundryitemid}}" {{#if default}}selected{{/if}}>
+        {{name}} (Priority: {{priority}})
+      </option>
+      {{/each}}
+    </select>
   </div>
-  <div class="priority-reset">
-    <a class="priority-reset" title="{{localize 'Reset'}}">
-      <i class="fas fa-rotate-left"></i> Reset
-    </a>
+
+  <!-- Magic Tradition Selection -->
+  <div class="form-group">
+    <label for="magicTradition-select">Select Magic Tradition:</label>
+    <select class="item-select" name="magic" id="magicTradition-select">
+      {{#each magicTraditions}}
+      <option value="{{foundryitemid}}" {{#if default}}selected{{/if}}>
+        {{name}} (Priority: {{priority}})
+      </option>
+      {{/each}}
+    </select>
+  </div>
+
+  <!-- Priority Tables -->
+  <div class="priority-selection">
+    <label for="attribute-priority">Attribute Priority:</label>
+    <select class="priority-select" id="attribute-priority" name="attributePriority">
+      {{#each attributePriorities}}
+      <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="priority-selection">
+    <label for="skills-priority">Skills Priority:</label>
+    <select class="priority-select" id="skills-priority" name="skillsPriority">
+      {{#each skillsPriorities}}
+      <option value="{{@key}}">{{@key}} ({{this}} Points)</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="priority-selection">
+    <label for="resources-priority">Resources Priority:</label>
+    <select class="priority-select" id="resources-priority" name="resourcesPriority">
+      {{#each resourcesPriorities}}
+      <option value="{{@key}}">{{@key}} ({{currency this}})</option>
+      {{/each}}
+    </select>
+  </div>
+  <fieldset>
+    <legend>Info</legend>
+    <div class="expanation">
+      {{localize "sr3d.characterCreation.instruction"}}
+    </div>
+  </fieldset>
+  <div class="priority-utilities">
+    <div class="priority-random">
+      <a class="priority-randomizer" title="{{localize 'Randomize'}}">
+        <i class="fas fa-shuffle"></i> Randomize
+      </a>
+    </div>
+    <div class="priority-reset">
+      <a class="priority-reset" title="{{localize 'Reset'}}">
+        <i class="fas fa-rotate-left"></i> Reset
+      </a>
+    </div>
   </div>
 </div>

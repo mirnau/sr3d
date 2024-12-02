@@ -1,29 +1,37 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-        <h1>
-            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
-        </h1>
-    </header>
 
-    <div class="sheet-content">
+    <div class="item-sheet-component">
+        <div class="inner-background-container">
+            <div class="fake-shadow"></div>
+            <div class="inner-background">
+                <div>
+                    <header class="sheet-header header-orientation">
+                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+                        <h1>
+                            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
+                        </h1>
+                    </header>
+                </div>
 
-        <!-- Active Skill Section -->
-        {{#if (eq system.skillType 'activeSkill')}}
-        {{> "systems/sr3d/templates/components/active-skill.hbs"}}
-        {{/if}}
+                <!-- Active Skill Section -->
+                {{#if (eq system.skillType 'activeSkill')}}
+                {{> "systems/sr3d/templates/components/active-skill.hbs"}}
+                {{/if}}
 
-        <!-- Knowledge Skill Section -->
-        {{#if (eq system.skillType 'knowledgeSkill')}}
-        {{> "systems/sr3d/templates/components/knowledge-skill.hbs"}}
-        {{/if}}
+                <!-- Knowledge Skill Section -->
+                {{#if (eq system.skillType 'knowledgeSkill')}}
+                {{> "systems/sr3d/templates/components/knowledge-skill.hbs"}}
+                {{/if}}
 
-        <!-- Language Skill Section -->
-        {{#if (eq system.skillType 'languageSkill')}}
-        {{> "systems/sr3d/templates/components/language-skill.hbs"}}
-        {{/if}}
-    </div>
-    <div class="editor-field">
-        {{editor system.description owner=owner button=true editabe=editable}}
+                <!-- Language Skill Section -->
+                {{#if (eq system.skillType 'languageSkill')}}
+                {{> "systems/sr3d/templates/components/language-skill.hbs"}}
+                {{/if}}
+
+                <div class="editor">
+                    {{editor system.description owner=owner button=true editabe=editable}}
+                </div>
+            </div>
+        </div>
     </div>
 </form>

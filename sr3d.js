@@ -1,69 +1,66 @@
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
+import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
-import SR3DLog from "./module/SR3DLog.js";
 import { setFlags } from "./module/hooks/createActor/setFlags.js";
+import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
+import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
+import { flags, hooks } from "./module/helpers/CommonConsts.js";
+import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
 
-// Utility function to register templates
-async function AsyncRegisterComponentTemplates() {
+// NOTE: Any .hbs file from these folders will be registered
+async function registerTemplatesFromPathsAsync() {
+    const folders = [
+        "systems/sr3d/templates/components/",
+        "systems/sr3d/templates/injections/",
+        "systems/sr3d/templates/dialogs/"
+    ];
 
-    const basePath = "systems/sr3d/templates/components/";
-    const paths = [
-        "attributes.hbs",
-        "skills.hbs",
-        "dice-pools.hbs",
-        "movement.hbs",
-        "weapon.hbs",
-        "active-skill.hbs",
-        "knowledge-skill.hbs",
-        "language-skill.hbs",
-    ].map(filename => basePath + filename);
+    const paths = [];
+
+    for (const folder of folders) {
+        const fileList = await FilePicker.browse("data", folder);
+        const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
+        paths.push(...hbsFiles);
+    }
 
     return loadTemplates(paths);
 }
 
 function registerHooks() {
 
-    const hooks = {
-        init: "init",
-        preCreateItem: "preCreateItem",
-        renderSR3DActorSheet: "renderSR3DActorSheet",
-        renderSR3DItemSheet: "renderSR3DItemSheet",
-        createActor: "createActor",
-        updateActor: "updateActor"
-
-    }
-
-    const register = {
-        core: "core",
-        sr3d: "sr3d"
-    }
-
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
+    Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
+    Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
+    Hooks.once(hooks.ready, scopeCssToProject);
+
+    Hooks.once("ready", () => {
+        const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
+        setTheme(savedTheme); // Apply the saved theme on startup
+    });
+      
 
     Hooks.once(hooks.init, function () {
-        
-        console.log("sr3d | Initializing Shadowrun Third Edition Homebrew");
 
-        Items.unregisterSheet(register.core, ItemSheet);
-        Items.registerSheet(register.sr3d, SR3DItemSheet, { makeDefault: true });
+        Items.unregisterSheet(flags.core, ItemSheet);
+        Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
 
-        Actors.unregisterSheet(register.core, ActorSheet);
-        Actors.registerSheet(register.sr3d, SR3DActorSheet, { makeDefault: true });
+        Actors.unregisterSheet(flags.core, ActorSheet);
+        Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
 
         CONFIG.Actor.documentClass = SR3DActor;
 
-        AsyncRegisterComponentTemplates();
+        registerTemplatesFromPathsAsync();
 
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
@@ -73,10 +70,55 @@ function registerHooks() {
             arg1 === arg2 ? options.fn(this) : options.inverse(this)
         );
 
-        Handlebars.registerHelper("currency", function(value) {
+        Handlebars.registerHelper("currency", function (value) {
             return `¥${Number(value).toLocaleString()}`;
         });
+
+        Handlebars.registerHelper('multiply', (value, factor) => {
+            return (value * factor).toFixed(1); // Converts and limits to 1 decimal places
+        });
+
+        Handlebars.registerHelper("isDossierOpen", function (actor) {
+            return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);
+        });
+
+        Handlebars.registerHelper("isShoppingStateActive", function (actor) {
+            return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
+        });
+
+        const themeChoices = {
+            "chummer-dark": "Chummer Dark",
+            "chummer-light": "Chummer Light"
+        };
+
+        registerThemeSelectionFunctionality(themeChoices);
+
     });
+}
+
+function registerThemeSelectionFunctionality(themeChoices) {
+    game.settings.register("sr3d", "theme", {
+        name: "Theme", // Setting name
+        hint: "Choose your preferred theme for the SR3D system.", // Setting description
+        scope: "client", // Client-side setting (individual for each user)
+        config: true, // Exposed in the settings UI
+        type: String, // Data type
+        choices: themeChoices,
+        default: "chummer-dark", // Default value
+        onChange: theme => setTheme(theme)
+    });
+}
+
+function setTheme(theme) {
+    let themeLink = document.getElementById("theme-stylesheet");
+
+    if (themeLink) themeLink.remove();
+
+    themeLink = document.createElement("link");
+    themeLink.id = "theme-stylesheet";
+    themeLink.rel = "stylesheet";
+    themeLink.href = `systems/sr3d/styles/sr3d-${theme}.css`; // Ensure correct path
+    document.head.appendChild(themeLink);
 }
 
 registerHooks();

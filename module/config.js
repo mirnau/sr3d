@@ -2,11 +2,16 @@ export const sr3d = {};
 
 sr3d.sheet ={
     addSkill: "sr3d.sheet.addSkill",
-    newItem: "sr3d.sheet.newItem"
+    newItem: "sr3d.sheet.newItem",
+    dossier: "sr3d.sheet.dossier",
+    deleteSkill: "sr3d.sheet.deleteSkill",
+    purchaseSkills: "sr3d.sheet.purchaseSkills",
+    deleteSpecialisation: "sr3d.sheet.deleteSpecialisation"
 }
 
 sr3d.characterCreation = {
-    instruction: "sr3d.characterCreation.instruction"
+    instruction: "sr3d.characterCreation.instruction",
+    selectAnOption: "sr3d.characterCreation.selectAnOption"
 }
 
 sr3d.freeActions = {
@@ -35,8 +40,11 @@ sr3d.races = {
 sr3d.metahuman = {
     name: "sr3d.item.metahuman.name",
     lifespan: "sr3d.item.metahuman.lifespan",
+    physical: "sr3d.item.metahuman.physical",
     average: "sr3d.item.metahuman.average",
     max: "sr3d.item.metahuman.max",
+    min: "sr3d.item.metahuman.min",
+    age: "sr3d.item.metahuman.age",
     height: "sr3d.item.metahuman.height",
     weight: "sr3d.item.metahuman.weight",
     modifiers: "sr3d.item.metahuman.modifiers",
@@ -93,12 +101,17 @@ sr3d.race = {
 };
 
 sr3d.character = {
+    
+    metahumanType: "sr3d.actor.character.metahumanType",
+    name: "sr3d.actor.character.name",
     character: "sr3d.actor.character.character",
     alias: "sr3d.actor.character.alias",
     pronouns: "sr3d.actor.character.pronouns",
     age: "sr3d.actor.character.age",
+    height: "sr3d.actor.character.height",
+    weight: "sr3d.actor.character.weight",
     looks: "sr3d.actor.character.looks",
-    quote: "sr3d.actor.character.Quote",
+    quote: "sr3d.actor.character.quote",
     ratsrace: "sr3d.actor.character.ratsrace",
     income: "sr3d.actor.character.income",
     post: "sr3d.actor.character.post",
@@ -138,7 +151,6 @@ sr3d.skills = {
     knowledgePoints: "sr3d.item.skill.knowledgePoints",
     languagePoints: "sr3d.item.skill.languagePoints", 
     skills: "sr3d.item.skill.skills",
-    purchaseSkills: "sr3d.item.skill.purchaseSkills",
     placeholder: "sr3d.item.skill.placeholder", 
     name: "sr3d.item.skill.name",
     activeSkill: "sr3d.item.skill.activeSkill",

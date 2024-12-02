@@ -63,13 +63,13 @@
 
         @keyframes colorPulse {
             0% {
-                background-color: magenta;
+                background-color: @attribute-pulse-primary;
             }
             50% {
-                background-color: blueviolet;
+                background-color: @attribute-pulse-secondary;
             }
             100% {
-                background-color: magenta;
+                background-color: @attribute-pulse-primary;
             }
         }
 
@@ -80,7 +80,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background-color: @highlight-color;
+            background-color: @highlight-color-secondary;
             box-sizing: border-box;
             padding: 0.5rem;
             z-index: 2;

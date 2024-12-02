@@ -5,16 +5,12 @@
             <label for="priority-select">Select Priority</label>
 
             <h1>
-                <input 
-                    name="name" 
-                    type="text" 
-                    value="{{item.name}}" 
-                    placeholder="{{localize "sr3d.item.metahuman.name"}}" 
-                />
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "
+                    sr3d.item.metahuman.name"}}" />
             </h1>
             <select name="system.priority" id="priority-select" class="priority-select">
-                <option value="C" {{#if (eq system.priority "C")}}selected{{/if}}>C</option>
-                <option value="D" {{#if (eq system.priority "D")}}selected{{/if}}>D</option>
+                <option value="C" {{#if (eq system.priority "C" )}}selected{{/if}}>C</option>
+                <option value="D" {{#if (eq system.priority "D" )}}selected{{/if}}>D</option>
             </select>
         </div>
     </header>
@@ -24,11 +20,15 @@
         <fieldset>
             <legend>{{localize "sr3d.item.metahuman.lifespan"}}</legend>
             <div>
-                <label>{{localize "sr3d.item.metahuman.average"}}:</label>
+                <label>{{localize "sr3d.item.metahuman.age"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
+                <input name="system.lifespan.min" type="number" value="{{system.lifespan.min}}" />
+            </div>
+            <div>
+                <label>{{localize "sr3d.item.metahuman.age"}}  ({{localize "sr3d.item.metahuman.average"}}):</label>
                 <input name="system.lifespan.average" type="number" value="{{system.lifespan.average}}" />
             </div>
             <div>
-                <label>{{localize "sr3d.item.metahuman.max"}}:</label>
+                <label>{{localize "sr3d.item.metahuman.age"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
                 <input name="system.lifespan.max" type="number" value="{{system.lifespan.max}}" />
             </div>
         </fieldset>
@@ -37,19 +37,27 @@
         <fieldset>
             <legend>{{localize "sr3d.item.metahuman.physical"}}</legend>
             <div>
-                <label>{{localize "sr3d.item.metahuman.height"}} (Min):</label>
+                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
                 <input name="system.physical.height.min" type="number" value="{{system.physical.height.min}}" />
             </div>
             <div>
-                <label>{{localize "sr3d.item.metahuman.height"}} (Max):</label>
+                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.average"}}):</label>
+                <input name="system.physical.height.average" type="number" value="{{system.physical.height.average}}" />
+            </div>
+            <div>
+                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
                 <input name="system.physical.height.max" type="number" value="{{system.physical.height.max}}" />
             </div>
             <div>
-                <label>{{localize "sr3d.item.metahuman.weight"}} (Min):</label>
+                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
                 <input name="system.physical.weight.min" type="number" value="{{system.physical.weight.min}}" />
             </div>
             <div>
-                <label>{{localize "sr3d.item.metahuman.weight"}} (Max):</label>
+                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.average"}}):</label>
+                <input name="system.physical.weight.average" type="number" value="{{system.physical.weight.average}}" />
+            </div>
+            <div>
+                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
                 <input name="system.physical.weight.max" type="number" value="{{system.physical.weight.max}}" />
             </div>
         </fieldset>

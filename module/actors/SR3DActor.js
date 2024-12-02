@@ -1,6 +1,7 @@
 import { flags } from '../helpers/CommonConsts.js'
 import SR3DLog from '../SR3DLog.js'
 import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
+import { baseAttributes } from '../helpers/CommonConsts.js';
 
 export default class SR3DActor extends Actor {
 
@@ -54,12 +55,13 @@ export default class SR3DActor extends Actor {
     character.charisma.total = character.charisma.value + character.charisma.meta;
     character.intelligence.total = character.intelligence.value + character.intelligence.meta;
     character.willpower.total = character.willpower.value + character.willpower.meta;
-    character.magic.total = character.magic.value;
     character.essence.total = character.essence.value;
+
+    character.magic.total = character.magic.value;
 
     const attributesDone = this.getFlag(flags.namespace, flags.attributesDone);
 
-    if(!attributesDone || character.creation.attributePoints > 0) {
+    if (!attributesDone || character.creation.attributePoints > 0) {
 
       character.creation.knowledgePoints = character.intelligence.value * 5;
       character.creation.languagePoints = Math.floor(character.intelligence.value * 1.5);
@@ -79,20 +81,33 @@ export default class SR3DActor extends Actor {
     this.update({ system: character });
   }
 
+  canGoblinizeTo(metaHumanItem) {
+
+    const character = this.system;
+
+    for (const a of baseAttributes) {
+      if (metaHumanItem.system.modifiers[a] < 0 && character[a].value + metaHumanItem.system.modifiers[a] < 1) {
+        return false; // Prevent goblinization if the result would drop below 1
+      }
+    }
+
+
+    return true; // All validations passed
+  }
+
+  awakenToMagic() {
+    const character = this.system;
+    character.magic.value = 6;
+    this.recalculateAttribute();
+  }
+
+
   characterSetup() {
 
     SR3DLog.info("characterSetup entered", this.name);
     const character = this.system
 
-    const attributes = [
-      "body",
-      "quickness",
-      "strength",
-      "intelligence",
-      "charisma",
-      "willpower"];
-
-    attributes.forEach((attr) => {
+    baseAttributes.forEach((attr) => {
       if (character[attr].value === 0) {
         character[attr].value += 3;
         character.creation.attributePoints -= 3;
@@ -100,9 +115,11 @@ export default class SR3DActor extends Actor {
     });
 
     character.essence.value = 6;
-    character.magic.value = 6;
+    character.magic.value = 0;
 
     this.recalculateAttribute();
     this.update({ system: character });
   }
+ 
 }
+

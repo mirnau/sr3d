@@ -5,25 +5,42 @@
     font-style: normal;
 }
 
-.sr3d.sheet.character {
-    @base-font-size: 16px;
-    @line-height: 1.2;
-    
-    font-family: 'VT323', monospace;
-    font-size: @base-font-size;
-    line-height: @line-height;
-    color: @text-color; /* Set font color */
-    
     h1, h2, h3, h4, h5, h6 {
         text-transform: uppercase;
         font-family: 'VT323', monospace;
         margin: 0.5em 0;
         line-height: 1.2;
-        color: @highlight-color;
         border: none;
+    }
+
+    h1 {
+        color: @h1-color;
+        text-shadow: @h1-color-bloom-primary;
+    }
+
+    h2 {
+        color: @h2-color;
+    }
+
+    h3 {
+        color: @h3-color;
+    }
+
+    h4 {
+        color: @h4-color;
+    }
+    
+    h5 {
+        color: @h4-color;
+    }
+
+    h6 {
+        color: @h4-color;
     }
 
     p, span, a, div, button, input, textarea {
         font-family: 'VT323', monospace;
+        font-size: @base-font-size;
+        line-height: @line-height;
+        color: @text-color; /* Set font color */
     }
-}
