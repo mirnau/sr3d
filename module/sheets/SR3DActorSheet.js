@@ -132,20 +132,30 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     _skillResizeObserver(html) {
-        const gridElement = html[0].querySelector('.skills-masonry-grid');
+        const gridElement = html[0]?.querySelector('.skills-masonry-grid');
+    
         if (gridElement) {
             const resizeObserver = new ResizeObserver(([entry]) => {
                 const { contentRect } = entry;
                 if (!contentRect) return;
-            
+    
                 const newWidth = Math.floor(contentRect.width);
+    
                 if (gridElement.dataset.lastWidth !== newWidth.toString()) {
                     gridElement.dataset.lastWidth = newWidth;
-            
+    
                     if (gridElement.masonryInstance) {
                         gridElement.masonryInstance.layout();
                     } else {
-                        initializeMasonry(gridElement, '.active-skill-container', false, false);
+                        const selector = '.active-skill-container';
+                        const masonryInstance = new Masonry(gridElement, {
+                            itemSelector: selector,
+                            columnWidth: '.grid-sizer',
+                            originLeft: true,
+                            gutter: 10,
+                        });
+    
+                        initializeMasonry(masonryInstance, gridElement, selector);
                     }
                 }
             });
@@ -154,7 +164,14 @@ export default class SR3DActorSheet extends ActorSheet {
             resizeObserver.observe(gridElement);
     
             // Trigger initial Masonry layout
-            initializeMasonry(gridElement, '.active-skill-container', true, true);
+            const selector = '.active-skill-container';
+            const masonryInstance = new Masonry(gridElement, {
+                itemSelector: selector,
+                originLeft: true,
+                gutter: 10,
+            });
+    
+            initializeMasonry(masonryInstance, gridElement, selector);
     
             // Store the observer for cleanup
             this._sResizeObserver = resizeObserver;
@@ -162,6 +179,7 @@ export default class SR3DActorSheet extends ActorSheet {
             console.warn("No .skills-masonry-grid element found for ResizeObserver");
         }
     }
+    
     
 
 

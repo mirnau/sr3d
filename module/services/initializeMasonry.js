@@ -1,33 +1,19 @@
 import SR3DLog from '../SR3DLog.js'
 
-export function initializeMasonry(gridElement, selector, fitWidth, isPercentPosition) {
-    if (!gridElement) return;
+export function initializeMasonry(masonryInstance, gridElement, selector) {
 
-    let masonryInstance = gridElement.masonryInstance;
+    gridElement.masonryInstance = masonryInstance;
 
-    if (!masonryInstance) {
-        masonryInstance = new Masonry(gridElement, {
-            itemSelector: selector,
-            fitWidth: fitWidth,
-            percentPosition: isPercentPosition,
-            originLeft: true,
-            gutter: 10,
+    const resizeObserver = new ResizeObserver(() => masonryInstance.layout());
+    resizeObserver.observe(gridElement);
+
+    gridElement.querySelectorAll('details').forEach((details) => {
+        details.addEventListener('toggle', () => {
+            masonryInstance.layout();
         });
+    });
 
-        gridElement.masonryInstance = masonryInstance;
+    SR3DLog.success(`Masonry Initiated for selector ${selector}`, initializeMasonry.name);
 
-        const resizeObserver = new ResizeObserver(() => masonryInstance.layout());
-        resizeObserver.observe(gridElement);
-
-        gridElement.querySelectorAll('details').forEach((details) => {
-            details.addEventListener('toggle', () => {
-                masonryInstance.layout();
-            });
-        });
-
-        SR3DLog.success(`Masonry Initiated for selector ${selector}`, initializeMasonry.name);
-    }
-
-    // Ensure layout is called on the instance
     masonryInstance.layout();
 }
