@@ -49,10 +49,10 @@ function registerHooks() {
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
-    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
-    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
+    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
+    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
     Hooks.once(hooks.ready, scopeCssToProject);
 

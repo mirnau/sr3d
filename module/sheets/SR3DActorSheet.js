@@ -118,6 +118,35 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
+
+        if (!this.resizeObserver) {
+            // Create and attach the ResizeObserver
+            this.resizeObserver = new ResizeObserver(() => this._adjustColumnWidth());
+            this.resizeObserver.observe(html[0]);
+        }
+    }
+
+    _adjustColumnWidth() {
+        const sheetWidth = this.position?.width || 1400; // Default width
+        const maxWidth = 1400;
+
+        let columnWidth = "100%";
+        if (sheetWidth > 0.66 * maxWidth) {
+            columnWidth = "32%";
+        } else if (sheetWidth > 0.5 * maxWidth) {
+            columnWidth = "49%";
+        }
+
+        this.element[0].style.setProperty("--column-width", columnWidth);
+    }
+
+    // NOTE: Disconnect ResizeObserver to avoid memory leaks
+    close(options = {}) {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+            this.resizeObserver = null;
+        }
+        return super.close(options);
     }
 
     // NOTE: This boolean is read in a hook in sr3d.js

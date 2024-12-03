@@ -38,7 +38,7 @@
 }
 .sr3d .sheet-component {
   box-sizing: border-box;
-  width: 32%;
+  width: var(--column-width, 32%);
   min-width: 300px;
   margin-bottom: 10px;
   background: transparent;
