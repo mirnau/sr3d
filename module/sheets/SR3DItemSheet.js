@@ -63,7 +63,7 @@ export default class SR3DItemSheet extends ItemSheet {
 
     async _showSkillTypeDialog() {
         const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
-    
+
         return new Promise((resolve) => {
             new Dialog({
                 title: "Select Skill Type",
@@ -74,20 +74,20 @@ export default class SR3DItemSheet extends ItemSheet {
                         callback: async (html) => {
                             const selectedType = html.find('input[name="skillType"]:checked').val();
                             console.log("Confirm button clicked, selectedType:", selectedType);
-    
+
                             if (!selectedType) {
                                 ui.notifications.error("You must select a skill type.");
                                 resolve(null); // Fail gracefully if no type is selected
                                 return;
                             }
-    
+
                             // Update the skill type and corresponding icon
                             await this.item.update({
                                 "system.skillType": selectedType,
                                 img: defaultImages.skill[selectedType] || defaultImages.default,
                                 "system.initialized": true
                             });
-    
+
                             console.log("Skill successfully updated with type:", selectedType);
                             resolve(true); // Resolve with success
                         },
@@ -105,7 +105,7 @@ export default class SR3DItemSheet extends ItemSheet {
             }).render(true);
         });
     }
-    
+
 
     activateListeners(html) {
         super.activateListeners(html);
@@ -113,6 +113,7 @@ export default class SR3DItemSheet extends ItemSheet {
         // Bind specialization event handlers
         html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
         html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
+        html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
 
         // Bind linked attribute dropdown listeners
         html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
@@ -121,20 +122,36 @@ export default class SR3DItemSheet extends ItemSheet {
         html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
     }
 
+    async _deleteOwnedInstance(event) {
+        event.preventDefault();
+
+        const itemId = this.item.id;
+        const actor = this.item.actor;
+
+        if (actor) {
+            try {
+                await actor.deleteEmbeddedDocuments("Item", [itemId]);
+                ui.notifications.info(`Deleted item ${this.item.name}`);
+            } catch (error) {
+                ui.notifications.error(`Failed to delete item ${this.item.name}: ${error.message}`);
+            }
+        }
+    }
+
     _onDynamicPriorityChange(event) {
         event.preventDefault();
-    
+
         // Determine the correct field from the name attribute
         const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magicTradition.priority"
         const selectedPriority = event.target.value;
-    
+
         // Update the correct field dynamically
         this.item.update({
             [fieldName]: selectedPriority // Use computed property name to dynamically set the field
         }).then(() => {
             console.log(`Successfully updated ${fieldName} to: ${selectedPriority}`);
             console.log("Updated item data:", this.item.system);
-    
+
             // Re-render the sheet to reflect the changes
             this.render();
             ui.notifications.info(`Priority updated to: ${selectedPriority}`);
@@ -146,16 +163,12 @@ export default class SR3DItemSheet extends ItemSheet {
 
     async _updateObject(event, formData) {
         console.log("Form Data Submitted:", formData);
-    
-        if (this.item.type === "skill" && !formData['system.priority']) {
-            console.error("Priority path is missing in formData.");
-        }
-    
+
         await this.object.update(formData);
     }
-    
-    
-    
+
+
+
 
     // Handler for Active Skill linked attribute changes
     async _onActiveSkillLinkedAttributeChange(event) {

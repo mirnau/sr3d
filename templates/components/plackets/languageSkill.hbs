@@ -1,28 +1,48 @@
+<!-- The language skill card in the skills section of the character sheet -->
+{{#each this}}
+<div class="language-card-container">
+  <!-- Main Skill Name -->
+  <div class="core-skill">
+    <div class="language-skill-name">
+      <h3>{{name}}</h3>
+    </div>
+    <div class="icons">
+      <a class="edit-skill pulsing-green-cart" data-id="{{id}}"><i class="fas fa-pen-to-square"></i></a>
+    </div>
+  </div>
 
-    <!-- The language skill card in the skills secton of the character sheet-->
-    
-    {{#each this}}
-    <div class="language-card">
-      <!-- Main Skill Name -->
-      <div class="language-skill-line">
-        <div class="language-skill-name">
-          <h3>{{name}}</h3>
+  <!-- Subskills -->
+  {{#each skills}}
+  <div class="specialisation-container">
+    <div class="core-skill">
+      <div class="language-card">
+        <div class="skill-name">
+          <h3>{{type}}</h3>
         </div>
-        <div class="icons">
-          <a class="delete-skill" data-id="{{id}}">
-            <i class="fa-solid fa-trash-can"></i></a>
-          <a class="edit-skill" data-id="{{id}}"><i class="fas fa-pen-to-square"></i></a>
+        <div class="skill-value">
+          <h1>
+            {{base}}
+          </h1>
         </div>
       </div>
-
-      <!-- Subskills -->
-      {{#each subskills}}
-      <div class="language-skill-line">
-        <div class="language-info">
-          <div class="subskill-name">{{@key}}</div>
-          <div class="subskill-value">{{this}}</div>
+    </div>
+    {{#if specializations}}
+    <div class="specializations">
+      {{#each specializations}}
+      <div class="skill-specialization-card active-specialization-card-color-override">
+        <div class="specialization-name">
+          {{name}}
         </div>
-       </div>
+        <div class="specialization-value">
+          <h1>
+            {{value}}
+          </h1>
+        </div>
+      </div>
       {{/each}}
     </div>
-    {{/each}}
+    {{/if}}
+  </div>
+  {{/each}}
+</div>
+{{/each}}

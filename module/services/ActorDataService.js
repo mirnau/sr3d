@@ -26,20 +26,36 @@ export class ActorDataService {
         };
     }
 
+
     static prepareLanguages(items) {
         return items
             .filter(item => item.type === "skill" && item.system.skillType === "languageSkill")
-            .map(skill => ({
-                id: skill.id,
-                name: skill.name,
-                subskills: {
-                    Speech: skill.system.languageSkill.speech.base,
-                    Read: skill.system.languageSkill.read.base,
-                    Write: skill.system.languageSkill.write.base,
-                },
-            }));
+            .map(item => {
+                const languageData = {
+                    id: item.id,
+                    name: item.name,
+                    skills: [
+                        {
+                            type: game.i18n.localize("sr3d.item.skill.speech"),
+                            base: item.system.skill.languageSkill.speech?.base,
+                            specializations: item.system.skill.languageSkill.speech.specializations,
+                        },
+                        {
+                            type: game.i18n.localize("sr3d.item.skill.write"),
+                            base: item.system.skill.languageSkill.read?.base,
+                            specializations: item.system.skill.languageSkill.read.specializations,
+                        },
+                        {
+                            type: game.i18n.localize("sr3d.item.skill.read"),
+                            base: item.system.skill.languageSkill.write?.base,
+                            specializations: item.system.skill.languageSkill.write.specializations,
+                        },
+                    ],
+                };
+                return languageData;
+            });
     }
-
+    
     static _categorizeAndSortSkills(skills, keyFn) {
         const categories = skills.reduce((acc, skill) => {
             const category = keyFn(skill) || "uncategorized";

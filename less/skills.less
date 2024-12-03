@@ -50,6 +50,7 @@
                 right: -0.25rem;
             }
 
+            .language-card,
             .knowledge-card,
             .active-skill-card {
                 width: 100%;
@@ -110,46 +111,6 @@
                     text-align: center;
                     background-color: @primary-color;
                     .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-                }
-            }
-
-
-
-            .language-card {
-                background-color: @background-color;
-                flex-direction: column; // Align items vertically
-
-                .language-skill-line,
-                .language-info {
-                    display: flex; // Horizontal layout for name and icons
-                    justify-content: space-between; // Push name to left, icons to right
-                    align-items: center; // Vertical alignment
-                }
-
-                .language-info {
-                    background-color: @accent-color;
-                    width: 66%;
-                    min-height: 1.5rem;
-                }
-
-                .language-skill-line {
-                    padding: 0.125rem 0; // Spacing between rows
-
-                    .language-skill-name,
-                    .subskill-name {
-                        flex: 1; // Occupies remaining space to push icons right
-                    }
-                }
-
-                .icons {
-                    display: flex;
-                    gap: 0.5rem; // Space between icons
-                }
-
-                a {
-                    color: @primary-color;
-                    cursor: pointer;
-                    text-decoration: none; // Optional: No underline for links
                 }
             }
         }

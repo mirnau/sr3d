@@ -100,7 +100,7 @@ export default class SR3DActorSheet extends ActorSheet {
         super.activateListeners(html);
 
         html.find(".item-create").click(this._onItemCreate.bind(this));
-        html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
+        // html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
 
@@ -144,16 +144,10 @@ export default class SR3DActorSheet extends ActorSheet {
 
         const skill = this.actor.items.get(skillId);
 
-        if (skill) {
-            // Open the item sheet
-            skill.sheet.render(true);
-        } else {
-            // Handle error if skill is not found
-            ui.notifications.error("Skill not found.");
-            console.error("Skill not found:", skillId);
-        }
+        skill.sheet.render(true);
     }
 
+    /*
     _onDeleteSkill(event) {
         event.preventDefault();
 
@@ -181,7 +175,7 @@ export default class SR3DActorSheet extends ActorSheet {
             console.error("Skill not found:", skillId); // Log missing skill
             ui.notifications.error("Skill not found.");
         }
-    }
+    }*/
 
     _onItemCreate(event) {
         event.preventDefault();
