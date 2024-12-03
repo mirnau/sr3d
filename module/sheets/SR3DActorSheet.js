@@ -121,24 +121,76 @@ export default class SR3DActorSheet extends ActorSheet {
 
         if (!this.resizeObserver) {
             // Create and attach the ResizeObserver
-            this.resizeObserver = new ResizeObserver(() => this._adjustColumnWidth());
+            this.resizeObserver = new ResizeObserver(() => this._layoutStateMachine());
             this.resizeObserver.observe(html[0]);
         }
     }
 
-    _adjustColumnWidth() {
+    _layoutStateMachine() {
         const sheetWidth = this.position?.width || 1400; // Default width
         const maxWidth = 1400;
-
-        let columnWidth = "100%";
-        if (sheetWidth > 0.66 * maxWidth) {
-            columnWidth = "32%";
-        } else if (sheetWidth > 0.5 * maxWidth) {
-            columnWidth = "49%";
+    
+        // Define thresholds for layout
+        const lowerLimit = 0.5 * maxWidth; // 33% of maxWidth
+        const middleLimit = 0.66 * maxWidth; // 60% of maxWidth
+    
+        // Determine layout state
+        let layoutState = "small"; // Default to small layout
+        if (sheetWidth > middleLimit) {
+            layoutState = "wide";
+        } else if (sheetWidth > lowerLimit) {
+            layoutState = "medium";
         }
-
-        this.element[0].style.setProperty("--column-width", columnWidth);
+    
+        // Column width percentages for each layout state
+        const columnWidthPercent = {
+            small: 100,
+            medium: 49,
+            wide: 32,
+        };
+    
+        // Apply column width globally
+        const columnWidth = columnWidthPercent[layoutState];
+        this.element[0].style.setProperty("--column-width", `${columnWidth}%`);
+    
+        // Query components
+        const twoSpanComponents = this.element[0].querySelectorAll(".two-span-selectable");
+        const threeSpanComponents = this.element[0].querySelectorAll(".three-span-selectable");
+    
+        // State machine for component layout
+        switch (layoutState) {
+            case "small":
+                // Small layout: Reset all spans to single column
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`;
+                });
+                break;
+    
+            case "medium":
+                // Medium layout: Two-span components span two columns
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`; // Reset to single column
+                });
+                break;
+    
+            case "wide":
+                // Wide layout: Three-span components span three columns
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `calc(3 * var(--column-width) - 20px)`;
+                });
+                break;
+        }
     }
+    
 
     // NOTE: Disconnect ResizeObserver to avoid memory leaks
     close(options = {}) {

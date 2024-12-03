@@ -26,7 +26,7 @@
         padding: 0.5rem;
         background-color: @secondary-color;
         justify-content: space-between; // Space between name and value
-        gap: 0.5rem; // Space between rows or items
+        gap: 0rem; // Space between rows or items
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
         .core-skill {
@@ -37,12 +37,6 @@
             align-items: center; // Align all children along the x-axis
             justify-content: space-between; // Space between the skill name, icons, and value
             position: relative;
-
-            h1,
-            h3,
-            h4 {
-                margin: 0rem;
-            }
 
             .checkmark {
                 position: absolute;
@@ -80,14 +74,11 @@
             }
         }
 
-
-
         .active-specialization-card-color-override {
             background-color: @tertiary-color;
             padding: 0.25rem;
             flex-direction: row; // Children inside also aligned horizontally
         }
-
 
         .specialisation-container {
             width: 100%;
@@ -101,16 +92,10 @@
 
                 .specialization-value {
 
-                    h1,
-                    h3,
-                    h4 {
-                        margin: 0rem;
-                    }
-
                     width: 3rem;
                     text-align: center;
-                    background-color: @primary-color;
-                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                    background-color: @quartiery-color;
+                    .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
                 }
             }
         }

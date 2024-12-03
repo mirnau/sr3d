@@ -103,11 +103,18 @@
   line-height: 1.2;
   border: none;
 }
-.sr3d .sr3d h1 {
+.sr3d .sr3d .actor-sheet h1 {
   color: #1df0ff;
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
 }
-.sr3d .sr3d h2 {
+.sr3d .sr3d .actor-sheet .h1-value h1 {
+  margin: 0rem;
+}
+.sr3d .sr3d .actor-sheet .specialization-font h1 {
+  margin: 0rem;
+  font-size: 1rem;
+}
+.sr3d .sr3d .actor-sheet h2 {
   color: #d13980;
 }
 .sr3d .sr3d h3 {
@@ -228,7 +235,7 @@
   padding: 0.5rem;
   background-color: #145b68;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .skills-section .skill-specialization-card .core-skill,
@@ -242,20 +249,6 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-}
-.sr3d .skills-section .skill-specialization-card .core-skill h1,
-.sr3d .skills-section .active-skill-container .core-skill h1,
-.sr3d .skills-section .knowledge-skill-container .core-skill h1,
-.sr3d .skills-section .language-card-container .core-skill h1,
-.sr3d .skills-section .skill-specialization-card .core-skill h3,
-.sr3d .skills-section .active-skill-container .core-skill h3,
-.sr3d .skills-section .knowledge-skill-container .core-skill h3,
-.sr3d .skills-section .language-card-container .core-skill h3,
-.sr3d .skills-section .skill-specialization-card .core-skill h4,
-.sr3d .skills-section .active-skill-container .core-skill h4,
-.sr3d .skills-section .knowledge-skill-container .core-skill h4,
-.sr3d .skills-section .language-card-container .core-skill h4 {
-  margin: 0rem;
 }
 .sr3d .skills-section .skill-specialization-card .core-skill .checkmark,
 .sr3d .skills-section .active-skill-container .core-skill .checkmark,
@@ -359,22 +352,8 @@
 .sr3d .skills-section .language-card-container .specialisation-container .specializations .specialization-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .skills-section .skill-specialization-card .specialisation-container .specializations .specialization-value h1,
-.sr3d .skills-section .active-skill-container .specialisation-container .specializations .specialization-value h1,
-.sr3d .skills-section .knowledge-skill-container .specialisation-container .specializations .specialization-value h1,
-.sr3d .skills-section .language-card-container .specialisation-container .specializations .specialization-value h1,
-.sr3d .skills-section .skill-specialization-card .specialisation-container .specializations .specialization-value h3,
-.sr3d .skills-section .active-skill-container .specialisation-container .specializations .specialization-value h3,
-.sr3d .skills-section .knowledge-skill-container .specialisation-container .specializations .specialization-value h3,
-.sr3d .skills-section .language-card-container .specialisation-container .specializations .specialization-value h3,
-.sr3d .skills-section .skill-specialization-card .specialisation-container .specializations .specialization-value h4,
-.sr3d .skills-section .active-skill-container .specialisation-container .specializations .specialization-value h4,
-.sr3d .skills-section .knowledge-skill-container .specialisation-container .specializations .specialization-value h4,
-.sr3d .skills-section .language-card-container .specialisation-container .specializations .specialization-value h4 {
-  margin: 0rem;
+  background-color: #552791;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
 }
 .sr3d .attribute-position {
   position: absolute;
