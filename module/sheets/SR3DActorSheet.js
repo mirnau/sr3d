@@ -1,6 +1,7 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
+import { initializeMasonry } from '../services/initializeMasonry.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -121,12 +122,16 @@ export default class SR3DActorSheet extends ActorSheet {
 
         if (!this.resizeObserver) {
             // Create and attach the ResizeObserver
-            this.resizeObserver = new ResizeObserver(() => this._layoutStateMachine());
+            this.resizeObserver = new ResizeObserver(() => this._layoutStateMachine(html));
             this.resizeObserver.observe(html[0]);
         }
     }
 
-    _layoutStateMachine() {
+    _layoutStateMachine(html) {
+
+        const gridElement = html[0].querySelector('.skills-masonry-grid');
+        initializeMasonry(gridElement,'.ctive-skill-container', true, true);
+
         const sheetWidth = this.position?.width || 1400; // Default width
         const maxWidth = 1400;
     
