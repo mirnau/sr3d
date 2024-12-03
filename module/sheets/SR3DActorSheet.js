@@ -125,20 +125,55 @@ export default class SR3DActorSheet extends ActorSheet {
             this.resizeObserver = new ResizeObserver(() => this._layoutStateMachine(html));
             this.resizeObserver.observe(html[0]);
         }
+
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        this._skillResizeObserver(html);
     }
+
+    _skillResizeObserver(html) {
+        const gridElement = html[0].querySelector('.skills-masonry-grid');
+        if (gridElement) {
+            const resizeObserver = new ResizeObserver(([entry]) => {
+                const { contentRect } = entry;
+                if (!contentRect) return;
+            
+                const newWidth = Math.floor(contentRect.width);
+                if (gridElement.dataset.lastWidth !== newWidth.toString()) {
+                    gridElement.dataset.lastWidth = newWidth;
+            
+                    if (gridElement.masonryInstance) {
+                        gridElement.masonryInstance.layout();
+                    } else {
+                        initializeMasonry(gridElement, '.active-skill-container', false, false);
+                    }
+                }
+            });
+    
+            // Observe changes in grid size
+            resizeObserver.observe(gridElement);
+    
+            // Trigger initial Masonry layout
+            initializeMasonry(gridElement, '.active-skill-container', true, true);
+    
+            // Store the observer for cleanup
+            this._sResizeObserver = resizeObserver;
+        } else {
+            console.warn("No .skills-masonry-grid element found for ResizeObserver");
+        }
+    }
+    
+
 
     _layoutStateMachine(html) {
 
-        const gridElement = html[0].querySelector('.skills-masonry-grid');
-        initializeMasonry(gridElement,'.ctive-skill-container', true, true);
-
         const sheetWidth = this.position?.width || 1400; // Default width
         const maxWidth = 1400;
-    
+
         // Define thresholds for layout
         const lowerLimit = 0.5 * maxWidth; // 33% of maxWidth
         const middleLimit = 0.66 * maxWidth; // 60% of maxWidth
-    
+
         // Determine layout state
         let layoutState = "small"; // Default to small layout
         if (sheetWidth > middleLimit) {
@@ -146,22 +181,22 @@ export default class SR3DActorSheet extends ActorSheet {
         } else if (sheetWidth > lowerLimit) {
             layoutState = "medium";
         }
-    
+
         // Column width percentages for each layout state
         const columnWidthPercent = {
             small: 100,
             medium: 49,
             wide: 32,
         };
-    
+
         // Apply column width globally
         const columnWidth = columnWidthPercent[layoutState];
         this.element[0].style.setProperty("--column-width", `${columnWidth}%`);
-    
+
         // Query components
         const twoSpanComponents = this.element[0].querySelectorAll(".two-span-selectable");
         const threeSpanComponents = this.element[0].querySelectorAll(".three-span-selectable");
-    
+
         // State machine for component layout
         switch (layoutState) {
             case "small":
@@ -173,7 +208,7 @@ export default class SR3DActorSheet extends ActorSheet {
                     component.style.width = `var(--column-width)`;
                 });
                 break;
-    
+
             case "medium":
                 // Medium layout: Two-span components span two columns
                 twoSpanComponents.forEach((component) => {
@@ -183,7 +218,7 @@ export default class SR3DActorSheet extends ActorSheet {
                     component.style.width = `var(--column-width)`; // Reset to single column
                 });
                 break;
-    
+
             case "wide":
                 // Wide layout: Three-span components span three columns
                 twoSpanComponents.forEach((component) => {
@@ -195,7 +230,7 @@ export default class SR3DActorSheet extends ActorSheet {
                 break;
         }
     }
-    
+
 
     // NOTE: Disconnect ResizeObserver to avoid memory leaks
     close(options = {}) {
@@ -203,6 +238,12 @@ export default class SR3DActorSheet extends ActorSheet {
             this.resizeObserver.disconnect();
             this.resizeObserver = null;
         }
+
+        if (this._sResizeObserver) {
+            this._sResizeObserver.disconnect();
+            this._sResizeObserver = null;
+        }
+    
         return super.close(options);
     }
 
@@ -210,7 +251,7 @@ export default class SR3DActorSheet extends ActorSheet {
     _onDetailPanelOpened(_, event) {
         this.actor.setFlag(flags.namespace, flags.isDossierPanelOpened, event.target.open);
     }
-    
+
 
     // Update Button States
     _updateButtons(attribute) {

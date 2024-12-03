@@ -1,3 +1,5 @@
+import SR3DLog from '../SR3DLog.js'
+
 export function initializeMasonry(gridElement, selector, fitWidth, isPercentPosition) {
     if (!gridElement) return;
 
@@ -22,6 +24,8 @@ export function initializeMasonry(gridElement, selector, fitWidth, isPercentPosi
                 masonryInstance.layout();
             });
         });
+
+        SR3DLog.success(`Masonry Initiated for selector ${selector}`, initializeMasonry.name);
     }
 
     // Ensure layout is called on the instance
