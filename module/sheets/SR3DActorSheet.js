@@ -1,6 +1,11 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
+<<<<<<< Updated upstream
+=======
+import { initializeMasonry } from '../services/initializeMasonry.js';
+import SR3DLog from '../SR3DLog.js';
+>>>>>>> Stashed changes
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -118,7 +123,206 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
+<<<<<<< Updated upstream
+=======
+
+        if (!this._mainMasonryLaoutStateMachineObserver) {
+            // Create and attach the ResizeObserver
+            this._mainMasonryLaoutStateMachineObserver = new ResizeObserver(() => this._layoutStateMachine(html));
+            this._mainMasonryLaoutStateMachineObserver.observe(html[0]);
+        }
+
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+        this._skillCategoryResizeObserver = null;
+        this._activeSkillContainerResizeObserver = null;
+
+        this._skillResizeObserver(html, '.skills-masonry-grid', '.skill-category', this._skillCategoryResizeObserver);
+        //this._skillResizeObserver(html, '.skills-masonry-grid', '.active-skill-container', 'inner-grid-sizer', this._activeSkillContainerResizeObserver);
     }
+
+    _dynamicColumnCalculator(html, parent, child, layout) {
+        const container = html[0]?.querySelector(parent);
+        const items = html[0]?.querySelectorAll(child); // Get all items
+    
+        if (container && items.length > 0) {
+            const containerWidth = container.offsetWidth;
+            const minWidthOfItem = parseFloat(window.getComputedStyle(items[0]).getPropertyValue('min-width'));
+            const itemsCurrentWidth = parseFloat(window.getComputedStyle(items[0]).getPropertyValue('width'));
+            const desiredColumnCount = Math.max(1, Math.floor(containerWidth / minWidthOfItem)); // At least 1 column
+    
+            // Calculate total gutter space and adjust column width
+        // Total space taken up by gutters
+            const totalGutterSpace = containerWidth - desiredColumnCount * minWidthOfItem;
+            layout.gutterWidth = desiredColumnCount > 1 ? totalGutterSpace / (desiredColumnCount - 1) : 0;
+            
+            layout.columnWidth = minWidthOfItem;
+
+                        // Loop through items and set their widths dynamically
+            items.forEach((item) => {
+                if (desiredColumnCount === 1) {
+                    item.style.width = '100%';
+                } else if (desiredColumnCount === 2) {
+                    item.style.width = '49%';
+                } else if (desiredColumnCount === 3) {
+                    item.style.width = '32%';
+                } else {
+                    item.style.width = '24%';
+                }
+            });
+    
+            // Debugging output
+            console.log('Container Width:', containerWidth);
+            console.log('Item Min Width:', minWidthOfItem);
+            console.log('Desired Columns:', desiredColumnCount);
+            console.log('Column Width (px):', layout.columnWidth);
+            console.log('Gutter Width (px):', layout.gutterWidth);
+        } else {
+            console.warn('Container or items not found.');
+        }
+    }
+    
+    
+    
+    
+    _skillResizeObserver(html, parent, child, observer) {
+        const containingElement = html[0]?.querySelector(parent);
+    
+        if (containingElement) {
+            observer = new ResizeObserver(([entry]) => {
+                
+                const layout = {columnWidth: 0, gutterWidth: 0 } 
+                this._dynamicColumnCalculator(html, parent, child, layout);
+                
+                const { contentRect } = entry;
+                if (!contentRect) return;
+    
+                const newWidth = Math.floor(contentRect.width);
+    
+                if (containingElement.dataset.lastWidth !== newWidth.toString()) {
+                    containingElement.dataset.lastWidth = newWidth;
+    
+                    
+
+    
+                    if (containingElement.masonryInstance) {
+                        containingElement.masonryInstance.layout();
+                    } else {
+                        const selector = child;
+                        const masonryInstance = new Masonry(containingElement, {
+                            itemSelector: selector,
+                            columnWidth: layout.columnWidth,
+                            gutter: layout.gutterWidth,
+                            isFitWidth: true,
+                        });
+    
+                        initializeMasonry(masonryInstance, containingElement, selector);
+                    }
+                }
+            });
+    
+            // Observe changes in grid size
+            observer.observe(containingElement);
+ 
+        } else {
+            console.warn("No .skills-masonry-grid element found for ResizeObserver");
+        }
+    }
+    
+    
+
+
+
+
+    _layoutStateMachine(html) {
+
+        const sheetWidth = this.position?.width || 1400; // Default width
+        const maxWidth = 1400;
+
+        // Define thresholds for layout
+        const lowerLimit = 0.5 * maxWidth; // 33% of maxWidth
+        const middleLimit = 0.66 * maxWidth; // 60% of maxWidth
+
+        // Determine layout state
+        let layoutState = "small"; // Default to small layout
+        if (sheetWidth > middleLimit) {
+            layoutState = "wide";
+        } else if (sheetWidth > lowerLimit) {
+            layoutState = "medium";
+        }
+
+        // Column width percentages for each layout state
+        const columnWidthPercent = {
+            small: 100,
+            medium: 49,
+            wide: 32,
+        };
+
+        // Apply column width globally
+        const columnWidth = columnWidthPercent[layoutState];
+        this.element[0].style.setProperty("--column-width", `${columnWidth}%`);
+
+        // Query components
+        const twoSpanComponents = this.element[0].querySelectorAll(".two-span-selectable");
+        const threeSpanComponents = this.element[0].querySelectorAll(".three-span-selectable");
+
+        // State machine for component layout
+        switch (layoutState) {
+            case "small":
+                // Small layout: Reset all spans to single column
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`;
+                });
+                break;
+
+            case "medium":
+                // Medium layout: Two-span components span two columns
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `var(--column-width)`; // Reset to single column
+                });
+                break;
+
+            case "wide":
+                // Wide layout: Three-span components span three columns
+                twoSpanComponents.forEach((component) => {
+                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
+                });
+                threeSpanComponents.forEach((component) => {
+                    component.style.width = `calc(3 * var(--column-width) - 20px)`;
+                });
+                break;
+        }
+    }
+
+
+    // NOTE: Disconnect ResizeObserver to avoid memory leaks
+    close(options = {}) {
+        const observerKeys = [
+            '_mainMasonryLaoutStateMachineObserver',
+            '_skillCategoryResizeObserver',
+            '_activeSkillContainerResizeObserver',
+        ];
+    
+        // Iterate over observer keys to disconnect and nullify
+        observerKeys.forEach((key) => {
+            if (this[key]) {
+                this[key].disconnect(); // Disconnect the observer
+                this[key] = null;       // Nullify the reference
+            }
+        });
+    
+        return super.close(options);
+>>>>>>> Stashed changes
+    }
+    
+
 
     // NOTE: This boolean is read in a hook in sr3d.js
     _onDetailPanelOpened(_, event) {

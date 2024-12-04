@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .specialization-value,
 .specialization-add,
 .specialization-container {
@@ -70,6 +71,122 @@
             text-align: center; // Aligns the value to the right
             background-color: @background-color;
             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+=======
+.grid-padding {
+    padding: 1rem;
+    background-color: @primary-color;
+    width: 100%;
+    .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+    .skills-masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+
+        .skill-category {
+            min-width: 10rem; //constant
+        }
+
+        .active-skills-section {
+            width: 100%;
+            
+            text-transform: uppercase;
+
+            .skill-specialization-card {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .skill-specialization-card,
+            .active-skill-container,
+            .knowledge-skill-container,
+            .language-card-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                min-height: 2rem;
+                margin-bottom: 0.5rem;
+                padding: 0.5rem;
+                background-color: @secondary-color;
+                justify-content: space-between; // Space between name and value
+                gap: 0rem; // Space between rows or items
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+                .core-skill {
+                    padding: 0.25rem;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row; // Ensure horizontal layout
+                    align-items: center; // Align all children along the x-axis
+                    justify-content: space-between; // Space between the skill name, icons, and value
+                    position: relative;
+
+                    .checkmark {
+                        position: absolute;
+                        top: -0.25rem;
+                        right: -0.25rem;
+                    }
+
+                    .language-card,
+                    .knowledge-card,
+                    .active-skill-card {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center; // Align icons and values in the same row
+                        gap: 0.5rem; // Add space between skill name and icons
+                        justify-content: center;
+
+                        .skill-name {
+                            flex: 1; // Allow this to take up remaining space
+                        }
+
+                        .icons {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 0.25rem; // Space between icons
+                        }
+
+                        .skill-value {
+                            width: 3rem; // Adjust to fit the value display appropriately
+                            text-align: center;
+                            background-color: @primary-color;
+                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
+                        }
+                    }
+                }
+
+                .active-specialization-card-color-override {
+                    background-color: @tertiary-color;
+                    padding: 0.25rem;
+                    flex-direction: row; // Children inside also aligned horizontally
+                }
+
+                .specialisation-container {
+                    width: 100%;
+                    padding: 0px;
+
+                    .specializations {
+
+                        .specialization-name {
+                            flex: 1; // Occupies available space
+                        }
+
+                        .specialization-value {
+
+                            width: 3rem;
+                            text-align: center;
+                            background-color: @quartiery-color;
+                            .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                        }
+                    }
+                }
+            }
+>>>>>>> Stashed changes
         }
     }
 

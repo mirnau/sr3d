@@ -202,6 +202,7 @@
   transform: scale(1.1);
   z-index: 10;
 }
+<<<<<<< Updated upstream
 .sr3d .specialization-value,
 .sr3d .specialization-add,
 .sr3d .specialization-container {
@@ -230,34 +231,118 @@
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .skills-section .skill-specialization-card {
+=======
+.sr3d .grid-padding {
+  padding: 1rem;
+  background-color: #212b35;
+  width: 100%;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .grid-padding .skills-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.sr3d .grid-padding .skills-masonry-grid .skill-category {
+  min-width: 10rem;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section {
+  width: 100%;
+  text-transform: uppercase;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card {
+  width: 100%;
+>>>>>>> Stashed changes
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .skill-specialization-card,
 .sr3d .skills-section .skill-card,
 .sr3d .skills-section .knowledge-card,
 .sr3d .skills-section .language-card {
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+>>>>>>> Stashed changes
   box-sizing: border-box;
   min-height: 2rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
   display: flex;
   gap: 0.5rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .skill-specialization-card {
   background-color: #8d6314;
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill {
+  padding: 0.25rem;
+  width: 100%;
+>>>>>>> Stashed changes
   display: flex;
   justify-content: space-between;
+<<<<<<< Updated upstream
+=======
+  position: relative;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .checkmark,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .checkmark,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .checkmark,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .checkmark {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .language-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .language-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .language-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .language-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .knowledge-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .knowledge-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .knowledge-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .knowledge-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .active-skill-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .active-skill-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .active-skill-card,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .active-skill-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+>>>>>>> Stashed changes
   align-items: center;
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .skill-specialization-card .specialization-name {
   font-weight: bold;
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .language-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .language-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .language-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .language-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .knowledge-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .knowledge-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .knowledge-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .knowledge-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .active-skill-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .active-skill-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .active-skill-card .skill-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .active-skill-card .skill-name {
+>>>>>>> Stashed changes
   flex: 1;
   text-align: left;
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .skill-specialization-card .specialization-value {
   font-size: 1.5rem;
   width: 20%;
@@ -272,6 +357,20 @@
   flex-direction: column;
 }
 .sr3d .skills-section .skill-card .skill-details {
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .language-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .language-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .language-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .language-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .knowledge-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .knowledge-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .knowledge-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .knowledge-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .active-skill-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .active-skill-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .active-skill-card .icons,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .active-skill-card .icons {
+>>>>>>> Stashed changes
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -293,6 +392,7 @@
   display: flex;
   gap: 0.25rem;
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .knowledge-card {
   background-color: #977ad7;
   min-height: 2rem;
@@ -318,9 +418,48 @@
 }
 .sr3d .skills-section .language-card .language-skill-line .language-skill-name,
 .sr3d .skills-section .language-card .language-skill-line .subskill-name {
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .language-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .language-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .language-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .language-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .knowledge-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .knowledge-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .knowledge-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .knowledge-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .core-skill .active-skill-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .core-skill .active-skill-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .core-skill .active-skill-card .skill-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .core-skill .active-skill-card .skill-value {
+  width: 3rem;
+  text-align: center;
+  background-color: #212b35;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .active-specialization-card-color-override,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .active-specialization-card-color-override,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .active-specialization-card-color-override,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .active-specialization-card-color-override {
+  background-color: #6825c0;
+  padding: 0.25rem;
+  flex-direction: row;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .specialisation-container,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .specialisation-container,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .specialisation-container,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .specialisation-container {
+  width: 100%;
+  padding: 0px;
+}
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .specialisation-container .specializations .specialization-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .specialisation-container .specializations .specialization-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .specialisation-container .specializations .specialization-name,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .specialisation-container .specializations .specialization-name {
+>>>>>>> Stashed changes
   flex: 1;
   text-align: left;
 }
+<<<<<<< Updated upstream
 .sr3d .skills-section .language-card .language-skill-line .subskill-value {
   font-style: bold;
 }
@@ -341,6 +480,16 @@
 .sr3d .skills-section a {
   color: #212b35;
   margin-left: 0.5rem;
+=======
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .skill-specialization-card .specialisation-container .specializations .specialization-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .active-skill-container .specialisation-container .specializations .specialization-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .knowledge-skill-container .specialisation-container .specializations .specialization-value,
+.sr3d .grid-padding .skills-masonry-grid .active-skills-section .language-card-container .specialisation-container .specializations .specialization-value {
+  width: 3rem;
+  text-align: center;
+  background-color: #552791;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+>>>>>>> Stashed changes
 }
 .sr3d .attribute-position {
   position: absolute;
