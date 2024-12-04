@@ -2,13 +2,14 @@
 
 {{#each this}}
 <div class="skill-category">
-  <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
-  {{#each this}}
+  <div>
+    <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
+  </div>
 
+  {{#each this}}
   <div class="active-skill-container">
     <div class="core-skill">
       <div class="active-skill-card">
-
         <div class="skill-name">
           <h3>
             {{this.name}}
@@ -23,9 +24,7 @@
             </a>
           </h4>
         </div>
-
         {{/if}}
-
 
         <div class="skill-value h1-value">
           <h1>
@@ -33,6 +32,7 @@
           </h1>
         </div>
       </div>
+
       <div class="checkmark">
         <a>
           <i class="fa-solid fa-circle-check"></i>

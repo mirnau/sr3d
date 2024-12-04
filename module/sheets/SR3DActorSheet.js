@@ -128,13 +128,28 @@ export default class SR3DActorSheet extends ActorSheet {
 
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        this._skillResizeObserver(html);
+        this._skillResizeObserver(html, '.skills-masonry-grid', '.skill-category');
     }
 
-    _skillResizeObserver(html) {
-        const gridElement = html[0]?.querySelector('.skills-masonry-grid');
+    _skillResizeObserver(html, parent, child) {
+        const gridElement = html[0]?.querySelector(parent);
     
         if (gridElement) {
+            // Initialize Masonry if it doesn't already exist
+            if (!gridElement.masonryInstance) {
+                const masonryInstance = new Masonry(gridElement, {
+                    itemSelector: child,
+                    columnWidth: child,
+                    gutter: 8,
+                    
+                });
+                initializeMasonry(masonryInstance, gridElement, child);
+    
+                // Attach the Masonry instance to the grid element for reuse
+                gridElement.masonryInstance = masonryInstance;
+            }
+    
+            // Initialize ResizeObserver
             const resizeObserver = new ResizeObserver(([entry]) => {
                 const { contentRect } = entry;
                 if (!contentRect) return;
@@ -144,34 +159,13 @@ export default class SR3DActorSheet extends ActorSheet {
                 if (gridElement.dataset.lastWidth !== newWidth.toString()) {
                     gridElement.dataset.lastWidth = newWidth;
     
-                    if (gridElement.masonryInstance) {
-                        gridElement.masonryInstance.layout();
-                    } else {
-                        const selector = '.active-skill-container';
-                        const masonryInstance = new Masonry(gridElement, {
-                            itemSelector: selector,
-                            columnWidth: '.grid-sizer',
-                            originLeft: true,
-                            gutter: 10,
-                        });
-    
-                        initializeMasonry(masonryInstance, gridElement, selector);
-                    }
+                    // Trigger a relayout of the existing Masonry instance
+                    gridElement.masonryInstance.layout();
                 }
             });
     
             // Observe changes in grid size
             resizeObserver.observe(gridElement);
-    
-            // Trigger initial Masonry layout
-            const selector = '.active-skill-container';
-            const masonryInstance = new Masonry(gridElement, {
-                itemSelector: selector,
-                originLeft: true,
-                gutter: 10,
-            });
-    
-            initializeMasonry(masonryInstance, gridElement, selector);
     
             // Store the observer for cleanup
             this._sResizeObserver = resizeObserver;
@@ -179,6 +173,7 @@ export default class SR3DActorSheet extends ActorSheet {
             console.warn("No .skills-masonry-grid element found for ResizeObserver");
         }
     }
+    
     
     
 
