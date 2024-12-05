@@ -3,7 +3,7 @@ import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
 import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
-import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
+import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
@@ -12,6 +12,8 @@ import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforc
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
 import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
+import { updateMasonryLayouts } from "./module/hooks/renderSR3DActorSheet/updateMasonryLayouts.js";
+import { initActiveSkillMasonry } from "./initActiveSkillMasonry.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -46,6 +48,15 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
+    Hooks.on(hooks.renderSR3DActorSheet, initializeMasonryLayout);
+    Hooks.on(hooks.renderSR3DActorSheet, initActiveSkillMasonry);
+    
+    
+
+    Hooks.on(hooks.renderSR3DActorSheet, updateMasonryLayouts);
+    
+    
+    
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
@@ -53,7 +64,6 @@ function registerHooks() {
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
-    Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
     Hooks.once(hooks.ready, scopeCssToProject);
 
     Hooks.once("ready", () => {

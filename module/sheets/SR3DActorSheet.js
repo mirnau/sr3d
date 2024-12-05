@@ -1,7 +1,7 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
-import { initializeMasonry } from '../services/initializeMasonry.js';
+import { getResizeObserver } from '../services/initializeMasonry.js';
 import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
@@ -203,7 +203,7 @@ export default class SR3DActorSheet extends ActorSheet {
                     percentPosition: true
 
                 });
-                initializeMasonry(masonryInstance, gridElement, child);
+                getResizeObserver(masonryInstance, gridElement, child);
 
                 // Attach the Masonry instance to the grid element for reuse
                 gridElement.masonryInstance = masonryInstance;

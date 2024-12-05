@@ -1,6 +1,5 @@
-import SR3DLog from '../SR3DLog.js'
 
-export function getResizeObserver(masonryInstance, gridElement, selector) {
+export function attachObserver(masonryInstance, gridElement, selector) {
 
     gridElement.masonryInstance = masonryInstance;
 
@@ -13,7 +12,7 @@ export function getResizeObserver(masonryInstance, gridElement, selector) {
         });
     });
 
-    SR3DLog.success(`Masonry Initiated for selector ${selector}`, getResizeObserver.name);
+    SR3DLog.success(`Masonry observer attached for Selector ${selector}`, attachObserver.name);
 
     return resizeObserver;
 }

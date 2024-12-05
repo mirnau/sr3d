@@ -43,3 +43,16 @@ export function lerpColor(color1, color2, t) {
 
     return `rgb(${r}, ${g}, ${b})`;
 }
+export function cacheMasonryOnActor(actor, masonryInstance) {
+
+    if (!actor.masonryLayouts)
+        actor.masonryLayouts = [];
+
+    actor.masonryLayouts.push(masonryInstance);
+}export function cacheResizeObserverOnActor(actor, resizeObserver) {
+    if (!actor.observers)
+        actor.observers = [];
+
+    actor.observers.push(resizeObserver);
+}
+

@@ -1,24 +1,31 @@
-import { initializeMasonry } from "../../services/initializeMasonry.js";
+import { getResizeObserver } from "../../services/initializeMasonry.js";
+import { cacheMasonryOnActor, cacheResizeObserverOnActor } from "../../sheets/Utilities.js";
 
-export function initializeMasonrlyLayout(app, html, data) {
-    console.log("MASONRY | Initializing after sheet render");
+export function initializeMasonryLayout(app, html, data) {
+    console.log("MASONRY | Initializing on start");
 
     const selector = '.sheet-component';
 
     const gridElement = html[0]?.querySelector('.sheet-masonry-grid');
 
     if (gridElement) {
+        
+        let masonryInstance = null;
+        let resizeObserver = null;
+        
         if (!gridElement.masonryInstance) {
-            const masonryInstance = new Masonry(gridElement, {
+            masonryInstance = new Masonry(gridElement, {
                 itemSelector: selector,
                 originLeft: true,
-                gutter: 10,
+                gutter: 7,
             });
            
-            initializeMasonry(masonryInstance, gridElement, selector);
+            resizeObserver = getResizeObserver(masonryInstance, gridElement, selector);
 
+            const actor = app.actor;
+
+            cacheMasonryOnActor(actor, masonryInstance);
+            cacheResizeObserverOnActor(actor, resizeObserver);
         }
-        
-        gridElement.masonryInstance.layout();
     }
 }
