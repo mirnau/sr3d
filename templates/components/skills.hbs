@@ -9,16 +9,13 @@
     <i class="fas fa-square-plus"></i>
   </a>
 </h2>
-<div class="grid-container">
-  <div class="skills-masonry-grid">
-    <div class="grid-sizer"></div>
-    <div class="gutter-sizer"></div>
-    <div class="active-skills-section">
-      {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
+<div class="active-grid-container">
+  <div class="active-skills-masonry-grid">
+    <div class="active-grid-sizer"></div>
+    <div class="active-gutter-sizer"></div>
+       {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
     </div>
-  </div>
 </div>
-
 
 <!-- Knowledge Skills -->
 <h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
@@ -27,7 +24,13 @@
   </a>
 </h2>
 
-{{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
+<div class="knowledge-grid-container">
+  <div class="knowledge-skills-masonry-grid">
+    <div class="knowledge-grid-sizer"></div>
+    <div class="knowledge-gutter-sizer"></div>
+      {{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
+  </div>
+</div>
 
 <!-- Language Skills -->
 <h2>{{localize "sr3d.item.skill.languageSkills"}}
@@ -35,5 +38,10 @@
     <i class="fas fa-square-plus"></i>
   </a>
 </h2>
-
-{{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
+<div class="language-grid-container">
+  <div class="language-skills-masonry-grid">
+    <div class="language-grid-sizer"></div>
+    <div class="language-gutter-sizer"></div>
+      {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
+  </div>
+</div>

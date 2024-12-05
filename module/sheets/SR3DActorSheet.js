@@ -121,82 +121,76 @@ export default class SR3DActorSheet extends ActorSheet {
             this._updateButtons(attribute);
         });
 
-        if (!this.resizeObserver) {
-            // Create and attach the ResizeObserver
-            this.resizeObserver = new ResizeObserver(() => this._layoutStateMachine(html));
-            this.resizeObserver.observe(html[0]);
+        if (!this.observers) {
+            this.observers = [];
         }
+
+        if (!this.stateMachineResizeObserver) {
+            // Create and attach the ResizeObserver
+            this.stateMachineResizeObserver = new ResizeObserver(() => this._layoutStateMachine(html));
+            this.stateMachineResizeObserver.observe(html[0]);
+            this.observers.push(this.stateMachineResizeObserver);
+        }
+
+        this.activeSkillsResizeObserver = null;
+        this.knowledgeSkillResizeObserver = null;
+        this.languageSkillResizeObserver = null;
+
+        this.observers.push(this.activeSkillsResizeObserver);
+        this.observers.push(this.knowledgeSkillResizeObserver);
+        this.observers.push(this.languageSkillResizeObserver);
 
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        this._skillResizeObserver(html, '.skills-masonry-grid', '.skill-category', '.grid-sizer', '.gutter-sizer');
+        this._observeMasonryResize(html, '.active-skills-masonry-grid', '.active-skill-category', '.active-grid-sizer', '.active-gutter-sizer',
+            this.activeSkillsResizeObserver, '--active-computed-item-width', '--active-gutter-width');
+
+        this._observeMasonryResize(html, '.knowledge-skills-masonry-grid', '.knowledge-skill-category', '.knowledge-grid-sizer', '.knowledge-gutter-sizer',
+            this.knowledgeSkillResizeObserver, '--knowledge-computed-item-width', '--knowledge-gutter-width');
+
+        this._observeMasonryResize(html, '.language-skills-masonry-grid', '.language-skill-category', '.language-grid-sizer', '.language-gutter-sizer',
+            this.languageSkillResizeObserver, '--language-computed-item-width', '--language-gutter-width');
     }
 
     //THe goal is to allways perfectly fill the available space in the grid with a
     //consistent gutter, already defined in Masonry.js instance. We are working in a projcet in FoundryVTT
 
-    _adjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector) {
-    const grid = html[0]?.querySelector(parentSelector);
-    const gridItems = html[0]?.querySelectorAll(childSelector);
-    const gutterSizer = html[0]?.querySelector(gutterSizerSelector);
-    const gridSizer = html[0]?.querySelector(gridSizerSelector);
+    _adjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemProp, gutterProp) {
+        const grid = html[0]?.querySelector(parentSelector);
+        const gridItems = html[0]?.querySelectorAll(childSelector);
+        const gutterSizer = html[0]?.querySelector(gutterSizerSelector);
+        const gridSizer = html[0]?.querySelector(gridSizerSelector);
 
-    // Ensure required elements exist
-    if (!grid || !gridItems.length || !gutterSizer || !gridSizer) return;
+        // Ensure required elements exist
+        if (!grid || !gridItems.length || !gutterSizer || !gridSizer) return;
 
-    // Use padding as the gutter size in pixels
-    const sampleItem = gridItems[0];
-    const gutterPx = parseFloat(getComputedStyle(sampleItem).padding);
+        // Use padding as the gutter size in pixels
+        const sampleItem = gridItems[0];
+        const gutterPx = parseFloat(getComputedStyle(sampleItem).padding);
 
-    // Grid area width in pixels (excluding margins)
-    const gridWidthPx = grid.offsetWidth;
+        // Grid area width in pixels (excluding margins)
+        const gridWidthPx = grid.offsetWidth;
 
-    // Minimum item width from grid-sizer
-    const minItemWidthPx = 184;
+        // Minimum item width from grid-sizer
+        const minItemWidthPx = 184;
 
-    // Estimate column count
-    let columnCount = Math.floor((gridWidthPx + gutterPx) / (minItemWidthPx + gutterPx));
-    columnCount = Math.max(columnCount, 1); // At least one column
+        // Estimate column count
+        let columnCount = Math.floor((gridWidthPx + gutterPx) / (minItemWidthPx + gutterPx));
+        columnCount = Math.max(columnCount, 1); // At least one column
 
-    // Calculate the actual item width in percentage
-    const totalGutterWidthPx = gutterPx * (columnCount - 1);
-    const availableWidthPx = gridWidthPx - totalGutterWidthPx;
-    const itemWidthPx = availableWidthPx / columnCount;
-    const itemWidthPercent = (itemWidthPx / gridWidthPx) * 100;
-    const gutterWidthPercent = (gutterPx / gridWidthPx) * 100;
+        // Calculate the actual item width in percentage
+        const totalGutterWidthPx = gutterPx * (columnCount - 1);
+        const availableWidthPx = gridWidthPx - totalGutterWidthPx;
+        const itemWidthPx = availableWidthPx / columnCount;
+        const itemWidthPercent = (itemWidthPx / gridWidthPx) * 100;
+        const gutterWidthPercent = (gutterPx / gridWidthPx) * 100;
 
-    // Update CSS variables
-    grid.style.setProperty('--active-computed-item-width', `${itemWidthPercent-1.5}%`);
-    grid.style.setProperty('--active-gutter-width', `${gutterWidthPercent}%`);
-}
+        // Update CSS variables
+        grid.style.setProperty(itemProp, `${itemWidthPercent - 1.5}%`);
+        grid.style.setProperty(gutterProp, `${gutterWidthPercent}%`);
+    }
 
-
-    /*
-
-    * We have a masonry grid, has a width that is adjustable. 
-    * I have to manally determine how many columns can be displayed at one time.
-    * How many columns displayed is based on this property:
-    
-            .grid-sizer {
-                min-width: 11.5rem;
-                }
-    
-    * a gutter is exacly the same width as the padding of a gridItem. Just trust me on this, and assume it is correct for this project.
-    * if the min-width fits the grid two times (after the N gutters has been substracted), then:
-        -the grid should display two columns
-        -the columns should distribute the available layotable space, after the N gutters space has been removed.
-        -the columns will be set by overwriting --active-computed-item-width with a new calculated percentage.
-        -we set the gutter with a varialbe too, if it will be changed in the future elsewhere, the code won't break
-
-        
-
-    */
-
-
-
-
-
-    _skillResizeObserver(html, parent, child, gridSizer, gutterSizer) {
+    _observeMasonryResize(html, parent, child, gridSizer, gutterSizer, observer, itemProp, gutterProp) {
         const gridElement = html[0]?.querySelector(parent);
 
         if (gridElement) {
@@ -216,9 +210,8 @@ export default class SR3DActorSheet extends ActorSheet {
             }
 
             // Initialize ResizeObserver
-            const resizeObserver = new ResizeObserver(([entry]) => {
+            observer = new ResizeObserver(([entry]) => {
                 const { contentRect } = entry;
-
 
                 if (!contentRect) return;
 
@@ -227,17 +220,14 @@ export default class SR3DActorSheet extends ActorSheet {
                 if (gridElement.dataset.lastWidth !== newWidth.toString()) {
                     gridElement.dataset.lastWidth = newWidth;
 
-                    this._adjustMasonryOnResize(html, parent, child, gridSizer, gutterSizer);
+                    this._adjustMasonryOnResize(html, parent, child, gridSizer, gutterSizer, itemProp, gutterProp);
                     gridElement.masonryInstance.layout();
                 }
             });
 
-
             // Observe changes in grid size
-            resizeObserver.observe(gridElement);
+            observer.observe(gridElement);
 
-            // Store the observer for cleanup
-            this._sResizeObserver = resizeObserver;
         } else {
             console.warn("No .skills-masonry-grid element found for ResizeObserver");
         }
@@ -314,17 +304,15 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
 
-    // NOTE: Disconnect ResizeObserver to avoid memory leaks
-    close(options = {}) {
-        if (this.resizeObserver) {
-            this.resizeObserver.disconnect();
-            this.resizeObserver = null;
-        }
 
-        if (this._sResizeObserver) {
-            this._sResizeObserver.disconnect();
-            this._sResizeObserver = null;
-        }
+    close(options = {}) {
+
+        this.observers.forEach((observer, index) => {
+            if (observer) {
+                observer.disconnect();
+                this.observers[index] = null;
+            }
+        });
 
         return super.close(options);
     }

@@ -1,12 +1,14 @@
 <!-- The knowledge skill card in the skills secton of the character sheet-->
 
 {{#each this}}
-<div class="skill-category">
-  <h3>{{@key}}</h3> <!-- Optional: Category Header -->
+<div class="knowledge-skill-category">
+  <div>
+    <h3>{{@key}}</h3> <!-- Category name (e.g., Body, Quickness) -->
+  </div>
   {{#each this}}
   <div class="knowledge-skill-container">
     <div class="core-skill">
-      <div class="active-skill-card">
+      <div class="knowledge-skill-card">
 
         <div class="skill-name">
           <h3>
@@ -22,9 +24,7 @@
             </a>
           </h4>
         </div>
-
         {{/if}}
-
 
         <div class="skill-value h1-value">
           <h1>
@@ -59,7 +59,7 @@
       </div>
     </div>
     {{/if}}
-  </div>
+  </div> <!-- Closing knowledge-skill-container -->
   {{/each}}
 </div>
 {{/each}}

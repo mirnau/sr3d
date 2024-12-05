@@ -63,12 +63,20 @@
 p,
 span,
 a,
-div,
 button,
 input,
 textarea {
     font-family: 'VT323', monospace;
     font-size: @base-font-size;
+    line-height: @line-height;
+    color: @text-color;
+    /* Set font color */
+}
+
+div,
+textarea {
+    font-family: 'VT323', monospace;
+    font-size: @base-font-size * 0.8; //set by rem
     line-height: @line-height;
     color: @text-color;
     /* Set font color */
