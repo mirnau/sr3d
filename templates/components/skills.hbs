@@ -1,42 +1,39 @@
 <!-- THE SKILL SECTION OF THE CHARACTERSHEET-->
-<section>
-  <h1>
-    {{localize "sr3d.item.skill.skills"}}
-  </h1>
+<h1>
+  {{localize "sr3d.item.skill.skills"}}
+</h1>
 
-  <!-- Active Skills -->
-  <h2>{{localize "sr3d.item.skill.activeSkills"}}
-    <a class="item-create" data-type="skill" data-skill-type="activeSkill" title="{{localize " sr3d.sheet.addSkill"}}">
-      <i class="fas fa-square-plus"></i>
-    </a>
-  </h2>
-  <div class="grid-container">
-    <div class="skills-masonry-grid">
-      <div class="active-skills-section">
-        {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
-      </div>
+<!-- Active Skills -->
+<h2>{{localize "sr3d.item.skill.activeSkills"}}
+  <a class="item-create" data-type="skill" data-skill-type="activeSkill" title="{{localize " sr3d.sheet.addSkill"}}">
+    <i class="fas fa-square-plus"></i>
+  </a>
+</h2>
+<div class="grid-container">
+  <div class="skills-masonry-grid">
+    <div class="grid-sizer"></div>
+    <div class="gutter-sizer"></div>
+    <div class="active-skills-section">
+      {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
     </div>
   </div>
+</div>
 
 
-  <!-- Knowledge Skills -->
-  <h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
-    <a class="item-create" data-type="skill" data-skill-type="knowledgeSkill" title="{{localize "
-      sr3d.sheet.addSkill"}}">
-      <i class="fas fa-square-plus"></i>
-    </a>
-  </h2>
+<!-- Knowledge Skills -->
+<h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
+  <a class="item-create" data-type="skill" data-skill-type="knowledgeSkill" title="{{localize " sr3d.sheet.addSkill"}}">
+    <i class="fas fa-square-plus"></i>
+  </a>
+</h2>
 
-  {{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
+{{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
 
-  <!-- Language Skills -->
-  <h2>{{localize "sr3d.item.skill.languageSkills"}}
-    <a class="item-create" data-type="skill" data-skill-type="languageSkill" title="{{localize "
-      sr3d.sheet.addSkill"}}">
-      <i class="fas fa-square-plus"></i>
-    </a>
-  </h2>
+<!-- Language Skills -->
+<h2>{{localize "sr3d.item.skill.languageSkills"}}
+  <a class="item-create" data-type="skill" data-skill-type="languageSkill" title="{{localize " sr3d.sheet.addSkill"}}">
+    <i class="fas fa-square-plus"></i>
+  </a>
+</h2>
 
-  {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
-
-</section>
+{{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}

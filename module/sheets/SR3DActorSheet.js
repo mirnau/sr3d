@@ -2,6 +2,7 @@ import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
 import { initializeMasonry } from '../services/initializeMasonry.js';
+import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -128,54 +129,122 @@ export default class SR3DActorSheet extends ActorSheet {
 
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        this._skillResizeObserver(html, '.skills-masonry-grid', '.skill-category');
+        this._skillResizeObserver(html, '.skills-masonry-grid', '.skill-category', '.grid-sizer', '.gutter-sizer');
     }
 
-    _skillResizeObserver(html, parent, child) {
-        const gridElement = html[0]?.querySelector(parent);
+    //THe goal is to allways perfectly fill the available space in the grid with a
+    //consistent gutter, already defined in Masonry.js instance. We are working in a projcet in FoundryVTT
+
+    _adjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector) {
+    const grid = html[0]?.querySelector(parentSelector);
+    const gridItems = html[0]?.querySelectorAll(childSelector);
+    const gutterSizer = html[0]?.querySelector(gutterSizerSelector);
+    const gridSizer = html[0]?.querySelector(gridSizerSelector);
+
+    // Ensure required elements exist
+    if (!grid || !gridItems.length || !gutterSizer || !gridSizer) return;
+
+    // Use padding as the gutter size in pixels
+    const sampleItem = gridItems[0];
+    const gutterPx = parseFloat(getComputedStyle(sampleItem).padding);
+
+    // Grid area width in pixels (excluding margins)
+    const gridWidthPx = grid.offsetWidth;
+
+    // Minimum item width from grid-sizer
+    const minItemWidthPx = 184;
+
+    // Estimate column count
+    let columnCount = Math.floor((gridWidthPx + gutterPx) / (minItemWidthPx + gutterPx));
+    columnCount = Math.max(columnCount, 1); // At least one column
+
+    // Calculate the actual item width in percentage
+    const totalGutterWidthPx = gutterPx * (columnCount - 1);
+    const availableWidthPx = gridWidthPx - totalGutterWidthPx;
+    const itemWidthPx = availableWidthPx / columnCount;
+    const itemWidthPercent = (itemWidthPx / gridWidthPx) * 100;
+    const gutterWidthPercent = (gutterPx / gridWidthPx) * 100;
+
+    // Update CSS variables
+    grid.style.setProperty('--active-computed-item-width', `${itemWidthPercent-1.5}%`);
+    grid.style.setProperty('--active-gutter-width', `${gutterWidthPercent}%`);
+}
+
+
+    /*
+
+    * We have a masonry grid, has a width that is adjustable. 
+    * I have to manally determine how many columns can be displayed at one time.
+    * How many columns displayed is based on this property:
     
+            .grid-sizer {
+                min-width: 11.5rem;
+                }
+    
+    * a gutter is exacly the same width as the padding of a gridItem. Just trust me on this, and assume it is correct for this project.
+    * if the min-width fits the grid two times (after the N gutters has been substracted), then:
+        -the grid should display two columns
+        -the columns should distribute the available layotable space, after the N gutters space has been removed.
+        -the columns will be set by overwriting --active-computed-item-width with a new calculated percentage.
+        -we set the gutter with a varialbe too, if it will be changed in the future elsewhere, the code won't break
+
+        
+
+    */
+
+
+
+
+
+    _skillResizeObserver(html, parent, child, gridSizer, gutterSizer) {
+        const gridElement = html[0]?.querySelector(parent);
+
         if (gridElement) {
             // Initialize Masonry if it doesn't already exist
             if (!gridElement.masonryInstance) {
                 const masonryInstance = new Masonry(gridElement, {
                     itemSelector: child,
-                    columnWidth: child,
-                    gutter: 8,
-                    
+                    columnWidth: gridSizer, // can be hardcoded to number, implcit px
+                    gutter: gutterSizer,
+                    percentPosition: true
+
                 });
                 initializeMasonry(masonryInstance, gridElement, child);
-    
+
                 // Attach the Masonry instance to the grid element for reuse
                 gridElement.masonryInstance = masonryInstance;
             }
-    
+
             // Initialize ResizeObserver
             const resizeObserver = new ResizeObserver(([entry]) => {
                 const { contentRect } = entry;
+
+
                 if (!contentRect) return;
-    
+
                 const newWidth = Math.floor(contentRect.width);
-    
+
                 if (gridElement.dataset.lastWidth !== newWidth.toString()) {
                     gridElement.dataset.lastWidth = newWidth;
-    
-                    // Trigger a relayout of the existing Masonry instance
+
+                    this._adjustMasonryOnResize(html, parent, child, gridSizer, gutterSizer);
                     gridElement.masonryInstance.layout();
                 }
             });
-    
+
+
             // Observe changes in grid size
             resizeObserver.observe(gridElement);
-    
+
             // Store the observer for cleanup
             this._sResizeObserver = resizeObserver;
         } else {
             console.warn("No .skills-masonry-grid element found for ResizeObserver");
         }
     }
-    
-    
-    
+
+
+
 
 
     _layoutStateMachine(html) {
@@ -256,7 +325,7 @@ export default class SR3DActorSheet extends ActorSheet {
             this._sResizeObserver.disconnect();
             this._sResizeObserver = null;
         }
-    
+
         return super.close(options);
     }
 
