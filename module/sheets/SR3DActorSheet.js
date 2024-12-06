@@ -1,7 +1,6 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
-import { getResizeObserver } from '../services/initializeMasonry.js';
 import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
@@ -17,6 +16,11 @@ export default class SR3DActorSheet extends ActorSheet {
                     navSelector: ".sheet-tabs .tabs",
                     contentSelector: ".tab-content",
                     initial: "inventory"
+                },
+                {
+                    navSelector: ".skills-tabs .tabs", 
+                    contentSelector: ".skills-tabs .tab-content",
+                    initial: "active-skills"
                 }
             ]
         });
@@ -64,8 +68,6 @@ export default class SR3DActorSheet extends ActorSheet {
             new CharacterCreationDialog(dialogData, content, resolve).render(true);
         });
     }
-
-
 
     async render(force = false, options = {}) {
         // Check if the creation dialog is completed
@@ -120,8 +122,6 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
-
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     close(options = {}) {

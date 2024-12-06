@@ -1,7 +1,4 @@
-.sr3d section.window-content {
-  background-color: red;
-}
-.sr3d img {
+.sr3d .sr3d img {
   border: 0px;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
@@ -57,7 +54,7 @@
 .sr3d .sheet-component .inner-background {
   box-sizing: border-box;
   padding: 0.5rem;
-  background: #283747;
+  background: #212b35;
   width: 100%;
   height: auto;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -126,20 +123,20 @@
 .sr3d .sr3d h6 {
   color: #48a564;
 }
-.sr3d p,
-.sr3d span,
-.sr3d a,
-.sr3d button,
-.sr3d input,
-.sr3d textarea {
+.sr3d .sr3d p,
+.sr3d .sr3d span,
+.sr3d .sr3d a,
+.sr3d .sr3d button,
+.sr3d .sr3d input,
+.sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
   font-size: 16px;
   line-height: 1.2;
   color: #c8d3f5;
   /* Set font color */
 }
-.sr3d div,
-.sr3d textarea {
+.sr3d .sr3d div,
+.sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
   font-size: 12.8px;
   line-height: 1.2;
@@ -160,7 +157,7 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   position: relative;
   text-align: center;
-  background: #212b35;
+  background: #283747;
   min-height: 6rem;
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease;
 }
@@ -426,7 +423,7 @@
 .sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background {
   box-sizing: border-box;
   padding: 1rem;
-  background: #283747;
+  background: #212b35;
   width: 100%;
   height: 100%;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -485,7 +482,7 @@
   justify-content: center;
   /* Centers the grid */
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -498,7 +495,7 @@
   width: var(--active-computed-item-width, 23%);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -562,7 +559,7 @@
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-specialization-card .active-specialization-card-color-override,
@@ -595,7 +592,7 @@
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid {
   justify-content: center;
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -608,7 +605,7 @@
   width: var(--knowledge-computed-item-width, 23%);
 }
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -718,7 +715,7 @@
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category .language-card-container .core-skill .active-skill-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category .skill-specialization-card .active-specialization-card-color-override,
@@ -761,7 +758,7 @@
   justify-content: center;
   /* Centers the grid */
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -774,7 +771,7 @@
   width: var(--language-computed-item-width, 23%);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -838,7 +835,7 @@
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations,
@@ -857,4 +854,48 @@
   text-align: center;
   background-color: #552791;
   clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs {
+  position: relative;
+  margin-top: 20px;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs {
+  display: flex;
+  gap: 1rem;
+  /* Space between tabs */
+  position: relative;
+  /* Base underline for tabs */
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  background: #145b68;
+  cursor: pointer;
+  z-index: 1;
+  /* Ensure tabs are above the content */
+  transition: background 0.3s, color 0.3s;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item:hover {
+  background: magenta;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item.active {
+  background: #283747;
+  /* Active tab is white */
+  color: #000;
+  z-index: 2;
+  /* Bring active tab to the front */
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content {
+  /* Rounded bottom corners */
+  padding: 0rem;
+  margin-top: -1px;
+  /* Pull the content up to align with tabs */
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab {
+  display: none;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab.active {
+  display: block;
 }

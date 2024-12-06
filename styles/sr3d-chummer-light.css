@@ -1,7 +1,4 @@
-.sr3d section.window-content {
-  background-color: red;
-}
-.sr3d img {
+.sr3d .sr3d img {
   border: 0px;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
@@ -126,20 +123,20 @@
 .sr3d .sr3d h6 {
   color: #48a564;
 }
-.sr3d p,
-.sr3d span,
-.sr3d a,
-.sr3d button,
-.sr3d input,
-.sr3d textarea {
+.sr3d .sr3d p,
+.sr3d .sr3d span,
+.sr3d .sr3d a,
+.sr3d .sr3d button,
+.sr3d .sr3d input,
+.sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
   font-size: 14px;
   line-height: 1.2;
   color: #c8d3f5;
   /* Set font color */
 }
-.sr3d div,
-.sr3d textarea {
+.sr3d .sr3d div,
+.sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
   font-size: 11.2px;
   line-height: 1.2;
@@ -857,4 +854,48 @@
   text-align: center;
   background-color: #552791;
   clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs {
+  position: relative;
+  margin-top: 20px;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs {
+  display: flex;
+  gap: 1rem;
+  /* Space between tabs */
+  position: relative;
+  /* Base underline for tabs */
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  background: #145b68;
+  cursor: pointer;
+  z-index: 1;
+  /* Ensure tabs are above the content */
+  transition: background 0.3s, color 0.3s;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item:hover {
+  background: magenta;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item.active {
+  background: #212b35;
+  /* Active tab is white */
+  color: #000;
+  z-index: 2;
+  /* Bring active tab to the front */
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content {
+  /* Rounded bottom corners */
+  padding: 0rem;
+  margin-top: -1px;
+  /* Pull the content up to align with tabs */
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab {
+  display: none;
+}
+.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab.active {
+  display: block;
 }

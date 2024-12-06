@@ -1,0 +1,59 @@
+.sr3d {
+    .sheet-masonry-grid {
+        .sheet-component {
+            .inner-background-container {
+                .skills-tabs {
+                    position: relative;
+                    margin-top: 20px;
+                }
+
+                .skills-tabs .tabs {
+                    display: flex;
+                    gap: 1rem;
+                    /* Space between tabs */
+                    position: relative;
+                    /* Base underline for tabs */
+                }
+
+                .skills-tabs .tabs .item {
+                    position: relative;
+                    padding: 0.5rem 1.5rem;
+                    background: @secondary-color;
+                    cursor: pointer;
+                    z-index: 1;
+                    /* Ensure tabs are above the content */
+                    transition: background 0.3s, color 0.3s;
+                    .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
+                }
+
+                .skills-tabs .tabs .item:hover {
+                    background: magenta;
+                }
+
+                .skills-tabs .tabs .item.active {
+                    background: @primary-color;
+                    /* Active tab is white */
+                    color: #000;
+                    z-index: 2;
+                    /* Bring active tab to the front */
+                }
+
+                .skills-tabs .tab-content {
+                    /* Rounded bottom corners */
+                    padding: 0rem;
+                    margin-top: -1px;
+                    /* Pull the content up to align with tabs */
+                    .clipped-corners(1rem, 1rem, 2rem, 1rem);
+                }
+
+                .skills-tabs .tab-content .tab {
+                    display: none;
+                }
+
+                .skills-tabs .tab-content .tab.active {
+                    display: block;
+                }
+            }
+        }
+    }
+}
