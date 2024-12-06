@@ -4,7 +4,7 @@
         <div class="specialization-value">
             {{system.activeSkill.value}}
             {{#if isOwned}}
-            <a class="delete-skill" title="{{localize "sr3d.sheet.deleteSkill"}}">
+            <a class="delete-owned-instance" title="{{localize " sr3d.sheet.deleteSkill"}}">
                 <i class="fas fa-trash-alt"></i>
             </a>
             <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}"><i
@@ -26,7 +26,7 @@
         <fieldset>
             <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
             <div class="specialization-add">
-                <input type="text" placeholder="{{localize "sr3d.item.skill.placeholder"}}"
+                <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}"
                     class="specialization-name" />
                 <a class="add-specialization" title="{{localize 'Add Specialization'}}">
                     <i class="fas fa-square-plus"></i>
@@ -41,8 +41,7 @@
                         value="{{this.name}}" />
                     <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
                     <input type="number" id="value-{{@index}}"
-                        name="system.skill.activeSkill.specializations.[{{@index}}].value" value="{{this.value}}"
-                        readonly />
+                        name="system.skill.activeSkill.specializations.[{{@index}}].value" value="{{this.value}}" />
 
                     <a class="delete-specialization" title="Delete Specialization">
                         <i class="fas fa-trash-alt"></i>

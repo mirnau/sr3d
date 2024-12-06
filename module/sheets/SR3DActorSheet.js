@@ -1,6 +1,8 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
+import { getResizeObserver } from '../services/initializeMasonry.js';
+import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
 
@@ -100,7 +102,7 @@ export default class SR3DActorSheet extends ActorSheet {
         super.activateListeners(html);
 
         html.find(".item-create").click(this._onItemCreate.bind(this));
-        html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
+        // html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
 
@@ -118,13 +120,28 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
+
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
+
+    close(options = {}) {
+        if (this.actor.observers) {
+            this.actor.observers.forEach((observer, index) => {
+                if (observer) {
+                    observer.disconnect();
+                    this.actor.observers[index] = null;
+                }
+            });
+        }
+        return super.close(options);
+    }
+
 
     // NOTE: This boolean is read in a hook in sr3d.js
     _onDetailPanelOpened(_, event) {
         this.actor.setFlag(flags.namespace, flags.isDossierPanelOpened, event.target.open);
     }
-    
+
 
     // Update Button States
     _updateButtons(attribute) {
@@ -144,43 +161,7 @@ export default class SR3DActorSheet extends ActorSheet {
 
         const skill = this.actor.items.get(skillId);
 
-        if (skill) {
-            // Open the item sheet
-            skill.sheet.render(true);
-        } else {
-            // Handle error if skill is not found
-            ui.notifications.error("Skill not found.");
-            console.error("Skill not found:", skillId);
-        }
-    }
-
-    _onDeleteSkill(event) {
-        event.preventDefault();
-
-        // Get the skill ID from the clicked element
-        const skillId = event.currentTarget.dataset.id;
-        console.log("Skill ID:", skillId); // Log the skill ID
-
-        // Fetch the skill using the ID
-        const skill = this.actor.items.get(skillId);
-
-        if (skill) {
-            console.log("Skill Found:", skill); // Log the skill if found
-            // Confirm deletion
-            const confirmed = window.confirm(`Are you sure you want to delete "${skill.name}"?`);
-            if (!confirmed) return;
-
-            // Delete the skill
-            skill.delete().then(() => {
-                ui.notifications.info(`${skill.name} has been deleted.`);
-            }).catch((error) => {
-                ui.notifications.error("An error occurred while deleting the skill.");
-                console.error(error);
-            });
-        } else {
-            console.error("Skill not found:", skillId); // Log missing skill
-            ui.notifications.error("Skill not found.");
-        }
+        skill.sheet.render(true);
     }
 
     _onItemCreate(event) {

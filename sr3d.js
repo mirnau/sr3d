@@ -3,7 +3,7 @@ import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
 import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
-import { initializeMasonrlyLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
+import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
@@ -12,6 +12,10 @@ import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforc
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
 import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
+import { updateMasonryLayouts } from "./module/hooks/renderSR3DActorSheet/updateMasonryLayouts.js";
+import { initActiveSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initActiveSkillMasonry.js";
+import { initKnowledgeSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initKnowledgeSkillMasonry.js";
+import { initLanguageSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initLanguageSkillMasonry.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -23,25 +27,45 @@ async function registerTemplatesFromPathsAsync() {
 
     const paths = [];
 
-    for (const folder of folders) {
+    async function gatherFiles(folder) {
         const fileList = await FilePicker.browse("data", folder);
+
+        // Filter and collect .hbs files
         const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
         paths.push(...hbsFiles);
+
+        // Recursively process subfolders
+        for (const subFolder of fileList.dirs) {
+            await gatherFiles(subFolder);
+        }
+    }
+
+    for (const folder of folders) {
+        await gatherFiles(folder);
     }
 
     return loadTemplates(paths);
 }
 
+
 function registerHooks() {
 
+    Hooks.on(hooks.renderSR3DActorSheet, (app, html, data) => {
+        initializeMasonryLayout(app, html, data);
+        initActiveSkillMasonry(app, html, data);
+        initKnowledgeSkillMasonry(app, html, data);
+        initLanguageSkillMasonry(app, html, data);
+    });
+    
+    //Hooks.on(hooks.renderSR3DActorSheet, updateMasonryLayouts); Probably redundant
+    
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
-    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
-    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.createActor, setFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
-    Hooks.on(hooks.renderSR3DActorSheet, initializeMasonrlyLayout);
+    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
+    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.once(hooks.ready, scopeCssToProject);
 
     Hooks.once("ready", () => {

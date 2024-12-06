@@ -1,35 +1,33 @@
-/*
-.grid-container {
-    background-color: antiquewhite;
+.language-grid-container {
+    background-color: transparent;
     width: 100%;
+    /* Allows it to stretch with the parent */
 
-
-    .skills-masonry-grid {
+    .language-skills-masonry-grid {
         justify-content: center;
-
+        /* Centers the grid */
         position: relative;
         background-color: @primary-color;
         width: 100%;
         margin: 0 auto;
-        padding: .5rem;
+        padding: 0.5rem;
         .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
-        .gutter-sizer {
-            width: var(---active-gutter-width, 2%); 
+        .language-gutter-sizer {
+            width: var(--language-gutter-width, 2%);
         }
-        .grid-sizer {
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+        .language-grid-sizer {
+            width: var(--language-computed-item-width, 23%);
+            // min-width: 11.5rem;
         }
 
-
-        .skill-category {
+        .language-skill-category {
             background-color: @background-color;
             margin-bottom: 0.5rem;
             padding: 0.5rem;
             float: left;
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+            width: var(--language-computed-item-width, 23%);
+            // min-width: 11.5rem;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
             .skill-specialization-card {
@@ -37,8 +35,6 @@
             }
 
             .skill-specialization-card,
-            .active-skill-container,
-            .knowledge-skill-container,
             .language-card-container {
                 width: 100%;
                 display: flex;
@@ -67,9 +63,7 @@
                         right: -0.25rem;
                     }
 
-                    .language-card,
-                    .knowledge-card,
-                    .active-skill-card {
+                    .language-card {
                         width: 100%;
                         display: flex;
                         flex-direction: row;
@@ -97,14 +91,7 @@
                     }
                 }
 
-                .active-specialization-card-color-override {
-                    background-color: @tertiary-color;
-                    padding: 0.25rem;
-                    flex-direction: row; // Children inside also aligned horizontally
-                }
-
                 .specialisation-container {
-
                     .specializations {
                         padding: 0px;
                         width: 50%;
@@ -112,11 +99,9 @@
                         .specialization-name {
                             flex-direction: column;
                             flex-wrap: wrap;
-
                         }
 
                         .specialization-value {
-
                             width: 3rem;
                             text-align: center;
                             background-color: @quartiery-color;
@@ -128,4 +113,3 @@
         }
     }
 }
-*/

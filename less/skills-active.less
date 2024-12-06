@@ -1,12 +1,11 @@
-/*
-.grid-container {
-    background-color: antiquewhite;
+.active-grid-container {
+    background-color: transparent;
     width: 100%;
+    /* Allows it to stretch with the parent */
 
-
-    .skills-masonry-grid {
+    .active-skills-masonry-grid {
         justify-content: center;
-
+        /* Centers the grid */
         position: relative;
         background-color: @primary-color;
         width: 100%;
@@ -14,16 +13,15 @@
         padding: .5rem;
         .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
-        .gutter-sizer {
-            width: var(---active-gutter-width, 2%); 
+        .active-gutter-sizer {
+            width: var(--active-gutter-width, 2%); 
         }
-        .grid-sizer {
+        .active-grid-sizer {
             width: var(--active-computed-item-width, 23%); 
             //min-width: 11.5rem;
         }
 
-
-        .skill-category {
+        .active-skill-category {
             background-color: @background-color;
             margin-bottom: 0.5rem;
             padding: 0.5rem;
@@ -37,9 +35,7 @@
             }
 
             .skill-specialization-card,
-            .active-skill-container,
-            .knowledge-skill-container,
-            .language-card-container {
+            .active-skill-container {
                 width: 100%;
                 display: flex;
                 flex-direction: column;
@@ -67,8 +63,6 @@
                         right: -0.25rem;
                     }
 
-                    .language-card,
-                    .knowledge-card,
                     .active-skill-card {
                         width: 100%;
                         display: flex;
@@ -128,4 +122,3 @@
         }
     }
 }
-*/

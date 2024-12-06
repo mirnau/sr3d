@@ -1,133 +1,135 @@
-        <fieldset data-skill-type="languageSkill" data-sub-skill="speech">
-            <legend>{{localize "sr3d.item.skill.languageSkill"}}</legend>
-            <label>
-                {{localize "sr3d.item.skill.speech"}}
-                <input type="number" name="system.skill.languageSkill.speech.base"
-                    value="{{system.skill.languageSkill.speech.base}}" />
-            </label>
-            <!-- Specializations Section -->
-            <fieldset>
-                <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
-                <div class="specialization-add">
-                    <input type="text" placeholder="{{localize "sr3d.item.skill.placeholder"}}"
-                        class="specialization-name" />
-                    <a class="add-specialization" title="{{localize 'Add Specialization'}}">
-                        <i class="fas fa-square-plus"></i>
-                    </a>
-                </div>
-                <hr />
-                <div class="specializations-list">
-                    {{#each system.skill.languageSkill.speech.specializations}}
+<fieldset data-skill-type="languageSkill" data-sub-skill="speech">
+    <legend>{{localize "sr3d.item.skill.languageSkill"}}</legend>
+    {{#if isOwned}}
+    <a class="delete-owned-instance" title="{{localize " sr3d.sheet.deleteSkill"}}">
+        <i class="fas fa-trash-alt"></i>
+    </a>
+    <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}"><i class="fas fa-shopping-cart-plus"></i></a>
+    <a class="undo" title="Undo"><i class="fas fa-undo-alt"></i></a>
+    {{/if}}
+    <label>
+        {{localize "sr3d.item.skill.speech"}}
+        <input type="number" name="system.skill.languageSkill.speech.base"
+            value="{{system.skill.languageSkill.speech.base}}" />
+    </label>
+    <!-- Specializations Section -->
+    <fieldset>
+        <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
+        <div class="specialization-add">
+            <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}" class="specialization-name" />
+            <a class="add-specialization" title="{{localize 'Add Specialization'}}">
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+        <hr />
+        <div class="specializations-list">
+            {{#each system.skill.languageSkill.speech.specializations}}
 
-                    <div class="specialization-container" data-index="{{@index}}">
-                        <input type="text" name="system.skill.languageSkill.speech.specializations.[{{@index}}].name"
-                            value="{{this.name}}" />
-                        <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
-                        <input type="number" id="value-{{@index}}"
-                            name="system.skill.languageSkill.speech.specializations.[{{@index}}].value"
-                            value="{{this.value}}" readonly />
+            <div class="specialization-container" data-index="{{@index}}">
+                <input type="text" name="system.skill.languageSkill.speech.specializations.[{{@index}}].name"
+                    value="{{this.name}}" />
+                <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
+                <input type="number" id="value-{{@index}}"
+                    name="system.skill.languageSkill.speech.specializations.[{{@index}}].value"
+                    value="{{this.value}}" />
 
-                        <a class="delete-specialization" title="Delete Specialization">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                        <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <a class="undo" title="Undo">
-                            <i class="fas fa-undo-alt"></i>
-                        </a>
-                    </div>
-                    {{else}}
-                    <p>No specializations available.</p>
-                    {{/each}}
-                </div>
-            </fieldset>
-        </fieldset>
-        <fieldset data-skill-type="languageSkill" data-sub-skill="read">
-            <label>
-                {{localize "sr3d.item.skill.read"}}
-                <input type="number" name="system.skill.languageSkill.read.base"
-                    value="{{system.skill.languageSkill.reading.base}}" />
-            </label>
-            <!-- Specializations Section -->
-            <fieldset>
-                <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
-                <div class="specialization-add">
-                    <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}"
-                        class="specialization-name" />
-                    <a class="add-specialization" title="{{localize 'Add Specialization'}}">
-                        <i class="fas fa-square-plus"></i>
-                    </a>
-                </div>
-                <hr />
-                <div class="specializations-list">
-                    {{#each system.skill.languageSkill.read.specializations}}
+                <a class="delete-specialization" title="Delete Specialization">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a class="undo" title="Undo">
+                    <i class="fas fa-undo-alt"></i>
+                </a>
+            </div>
+            {{else}}
+            <p>No specializations available.</p>
+            {{/each}}
+        </div>
+    </fieldset>
+</fieldset>
+<fieldset data-skill-type="languageSkill" data-sub-skill="read">
+    <label>
+        {{localize "sr3d.item.skill.read"}}
+        <input type="number" name="system.skill.languageSkill.read.base"
+            value="{{system.skill.languageSkill.read.base}}" />
+    </label>
+    <!-- Specializations Section -->
+    <fieldset>
+        <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
+        <div class="specialization-add">
+            <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}" class="specialization-name" />
+            <a class="add-specialization" title="{{localize 'Add Specialization'}}">
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+        <hr />
+        <div class="specializations-list">
+            {{#each system.skill.languageSkill.read.specializations}}
 
-                    <div class="specialization-container" data-index="{{@index}}">
-                        <input type="text" name="system.skill.languageSkill.read.specializations.[{{@index}}].name"
-                            value="{{this.name}}" />
-                        <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
-                        <input type="number" id="value-{{@index}}"
-                            name="system.skill.languageSkill.read.specializations.[{{@index}}].value"
-                            value="{{this.value}}" readonly />
+            <div class="specialization-container" data-index="{{@index}}">
+                <input type="text" name="system.skill.languageSkill.read.specializations.[{{@index}}].name"
+                    value="{{this.name}}" />
+                <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
+                <input type="number" id="value-{{@index}}"
+                    name="system.skill.languageSkill.read.specializations.[{{@index}}].value" value="{{this.value}}" />
 
-                        <a class="delete-specialization" title="Delete Specialization">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                        <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <a class="undo" title="Undo">
-                            <i class="fas fa-undo-alt"></i>
-                        </a>
-                    </div>
-                    {{else}}
-                    <p>No specializations available.</p>
-                    {{/each}}
-                </div>
-            </fieldset>
-        </fieldset>
-        <fieldset data-skill-type="languageSkill" data-sub-skill="write">
-            <label>
-                {{localize "sr3d.item.skill.write"}}
-                <input type="number" name="system.skill.languageSkill.write.base"
-                    value="{{system.skill.languageSkill.writing.base}}" />
-            </label>
-            <!-- Specializations Section -->
-            <fieldset>
-                <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
-                <div class="specialization-add">
-                    <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}"
-                        class="specialization-name" />
-                    <a class="add-specialization" title="{{localize 'Add Specialization'}}">
-                        <i class="fas fa-square-plus"></i>
-                    </a>
-                </div>
-                <hr />
-                <div class="specializations-list">
-                    {{#each system.skill.languageSkill.write.specializations}}
+                <a class="delete-specialization" title="Delete Specialization">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a class="undo" title="Undo">
+                    <i class="fas fa-undo-alt"></i>
+                </a>
+            </div>
+            {{else}}
+            <p>No specializations available.</p>
+            {{/each}}
+        </div>
+    </fieldset>
+</fieldset>
+<fieldset data-skill-type="languageSkill" data-sub-skill="write">
+    <label>
+        {{localize "sr3d.item.skill.write"}}
+        <input type="number" name="system.skill.languageSkill.write.base"
+            value="{{system.skill.languageSkill.write.base}}" />
+    </label>
+    <!-- Specializations Section -->
+    <fieldset>
+        <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
+        <div class="specialization-add">
+            <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}" class="specialization-name" />
+            <a class="add-specialization" title="{{localize 'Add Specialization'}}">
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+        <hr />
+        <div class="specializations-list">
+            {{#each system.skill.languageSkill.write.specializations}}
 
-                    <div class="specialization-container" data-index="{{@index}}">
-                        <input type="text" name="system.skill.languageSkill.write.specializations.[{{@index}}].name"
-                            value="{{this.name}}" />
-                        <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
-                        <input type="number" id="value-{{@index}}"
-                            name="system.skill.languageSkill.write.specializations.[{{@index}}].value"
-                            value="{{this.value}}" readonly />
+            <div class="specialization-container" data-index="{{@index}}">
+                <input type="text" name="system.skill.languageSkill.write.specializations.[{{@index}}].name"
+                    value="{{this.name}}" />
+                <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
+                <input type="number" id="value-{{@index}}"
+                    name="system.skill.languageSkill.write.specializations.[{{@index}}].value" value="{{this.value}}" />
 
-                        <a class="delete-specialization" title="Delete Specialization">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                        <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <a class="undo" title="Undo">
-                            <i class="fas fa-undo-alt"></i>
-                        </a>
-                    </div>
-                    {{else}}
-                    <p>No specializations available.</p>
-                    {{/each}}
-                </div>
-            </fieldset>
-        </fieldset>
+                <a class="delete-specialization" title="Delete Specialization">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                <a class="buy-skill" title="{{localize " sr3d.item.skill.purchaseSkills"}}">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a class="undo" title="Undo">
+                    <i class="fas fa-undo-alt"></i>
+                </a>
+            </div>
+            {{else}}
+            <p>No specializations available.</p>
+            {{/each}}
+        </div>
+    </fieldset>
+</fieldset>
