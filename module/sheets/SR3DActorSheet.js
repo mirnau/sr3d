@@ -121,201 +121,21 @@ export default class SR3DActorSheet extends ActorSheet {
             this._updateButtons(attribute);
         });
 
-        if (!this.observers) {
-            this.observers = [];
-        }
-
-        if (!this.stateMachineResizeObserver) {
-            // Create and attach the ResizeObserver
-            this.stateMachineResizeObserver = new ResizeObserver(() => this._layoutStateMachine(html));
-            this.stateMachineResizeObserver.observe(html[0]);
-            this.observers.push(this.stateMachineResizeObserver);
-        }
-
-        this.activeSkillsResizeObserver = null;
-        this.knowledgeSkillResizeObserver = null;
-        this.languageSkillResizeObserver = null;
-
-        this.observers.push(this.activeSkillsResizeObserver);
-        this.observers.push(this.knowledgeSkillResizeObserver);
-        this.observers.push(this.languageSkillResizeObserver);
-
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        this._observeMasonryResize(html, '.active-skills-masonry-grid', '.active-skill-category', '.active-grid-sizer', '.active-gutter-sizer',
-            this.activeSkillsResizeObserver, '--active-computed-item-width', '--active-gutter-width');
-
-        this._observeMasonryResize(html, '.knowledge-skills-masonry-grid', '.knowledge-skill-category', '.knowledge-grid-sizer', '.knowledge-gutter-sizer',
-            this.knowledgeSkillResizeObserver, '--knowledge-computed-item-width', '--knowledge-gutter-width');
-
-        this._observeMasonryResize(html, '.language-skills-masonry-grid', '.language-skill-category', '.language-grid-sizer', '.language-gutter-sizer',
-            this.languageSkillResizeObserver, '--language-computed-item-width', '--language-gutter-width');
     }
-
-    //THe goal is to allways perfectly fill the available space in the grid with a
-    //consistent gutter, already defined in Masonry.js instance. We are working in a projcet in FoundryVTT
-
-    _adjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemProp, gutterProp) {
-        const grid = html[0]?.querySelector(parentSelector);
-        const gridItems = html[0]?.querySelectorAll(childSelector);
-        const gutterSizer = html[0]?.querySelector(gutterSizerSelector);
-        const gridSizer = html[0]?.querySelector(gridSizerSelector);
-
-        // Ensure required elements exist
-        if (!grid || !gridItems.length || !gutterSizer || !gridSizer) return;
-
-        // Use padding as the gutter size in pixels
-        const sampleItem = gridItems[0];
-        const gutterPx = parseFloat(getComputedStyle(sampleItem).padding);
-
-        // Grid area width in pixels (excluding margins)
-        const gridWidthPx = grid.offsetWidth;
-
-        // Minimum item width from grid-sizer
-        const minItemWidthPx = 184;
-
-        // Estimate column count
-        let columnCount = Math.floor((gridWidthPx + gutterPx) / (minItemWidthPx + gutterPx));
-        columnCount = Math.max(columnCount, 1); // At least one column
-
-        // Calculate the actual item width in percentage
-        const totalGutterWidthPx = gutterPx * (columnCount - 1);
-        const availableWidthPx = gridWidthPx - totalGutterWidthPx;
-        const itemWidthPx = availableWidthPx / columnCount;
-        const itemWidthPercent = (itemWidthPx / gridWidthPx) * 100;
-        const gutterWidthPercent = (gutterPx / gridWidthPx) * 100;
-
-        // Update CSS variables
-        grid.style.setProperty(itemProp, `${itemWidthPercent - 1.5}%`);
-        grid.style.setProperty(gutterProp, `${gutterWidthPercent}%`);
-    }
-
-    _observeMasonryResize(html, parent, child, gridSizer, gutterSizer, observer, itemProp, gutterProp) {
-        const gridElement = html[0]?.querySelector(parent);
-
-        if (gridElement) {
-            // Initialize Masonry if it doesn't already exist
-            if (!gridElement.masonryInstance) {
-                const masonryInstance = new Masonry(gridElement, {
-                    itemSelector: child,
-                    columnWidth: gridSizer, // can be hardcoded to number, implcit px
-                    gutter: gutterSizer,
-                    percentPosition: true
-
-                });
-                getResizeObserver(masonryInstance, gridElement, child);
-
-                // Attach the Masonry instance to the grid element for reuse
-                gridElement.masonryInstance = masonryInstance;
-            }
-
-            // Initialize ResizeObserver
-            observer = new ResizeObserver(([entry]) => {
-                const { contentRect } = entry;
-
-                if (!contentRect) return;
-
-                const newWidth = Math.floor(contentRect.width);
-
-                if (gridElement.dataset.lastWidth !== newWidth.toString()) {
-                    gridElement.dataset.lastWidth = newWidth;
-
-                    this._adjustMasonryOnResize(html, parent, child, gridSizer, gutterSizer, itemProp, gutterProp);
-                    gridElement.masonryInstance.layout();
-                }
-            });
-
-            // Observe changes in grid size
-            observer.observe(gridElement);
-
-        } else {
-            console.warn("No .skills-masonry-grid element found for ResizeObserver");
-        }
-    }
-
-
-
-
-
-    _layoutStateMachine(html) {
-
-        const sheetWidth = this.position?.width || 1400; // Default width
-        const maxWidth = 1400;
-
-        // Define thresholds for layout
-        const lowerLimit = 0.5 * maxWidth; // 33% of maxWidth
-        const middleLimit = 0.66 * maxWidth; // 60% of maxWidth
-
-        // Determine layout state
-        let layoutState = "small"; // Default to small layout
-        if (sheetWidth > middleLimit) {
-            layoutState = "wide";
-        } else if (sheetWidth > lowerLimit) {
-            layoutState = "medium";
-        }
-
-        // Column width percentages for each layout state
-        const columnWidthPercent = {
-            small: 100,
-            medium: 49,
-            wide: 32,
-        };
-
-        // Apply column width globally
-        const columnWidth = columnWidthPercent[layoutState];
-        this.element[0].style.setProperty("--column-width", `${columnWidth}%`);
-
-        // Query components
-        const twoSpanComponents = this.element[0].querySelectorAll(".two-span-selectable");
-        const threeSpanComponents = this.element[0].querySelectorAll(".three-span-selectable");
-
-        // State machine for component layout
-        switch (layoutState) {
-            case "small":
-                // Small layout: Reset all spans to single column
-                twoSpanComponents.forEach((component) => {
-                    component.style.width = `var(--column-width)`;
-                });
-                threeSpanComponents.forEach((component) => {
-                    component.style.width = `var(--column-width)`;
-                });
-                break;
-
-            case "medium":
-                // Medium layout: Two-span components span two columns
-                twoSpanComponents.forEach((component) => {
-                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
-                });
-                threeSpanComponents.forEach((component) => {
-                    component.style.width = `var(--column-width)`; // Reset to single column
-                });
-                break;
-
-            case "wide":
-                // Wide layout: Three-span components span three columns
-                twoSpanComponents.forEach((component) => {
-                    component.style.width = `calc(2 * var(--column-width) - 10px)`;
-                });
-                threeSpanComponents.forEach((component) => {
-                    component.style.width = `calc(3 * var(--column-width) - 20px)`;
-                });
-                break;
-        }
-    }
-
-
 
     close(options = {}) {
-
-        this.observers.forEach((observer, index) => {
-            if (observer) {
-                observer.disconnect();
-                this.observers[index] = null;
-            }
-        });
-
+        if (this.actor.observers) {
+            this.actor.observers.forEach((observer, index) => {
+                if (observer) {
+                    observer.disconnect();
+                    this.actor.observers[index] = null;
+                }
+            });
+        }
         return super.close(options);
     }
+
 
     // NOTE: This boolean is read in a hook in sr3d.js
     _onDetailPanelOpened(_, event) {
@@ -343,36 +163,6 @@ export default class SR3DActorSheet extends ActorSheet {
 
         skill.sheet.render(true);
     }
-
-    /*
-    _onDeleteSkill(event) {
-        event.preventDefault();
-
-        // Get the skill ID from the clicked element
-        const skillId = event.currentTarget.dataset.id;
-        console.log("Skill ID:", skillId); // Log the skill ID
-
-        // Fetch the skill using the ID
-        const skill = this.actor.items.get(skillId);
-
-        if (skill) {
-            console.log("Skill Found:", skill); // Log the skill if found
-            // Confirm deletion
-            const confirmed = window.confirm(`Are you sure you want to delete "${skill.name}"?`);
-            if (!confirmed) return;
-
-            // Delete the skill
-            skill.delete().then(() => {
-                ui.notifications.info(`${skill.name} has been deleted.`);
-            }).catch((error) => {
-                ui.notifications.error("An error occurred while deleting the skill.");
-                console.error(error);
-            });
-        } else {
-            console.error("Skill not found:", skillId); // Log missing skill
-            ui.notifications.error("Skill not found.");
-        }
-    }*/
 
     _onItemCreate(event) {
         event.preventDefault();

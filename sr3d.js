@@ -13,7 +13,9 @@ import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforc
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
 import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
 import { updateMasonryLayouts } from "./module/hooks/renderSR3DActorSheet/updateMasonryLayouts.js";
-import { initActiveSkillMasonry } from "./initActiveSkillMasonry.js";
+import { initActiveSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initActiveSkillMasonry.js";
+import { initKnowledgeSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initKnowledgeSkillMasonry.js";
+import { initLanguageSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initLanguageSkillMasonry.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -48,14 +50,14 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
-    Hooks.on(hooks.renderSR3DActorSheet, initializeMasonryLayout);
-    Hooks.on(hooks.renderSR3DActorSheet, initActiveSkillMasonry);
+    Hooks.on(hooks.renderSR3DActorSheet, (app, html, data) => {
+        initializeMasonryLayout(app, html, data);
+        initActiveSkillMasonry(app, html, data);
+        initKnowledgeSkillMasonry(app, html, data);
+        initLanguageSkillMasonry(app, html, data);
+    });
     
-    
-
-    Hooks.on(hooks.renderSR3DActorSheet, updateMasonryLayouts);
-    
-    
+    //Hooks.on(hooks.renderSR3DActorSheet, updateMasonryLayouts); Probably redundant
     
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);

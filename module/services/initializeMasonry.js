@@ -1,10 +1,19 @@
 import SR3DLog from '../SR3DLog.js'
 
-export function getResizeObserver(masonryInstance, gridElement, selector) {
+export function getResizeObserver(masonryInstance, gridElement, selector, func = null) {
 
     gridElement.masonryInstance = masonryInstance;
 
-    const resizeObserver = new ResizeObserver(() => masonryInstance.layout());
+    const resizeObserver = new ResizeObserver(() => {
+        
+        if(func) {
+            
+            func();
+        }
+        
+        masonryInstance.layout()
+    });
+    
     resizeObserver.observe(gridElement);
 
     gridElement.querySelectorAll('details').forEach((details) => {

@@ -1,25 +1,27 @@
+
 import { cacheMasonryOnActor, cacheResizeObserverOnActor } from "../../sheets/Utilities.js";
 import { getResizeObserver } from "../../services/initializeMasonry.js";
 
-export function initActiveSkillMasonry(app, html, data) {
+export function initKnowledgeSkillMasonry(app, html, data) {
+
     const actor = app.actor;
 
-    if (!actor.activeSkillsResizeObserver) 
-        actor.activeSkillsResizeObserver = null; //I assume this has to be destroyed from the actor
+    if (!actor.knowledgeSkillsResizeObserver) 
+        actor.knowledgeSkillsResizeObserver = null; //I assume this has to be destroyed from the actor
 
 
         const masonryResizeConfig = {
             html: html,
-            parentSelector: '.active-skills-masonry-grid',
-            childSelector: '.active-skill-category',
-            gridSizerSelector: '.active-grid-sizer',
-            gutterSizerSelector: '.active-gutter-sizer',
-            itemCSSVar: '--active-computed-item-width',
-            gutterCSSVar: '--active-gutter-width',
-            observer: actor.activeSkillsResizeObserver //keeping the reference so we can reach it from the actor
+            parentSelector: '.knowledge-skills-masonry-grid',
+            childSelector: '.knowledge-skill-category',
+            gridSizerSelector: '.knowledge-grid-sizer',
+            gutterSizerSelector: '.knowledge-gutter-sizer',
+            itemCSSVar: '--knowledge-computed-item-width',
+            gutterCSSVar: '--knowledge-gutter-width',
+            observer: actor.knowledgeSkillsResizeObserver //keeping the reference so we can reach it from the actor
         };
 
-        actor.activeSkillsResizeObserver = observeMasonryResize(actor, masonryResizeConfig);
+        actor.knowledgeSkillsResizeObserver = observeMasonryResize(actor, masonryResizeConfig);
 }
 
 function adjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemCSSVar, gutterCSSVar) {
@@ -88,3 +90,6 @@ function observeMasonryResize(actor, masonryResizeConfig) {
 
     return masonryResizeConfig.observer;
 }
+
+
+
