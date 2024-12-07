@@ -18,6 +18,9 @@
   max-width: 1400px;
   background: transparent;
 }
+.sr3d .sr3d.sheet.character .window-resizable-handle {
+  background-color: #ff0095;
+}
 .sr3d .sr3d.sheet.character .window-content,
 .sr3d .sr3d.sheet.character form {
   position: relative;
@@ -219,6 +222,7 @@
   width: 100px;
   /* Fixed size for square */
   height: 100px;
+  top: 5rem;
   left: -3rem;
   z-index: 1;
 }
@@ -448,16 +452,11 @@
   height: 100%;
 }
 .sr3d .pulsing-green-cart {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
   color: inherit;
   cursor: pointer;
   animation: pulse-color-scale 2s infinite ease-in-out;
 }
 .sr3d .pulsing-green-cart i {
-  font-size: 1.2em;
   animation: pulse-color-scale 2s infinite ease-in-out;
 }
 @keyframes pulse-color-scale {
@@ -857,40 +856,35 @@
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs {
   position: relative;
-  margin-top: 20px;
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs {
   display: flex;
-  gap: 1rem;
-  /* Space between tabs */
-  position: relative;
-  /* Base underline for tabs */
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 0;
+  margin-left: 1.5rem;
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item {
   position: relative;
-  padding: 0.5rem 1.5rem;
-  background: #145b68;
+  padding: 0.5rem 0.5rem;
+  background: #552791;
   cursor: pointer;
   z-index: 1;
-  /* Ensure tabs are above the content */
-  transition: background 0.3s, color 0.3s;
+  transition: background 1.5s, color 1.3s;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item:hover {
-  background: magenta;
+  transition: background 1.5s, color 1.3s;
+  background: #6825c0;
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item.active {
   background: #212b35;
-  /* Active tab is white */
   color: #000;
   z-index: 2;
-  /* Bring active tab to the front */
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content {
-  /* Rounded bottom corners */
   padding: 0rem;
   margin-top: -1px;
-  /* Pull the content up to align with tabs */
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab {
@@ -898,4 +892,226 @@
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tab-content .tab.active {
   display: block;
+}
+@font-face {
+  font-family: 'Neonderthaw';
+  font-style: oblique;
+  src: url('../fonts/Neonderthaw/Neonderthaw-Regular.ttf') format('truetype');
+}
+.sr3d .neon-name-position {
+  position: absolute;
+  top: -6rem;
+  left: 1;
+  z-index: 100;
+}
+.sr3d .neon-name-position .neon-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sr3d .neon-name-position .neon-name div {
+  font-family: 'Neonderthaw', serif;
+  font-size: 5rem;
+  color: #ff0095;
+  text-shadow: 0 0 10px blueviolet, 0 0 20px #ff0033, 0 0 40px blue;
+  animation: glow 1.5s infinite alternate;
+}
+.sr3d .neon-name-position .neon-name .malfunc {
+  color: #ff0095;
+  text-shadow: 0 0 10px blueviolet, 0 0 20px #ff0033, 0 0 40px blue;
+  animation: flicker 3.3s infinite alternate;
+}
+@keyframes glow {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes flicker {
+  0% {
+    opacity: 0.2;
+  }
+  2.5% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  7.5% {
+    opacity: 0.7;
+  }
+  10% {
+    opacity: 1;
+  }
+  12.5% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 1;
+  }
+  17.5% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  22.5% {
+    opacity: 0.2;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  27.5% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.2;
+  }
+  32.5% {
+    opacity: 0.2;
+  }
+  35% {
+    opacity: 0.2;
+  }
+  37.5% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  42.5% {
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 0.5;
+  }
+  47.5% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  52.5% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  57.5% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  62.5% {
+    opacity: 0.7;
+  }
+  65% {
+    opacity: 1;
+  }
+  67.5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  72.5% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  77.5% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 1;
+  }
+  82.5% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  87.5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  92.5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  97.5% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+.sr3d .sr3d .window-header {
+  background-color: transparent;
+  align-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.sr3d .sr3d .window-header .window-title {
+  background-color: transparent;
+  text-align: center;
+  /* Keyframes for the scrolling effect */
+}
+.sr3d .sr3d .window-header .window-title .news-container {
+  overflow: hidden;
+  /* Hide overflowing text */
+  white-space: nowrap;
+  /* Prevent text from wrapping */
+  position: relative;
+  /* For positioning the scrolling text */
+  width: 100%;
+  /* Full width of the container */
+  height: 100%;
+  display: flex;
+  flex: 1;
+  /* Allow it to grow in a flex container */
+  align-items: center;
+  text-align: center;
+}
+.sr3d .sr3d .window-header .window-title .news-feed {
+  color: #1df0ff;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  padding: 0rem;
+  margin: 0rem;
+  line-height: 3rem;
+  font-size: 1.5rem;
+  display: inline-block;
+  /* Ensure the text stays on one line */
+  position: absolute;
+  /* Needed for movement */
+  animation: scroll-left 25s linear infinite;
+  /* Apply scrolling animation */
+  align-items: center;
+  text-align: center;
+  /* Make it take all available space */
+  min-width: 100%;
+  /* Prevent shrinking */
+  min-height: 100%;
+  /* Prevent shrinking */
+  white-space: nowrap;
+  /* Ensure the text doesn't wrap */
+}
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+    /* Start off-screen to the right */
+  }
+  100% {
+    transform: translateX(-100%);
+    /* End off-screen to the left */
+  }
 }

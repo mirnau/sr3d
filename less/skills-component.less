@@ -4,54 +4,52 @@
             .inner-background-container {
                 .skills-tabs {
                     position: relative;
-                    margin-top: 20px;
-                }
 
-                .skills-tabs .tabs {
-                    display: flex;
-                    gap: 1rem;
-                    /* Space between tabs */
-                    position: relative;
-                    /* Base underline for tabs */
-                }
+                    .tabs {
+                        display: flex;
+                        flex-wrap: nowrap; // Prevent wrapping for consecutive placement
+                        justify-content: flex-start; // Align all tabs starting from the left
+                        gap: 0; // Remove any gaps for back-to-back placement
+                        margin-left: 1.5rem;
 
-                .skills-tabs .tabs .item {
-                    position: relative;
-                    padding: 0.5rem 1.5rem;
-                    background: @secondary-color;
-                    cursor: pointer;
-                    z-index: 1;
-                    /* Ensure tabs are above the content */
-                    transition: background 0.3s, color 0.3s;
-                    .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
-                }
+                        .item {
+                            position: relative;
+                            
+                            padding: 0.5rem 0.5rem;
+                            background: @quartiery-color; // Secondary color
+                            cursor: pointer;
+                            z-index: 1; // Ensure tabs are above the content
+                            transition: background 1.5s, color 1.3s;
 
-                .skills-tabs .tabs .item:hover {
-                    background: magenta;
-                }
+                            .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
 
-                .skills-tabs .tabs .item.active {
-                    background: @primary-color;
-                    /* Active tab is white */
-                    color: #000;
-                    z-index: 2;
-                    /* Bring active tab to the front */
-                }
+                            &:hover {
+                                transition: background 1.5s, color 1.3s;
+                                background: @tertiary-color;
+                            }
 
-                .skills-tabs .tab-content {
-                    /* Rounded bottom corners */
-                    padding: 0rem;
-                    margin-top: -1px;
-                    /* Pull the content up to align with tabs */
-                    .clipped-corners(1rem, 1rem, 2rem, 1rem);
-                }
+                            &.active {
+                                background: @primary-color;
+                                color: #000;
+                                z-index: 2; // Bring active tab to the front
+                            }
+                        }
+                    }
 
-                .skills-tabs .tab-content .tab {
-                    display: none;
-                }
+                    .tab-content {
+                        padding: 0rem;
+                        margin-top: -1px; // Align content with tabs
 
-                .skills-tabs .tab-content .tab.active {
-                    display: block;
+                        .clipped-corners(1rem, 1rem, 2rem, 1rem);
+
+                        .tab {
+                            display: none;
+
+                            &.active {
+                                display: block;
+                            }
+                        }
+                    }
                 }
             }
         }

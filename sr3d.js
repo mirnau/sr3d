@@ -15,6 +15,7 @@ import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
 import { initActiveSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initActiveSkillMasonry.js";
 import { initKnowledgeSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initKnowledgeSkillMasonry.js";
 import { initLanguageSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initLanguageSkillMasonry.js";
+import { displayNeonName } from "./module/injections/displayNeonName.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -46,7 +47,6 @@ async function registerTemplatesFromPathsAsync() {
     return loadTemplates(paths);
 }
 
-
 function registerHooks() {
 
     Hooks.on(hooks.renderSR3DActorSheet, (app, html, data) => {
@@ -55,7 +55,7 @@ function registerHooks() {
         initKnowledgeSkillMasonry(app, html, data);
         initLanguageSkillMasonry(app, html, data);
     });
-           
+
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
@@ -63,13 +63,35 @@ function registerHooks() {
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
+    Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
     Hooks.once(hooks.ready, scopeCssToProject);
+
+    Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
+
+    async function displayNewsFeed(app, html, data) {
+        // INFO: Clear window of unwanted stuff
+        const title = html.find('h4.window-title'); // Use jQuery object
+        if (title.length) {
+            title.html(''); // Clear the content inside <h4>
+        }
+    
+        html.find('i.fa-solid.fa-passport').remove(); // Remove unwanted icon
+    
+        // INFO: Set up the handlebars data context and html
+        const htmlTemplate = "systems/sr3d/templates/injections/news-feed.hbs";
+        const hbsDataContext = { actor: app.object };
+        const renderedHTML = await renderTemplate(htmlTemplate, hbsDataContext);
+    
+        // INFO: Inject the HTML as content inside the <h4>
+        title.html(renderedHTML);
+    }
+    
 
     Hooks.once("ready", () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
     });
-      
+
 
     Hooks.once(hooks.init, function () {
 
