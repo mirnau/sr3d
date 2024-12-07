@@ -101,6 +101,41 @@
                     "total": 0,
                     "value": 0,
                     "mod": 0
+                },
+                "combat": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "astral": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "hacking": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "control": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "spell": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "walking": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
+                },
+                "running": {
+                    "total": 0,
+                    "base": 0,
+                    "mod": 0
                 }
                 
             }
@@ -127,10 +162,6 @@
             "languageSkills": {
                 "template": "languageSkill",
                 "items": []
-            },
-            "movement": {
-                "walking": 0,
-                "running": 0
             },
             "karma": {
                 "goodKarma": 0,

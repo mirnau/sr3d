@@ -9,6 +9,24 @@ sr3d.sheet ={
     deleteSpecialisation: "sr3d.sheet.deleteSpecialisation"
 }
 
+sr3d.health = {
+    health: "sr3d.actor.health.health",
+    damageTracker: "sr3d.actor.health.damageTracker"
+}
+
+sr3d.budget = {
+    budget: "sr3d.actor.budget.budget"
+}
+
+sr3d.possessions = {
+    possessions: "sr3d.actor.possessions.possessions", //all items
+    inventory: "sr3d.actor.possessions.inventory", //clothes, bioware, cyberwear
+    loadout: "sr3d.actor.possessions.loadout", // currently equipped
+    arsenal: "sr3d.actor.possessions.arsenal", //owned weapons
+    arcane: "sr3d.actor.possessions.arcane", //owned magical items
+    garage: "sr3d.actor.possessions.garage", // owned vehicles and drones
+}
+
 sr3d.characterCreation = {
     instruction: "sr3d.characterCreation.instruction",
     selectAnOption: "sr3d.characterCreation.selectAnOption"
@@ -137,6 +155,7 @@ sr3d.attributes = {
 };
 
 sr3d.dicepools = {
+    dicepools: "sr3d.actor.dicepools.dicepools",
     combat: "sr3d.actor.dicepools.combat",
     astral: "sr3d.actor.dicepools.astral",
     hacking: "sr3d.actor.dicepools.hacking",

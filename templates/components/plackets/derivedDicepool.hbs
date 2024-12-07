@@ -1,0 +1,15 @@
+<div class="dicepool-card">
+    <div class="dicepool-name">
+        <h3>{{localize (concat "sr3d.actor.dicepools." dicepool)}}</h3>
+    </div>
+    <div class="horizontal-section">
+        <div class="dicepool-value">
+            <h1>
+                {{getProperty (getProperty system dicepool) "total"}}
+                {{#if (getProperty (getProperty system dicepool) "mod")}}
+                    /{{getProperty (getProperty system dicepool) "mod"}}
+                {{/if}}
+            </h1>
+        </div>
+    </div>
+</div>

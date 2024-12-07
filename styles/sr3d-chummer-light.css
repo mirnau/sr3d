@@ -16,7 +16,8 @@
   min-width: 22rem;
   min-height: 800px;
   max-width: 1400px;
-  background: transparent;
+  background: rgba(20, 49, 34, 0.4);
+  box-shadow: none;
 }
 .sr3d .sr3d.sheet.character .window-resizable-handle {
   background-color: #ff0095;
@@ -57,7 +58,7 @@
 .sr3d .sheet-component .inner-background {
   box-sizing: border-box;
   padding: 0.5rem;
-  background: #283747;
+  background: #212b35;
   width: 100%;
   height: auto;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -87,6 +88,12 @@
   src: url('../fonts/VT323/VT323-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+.sr3d .sr3d {
+  --color-scrollbar: rgba(30, 30, 0, 0.8);
+  /* Smokey yellow tinge */
+  --color-scrollbar-track: transparent;
+  /* Track background */
 }
 .sr3d .sr3d h1,
 .sr3d .sr3d h2,
@@ -133,7 +140,7 @@
 .sr3d .sr3d input,
 .sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.2;
   color: #c8d3f5;
   /* Set font color */
@@ -141,7 +148,7 @@
 .sr3d .sr3d div,
 .sr3d .sr3d textarea {
   font-family: 'VT323', monospace;
-  font-size: 11.2px;
+  font-size: 12.8px;
   line-height: 1.2;
   color: #c8d3f5;
   /* Set font color */
@@ -156,17 +163,35 @@
   will-change: transform, width, height;
   /* Optimize rendering */
 }
+.sr3d .attribute-masonry-grid .attribute-gutter-sizer {
+  width: var(--attribute-gutter-width, 2%);
+}
+.sr3d .attribute-masonry-grid .attribute-grid-sizer {
+  width: var(--attribute-computed-item-width, 23%);
+}
 .sr3d .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   position: relative;
   text-align: center;
-  background: #212b35;
-  min-height: 6rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease;
+  background: #283747;
+  min-height: 4rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .attribute-masonry-grid .attribute-card h1 {
+  font-size: 1.6rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card h3 {
+  font-size: 0.9rem;
 }
 .sr3d .attribute-masonry-grid .attribute-card .attribute-name {
   background-color: #145b68;
   margin-bottom: 0.25rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card .attribute-name .attribute-value {
+  margin: 0px;
+  text-align: center;
 }
 .sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
   position: absolute;
@@ -210,11 +235,180 @@
   pointer-events: none;
   opacity: 0.5;
 }
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .attribute-value {
+.sr3d .attribute-masonry-grid .attribute-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
+.sr3d .dicepool-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  grid-auto-flow: dense;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  will-change: transform, width, height;
+  /* Optimize rendering */
+}
+.sr3d .dicepool-masonry-grid .dicepool-gutter-sizer {
+  width: var(--dicepool-gutter-width, 2%);
+}
+.sr3d .dicepool-masonry-grid .dicepool-grid-sizer {
+  width: var(--dicepool-computed-item-width, 23%);
+}
+.sr3d .dicepool-masonry-grid .dicepool-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
+  text-align: center;
+  background: #283747;
+  min-height: 4rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card h1 {
+  font-size: 1.6rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card h3 {
+  font-size: 0.9rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name {
+  background-color: #145b68;
+  margin-bottom: 0.25rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name .dicepool-value {
+  margin: 0px;
   text-align: center;
 }
-.sr3d .attribute-masonry-grid .attribute-card:hover {
-  transform: scale(1.1);
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: #145b68;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:hover,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:active,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool a.decrement-dicepool.disabled,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool a.decrement-dicepool.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
+.sr3d .movement-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  grid-auto-flow: dense;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  will-change: transform, width, height;
+  /* Optimize rendering */
+}
+.sr3d .movement-masonry-grid .movement-gutter-sizer {
+  width: var(--movement-gutter-width, 2%);
+}
+.sr3d .movement-masonry-grid .movement-grid-sizer {
+  width: var(--movement-computed-item-width, 23%);
+}
+.sr3d .movement-masonry-grid .movement-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
+  text-align: center;
+  background: #283747;
+  min-height: 4rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .movement-masonry-grid .movement-card h1 {
+  font-size: 1.6rem;
+}
+.sr3d .movement-masonry-grid .movement-card h3 {
+  font-size: 0.9rem;
+}
+.sr3d .movement-masonry-grid .movement-card .movement-name {
+  background-color: #145b68;
+  margin-bottom: 0.25rem;
+}
+.sr3d .movement-masonry-grid .movement-card .movement-name .movement-value {
+  margin: 0px;
+  text-align: center;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: #145b68;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:hover,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:active,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement a.decrement-movement.disabled,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement a.decrement-movement.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.sr3d .movement-masonry-grid .movement-card:hover {
+  background-color: #ff0095;
   z-index: 10;
 }
 .sr3d .attribute-position {
@@ -427,7 +621,7 @@
 .sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background {
   box-sizing: border-box;
   padding: 1rem;
-  background: #283747;
+  background: #212b35;
   width: 100%;
   height: 100%;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -481,7 +675,7 @@
   justify-content: center;
   /* Centers the grid */
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -494,7 +688,7 @@
   width: var(--active-computed-item-width, 23%);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -558,7 +752,7 @@
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-specialization-card .active-specialization-card-color-override,
@@ -591,7 +785,7 @@
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid {
   justify-content: center;
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -604,7 +798,7 @@
   width: var(--knowledge-computed-item-width, 23%);
 }
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -714,7 +908,7 @@
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category .language-card-container .core-skill .active-skill-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skills-masonry-grid .knowledge-skill-category .skill-specialization-card .active-specialization-card-color-override,
@@ -757,7 +951,7 @@
   justify-content: center;
   /* Centers the grid */
   position: relative;
-  background-color: #212b35;
+  background-color: #283747;
   width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -770,7 +964,7 @@
   width: var(--language-computed-item-width, 23%);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category {
-  background-color: #283747;
+  background-color: #212b35;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
@@ -834,7 +1028,7 @@
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #212b35;
+  background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations,
@@ -878,7 +1072,7 @@
   background: #6825c0;
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .tabs .item.active {
-  background: #212b35;
+  background: #283747;
   color: #000;
   z-index: 2;
 }

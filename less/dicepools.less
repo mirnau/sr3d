@@ -1,5 +1,5 @@
 
-    .attribute-masonry-grid {
+    .dicepool-masonry-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
         gap: 1rem;
@@ -8,14 +8,14 @@
         transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
         will-change: transform, width, height; /* Optimize rendering */
 
-        .attribute-gutter-sizer {
-            width: var(--attribute-gutter-width, 2%); 
+        .dicepool-gutter-sizer {
+            width: var(--dicepool-gutter-width, 2%); 
         }
-        .attribute-grid-sizer {
-            width: var(--attribute-computed-item-width, 23%); 
+        .dicepool-grid-sizer {
+            width: var(--dicepool-computed-item-width, 23%); 
         }
 
-        .attribute-card {
+        .dicepool-card {
             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
             position: relative; // Required for absolute positioning of child elements
             text-align: center;
@@ -32,11 +32,11 @@
                 font-size: 0.9rem;
             }
 
-            .attribute-name {
+            .dicepool-name {
                 background-color: @secondary-color;
                 margin-bottom: 0.25rem; // Optional spacing
 
-                .attribute-value {
+                .dicepool-value {
                     margin: 0px;
                     text-align: center;
                 }
@@ -53,8 +53,8 @@
                 gap: 0.125rem; // Space between elements
                 padding: 0.25rem;
 
-                .decrement-attribute,
-                .increment-attribute {
+                .decrement-dicepool,
+                .increment-dicepool {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -78,7 +78,7 @@
                         filter: brightness(1); // Reset brightness on press
                     }
 
-                    a.decrement-attribute.disabled {
+                    a.decrement-dicepool.disabled {
                         color: grey;
                         pointer-events: none;
                         opacity: 0.5;

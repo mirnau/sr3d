@@ -1,0 +1,17 @@
+<!-- Applicable for any drived attribute, movement or dicepool -->
+
+<div class="attribute-card">
+    <div class="attribute-name">
+        <h3>{{localize (concat "sr3d.actor.attributes." attribute)}}</h3>
+    </div>
+    <div class="horizontal-section">
+        <div class="attribute-value">
+            <h1>
+                {{getProperty (getProperty system attribute) "total"}}
+                {{#if (getProperty (getProperty system attribute) "mod")}}
+                    /{{getProperty (getProperty system attribute) "mod"}}
+                {{/if}}
+            </h1>
+        </div>
+    </div>
+</div>

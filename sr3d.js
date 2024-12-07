@@ -16,6 +16,10 @@ import { initActiveSkillMasonry } from "./module/hooks/renderSR3DActorSheet/init
 import { initKnowledgeSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initKnowledgeSkillMasonry.js";
 import { initLanguageSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initLanguageSkillMasonry.js";
 import { displayNeonName } from "./module/injections/displayNeonName.js";
+import { displayNewsFeed } from "./module/injections/displayNewsFeed.js";
+import { initAttributesMasonry } from "./module/hooks/renderSR3DActorSheet/initAttributesMasonry.js";
+import { initDicepoolMasonry } from "./module/hooks/renderSR3DActorSheet/initDicepoolMasonry.js";
+import { initMovementMasonry } from "./module/hooks/renderSR3DActorSheet/initMovementMasonry.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -54,7 +58,12 @@ function registerHooks() {
         initActiveSkillMasonry(app, html, data);
         initKnowledgeSkillMasonry(app, html, data);
         initLanguageSkillMasonry(app, html, data);
+        initAttributesMasonry(app, html, data);
+        initDicepoolMasonry(app, html, data);
+        initMovementMasonry(app, html, data);
     });
+
+    
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
@@ -64,27 +73,9 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
+    Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
     Hooks.once(hooks.ready, scopeCssToProject);
 
-    Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
-
-    async function displayNewsFeed(app, html, data) {
-        // INFO: Clear window of unwanted stuff
-        const title = html.find('h4.window-title'); // Use jQuery object
-        if (title.length) {
-            title.html(''); // Clear the content inside <h4>
-        }
-    
-        html.find('i.fa-solid.fa-passport').remove(); // Remove unwanted icon
-    
-        // INFO: Set up the handlebars data context and html
-        const htmlTemplate = "systems/sr3d/templates/injections/news-feed.hbs";
-        const hbsDataContext = { actor: app.object };
-        const renderedHTML = await renderTemplate(htmlTemplate, hbsDataContext);
-    
-        // INFO: Inject the HTML as content inside the <h4>
-        title.html(renderedHTML);
-    }
     
 
     Hooks.once("ready", () => {
@@ -128,6 +119,12 @@ function registerHooks() {
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
+
+        Handlebars.registerHelper('getProperty', function (obj, attr) {
+            return obj[attr];
+        });
+        
+        
 
         const themeChoices = {
             "chummer-dark": "Chummer Dark",

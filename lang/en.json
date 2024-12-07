@@ -74,13 +74,28 @@
                 "essence": "Essence"
             },
             "dicepools": {
+                "dicepools": "Dice Pools",
                 "combat": "Combat",
                 "astral": "Astral",
                 "hacking": "Hacking",
                 "control": "Control",
                 "spell": "Spell"
             },
-            
+            "health": {
+                "health": "Health",
+                "damageTracker": "Damage Tracker"
+            },
+            "budget": {
+                "budget": "Budget"
+            },
+            "possessions": {
+                "possessions": "Possessions",
+                "inventory": "Inventory",
+                "loadout": "Loadout",
+                "arsenal": "Arsenal",
+                "arcane": "Arcane",
+                "garage": "Garage"
+            },
             "movement": {
                 "movement": "Movement",
                 "walking": "Walking Speed",

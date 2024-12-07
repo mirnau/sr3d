@@ -1,0 +1,23 @@
+<div class="attribute-card">
+    <div class="attribute-name">
+        <h3>{{localize (concat "sr3d.actor.attributes." attribute)}}</h3>
+    </div>
+    <div class="horizontal-section">
+        {{#if (not actor.flags.sr3d.attributesDone)}}
+            <a class="decrement-attribute" data-attribute="{{attribute}}" 
+               class="{{#if (eq (getProperty (getProperty system attribute) "total") 0)}}disabled{{/if}}">
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+        {{/if}}
+        <div class="attribute-value">
+            <h1>
+                {{getProperty (getProperty system attribute) "total"}}/{{getProperty (getProperty system attribute) "mod"}}
+            </h1>
+        </div>
+        {{#if (not actor.flags.sr3d.attributesDone)}}
+            <a class="increment-attribute" data-attribute="{{attribute}}">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
+        {{/if}}
+    </div>
+</div>
