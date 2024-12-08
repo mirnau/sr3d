@@ -1,6 +1,7 @@
 
-import { cacheMasonryOnActor, cacheResizeObserverOnActor } from "../../sheets/Utilities.js";
+import { cacheResizeObserverOnActor } from "../../sheets/Utilities.js";
 import { getResizeObserver } from "../../services/initializeMasonry.js";
+import SR3DLog from "../../SR3DLog.js";
 
 export function initAttributesMasonry(app, html, data) {
 
@@ -16,39 +17,57 @@ export function initAttributesMasonry(app, html, data) {
         childSelector: '.attribute-card',
         gridSizerSelector: '.attribute-grid-sizer',
         gutterSizerSelector: '.attribute-gutter-sizer',
-        itemCSSVar: '--attribute-computed-item-width',
+        itemCSSVar: '--attribute-grid-sizer',
         gutterCSSVar: '--attribute-gutter-width',
         observer: actor.attributeSkillsResizeObserver //keeping the reference so we can reach it from the actor
     };
 
     actor.attributeSkillsResizeObserver = attrObserveMasonryResize(actor, masonryResizeConfig);
 }
+// Adjust grid items to fit perfectly within the parent container
 
-function attrAdjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemCSSVar, gutterCSSVar) {
+function attrAdjustMasonryOnResize(html, parentSelector, childSelector, gridSizerSelector, itemCSSVar) {
     const grid = html[0]?.querySelector(parentSelector);
     const gridItems = html[0]?.querySelectorAll(childSelector);
-    const gutterSizer = html[0]?.querySelector(gutterSizerSelector);
     const gridSizer = html[0]?.querySelector(gridSizerSelector);
 
-    if (!grid || !gridItems.length || !gutterSizer || !gridSizer) return;
+    if (!grid || !gridSizer) return;
 
-    const sampleItem = gridItems[0];
-    const gutterPx = parseFloat(getComputedStyle(sampleItem).padding);
-    const gridWidthPx = grid.offsetWidth;
-    const minItemWidthPx = 100;
+    const parentPadding = parseFloat(getComputedStyle(grid.parentNode).paddingLeft) || 0;
+    const gridWidthPx = grid.parentNode.offsetWidth - 2 * parentPadding; // Subtract padding from available width
+    const gutterPx = 7; // Fixed gutter size in pixels
+    const minItemWidthPx = parseFloat(getComputedStyle(gridItems[0]).minWidth);
 
+
+    // Calculate the number of columns
     let columnCount = Math.floor((gridWidthPx + gutterPx) / (minItemWidthPx + gutterPx));
-    columnCount = Math.max(columnCount, 1);
+    columnCount = Math.max(columnCount, 1); // Ensure at least one column
 
+    // Calculate the exact item width
     const totalGutterWidthPx = gutterPx * (columnCount - 1);
-    const availableWidthPx = gridWidthPx - totalGutterWidthPx;
-    const itemWidthPx = availableWidthPx / columnCount;
-    const itemWidthPercent = (itemWidthPx / gridWidthPx) * 100;
-    const gutterWidthPercent = (gutterPx / gridWidthPx) * 100;
+    const itemWidthPx = (gridWidthPx - totalGutterWidthPx) / columnCount;
 
-    grid.style.setProperty(itemCSSVar, `${itemWidthPercent - 1.5}%`);
-    grid.style.setProperty(gutterCSSVar, `${gutterWidthPercent}%`);
+    // Round to ensure perfect fit (use floor or ceil as necessary)
+    const adjustedItemWidthPx = Math.floor(itemWidthPx);
+
+    // Apply the calculated item width
+
+    SR3DLog.inspect(`adjustedItem, ${adjustedItemWidthPx}`, attrAdjustMasonryOnResize.name)
+
+    //grid.style.setProperty(childSelector, `${adjustedItemWidthPx}px`);
+    grid.style.setProperty(itemCSSVar, `${adjustedItemWidthPx}px`);
+
+    gridItems.forEach((item) => {
+        item.style.width = `${adjustedItemWidthPx}px`;
+    });
+
+    // Dynamically adjust the grid sizer width
+    gridSizer.style.width = `${adjustedItemWidthPx}px`;
 }
+
+
+
+
 
 function attrObserveMasonryResize(actor, masonryResizeConfig) {
     const { html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemCSSVar, gutterCSSVar } = masonryResizeConfig;
@@ -61,11 +80,10 @@ function attrObserveMasonryResize(actor, masonryResizeConfig) {
                 itemSelector: childSelector,
                 columnWidth: gridSizerSelector,
                 gutter: gutterSizerSelector,
-                percentPosition: true
+                fitWidth: true,
             });
 
             gridElement.masonryInstance = masonryInstance;
-            
             const func = () => attrAdjustMasonryOnResize(
                 html,
                 parentSelector,
@@ -75,7 +93,7 @@ function attrObserveMasonryResize(actor, masonryResizeConfig) {
                 itemCSSVar,
                 gutterCSSVar
             );
-            
+
             masonryResizeConfig.observer = getResizeObserver(masonryInstance, gridElement, childSelector, func);
         }
 
@@ -84,7 +102,7 @@ function attrObserveMasonryResize(actor, masonryResizeConfig) {
         }
 
         cacheResizeObserverOnActor(actor, masonryResizeConfig.observer);
-        masonryResizeConfig.observer.observe(gridElement);
+        masonryResizeConfig.observer.observe(gridElement.parentNode);
     }
 
     return masonryResizeConfig.observer;

@@ -92,6 +92,4 @@ export function observeMasonryResize(html, parent, child, gridSizer, gutterSizer
 
     // Observe changes in grid size
     observer.observe(gridElement);
-
-    return masonryInstance;
 }

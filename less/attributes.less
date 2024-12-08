@@ -1,18 +1,13 @@
 
     .attribute-masonry-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-        gap: 1rem;
-        width: 100%;
-        grid-auto-flow: dense; 
-        transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-        will-change: transform, width, height; /* Optimize rendering */
+          margin: 0 auto;
 
         .attribute-gutter-sizer {
-            width: var(--attribute-gutter-width, 2%); 
+            width: var(--attribute-gutter-width, 7px); 
         }
         .attribute-grid-sizer {
-            width: var(--attribute-computed-item-width, 23%); 
+            min-width: var(--attribute-item-width, 5.5rem); 
         }
 
         .attribute-card {
@@ -21,6 +16,7 @@
             text-align: center;
             background: @primary-color;
             min-height: 4rem;
+            width: 5.5rem;
             min-width: 5.5rem;
             margin-bottom: 0.5rem;
             transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease,  background-color 1.3s ease;

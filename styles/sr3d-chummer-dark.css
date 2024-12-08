@@ -155,19 +155,13 @@
 }
 .sr3d .attribute-masonry-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-  gap: 1rem;
-  width: 100%;
-  grid-auto-flow: dense;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-  will-change: transform, width, height;
-  /* Optimize rendering */
+  margin: 0 auto;
 }
 .sr3d .attribute-masonry-grid .attribute-gutter-sizer {
-  width: var(--attribute-gutter-width, 2%);
+  width: var(--attribute-gutter-width, 7px);
 }
 .sr3d .attribute-masonry-grid .attribute-grid-sizer {
-  width: var(--attribute-computed-item-width, 23%);
+  min-width: var(--attribute-item-width, 5.5rem);
 }
 .sr3d .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -175,6 +169,7 @@
   text-align: center;
   background: #283747;
   min-height: 4rem;
+  width: 5.5rem;
   min-width: 5.5rem;
   margin-bottom: 0.5rem;
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
