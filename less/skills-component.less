@@ -5,34 +5,43 @@
                 .skills-tabs {
                     position: relative;
 
-                    .tabs {
+                    .skill-utility-bar {
                         display: flex;
-                        flex-wrap: nowrap; // Prevent wrapping for consecutive placement
-                        justify-content: flex-start; // Align all tabs starting from the left
-                        gap: 0; // Remove any gaps for back-to-back placement
-                        margin-left: 1.5rem;
+                        justify-content: space-between; 
 
-                        .item {
-                            position: relative;
-                            
-                            padding: 0.5rem 0.5rem;
-                            background: @quartiery-color; // Secondary color
-                            cursor: pointer;
-                            z-index: 1; // Ensure tabs are above the content
-                            transition: background 1.5s, color 1.3s;
+                        .tabs {
+                            display: flex;
+                            flex-wrap: nowrap; // Prevent wrapping for consecutive placement
+                            justify-content: flex-start; // Align all tabs starting from the left
+                            gap: 0; // Remove any gaps for back-to-back placement
+                            margin-left: 1.5rem;
 
-                            .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
+                            .item {
+                                position: relative;
 
-                            &:hover {
+                                padding: 0.5rem 0.5rem;
+                                background: @primary-color; // Secondary color
+                                cursor: pointer;
+                                z-index: 1; // Ensure tabs are above the content
                                 transition: background 1.5s, color 1.3s;
-                                background: @tertiary-color;
-                            }
 
-                            &.active {
-                                background: @primary-color;
-                                color: #000;
-                                z-index: 2; // Bring active tab to the front
+                                .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
+
+                                &:hover {
+                                    transition: background 1.5s, color 1.3s;
+                                    background: @tertiary-color;
+                                }
+
+                                &.active {
+                                    background: @secondary-color;
+                                    z-index: 2; // Bring active tab to the front
+                                }
                             }
+                        }
+                        .item-create {
+                            position: absolute;
+                            top: -2.5rem;
+                            right: 0.5rem;
                         }
                     }
 

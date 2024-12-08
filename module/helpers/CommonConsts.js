@@ -3,10 +3,12 @@ export const baseAttributes = ["body", "quickness", "strength", "charisma", "int
 export const flags = {
     namespace: "sr3d",
     flagsInitiated: "flagsInitiated",
+    isInitialized: "isInitialized",
     attributesDone: "attributesDone",
     goblinizationApplied: "goblinizationApplied",
     isDossierPanelOpened: "isDossierPanelOpened",
     isShoppingStateActive: "isShoppingStateActive",
+    characterCreationCompleted: "characterCreationCompleted",
     core: "core",
     sr3d: "sr3d"
 };
@@ -14,6 +16,7 @@ export const flags = {
 export const hooks = {
     init: "init",
     preCreateItem: "preCreateItem",
+    createItem: "createItem",
     renderSR3DActorSheet: "renderSR3DActorSheet",
     renderSR3DItemSheet: "renderSR3DItemSheet",
     createActor: "createActor",

@@ -1,33 +1,28 @@
 .active-grid-container {
-    background-color: transparent;
+    background-color: @secondary-color;
+    padding: 0.5rem;
     width: 100%;
+    .clipped-corners(1rem, 1rem, 1rem, 1rem);
     /* Allows it to stretch with the parent */
 
     .active-skills-masonry-grid {
-        justify-content: center;
-        /* Centers the grid */
-        position: relative;
-        background-color: @primary-color;
-        width: 100%;
-        margin: 0 auto;
-        padding: .5rem;
-        .clipped-corners(1rem, 1rem, 1rem, 1rem);
+        display: grid;
+          margin: 0 auto;
 
         .active-gutter-sizer {
-            width: var(--active-gutter-width, 2%); 
+            width: 0.5rem;
         }
+
         .active-grid-sizer {
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+            min-width: 11.5rem;
         }
 
         .active-skill-category {
-            background-color: @background-color;
+            background-color: @primary-color;
             margin-bottom: 0.5rem;
             padding: 0.5rem;
             float: left;
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+            min-width: 11.5rem;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
             .skill-specialization-card {

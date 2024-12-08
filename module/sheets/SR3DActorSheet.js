@@ -1,6 +1,7 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { flags } from '../helpers/CommonConsts.js'
+import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
 import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
@@ -44,6 +45,37 @@ export default class SR3DActorSheet extends ActorSheet {
         return ctx;
     }
 
+    async render(force = false, options = {}) {
+        // Check if the creation dialog is completed
+        let creationCompleted = this.actor.getFlag(flags.namespace, flags.characterCreationCompleted);
+
+        // If the flag doesn't exist, initialize it
+        if (creationCompleted === undefined) {
+            console.log("Flag 'creationDialogCompleted' not found. Creating and setting it to false.");
+            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, false);
+            creationCompleted = false;
+        }
+
+        // If the creation is not completed, show the dialog
+        if (!creationCompleted) {
+            console.log("Character creation not completed. Showing creation dialog.");
+
+            const dialogResult = await this._showCharacterCreationDialog(this.actor);
+
+            // If the dialog is canceled, delete the actor and prevent rendering
+            if (!dialogResult) {
+                console.log(`Character creation canceled for actor: ${this.actor.name}. Deleting actor.`);
+                await this.actor.delete();
+                return; // Halt rendering by exiting the `render` method
+            }
+
+            // Set the flag to true after the dialog is completed
+            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, true);
+            console.log("Character creation completed. Flag set to true.");
+        }
+        return super.render(force, options);
+    }
+
     async _showCharacterCreationDialog(actor) {
         // Fetch all items of type "metahuman" and "magicTradition"
         const metahumans = game.items.filter(item => item.type === "metahuman");
@@ -67,37 +99,6 @@ export default class SR3DActorSheet extends ActorSheet {
         return new Promise((resolve) => {
             new CharacterCreationDialog(dialogData, content, resolve).render(true);
         });
-    }
-
-    async render(force = false, options = {}) {
-        // Check if the creation dialog is completed
-        let creationCompleted = this.actor.getFlag("sr3d", "creationDialogCompleted");
-
-        // If the flag doesn't exist, initialize it
-        if (creationCompleted === undefined) {
-            console.log("Flag 'creationDialogCompleted' not found. Creating and setting it to false.");
-            await this.actor.setFlag("sr3d", "creationDialogCompleted", false);
-            creationCompleted = false;
-        }
-
-        // If the creation is not completed, show the dialog
-        if (!creationCompleted) {
-            console.log("Character creation not completed. Showing creation dialog.");
-
-            const dialogResult = await this._showCharacterCreationDialog(this.actor);
-
-            // If the dialog is canceled, delete the actor and prevent rendering
-            if (!dialogResult) {
-                console.log(`Character creation canceled for actor: ${this.actor.name}. Deleting actor.`);
-                await this.actor.delete();
-                return; // Halt rendering by exiting the `render` method
-            }
-
-            // Set the flag to true after the dialog is completed
-            await this.actor.setFlag("sr3d", "creationDialogCompleted", true);
-            console.log("Character creation completed. Flag set to true.");
-        }
-        return super.render(force, options);
     }
 
     activateListeners(html) {
@@ -163,52 +164,27 @@ export default class SR3DActorSheet extends ActorSheet {
 
         skill.sheet.render(true);
     }
-
-    _onItemCreate(event) {
+   
+    async _onItemCreate(event) {
         event.preventDefault();
-
-        // Get the clicked element and skill type
-        const element = event.currentTarget;
-        const skillType = element.dataset.skillType; // Retrieve the skill type (e.g., activeSkill)
-        const itemType = element.dataset.type; // Retrieve the item type (always "skill" here)
-
-        // Ensure the skill type is valid
-        if (!itemType || !skillType) {
-            console.error("Invalid item or skill type specified:", { itemType, skillType });
+    
+        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
+        const ctx = { item: null, actor: this.actor }; // No item yet created
+    
+        console.log("Creating skill. Showing dialog.");
+        const dialogResult = await new Promise((resolve) => {
+            new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
+        });
+    
+        if (!dialogResult) {
+            console.log("Skill creation canceled.");
             return;
         }
-
-        // Prepare the item data
-        const itemData = {
-            name: game.i18n.localize("sr3d.sheet.newItem"),
-            type: itemType,
-            system: {
-                skillType: skillType // Set the specific skill type
-            }
-        };
-
-        // Add specific default data for skill types (optional)
-        if (skillType === "activeSkill") {
-            itemData.system.activeSkill = { linkedAttribute: "", value: 0, specializations: [] };
-
-        } else if (skillType === "knowledgeSkill") {
-
-            itemData.system.knowledgeSkill = { linkedAttribute: "", value: 0, specializations: [] };
-
-        } else if (skillType === "languageSkill") {
-            itemData.system.languageSkill = {
-                speech: { value: 0, specializations: [] },
-                read: { value: 0, specializations: [] },
-                write: { value: 0, specializations: [] }
-            };
-        }
-
-        // Create the item
-        return this.actor.createEmbeddedDocuments("Item", [itemData]).then(() => {
-            ui.notifications.info(`Created new ${skillType}`);
-        }).catch((error) => {
-            console.error("Error creating item:", error);
-            ui.notifications.error(`Failed to create new ${skillType}. Check console for details.`);
-        });
+    
+        console.log("Dialog result:", JSON.stringify(dialogResult, null, 2));
+    
+        await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
     }
+    
 }
+

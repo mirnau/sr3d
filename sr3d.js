@@ -7,7 +7,7 @@ import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/ini
 import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
-import { setFlags } from "./module/hooks/createActor/setFlags.js";
+import { setActorFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
@@ -63,12 +63,13 @@ function registerHooks() {
         initMovementMasonry(app, html, data);
     });
 
-    
+
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
-    Hooks.on(hooks.createActor, setFlags);
+    Hooks.on(hooks.createActor, setActorFlags);
+    Hooks.on(hooks.createItem, setItemFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
@@ -76,7 +77,12 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
     Hooks.once(hooks.ready, scopeCssToProject);
 
-    
+    function setItemFlags(item, options, userId) {
+        SR3DLog.info("Initiating Item Flags", "setItemFlags.js");
+
+        item.setFlag(flags.namespace, flags.isInitialized, false);
+    }
+
 
     Hooks.once("ready", () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
@@ -123,8 +129,8 @@ function registerHooks() {
         Handlebars.registerHelper('getProperty', function (obj, attr) {
             return obj[attr];
         });
-        
-        
+
+
 
         const themeChoices = {
             "chummer-dark": "Chummer Dark",

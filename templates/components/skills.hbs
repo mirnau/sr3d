@@ -1,18 +1,23 @@
 <div class="skills-tabs">
-  <nav class="tabs">
-    <a class="item" data-tab="active-skills">
-      <h2>{{localize "sr3d.item.skill.activeSkills"}}</h2>
-    </a>
-    <a class="item" data-tab="knowledge-skills">
+
+  <div class="skill-utility-bar">
+    <nav class="tabs">
+      <a class="item" data-tab="active-skills">
+        <h2>{{localize "sr3d.item.skill.activeSkills"}}</h2>
+      </a>
+      <a class="item" data-tab="knowledge-skills">
         <h2>{{localize "sr3d.item.skill.knowledgeSkills"}}</h2>
-    </a>
-    <a class="item" data-tab="language-skills">
-      <h2>{{localize "sr3d.item.skill.languageSkills"}}</h2>
-    </a>
+      </a>
+      <a class="item" data-tab="language-skills">
+        <h2>{{localize "sr3d.item.skill.languageSkills"}}</h2>
+      </a>
+    </nav>
+    {{#if (isShoppingStateActive this.actor)}}
     <a class="item-create" data-type="skill" data-skill-type="skill" title="{{localize " sr3d.sheet.addSkill"}}">
-      <h2><i class="fas fa-square-plus"></i></h2>
+      <h2><i class="fas fa-square-plus pulsing-green-cart"></i></h2>
     </a>
-  </nav>
+    {{/if}}
+  </div>
 
   <div class="tab-content">
     <!-- Active Skills Tab -->

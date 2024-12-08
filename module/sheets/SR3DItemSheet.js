@@ -1,4 +1,4 @@
-import { defaultImages } from "../helpers/ItemImagePaths.js"
+import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
 
 export default class SR3DItemSheet extends ItemSheet {
 
@@ -25,101 +25,33 @@ export default class SR3DItemSheet extends ItemSheet {
 
         return ctx;
     }
-
+    
     async render(force = false, options = {}) {
-        // Check if the item is a skill
+
         if (this.item.type === "skill") {
-            // Check if the flag exists
-            let isInitialized = this.item.getFlag("sr3d", "initialized");
-
-            // If the flag doesn't exist, initialize it
-            if (isInitialized === undefined) {
-                console.log("Flag 'initialized' not found. Creating and setting it to false.");
-                await this.item.setFlag("sr3d", "initialized", false);
-                isInitialized = false; // Explicitly set the variable
-            }
-
-            // If the flag is false, show the dialog
-            if (!isInitialized) {
-                console.log("Skill is not initialized. Showing skill type dialog.");
-                const dialogResult = await this._showSkillTypeDialog();
-
-                // If the dialog is canceled, delete the item and prevent rendering
-                if (!dialogResult) {
-                    console.log(`Skill creation canceled for item: ${this.item.name}. Deleting item.`);
-                    await this.item.delete();
-                    return; // Halt rendering by exiting the `render` method
-                }
-
-                // Set the flag to true after the dialog is completed
-                await this.item.setFlag("sr3d", "initialized", true);
-                console.log("Skill has been initialized. Flag set to true.");
-            }
-        }
-
-        // Call the parent `render` method to continue rendering if initialized
+            await handleRenderSkills(this);
+        }    
+            
         return super.render(force, options);
     }
-
-    async _showSkillTypeDialog() {
-        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
-
-        return new Promise((resolve) => {
-            new Dialog({
-                title: "Select Skill Type",
-                content: htmlTemplate,
-                buttons: {
-                    confirm: {
-                        label: "Confirm",
-                        callback: async (html) => {
-                            const selectedType = html.find('input[name="skillType"]:checked').val();
-                            console.log("Confirm button clicked, selectedType:", selectedType);
-
-                            if (!selectedType) {
-                                ui.notifications.error("You must select a skill type.");
-                                resolve(null); // Fail gracefully if no type is selected
-                                return;
-                            }
-
-                            // Update the skill type and corresponding icon
-                            await this.item.update({
-                                "system.skillType": selectedType,
-                                img: defaultImages.skill[selectedType] || defaultImages.default,
-                                "system.initialized": true
-                            });
-
-                            console.log("Skill successfully updated with type:", selectedType);
-                            resolve(true); // Resolve with success
-                        },
-                    },
-                    cancel: {
-                        label: "Cancel",
-                        callback: async () => {
-                            console.log("Cancel button clicked. Deleting item:", this.item.name);
-                            await this.item.delete();
-                            resolve(null); // Resolve with cancellation
-                        },
-                    },
-                },
-                default: "confirm", // Ensure Confirm is default
-            }).render(true);
-        });
-    }
-
 
     activateListeners(html) {
         super.activateListeners(html);
 
-        // Bind specialization event handlers
-        html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
-        html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
+        const type = this.item.type;
+
+        if (type === "skill") {
+            html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
+            html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
+            html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
+        } else if(type === "magicTradition") {
+            html.find('select[name="system.metahuman.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
+            html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
+        }
+        
+        // General cases
         html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
 
-        // Bind linked attribute dropdown listeners
-        html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
-        html.find('select[name="system.skill.knowledgeSkill.linkedAttribute"]').on('change', this._onKnowledgeSkillLinkedAttributeChange.bind(this));
-        html.find('select[name="system.metahuman.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
-        html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
     }
 
     async _deleteOwnedInstance(event) {
@@ -167,9 +99,6 @@ export default class SR3DItemSheet extends ItemSheet {
         await this.object.update(formData);
     }
 
-
-
-
     // Handler for Active Skill linked attribute changes
     async _onActiveSkillLinkedAttributeChange(event) {
         const dropdown = event.currentTarget;
@@ -188,26 +117,6 @@ export default class SR3DItemSheet extends ItemSheet {
             actor.sheet.render(); // Trigger a re-render of the actor sheet
         }
     }
-
-    // Handler for Knowledge Skill linked attribute changes
-    async _onKnowledgeSkillLinkedAttributeChange(event) {
-        const dropdown = event.currentTarget;
-        const selectedAttribute = dropdown.value;
-
-        // Update the item directly
-        await this.item.update({
-            "system.knowledgeSkill.linkedAttribute": selectedAttribute
-        });
-
-        console.log(`Updated Knowledge Skill linkedAttribute to: ${selectedAttribute}`);
-
-        // Notify the parent actor sheet to re-sort and re-render
-        const actor = this.item.parent;
-        if (actor && actor.sheet.rendered) {
-            actor.sheet.render(); // Trigger a re-render of the actor sheet
-        }
-    }
-
 
     _resolveSpecializationsPath(skillType, subfield = null) {
         if (skillType === "languageSkill" && subfield) {

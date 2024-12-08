@@ -342,7 +342,7 @@
             },
             "knowledgeSkill": {
                 "value": 0,
-                "linkedAttribute": "",
+                "linkedAttribute": "intelligence",
                 "specializations": []
             },
             "languageSkill": {
