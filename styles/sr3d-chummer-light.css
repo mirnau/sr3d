@@ -158,10 +158,10 @@
   margin: 0 auto;
 }
 .sr3d .attribute-masonry-grid .attribute-gutter-sizer {
-  width: var(--attribute-gutter-width, 7px);
+  width: 0.5rem;
 }
 .sr3d .attribute-masonry-grid .attribute-grid-sizer {
-  min-width: var(--attribute-item-width, 5.5rem);
+  min-width: 5.5rem;
 }
 .sr3d .attribute-masonry-grid .attribute-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -245,10 +245,10 @@
   /* Optimize rendering */
 }
 .sr3d .dicepool-masonry-grid .dicepool-gutter-sizer {
-  width: var(--dicepool-gutter-width, 2%);
+  width: 0.5rem;
 }
 .sr3d .dicepool-masonry-grid .dicepool-grid-sizer {
-  width: var(--dicepool-computed-item-width, 23%);
+  min-width: 5.5rem;
 }
 .sr3d .dicepool-masonry-grid .dicepool-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -331,10 +331,10 @@
   /* Optimize rendering */
 }
 .sr3d .movement-masonry-grid .movement-gutter-sizer {
-  width: var(--movement-gutter-width, 2%);
+  width: 0.5rem;
 }
 .sr3d .movement-masonry-grid .movement-grid-sizer {
-  width: var(--movement-computed-item-width, 23%);
+  min-width: 5.5rem;
 }
 .sr3d .movement-masonry-grid .movement-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
