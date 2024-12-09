@@ -1,0 +1,26 @@
+.inner-background-container() {
+        
+    position: relative;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.inner-background(@inner-background-color) {
+        
+    padding: 0.5rem;
+    width: 100%;
+    height: auto;
+    background: @inner-background-color;
+}
+
+.fake-shadow(@fake-shadow-color) {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background-color: @fake-shadow-color;
+    width: calc(100% - 1.5rem);
+    height: calc(100% - 1.5rem);
+    z-index: -1;
+    filter: blur(20px);
+}

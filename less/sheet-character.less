@@ -2,23 +2,10 @@
     min-width: @masonry-column-width;
     min-height: 800px;
     max-width: 1400px;
-    background: @background-back-panel;
-    box-shadow: none;
-
-    .window-resizable-handle {
-        background-color: @accent-color;
-    }
-
-    .window-content,
-    form {
-        position: relative;
-        background: @transparent;
-    }
 
     .sheet-masonry-grid {
         display: grid;
         gap: 1rem;
-        background: @transparent;
 
         /* Use CSS variable for column width */
         grid-template-columns: repeat(auto-fit, minmax(var(@masonry-column-width, 200px), 1fr));

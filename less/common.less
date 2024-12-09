@@ -18,12 +18,16 @@
 
 input[type="text"] {
     border: 0;
-    background-color: transparent;
+    background-color: @quartiery-color;
     .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
     &:focus {
         background-color: violet;
         box-shadow: 0 0 10px 3px violet; // Bloom effect
         outline: none; // Removes default browser focus outline
+    }
+
+    &::placeholder {
+        color: @text-color;
     }
 }

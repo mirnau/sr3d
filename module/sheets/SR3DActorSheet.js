@@ -181,9 +181,19 @@ export default class SR3DActorSheet extends ActorSheet {
             return;
         }
     
-        console.log("Dialog result:", JSON.stringify(dialogResult, null, 2));
+        // Create the item
+        const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
     
-        await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
+        if (createdItems.length > 0) {
+            const createdItem = createdItems[0]; // Retrieve the first created item
+            console.log("Skill successfully created:", createdItem.toObject());
+    
+            // Set a flag on the newly created item
+            await createdItem.setFlag("sr3d", "isInitialized", true);
+            console.log("Flag 'isInitialized' set to true for item:", createdItem.id);
+        } else {
+            console.error("No item was created.");
+        }
     }
     
 }

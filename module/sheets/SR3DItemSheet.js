@@ -4,9 +4,10 @@ export default class SR3DItemSheet extends ItemSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 600,
-            height: 300,
-            classes: ["sr3d", "sheet", "item"]
+            width: "auto",
+            height: "auto",
+            classes: ["sr3d", "sheet", "item"],
+            resizable: false
         });
     }
 

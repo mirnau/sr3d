@@ -18,7 +18,7 @@ export class CreateSkillDialog extends Dialog {
                                 await ctx.item.update({
                                     "system.skillType": selectedType,
                                     img: defaultImages.skill[selectedType] || defaultImages.default,
-                                    ...this._getSkillDefaults(selectedType), // Add structure defaults
+                                    ...this._getItemData(selectedType), // Add structure defaults
                                     "system.initialized": true,
                                 });
                                 console.log("Skill successfully updated with type:", selectedType);
@@ -57,7 +57,8 @@ export class CreateSkillDialog extends Dialog {
     _getItemData(skillType) {
         // Initialize the default structure
         let itemData = {
-            name: "New Skill",
+            img: defaultImages.skill[skillType] || defaultImages.default,
+            name: `New ${game.i18n.localize(`sr3d.item.skill.${skillType}`)}`,
             type: "skill",
             system: {
                 description: "",

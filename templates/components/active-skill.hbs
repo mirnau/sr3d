@@ -1,19 +1,45 @@
-<section class="sheet-component">
-    <fieldset data-skill-type="activeSkill">
-        <legend>{{localize "sr3d.item.skill.activeSkill"}}</legend>
-        <div class="specialization-value">
-            {{system.activeSkill.value}}
+<div class="item-header">
+    <div class="item-image">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    </div>
+
+    <div class="item-middle-header">
+        <div class="skill-header">
+            <h1 class="h1">{{localize "sr3d.item.skill.activeSkill"}}</h1>
+        </div>
+
+        <div class="active-skill-icons">
+
             {{#if isOwned}}
-            <a class="delete-owned-instance" title="{{localize " sr3d.sheet.deleteSkill"}}">
+            <a class="delete-owned-instance" title="{{localize 'sr3d.sheet.deleteSkill'}}">
                 <i class="fas fa-trash-alt"></i>
             </a>
-            <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}"><i
-                    class="fas fa-shopping-cart-plus"></i></a>
-            <a class="undo" title="Undo"><i class="fas fa-undo-alt"></i></a>
+            <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a class="undo" title="Undo">
+                <i class="fas fa-undo-alt"></i>
+            </a>
             {{/if}}
         </div>
-        <fieldset data-item-id="{{this._id}}">
-            <legend>{{localize "sr3d.item.skill.linkedAttribute"}}</legend>
+    </div>
+
+    <div class="skill-value">
+        {{system.activeSkill.value}}
+    </div>
+</div>
+<div class="item-name">
+    <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
+</div>
+
+<div class="skill-type" data-skill-type="activeSkill">
+
+
+    <div class="linked-attribute" data-item-id="{{this._id}}">
+        <div class="attribute-header">
+            <h2>{{localize "sr3d.item.skill.linkedAttribute"}}</h2>
+        </div>
+        <div class="attribute-select">
             <select name="system.skill.activeSkill.linkedAttribute">
                 {{#each attributes}}
                 <option value="{{this}}" {{#if (eq this ../system.skill.activeSkill.linkedAttribute)}}selected{{/if}}>
@@ -21,42 +47,45 @@
                 </option>
                 {{/each}}
             </select>
-        </fieldset>
-        <!-- Specializations Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.skill.specializations"}}</legend>
-            <div class="specialization-add">
-                <input type="text" placeholder="{{localize " sr3d.item.skill.placeholder"}}"
-                    class="specialization-name" />
-                <a class="add-specialization" title="{{localize 'Add Specialization'}}">
-                    <i class="fas fa-square-plus"></i>
+        </div>
+    </div>
+
+    <!-- Specializations Section -->
+    <div class="specializations-section">
+
+        <div class="specializations-header">
+            <h3>{{localize "sr3d.item.skill.specializations"}}</h3>
+        </div>
+
+        <div class="specialization-add">
+            <input type="text" placeholder="{{localize  'sr3d.item.skill.placeholder'}}" class="specialization-name" />
+            <a class="add-specialization" title="{{localize 'sr3d.item.sheet.addSpecialization'}}">
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+        
+        <div class="specializations-list">
+            {{#each system.skill.activeSkill.specializations}}
+            <div class="specialization-container" data-index="{{@index}}">
+                <input type="text" name="system.skill.activeSkill.specializations.[{{@index}}].name"
+                    value="{{this.name}}" />
+                <span class="specialization-value-label">Value:</span>
+                <input type="number" id="value-{{@index}}"
+                    name="system.skill.activeSkill.specializations.[{{@index}}].value" value="{{this.value}}" />
+
+                <a class="delete-specialization" title="Delete Specialization">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}">
+                    <i class="fas fa-shopping-cart-plus"></i>
+                </a>
+                <a class="undo" title="Undo">
+                    <i class="fas fa-undo-alt"></i>
                 </a>
             </div>
-            <hr />
-            <div class="specializations-list">
-                {{#each system.skill.activeSkill.specializations}}
-
-                <div class="specialization-container" data-index="{{@index}}">
-                    <input type="text" name="system.skill.activeSkill.specializations.[{{@index}}].name"
-                        value="{{this.name}}" />
-                    <label for="value-{{@index}}" class="specialization-value-label">Value:</label>
-                    <input type="number" id="value-{{@index}}"
-                        name="system.skill.activeSkill.specializations.[{{@index}}].value" value="{{this.value}}" />
-
-                    <a class="delete-specialization" title="Delete Specialization">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}">
-                        <i class="fas fa-shopping-cart-plus"></i>
-                    </a>
-                    <a class="undo" title="Undo">
-                        <i class="fas fa-undo-alt"></i>
-                    </a>
-                </div>
-                {{else}}
-                <p>No specializations available.</p>
-                {{/each}}
-            </div>
-        </fieldset>
-    </fieldset>
-</section>
+            {{else}}
+            <p>No specializations available.</p>
+            {{/each}}
+        </div>
+    </div>
+</div>

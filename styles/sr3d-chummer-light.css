@@ -4,7 +4,7 @@
 }
 .sr3d input[type="text"] {
   border: 0;
-  background-color: transparent;
+  background-color: #552791;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d input[type="text"]:focus {
@@ -12,25 +12,17 @@
   box-shadow: 0 0 10px 3px violet;
   outline: none;
 }
+.sr3d input[type="text"]::placeholder {
+  color: #c8d3f5;
+}
 .sr3d .sr3d.sheet.character {
   min-width: 22rem;
   min-height: 800px;
   max-width: 1400px;
-  background: rgba(20, 49, 34, 0.4);
-  box-shadow: none;
-}
-.sr3d .sr3d.sheet.character .window-resizable-handle {
-  background-color: #ff0095;
-}
-.sr3d .sr3d.sheet.character .window-content,
-.sr3d .sr3d.sheet.character form {
-  position: relative;
-  background: transparent;
 }
 .sr3d .sr3d.sheet.character .sheet-masonry-grid {
   display: grid;
   gap: 1rem;
-  background: transparent;
   /* Use CSS variable for column width */
   grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
 }
@@ -39,29 +31,23 @@
   width: var(--column-width, 32%);
   min-width: 300px;
   margin-bottom: 10px;
-  background: transparent;
 }
 .sr3d .sheet-component .proportional {
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
-.sr3d .sheet-component .proportional h4 {
-  color: #48a564;
-}
 .sr3d .sheet-component .inner-background-container {
-  box-sizing: border-box;
   position: relative;
   padding: 0.5rem;
   width: 100%;
   height: 100%;
 }
 .sr3d .sheet-component .inner-background {
-  box-sizing: border-box;
   padding: 0.5rem;
-  background: #212b35;
   width: 100%;
   height: auto;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+  background: #212b35;
 }
 .sr3d .sheet-component .fake-shadow {
   position: absolute;
@@ -79,7 +65,6 @@
   object-fit: cover;
   object-position: center;
   border: 0;
-  box-sizing: border-box;
   z-index: 1;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
@@ -89,69 +74,57 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Neonderthaw';
+  font-style: bold;
+  src: url('../fonts/Neonderthaw/Neonderthaw-Regular.ttf') format('truetype');
+}
 .sr3d .sr3d {
   --color-scrollbar: rgba(30, 30, 0, 0.8);
   /* Smokey yellow tinge */
   --color-scrollbar-track: transparent;
   /* Track background */
 }
-.sr3d .sr3d h1,
-.sr3d .sr3d h2,
-.sr3d .sr3d h3,
-.sr3d .sr3d h4,
-.sr3d .sr3d h5,
-.sr3d .sr3d h6 {
-  text-transform: uppercase;
+.sr3d .sr3d.sheet.item .window-content,
+.sr3d .sr3d.sheet.character .window-content {
   font-family: 'VT323', monospace;
   margin: 0.33rem 0;
   line-height: 1.2;
-  border: none;
+  color: #c8d3f5;
 }
-.sr3d .sr3d .actor-sheet h1 {
+.sr3d .sr3d.sheet.item .window-content h1,
+.sr3d .sr3d.sheet.character .window-content h1 {
+  text-transform: uppercase;
   color: #1df0ff;
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  border: none;
 }
-.sr3d .sr3d .actor-sheet .h1-value h1 {
-  margin: 0rem;
-}
-.sr3d .sr3d .actor-sheet .specialization-font h1 {
-  margin: 0rem;
-  font-size: 1rem;
-}
-.sr3d .sr3d .actor-sheet h2 {
+.sr3d .sr3d.sheet.item .window-content h2,
+.sr3d .sr3d.sheet.character .window-content h2 {
+  text-transform: uppercase;
   color: #d13980;
+  border: none;
 }
-.sr3d .sr3d h3 {
+.sr3d .sr3d.sheet.item .window-content h3,
+.sr3d .sr3d.sheet.character .window-content h3 {
+  text-transform: uppercase;
+  color: #48a564;
+  border: none;
+}
+.sr3d .sr3d.sheet.item .window-content h4,
+.sr3d .sr3d.sheet.character .window-content h4 {
+  text-transform: uppercase;
   color: #48a564;
 }
-.sr3d .sr3d h4 {
+.sr3d .sr3d.sheet.item .window-content h5,
+.sr3d .sr3d.sheet.character .window-content h5 {
+  text-transform: uppercase;
   color: #48a564;
 }
-.sr3d .sr3d h5 {
+.sr3d .sr3d.sheet.item .window-content h6,
+.sr3d .sr3d.sheet.character .window-content h6 {
+  text-transform: uppercase;
   color: #48a564;
-}
-.sr3d .sr3d h6 {
-  color: #48a564;
-}
-.sr3d .sr3d p,
-.sr3d .sr3d span,
-.sr3d .sr3d a,
-.sr3d .sr3d button,
-.sr3d .sr3d input,
-.sr3d .sr3d textarea {
-  font-family: 'VT323', monospace;
-  font-size: 16px;
-  line-height: 1.2;
-  color: #c8d3f5;
-  /* Set font color */
-}
-.sr3d .sr3d div,
-.sr3d .sr3d textarea {
-  font-family: 'VT323', monospace;
-  font-size: 12.8px;
-  line-height: 1.2;
-  color: #c8d3f5;
-  /* Set font color */
 }
 .sr3d .attribute-masonry-grid {
   display: grid;
@@ -575,30 +548,120 @@
   color: transparent;
 }
 .sr3d .sr3d.sheet.item {
-  background: transparent;
+  box-shadow: none;
 }
 .sr3d .sr3d.sheet.item .window-content {
   background-color: transparent;
-}
-.sr3d .sr3d.sheet.item .window-content form {
-  position: relative;
-  background: transparent;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  background-image: none;
+  padding: 0;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .sr3d.sheet.item .window-content form img {
-  border: 0px;
-  margin: 0.5rem;
+.sr3d .sr3d.sheet.item .window-content .item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #552791;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item .window-content form section {
+.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
+  flex: 0 0 auto;
+  max-width: 5rem;
+  max-height: 5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-image img {
+  width: 100%;
+  height: auto;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
+  display: flex;
+  flex-direction: column;
+  /* Stacks the skill header and icons vertically */
+  justify-content: space-between;
+  /* Distributes icons evenly */
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons {
+  display: flex;
+  /* Enables flexbox for this container */
+  justify-content: space-between;
+  /* Distributes icons evenly */
+  align-items: center;
+  /* Aligns icons vertically in the center */
+  width: 100%;
+  /* Ensures the container takes the full width */
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons a {
+  font-size: 1.5rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .skill-value {
+  background-color: #6825c0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  max-width: 5rem;
+  max-height: 5rem;
+  font-size: 4rem;
+  color: #1df0ff;
+  text-align: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item .window-content form .item-sheet-component {
-  padding: 1rem;
+.sr3d .sr3d.sheet.item .window-content .item-name {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
+  text-transform: uppercase;
+  border: 0;
+  font-size: 2.5rem;
+  height: 3rem;
+  background-color: #552791;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
+  background-color: #212b35;
+  box-shadow: 0 0 10px 3px #212b35;
+  outline: none;
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
+  color: #c8d3f5;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute {
+  padding: 0.5rem;
+  background-color: #802480;
+  min-height: 3rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-header {
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-select {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute select {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .window-content .specializations-section {
+  background-color: #802480;
+  padding: 0.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component {
+  padding: 0rem;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -606,22 +669,20 @@
   margin-bottom: 10px;
   background: transparent;
 }
-.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background-container {
-  box-sizing: border-box;
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background-container {
   position: relative;
   padding: 0.5rem;
   width: 100%;
   height: 100%;
 }
-.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .inner-background {
-  box-sizing: border-box;
-  padding: 1rem;
-  background: #212b35;
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background {
+  padding: 0.5rem;
   width: 100%;
-  height: 100%;
+  height: auto;
+  background: #6825c0;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .sr3d.sheet.item .window-content form .item-sheet-component .fake-shadow {
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .fake-shadow {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
@@ -632,13 +693,112 @@
   filter: blur(20px);
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .sr3d.sheet.item .window-content header {
-  width: 100%;
-  background-color: transparent;
-  border: 0;
+.sr3d .sr3d.sheet.item .window-content .item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #552791;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .editor {
+.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
+  flex: 0 0 auto;
+  max-width: 5rem;
+  max-height: 5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-image img {
+  width: 100%;
+  height: auto;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
+  display: flex;
+  flex-direction: column;
+  /* Stacks the skill header and icons vertically */
+  justify-content: space-between;
+  /* Distributes icons evenly */
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons {
+  display: flex;
+  /* Enables flexbox for this container */
+  justify-content: space-between;
+  /* Distributes icons evenly */
+  align-items: center;
+  /* Aligns icons vertically in the center */
+  width: 100%;
+  /* Ensures the container takes the full width */
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons a {
+  font-size: 1.5rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .skill-value {
+  background-color: #6825c0;
+  width: 100%;
   height: 100%;
+  max-width: 5rem;
+  max-height: 5rem;
+  font-size: 4rem;
+  color: #1df0ff;
+  text-align: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-name {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
+  text-transform: uppercase;
+  border: 0;
+  font-size: 2.5rem;
+  height: 3rem;
+  background-color: #552791;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
+  background-color: #212b35;
+  box-shadow: 0 0 10px 3px #212b35;
+  outline: none;
+}
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
+  color: #c8d3f5;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute {
+  padding: 0.5rem;
+  background-color: #802480;
+  min-height: 3rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-header {
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-select {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.sr3d .sr3d.sheet.item .window-content .linked-attribute select {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .window-content .specializations-section {
+  background-color: #802480;
+  padding: 0.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .specializations-section .add-specialization {
+  font-size: 1.5;
 }
 .sr3d .pulsing-green-cart {
   color: inherit;
@@ -1088,7 +1248,7 @@
 }
 @font-face {
   font-family: 'Neonderthaw';
-  font-style: oblique;
+  font-style: bold;
   src: url('../fonts/Neonderthaw/Neonderthaw-Regular.ttf') format('truetype');
 }
 .sr3d .neon-name-position {
@@ -1101,6 +1261,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Add more as needed or loop dynamically with LESS/SASS */
 }
 .sr3d .neon-name-position .neon-name div {
   font-family: 'Neonderthaw', serif;
@@ -1112,7 +1273,22 @@
 .sr3d .neon-name-position .neon-name .malfunc {
   color: #ff0095;
   text-shadow: 0 0 10px blueviolet, 0 0 20px #ff0033, 0 0 40px blue;
-  animation: flicker 3.3s infinite alternate;
+  animation: flicker 3.5s infinite alternate;
+}
+.sr3d .neon-name-position .neon-name .malfunc:nth-child(2) {
+  animation-delay: 0s;
+}
+.sr3d .neon-name-position .neon-name .malfunc:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.sr3d .neon-name-position .neon-name .malfunc:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.sr3d .neon-name-position .neon-name .malfunc:nth-child(10) {
+  animation-delay: 1.2s;
+}
+.sr3d .neon-name-position .neon-name .malfunc:nth-child(14) {
+  animation-delay: 1.8s;
 }
 @keyframes glow {
   from {
@@ -1307,4 +1483,19 @@
     transform: translateX(-100%);
     /* End off-screen to the left */
   }
+}
+.sr3d .sr3d.sheet.item,
+.sr3d .sr3d.sheet.character {
+  box-shadow: none;
+}
+.sr3d .sr3d.sheet.item .window-resizable-handle,
+.sr3d .sr3d.sheet.character .window-resizable-handle {
+  background-color: #ff0095;
+}
+.sr3d .sr3d.sheet.item .window-content,
+.sr3d .sr3d.sheet.character .window-content {
+  background: transparent;
+  background-image: none;
+  position: relative;
+  padding: 0rem;
 }

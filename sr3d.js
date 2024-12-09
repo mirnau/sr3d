@@ -63,8 +63,6 @@ function registerHooks() {
         initMovementMasonry(app, html, data);
     });
 
-
-
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
@@ -92,13 +90,14 @@ function registerHooks() {
 
     Hooks.once(hooks.init, function () {
 
+        CONFIG.Actor.documentClass = SR3DActor;
+        
         Items.unregisterSheet(flags.core, ItemSheet);
         Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
-
+        
         Actors.unregisterSheet(flags.core, ActorSheet);
         Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
 
-        CONFIG.Actor.documentClass = SR3DActor;
 
         registerTemplatesFromPathsAsync();
 
