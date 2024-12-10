@@ -8,7 +8,7 @@
             <h1 class="h1">{{localize "sr3d.item.skill.activeSkill"}}</h1>
         </div>
 
-        <div class="active-skill-icons">
+        <div class="skill-icons">
 
             {{#if isOwned}}
             <a class="delete-owned-instance" title="{{localize 'sr3d.sheet.deleteSkill'}}">
@@ -28,6 +28,7 @@
         {{system.activeSkill.value}}
     </div>
 </div>
+
 <div class="item-name">
     <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
 </div>
@@ -51,7 +52,7 @@
     </div>
 
     <!-- Specializations Section -->
-     {{#if isOwned}}
+    {{#if isOwned}}
     <div class="specializations-section">
 
         <div class="specializations-header">

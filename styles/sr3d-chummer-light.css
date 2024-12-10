@@ -13,53 +13,56 @@
   text-indent: 0.5rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
+.sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
-  min-width: 22rem;
-  min-height: 800px;
-  max-width: 1400px;
+  box-shadow: none;
 }
-.sr3d .sr3d.sheet.character .sheet-masonry-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
-}
-.sr3d .sheet-component {
-  box-sizing: border-box;
-  width: var(--column-width, 32%);
-  min-width: 300px;
-  margin-bottom: 10px;
-}
-.sr3d .sheet-component .inner-background-container {
-  position: relative;
-  padding: 0.5rem;
-  width: 100%;
-  height: 100%;
-}
-.sr3d .sheet-component .inner-background {
-  padding: 0.5rem;
-  width: 100%;
-  height: auto;
-  background: #212b35;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .sheet-component .fake-shadow {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+.sr3d .sr3d.sheet.item .window-resizable-handle,
+.sr3d .sr3d.sheet.character .window-resizable-handle {
   background-color: #ff0095;
-  width: calc(100% - 1.5rem);
-  height: calc(100% - 1.5rem);
-  z-index: -1;
-  filter: blur(20px);
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .sheet-component .portrait {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center;
-  border: 0;
-  z-index: 1;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+.sr3d .sr3d.sheet.item .window-content,
+.sr3d .sr3d.sheet.character .window-content {
+  background: transparent;
+  background-image: none;
+}
+.sr3d .sr3d.sheet.item input[type="text"],
+.sr3d .sr3d.sheet.character input[type="text"] {
+  background-color: #283747;
+  border: none;
+}
+.sr3d .sr3d.sheet.item img,
+.sr3d .sr3d.sheet.character img {
+  border: none;
+}
+.sr3d .sr3d.sheet.item img.small,
+.sr3d .sr3d.sheet.character img.small {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item img.large,
+.sr3d .sr3d.sheet.character img.large {
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item select,
+.sr3d .sr3d.sheet.character select {
+  background-color: #552791;
+  border: none;
+  border-radius: 0%;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item select:hover,
+.sr3d .sr3d.sheet.character select:hover {
+  background-color: #ff0095;
+}
+.sr3d .sr3d.sheet.item option,
+.sr3d .sr3d.sheet.character option {
+  background-color: #552791;
+  border-radius: 0rem;
+  border: none;
+}
+.sr3d .sr3d.sheet.item option:hover,
+.sr3d .sr3d.sheet.character option:hover {
+  background-color: red;
 }
 @font-face {
   font-family: 'VT323';
@@ -141,253 +144,6 @@
 .sr3d .sr3d.sheet.item .window-content input::placeholder,
 .sr3d .sr3d.sheet.character .window-content input::placeholder {
   color: #c8d3f5;
-}
-.sr3d .attribute-masonry-grid {
-  display: grid;
-  margin: 0 auto;
-}
-.sr3d .attribute-masonry-grid .attribute-gutter-sizer {
-  width: 0.5rem;
-}
-.sr3d .attribute-masonry-grid .attribute-grid-sizer {
-  min-width: 5.5rem;
-}
-.sr3d .attribute-masonry-grid .attribute-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  position: relative;
-  text-align: center;
-  background: #283747;
-  min-height: 4rem;
-  width: 5.5rem;
-  min-width: 5.5rem;
-  margin-bottom: 0.5rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-}
-.sr3d .attribute-masonry-grid .attribute-card h1 {
-  font-size: 1.6rem;
-}
-.sr3d .attribute-masonry-grid .attribute-card h3 {
-  font-size: 0.9rem;
-}
-.sr3d .attribute-masonry-grid .attribute-card .attribute-name {
-  background-color: #145b68;
-  margin-bottom: 0.25rem;
-}
-.sr3d .attribute-masonry-grid .attribute-card .attribute-name .attribute-value {
-  margin: 0px;
-  text-align: center;
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.125rem;
-  padding: 0.25rem;
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.2rem;
-  color: #145b68;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
-  transform: scale(1.2);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.15);
-  z-index: 10;
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
-  transform: scale(1.15);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  filter: brightness(1);
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
-  color: grey;
-  pointer-events: none;
-  opacity: 0.5;
-}
-.sr3d .attribute-masonry-grid .attribute-card:hover {
-  background-color: #ff0095;
-  z-index: 10;
-}
-.sr3d .dicepool-masonry-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-  gap: 1rem;
-  width: 100%;
-  grid-auto-flow: dense;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-  will-change: transform, width, height;
-  /* Optimize rendering */
-}
-.sr3d .dicepool-masonry-grid .dicepool-gutter-sizer {
-  width: 0.5rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-grid-sizer {
-  min-width: 5.5rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  position: relative;
-  text-align: center;
-  background: #283747;
-  min-height: 4rem;
-  min-width: 5.5rem;
-  margin-bottom: 0.5rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card h1 {
-  font-size: 1.6rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card h3 {
-  font-size: 0.9rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name {
-  background-color: #145b68;
-  margin-bottom: 0.25rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name .dicepool-value {
-  margin: 0px;
-  text-align: center;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.125rem;
-  padding: 0.25rem;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.2rem;
-  color: #145b68;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:hover,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:hover {
-  transform: scale(1.2);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.15);
-  z-index: 10;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:active,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:active {
-  transform: scale(1.15);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  filter: brightness(1);
-}
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool a.decrement-dicepool.disabled,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool a.decrement-dicepool.disabled {
-  color: grey;
-  pointer-events: none;
-  opacity: 0.5;
-}
-.sr3d .dicepool-masonry-grid .dicepool-card:hover {
-  background-color: #ff0095;
-  z-index: 10;
-}
-.sr3d .movement-masonry-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-  gap: 1rem;
-  width: 100%;
-  grid-auto-flow: dense;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-  will-change: transform, width, height;
-  /* Optimize rendering */
-}
-.sr3d .movement-masonry-grid .movement-gutter-sizer {
-  width: 0.5rem;
-}
-.sr3d .movement-masonry-grid .movement-grid-sizer {
-  min-width: 5.5rem;
-}
-.sr3d .movement-masonry-grid .movement-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  position: relative;
-  text-align: center;
-  background: #283747;
-  min-height: 4rem;
-  min-width: 5.5rem;
-  margin-bottom: 0.5rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-}
-.sr3d .movement-masonry-grid .movement-card .movement-name {
-  background-color: #145b68;
-  margin-bottom: 0.25rem;
-}
-.sr3d .movement-masonry-grid .movement-card .movement-name .movement-value {
-  margin: 0px;
-  text-align: center;
-}
-.sr3d .movement-masonry-grid .movement-card .horizontal-section {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.125rem;
-  padding: 0.25rem;
-}
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.2rem;
-  color: #145b68;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:hover,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:hover {
-  transform: scale(1.2);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.15);
-  z-index: 10;
-}
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:active,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:active {
-  transform: scale(1.15);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  filter: brightness(1);
-}
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement a.decrement-movement.disabled,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement a.decrement-movement.disabled {
-  color: grey;
-  pointer-events: none;
-  opacity: 0.5;
-}
-.sr3d .movement-masonry-grid .movement-card:hover {
-  background-color: #ff0095;
-  z-index: 10;
 }
 .sr3d .attribute-position {
   position: absolute;
@@ -557,6 +313,399 @@
   border-color: transparent;
   color: transparent;
 }
+.sr3d .pulsing-green-cart {
+  color: inherit;
+  cursor: pointer;
+  animation: pulse-color-scale 2s infinite ease-in-out;
+}
+.sr3d .pulsing-green-cart i {
+  animation: pulse-color-scale 2s infinite ease-in-out;
+}
+@keyframes pulse-color-scale {
+  0%,
+  100% {
+    transform: scale(0.98);
+    color: #00FC00C0;
+    text-shadow: none;
+  }
+  50% {
+    transform: scale(1);
+    color: cyan;
+    text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  }
+}
+.sr3d .sheet-component {
+  box-sizing: border-box;
+  width: var(--column-width, 32%);
+  min-width: 300px;
+  margin-bottom: 10px;
+}
+.sr3d .sheet-component .inner-background-container {
+  position: relative;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+.sr3d .sheet-component .inner-background {
+  padding: 0.5rem;
+  width: 100%;
+  height: auto;
+  background: #212b35;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sheet-component .fake-shadow {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background-color: #ff0095;
+  width: calc(100% - 1.5rem);
+  height: calc(100% - 1.5rem);
+  z-index: -1;
+  filter: blur(20px);
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sheet-component .portrait {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  z-index: 1;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .movement-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  grid-auto-flow: dense;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  will-change: transform, width, height;
+  /* Optimize rendering */
+}
+.sr3d .movement-masonry-grid .movement-gutter-sizer {
+  width: 0.5rem;
+}
+.sr3d .movement-masonry-grid .movement-grid-sizer {
+  min-width: 5.5rem;
+}
+.sr3d .movement-masonry-grid .movement-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
+  text-align: center;
+  background: #283747;
+  min-height: 4rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .movement-masonry-grid .movement-card .movement-name {
+  background-color: #145b68;
+  margin-bottom: 0.25rem;
+}
+.sr3d .movement-masonry-grid .movement-card .movement-name .movement-value {
+  margin: 0px;
+  text-align: center;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: #145b68;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:hover,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:active,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement a.decrement-movement.disabled,
+.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement a.decrement-movement.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.sr3d .movement-masonry-grid .movement-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
+.sr3d .attribute-masonry-grid {
+  display: grid;
+  margin: 0 auto;
+}
+.sr3d .attribute-masonry-grid .attribute-gutter-sizer {
+  width: 0.5rem;
+}
+.sr3d .attribute-masonry-grid .attribute-grid-sizer {
+  min-width: 5.5rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
+  text-align: center;
+  background: #283747;
+  min-height: 4rem;
+  width: 5.5rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .attribute-masonry-grid .attribute-card h1 {
+  font-size: 1.6rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card h3 {
+  font-size: 0.9rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card .attribute-name {
+  background-color: #145b68;
+  margin-bottom: 0.25rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card .attribute-name .attribute-value {
+  margin: 0px;
+  text-align: center;
+}
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: #145b68;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
+.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.sr3d .attribute-masonry-grid .attribute-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
+.sr3d .dicepool-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  grid-auto-flow: dense;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  will-change: transform, width, height;
+  /* Optimize rendering */
+}
+.sr3d .dicepool-masonry-grid .dicepool-gutter-sizer {
+  width: 0.5rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-grid-sizer {
+  min-width: 5.5rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  position: relative;
+  text-align: center;
+  background: #283747;
+  min-height: 4rem;
+  min-width: 5.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card h1 {
+  font-size: 1.6rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card h3 {
+  font-size: 0.9rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name {
+  background-color: #145b68;
+  margin-bottom: 0.25rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name .dicepool-value {
+  margin: 0px;
+  text-align: center;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.125rem;
+  padding: 0.25rem;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  color: #145b68;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:hover,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:active,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: brightness(1);
+}
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool a.decrement-dicepool.disabled,
+.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool a.decrement-dicepool.disabled {
+  color: grey;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.sr3d .dicepool-masonry-grid .dicepool-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.character {
+  min-width: 22rem;
+  min-height: 800px;
+  max-width: 1400px;
+}
+.sr3d .sr3d.sheet.character .sheet-masonry-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
+}
+.sr3d .apply-common-header .item-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: top;
+  background-color: #552791;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .apply-common-header .item-header .item-middle-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: top;
+}
+.sr3d .apply-common-header .item-header .item-middle-header h1 {
+  margin: 0;
+}
+.sr3d .apply-common-header .item-header .item-middle-header .skill-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding: 0rem;
+  align-items: center;
+  width: 100%;
+}
+.sr3d .apply-common-header .item-header .item-middle-header .skill-icons a {
+  padding: 0rem;
+  font-size: 1.5rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+.sr3d .apply-common-header .item-header .item-image {
+  background-color: #6825c0;
+  max-width: 5rem;
+  max-height: 5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .apply-common-header .item-header .skill-value {
+  background-color: #6825c0;
+  width: 100%;
+  height: 100%;
+  width: 5rem;
+  height: 5rem;
+  font-size: 4rem;
+  color: #1df0ff;
+  text-align: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .apply-common-header .item-name {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.sr3d .apply-common-header .item-name input[type="text"] {
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  height: 3rem;
+  background-color: #552791;
+  color: #1df0ff;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .apply-common-header .item-name input[type="text"]:focus {
+  background-color: #552791;
+  box-shadow: 0 0 10px 3px #212b35;
+  outline: none;
+}
+.sr3d .apply-common-header .item-name input[type="text"]::placeholder {
+  color: #c8d3f5;
+}
 .sr3d .sr3d.sheet.item .window-content {
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
@@ -579,7 +728,7 @@
 .sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header h1 {
   margin: 0;
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons {
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .skill-icons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -588,18 +737,24 @@
   align-items: center;
   width: 100%;
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons a {
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .skill-icons a {
   padding: 0rem;
   font-size: 1.5rem;
   text-align: center;
   flex: 0 1 auto;
 }
+.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
+  background-color: #6825c0;
+  max-width: 5rem;
+  max-height: 5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
 .sr3d .sr3d.sheet.item .window-content .item-header .skill-value {
   background-color: #6825c0;
   width: 100%;
   height: 100%;
-  max-width: 5rem;
-  max-height: 5rem;
+  width: 5rem;
+  height: 5rem;
   font-size: 4rem;
   color: #1df0ff;
   text-align: center;
@@ -678,11 +833,15 @@
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background input[type="text"] {
   background-color: #6825c0;
+  padding: 0rem;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
   background: #552791;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   height: 100%;
+  padding: 0.5rem;
+  padding-bottom: 1rem;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specialization-add {
   display: flex;
@@ -696,6 +855,7 @@
   flex-direction: column;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container {
+  padding: 0rem;
   position: relative;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card {
@@ -709,7 +869,7 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card .specialization-value {
-  padding: 0.5rem;
+  padding: 0rem;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card input[type="text"] {
   width: 100%;
@@ -731,134 +891,6 @@
   z-index: -1;
   filter: blur(20px);
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-header {
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  justify-content: space-between;
-  padding: 0.5rem;
-  background-color: #552791;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
-  flex: 0 0 auto;
-  max-width: 5rem;
-  max-height: 5rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-image img {
-  width: 100%;
-  height: auto;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
-  display: flex;
-  flex-direction: column;
-  /* Stacks the skill header and icons vertically */
-  justify-content: space-between;
-  /* Distributes icons evenly */
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons {
-  display: flex;
-  /* Enables flexbox for this container */
-  justify-content: space-between;
-  /* Distributes icons evenly */
-  align-items: center;
-  /* Aligns icons vertically in the center */
-  width: 100%;
-  /* Ensures the container takes the full width */
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons a {
-  font-size: 1.5rem;
-  text-align: center;
-  flex: 0 1 auto;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .skill-value {
-  background-color: #6825c0;
-  width: 100%;
-  height: 100%;
-  max-width: 5rem;
-  max-height: 5rem;
-  font-size: 4rem;
-  color: #1df0ff;
-  text-align: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-name {
-  text-align: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
-  text-transform: uppercase;
-  border: 0;
-  font-size: 2.5rem;
-  height: 3rem;
-  background-color: #552791;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
-  background-color: #212b35;
-  box-shadow: 0 0 10px 3px #212b35;
-  outline: none;
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
-  color: #c8d3f5;
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute {
-  padding: 0.5rem;
-  background-color: #802480;
-  min-height: 3rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-header {
-  flex: 0 1 auto;
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-select {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: flex-end;
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute select {
-  width: 100%;
-}
-.sr3d .sr3d.sheet.item .window-content .specializations-section {
-  background-color: #802480;
-  padding: 0.5rem;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .specializations-section .add-specialization {
-  font-size: 1.5;
-}
-.sr3d .pulsing-green-cart {
-  color: inherit;
-  cursor: pointer;
-  animation: pulse-color-scale 2s infinite ease-in-out;
-}
-.sr3d .pulsing-green-cart i {
-  animation: pulse-color-scale 2s infinite ease-in-out;
-}
-@keyframes pulse-color-scale {
-  0%,
-  100% {
-    transform: scale(0.98);
-    color: #00FC00C0;
-    text-shadow: none;
-  }
-  50% {
-    transform: scale(1);
-    color: cyan;
-    text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
-  }
 }
 .sr3d .active-grid-container {
   background-color: #145b68;
@@ -1521,55 +1553,4 @@
     transform: translateX(-100%);
     /* End off-screen to the left */
   }
-}
-.sr3d .sr3d.sheet.item,
-.sr3d .sr3d.sheet.character {
-  box-shadow: none;
-}
-.sr3d .sr3d.sheet.item .window-resizable-handle,
-.sr3d .sr3d.sheet.character .window-resizable-handle {
-  background-color: #ff0095;
-}
-.sr3d .sr3d.sheet.item .window-content,
-.sr3d .sr3d.sheet.character .window-content {
-  background: transparent;
-  background-image: none;
-}
-.sr3d .sr3d.sheet.item input[type="text"],
-.sr3d .sr3d.sheet.character input[type="text"] {
-  background-color: #283747;
-  border: none;
-}
-.sr3d .sr3d.sheet.item img,
-.sr3d .sr3d.sheet.character img {
-  border: none;
-}
-.sr3d .sr3d.sheet.item img.small,
-.sr3d .sr3d.sheet.character img.small {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item img.large,
-.sr3d .sr3d.sheet.character img.large {
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .sr3d.sheet.item select,
-.sr3d .sr3d.sheet.character select {
-  background-color: #552791;
-  border: none;
-  border-radius: 0%;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item select:hover,
-.sr3d .sr3d.sheet.character select:hover {
-  background-color: #ff0095;
-}
-.sr3d .sr3d.sheet.item option,
-.sr3d .sr3d.sheet.character option {
-  background-color: #552791;
-  border-radius: 0rem;
-  border: none;
-}
-.sr3d .sr3d.sheet.item option:hover,
-.sr3d .sr3d.sheet.character option:hover {
-  background-color: red;
 }
