@@ -10,7 +10,8 @@
 }
 .sr3d .sr3d.sheet.item input,
 .sr3d .sr3d.sheet.character input {
-  clip-path: polygon(0.33rem 0px, calc(100% - 0.33rem) 0px, 100% 0.33rem, 100% calc(100% - 0.33rem), calc(100% - 0.33rem) 100%, 0.33rem 100%, 0px calc(100% - 0.33rem), 0px 0.33rem);
+  text-indent: 0.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.character {
   min-width: 22rem;
@@ -90,6 +91,10 @@
   color: #1df0ff;
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   border: none;
+}
+.sr3d .sr3d.sheet.item .window-content h1.no-margin,
+.sr3d .sr3d.sheet.character .window-content h1.no-margin {
+  margin: 0;
 }
 .sr3d .sr3d.sheet.item .window-content h2,
 .sr3d .sr3d.sheet.character .window-content h2 {
@@ -566,7 +571,7 @@
 }
 .sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem;
   align-items: top;
@@ -619,7 +624,7 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
-  background-color: #212b35;
+  background-color: #552791;
   box-shadow: 0 0 10px 3px #212b35;
   outline: none;
 }
@@ -671,12 +676,52 @@
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute select {
   width: 100%;
 }
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
-  background-color: #552791;
-  padding: 0.5rem;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background input[type="text"] {
+  background-color: #6825c0;
 }
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .fake-shadow {
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
+  background: #552791;
+  margin-bottom: 2rem;
+  height: 100%;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specialization-add {
+  display: flex;
+  align-items: center;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specialization-add .add-specialization {
+  padding: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list {
+  display: flex;
+  flex-direction: column;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container {
+  position: relative;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  background: #6825c0;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card .specialization-value {
+  padding: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card input[type="text"] {
+  width: 100%;
+  background-color: #552791;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-acitons {
+  z-index: 10;
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+}
+.sr3d .sr3d.sheet.item .window-content .fake-shadow {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
@@ -1426,7 +1471,6 @@
 }
 .sr3d .sr3d .window-header .window-title {
   background-color: transparent;
-  text-align: center;
   /* Keyframes for the scrolling effect */
 }
 .sr3d .sr3d .window-header .window-title .news-container {

@@ -64,7 +64,7 @@
                 .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
                 &:focus {
-                    background-color: @background-color;
+                    background-color: @quartiery-color;
                     box-shadow: 0 0 10px 3px @background-color; // Bloom effect
                     outline: none;
                 }
@@ -116,19 +116,65 @@
                     }
                 }
 
+                input[type="text"] {
+                    background-color: @tertiary-color;
+                }
+
                 .specializations-section {
+                    background: @quartiery-color;
+                    margin-bottom: 2rem;
+                    height: 100%;
 
-                    background-color: @quartiery-color;
-                    padding: 0.5rem;
+                    .specialization-add {
+                        display: flex;
+                        align-items: center;
 
-                    .clipped-corners(0.5rem, 0.5rem, 2rem, 0.5rem);
+                        .add-specialization {
+                            padding: 0.5rem;
+                        }
+                    }
+
+                    .specializations-list {
+                        display: flex;
+                        flex-direction: column;
+
+                        .specialization-container {
+                            position: relative;
+
+                            .specialization-card {
+                                .apply-flex-distribute(row);
+
+                                margin-bottom: 0.5rem;
+                                align-items: center;
+                                background: @tertiary-color;
+
+                                .specialization-value {
+                                    padding: 0.5rem;
+                                }
+
+                                input[type="text"] {
+                                    width:100%;
+                                    background-color: @quartiery-color;
+                                }
+
+                                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                            }
+
+                            .specialization-acitons {
+                                z-index: 10;
+                                position: absolute;
+                                bottom: 0rem;
+                                right: 1rem;
+                            }
+                        }
+                    }
                 }
             }
+        }
 
-            .fake-shadow {
-                .fake-shadow(@highlight-color-primary);
-                .clipped-corners(1rem, 1rem, 2rem, 1rem);
-            }
+        .fake-shadow {
+            .fake-shadow(@highlight-color-primary);
+            .clipped-corners(1rem, 1rem, 2rem, 1rem);
         }
     }
 }

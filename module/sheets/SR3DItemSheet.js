@@ -1,4 +1,5 @@
 import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
+import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import SR3DLog from '../SR3DLog.js'
 
 export default class SR3DItemSheet extends ItemSheet {
@@ -20,7 +21,7 @@ export default class SR3DItemSheet extends ItemSheet {
         const ctx = super.getData();
 
         // Add attributes to the context
-        ctx.attributes = ["Body", "Quickness", "Strength", "Intelligence", "Willpower", "Charisma"];
+        ctx.attributes = baseAttributeDropdown;
         ctx.system = ctx.item.system;
         ctx.config = CONFIG.sr3d;
         ctx.isOwned = Boolean(this.item.parent);

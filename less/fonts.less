@@ -32,12 +32,18 @@
 .sr3d.sheet.character {
     .window-content {
         .VTT323();
+
+        
         
         h1 {
             .VTT323-header();
             color: @h1-color;
             text-shadow: @h1-color-bloom-primary;
             border: none;
+
+            &.no-margin {
+                margin: 0;
+            }
         }
         h2 {
             .VTT323-header();
@@ -48,7 +54,7 @@
             .VTT323-header();
             color: @h3-color;
             border: none;
-
+            
             &.no-margin {
                 margin: 0;
             }

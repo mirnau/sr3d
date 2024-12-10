@@ -28,7 +28,7 @@
 
 .apply-flex-distribute(@orientation) {
     display: flex;
-    flex-direction: row;
+    flex-direction: @orientation;
     justify-content: space-between;
     padding: 0.5rem;
 }
@@ -47,6 +47,7 @@
     }
 
     input {
-        .clipped-corners(0.33rem, 0.33rem, 0.33rem, 0.33rem);
+        text-indent: 0.5rem; 
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
     }
 }
