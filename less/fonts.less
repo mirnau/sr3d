@@ -48,6 +48,10 @@
             .VTT323-header();
             color: @h3-color;
             border: none;
+
+            &.no-margin {
+                margin: 0;
+            }
         }
         h4 {
             .VTT323-header();
@@ -60,6 +64,15 @@
         h6 {
             .VTT323-header();
             color: @h6-color;
+        }
+
+        select,
+        input {
+            .VTT323();
+
+            &::placeholder {
+                color: @text-color;
+            }
         }
     }
 }

@@ -1,12 +1,13 @@
-.inner-background-container() {
-        
+// NOTE: LESS mixins for brevity
+
+.apply-container() {
     position: relative;
     padding: 0.5rem;
     width: 100%;
     height: 100%;
 }
 
-.inner-background(@inner-background-color) {
+.apply-inner-background(@inner-background-color) {
         
     padding: 0.5rem;
     width: 100%;
@@ -23,4 +24,29 @@
     height: calc(100% - 1.5rem);
     z-index: -1;
     filter: blur(20px);
+}
+
+.apply-flex-distribute(@orientation) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.sr3d.sheet.item,
+.sr3d.sheet.character { 
+
+    .window-content {
+        position: relative;
+        padding: 0rem;
+    }
+
+    img {
+        width: 100%; // Ensure the image fits within the container
+        height: auto; // Maintain the aspect ratio
+    }
+
+    input {
+        .clipped-corners(0.33rem, 0.33rem, 0.33rem, 0.33rem);
+    }
 }

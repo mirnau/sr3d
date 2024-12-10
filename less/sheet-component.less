@@ -4,22 +4,13 @@
     min-width: 300px;
     margin-bottom: 10px;
 
-    .proportional {
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-    }
-
     .inner-background-container {
         .apply-container();
     }
 
     .inner-background {
-        
-        padding: 0.5rem;
-        width: 100%;
-        height: auto;
+        .apply-inner-background(@background-color);
         .clipped-corners(1rem, 1rem, 2rem, 1rem);
-        background: @background-color;
     }
 
     .fake-shadow {
@@ -32,9 +23,7 @@
         object-fit: cover;
         object-position: center;
         border: 0;
-        
         z-index: 1;
-
         .clipped-corners(1rem, 1rem, 2rem, 1rem);
     }
 }

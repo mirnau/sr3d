@@ -10,34 +10,44 @@
     .window-content {
         background: @transparent;
         background-image: @sheet-background-image;
-        position: relative;
-        padding: 0rem;
     }
-}
 
-.inner-background-container() {
-        
-    position: relative;
-    padding: 0.5rem;
-    width: 100%;
-    height: 100%;
-}
+    input[type="text"] {
+        background-color: @primary-color;
+        border: none;
+    }
 
-.inner-background(@inner-background-color) {
-        
-    padding: 0.5rem;
-    width: 100%;
-    height: auto;
-    background: @inner-background-color;
-}
+    img {
+        border: none;
 
-.fake-shadow(@fake-shadow-color) {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    background-color: @fake-shadow-color;
-    width: calc(100% - 1.5rem);
-    height: calc(100% - 1.5rem);
-    z-index: -1;
-    filter: blur(20px);
+        &.small {
+            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+        }
+
+        &.large {
+            .clipped-corners(1rem, 1rem, 1rem, 1rem);
+        }
+    }
+
+    select {
+        background-color: @quartiery-color;
+        border: none;
+        border-radius: 0%;
+
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+        &:hover {
+            background-color: @accent-color;
+        }
+       
+    }
+    option {
+        background-color: @quartiery-color;
+        border-radius: 0rem;
+        border:none;
+
+        &:hover {
+            background-color: red;
+        }
+    }
 }

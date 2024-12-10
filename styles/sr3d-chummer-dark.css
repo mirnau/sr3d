@@ -1,19 +1,16 @@
-.sr3d .sr3d img {
-  border: 0px;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+.sr3d .sr3d.sheet.item .window-content,
+.sr3d .sr3d.sheet.character .window-content {
+  position: relative;
+  padding: 0rem;
 }
-.sr3d input[type="text"] {
-  border: 0;
-  background-color: #552791;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+.sr3d .sr3d.sheet.item img,
+.sr3d .sr3d.sheet.character img {
+  width: 100%;
+  height: auto;
 }
-.sr3d input[type="text"]:focus {
-  background-color: violet;
-  box-shadow: 0 0 10px 3px violet;
-  outline: none;
-}
-.sr3d input[type="text"]::placeholder {
-  color: #c8d3f5;
+.sr3d .sr3d.sheet.item input,
+.sr3d .sr3d.sheet.character input {
+  clip-path: polygon(0.33rem 0px, calc(100% - 0.33rem) 0px, 100% 0.33rem, 100% calc(100% - 0.33rem), calc(100% - 0.33rem) 100%, 0.33rem 100%, 0px calc(100% - 0.33rem), 0px 0.33rem);
 }
 .sr3d .sr3d.sheet.character {
   min-width: 22rem;
@@ -23,7 +20,6 @@
 .sr3d .sr3d.sheet.character .sheet-masonry-grid {
   display: grid;
   gap: 1rem;
-  /* Use CSS variable for column width */
   grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
 }
 .sr3d .sheet-component {
@@ -31,10 +27,6 @@
   width: var(--column-width, 32%);
   min-width: 300px;
   margin-bottom: 10px;
-}
-.sr3d .sheet-component .proportional {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
 }
 .sr3d .sheet-component .inner-background-container {
   position: relative;
@@ -46,8 +38,8 @@
   padding: 0.5rem;
   width: 100%;
   height: auto;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
   background: #212b35;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .sheet-component .fake-shadow {
   position: absolute;
@@ -111,6 +103,10 @@
   color: #48a564;
   border: none;
 }
+.sr3d .sr3d.sheet.item .window-content h3.no-margin,
+.sr3d .sr3d.sheet.character .window-content h3.no-margin {
+  margin: 0;
+}
 .sr3d .sr3d.sheet.item .window-content h4,
 .sr3d .sr3d.sheet.character .window-content h4 {
   text-transform: uppercase;
@@ -125,6 +121,21 @@
 .sr3d .sr3d.sheet.character .window-content h6 {
   text-transform: uppercase;
   color: #48a564;
+}
+.sr3d .sr3d.sheet.item .window-content select,
+.sr3d .sr3d.sheet.character .window-content select,
+.sr3d .sr3d.sheet.item .window-content input,
+.sr3d .sr3d.sheet.character .window-content input {
+  font-family: 'VT323', monospace;
+  margin: 0.33rem 0;
+  line-height: 1.2;
+  color: #c8d3f5;
+}
+.sr3d .sr3d.sheet.item .window-content select::placeholder,
+.sr3d .sr3d.sheet.character .window-content select::placeholder,
+.sr3d .sr3d.sheet.item .window-content input::placeholder,
+.sr3d .sr3d.sheet.character .window-content input::placeholder {
+  color: #c8d3f5;
 }
 .sr3d .attribute-masonry-grid {
   display: grid;
@@ -318,12 +329,6 @@
   min-width: 5.5rem;
   margin-bottom: 0.5rem;
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-}
-.sr3d .movement-masonry-grid .movement-card h1 {
-  font-size: 1.6rem;
-}
-.sr3d .movement-masonry-grid .movement-card h3 {
-  font-size: 0.9rem;
 }
 .sr3d .movement-masonry-grid .movement-card .movement-name {
   background-color: #145b68;
@@ -547,51 +552,39 @@
   border-color: transparent;
   color: transparent;
 }
-.sr3d .sr3d.sheet.item {
-  box-shadow: none;
-}
 .sr3d .sr3d.sheet.item .window-content {
-  background-color: transparent;
-  background-image: none;
-  padding: 0;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-header {
   display: flex;
   flex-direction: row;
-  align-items: top;
   justify-content: space-between;
   padding: 0.5rem;
+  align-items: top;
   background-color: #552791;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
-  flex: 0 0 auto;
-  max-width: 5rem;
-  max-height: 5rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-image img {
-  width: 100%;
-  height: auto;
-}
 .sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
   display: flex;
-  flex-direction: column;
-  /* Stacks the skill header and icons vertically */
+  flex-direction: row;
   justify-content: space-between;
-  /* Distributes icons evenly */
+  padding: 0.5rem;
+  align-items: top;
+}
+.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header h1 {
+  margin: 0;
 }
 .sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons {
   display: flex;
-  /* Enables flexbox for this container */
+  flex-direction: row;
   justify-content: space-between;
-  /* Distributes icons evenly */
+  padding: 0.5rem;
+  padding: 0rem;
   align-items: center;
-  /* Aligns icons vertically in the center */
   width: 100%;
-  /* Ensures the container takes the full width */
 }
 .sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .active-skill-icons a {
+  padding: 0rem;
   font-size: 1.5rem;
   text-align: center;
   flex: 0 1 auto;
@@ -618,10 +611,11 @@
 }
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
   text-transform: uppercase;
-  border: 0;
   font-size: 2.5rem;
   height: 3rem;
   background-color: #552791;
+  color: #1df0ff;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
@@ -632,41 +626,12 @@
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
   color: #c8d3f5;
 }
-.sr3d .sr3d.sheet.item .window-content .linked-attribute {
-  padding: 0.5rem;
-  background-color: #802480;
-  min-height: 3rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-header {
-  flex: 0 1 auto;
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute .attribute-select {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: flex-end;
-}
-.sr3d .sr3d.sheet.item .window-content .linked-attribute select {
-  width: 100%;
-}
-.sr3d .sr3d.sheet.item .window-content .specializations-section {
-  background-color: #802480;
-  padding: 0.5rem;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component {
   padding: 0rem;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   min-width: 300px;
-  margin-bottom: 10px;
   background: transparent;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background-container {
@@ -681,6 +646,35 @@
   height: auto;
   background: #6825c0;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #552791;
+  min-height: 3rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute .attribute-header {
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute .attribute-select {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute select {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
+  background-color: #552791;
+  padding: 0.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .fake-shadow {
   position: absolute;
@@ -1496,6 +1490,42 @@
 .sr3d .sr3d.sheet.character .window-content {
   background: transparent;
   background-image: none;
-  position: relative;
-  padding: 0rem;
+}
+.sr3d .sr3d.sheet.item input[type="text"],
+.sr3d .sr3d.sheet.character input[type="text"] {
+  background-color: #283747;
+  border: none;
+}
+.sr3d .sr3d.sheet.item img,
+.sr3d .sr3d.sheet.character img {
+  border: none;
+}
+.sr3d .sr3d.sheet.item img.small,
+.sr3d .sr3d.sheet.character img.small {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item img.large,
+.sr3d .sr3d.sheet.character img.large {
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item select,
+.sr3d .sr3d.sheet.character select {
+  background-color: #552791;
+  border: none;
+  border-radius: 0%;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item select:hover,
+.sr3d .sr3d.sheet.character select:hover {
+  background-color: #ff0095;
+}
+.sr3d .sr3d.sheet.item option,
+.sr3d .sr3d.sheet.character option {
+  background-color: #552791;
+  border-radius: 0rem;
+  border: none;
+}
+.sr3d .sr3d.sheet.item option:hover,
+.sr3d .sr3d.sheet.character option:hover {
+  background-color: red;
 }

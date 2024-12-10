@@ -6,8 +6,6 @@
     .sheet-masonry-grid {
         display: grid;
         gap: 1rem;
-
-        /* Use CSS variable for column width */
         grid-template-columns: repeat(auto-fit, minmax(var(@masonry-column-width, 200px), 1fr));
     }
 }
