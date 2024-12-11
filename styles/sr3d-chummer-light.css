@@ -757,6 +757,7 @@
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background input[type="text"] {
   background-color: #6825c0;
   padding: 0rem;
+  margin-bottom: 0.5rem;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
   background: #552791;
@@ -792,13 +793,16 @@
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card .specialization-value {
+  text-align: center;
+  width: 3rem;
   padding: 0rem;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card input[type="text"] {
   width: 100%;
+  margin: 0rem;
   background-color: #552791;
 }
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-acitons {
+.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-actions {
   z-index: 10;
   position: absolute;
   bottom: 0rem;
@@ -814,6 +818,25 @@
   z-index: -1;
   filter: blur(20px);
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .language-skill-section .item-header .skill-value {
+  background-color: transparent;
+}
+.sr3d .language-skill-section .subskill-card {
+  background-color: #552791;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .language-skill-section .subskill-card .language-skill-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background-color: #6825c0;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container {
   background-color: #145b68;
