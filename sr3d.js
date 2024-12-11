@@ -129,7 +129,10 @@ function registerHooks() {
             return obj[attr];
         });
 
-
+        Handlebars.registerHelper('log', function(value) {
+            SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
+            return ''; // Handlebars requires the helper to return something
+        });
 
         const themeChoices = {
             "chummer-dark": "Chummer Dark",

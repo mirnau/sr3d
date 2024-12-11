@@ -42,6 +42,8 @@ export default class SR3DActorSheet extends ActorSheet {
         ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
         ctx.inventory = ActorDataService.prepareInventory(ctx.actor.items.contents);
 
+        console.log("Prepared Language Skills:", ctx.skills.language);
+
         return ctx;
     }
 

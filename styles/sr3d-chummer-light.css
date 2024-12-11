@@ -819,9 +819,6 @@
   filter: blur(20px);
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .language-skill-section .item-header .skill-value {
-  background-color: transparent;
-}
 .sr3d .language-skill-section .subskill-card {
   background-color: #552791;
   padding: 0.5rem;
@@ -837,6 +834,13 @@
   margin-bottom: 0.5rem;
   background-color: #6825c0;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .language-skill-section .subskill-card .language-skill-display h1 {
+  margin: 0rem;
+}
+.sr3d .language-skill-section .subskill-card .language-skill-display .subskill-value {
+  width: 3rem;
+  text-align: center;
 }
 .sr3d .active-grid-container {
   background-color: #145b68;
