@@ -687,12 +687,11 @@
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-name {
+.sr3d .sr3d.sheet.item .window-content .item-name {
   text-align: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-name input[type="text"] {
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
+  margin: 0rem;
   text-transform: uppercase;
   font-size: 2.5rem;
   height: 3rem;
@@ -701,12 +700,12 @@
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-name input[type="text"]:focus {
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
   background-color: #552791;
   box-shadow: 0 0 10px 3px #212b35;
   outline: none;
 }
-.sr3d .sr3d.sheet.item .window-content .item-header .item-name input[type="text"]::placeholder {
+.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
   color: #c8d3f5;
 }
 .sr3d .sr3d.sheet.item .window-content .item-sheet-component {
@@ -1268,7 +1267,6 @@
   cursor: pointer;
   position: relative;
   z-index: 1;
-  transition: background 1.5s, color 1.3s;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
 }
 .sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tabs .item:hover {
