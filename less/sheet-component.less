@@ -1,16 +1,15 @@
 .sheet-component {
     box-sizing: border-box;
-    width: var(--column-width, 32%); // Use the dynamically set column width, fallback to 32%
     min-width: 300px;
     margin-bottom: 10px;
 
     .inner-background-container {
         .apply-container();
-    }
 
-    .inner-background {
-        .apply-inner-background(@background-color);
-        .clipped-corners(1rem, 1rem, 2rem, 1rem);
+        .inner-background {
+            .apply-inner-background(@background-color);
+            .clipped-corners(1rem, 1rem, 2rem, 1rem);
+        }
     }
 
     .fake-shadow {

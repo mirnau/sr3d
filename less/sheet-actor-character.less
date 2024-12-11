@@ -5,7 +5,14 @@
 
     .sheet-masonry-grid {
         display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(var(@masonry-column-width, 200px), 1fr));
+        margin: 0 auto;
+
+        .layout-gutter-sizer {
+            width: 1rem;
+        }
+
+        .layout-grid-sizer {
+            min-width: 300px;
+        }
     }
 }

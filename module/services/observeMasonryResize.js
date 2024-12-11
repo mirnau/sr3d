@@ -8,8 +8,8 @@ import { cacheResizeObserverOnActor } from "../sheets/Utilities.js";
  * @param {Object} masonryResizeConfig - Configuration for the masonry layout.
  * @returns {ResizeObserver} - The resize observer instance.
  */
-export function observeMasonryResize(actor, masonryResizeConfig) {
-    const { html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector } = masonryResizeConfig;
+export function observeMasonryResize(actor, masonryResizeConfig, isMainGrid = false) {
+    const { html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, app } = masonryResizeConfig;
     const gridElement = html[0]?.querySelector(parentSelector);
 
     if (gridElement) {
@@ -24,8 +24,13 @@ export function observeMasonryResize(actor, masonryResizeConfig) {
 
             gridElement.masonryInstance = masonryInstance;
 
-            // Bind resize adjustment function
-            const func = () => adjustMasonryOnResize(masonryResizeConfig);
+            let func = () => {
+                adjustMasonryOnResize(masonryResizeConfig);
+                if (isMainGrid) {
+                    layoutStateMachine(app, html);
+                }
+            };
+
             masonryResizeConfig.observer = getResizeObserver(masonryInstance, gridElement, childSelector, func);
         }
 
@@ -47,7 +52,7 @@ export function observeMasonryResize(actor, masonryResizeConfig) {
  */
 
 export function adjustMasonryOnResize(masonryResizeConfig) {
-    const { html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector, itemCSSVar } = masonryResizeConfig;
+    const { html, parentSelector, childSelector, gridSizerSelector, gutterSizerSelector } = masonryResizeConfig;
     const grid = html[0]?.querySelector(parentSelector);
     const gridItems = html[0]?.querySelectorAll(childSelector);
     const gridSizer = html[0]?.querySelector(gridSizerSelector);
@@ -71,7 +76,6 @@ export function adjustMasonryOnResize(masonryResizeConfig) {
 
     // Adjust item width to ensure perfect fit
     const adjustedItemWidthPx = Math.floor(itemWidthPx);
-    grid.style.setProperty(itemCSSVar, `${adjustedItemWidthPx}px`);
 
     gridItems.forEach((item) => {
         item.style.width = `${adjustedItemWidthPx}px`;
@@ -79,4 +83,70 @@ export function adjustMasonryOnResize(masonryResizeConfig) {
 
     // Dynamically adjust the grid sizer width
     gridSizer.style.width = `${adjustedItemWidthPx}px`;
+}
+
+function layoutStateMachine(app, html) {
+
+    const sheetWidth = app.position?.width || 1400; // Default width
+    const maxWidth = 1400;
+
+    // Define thresholds for layout
+    const lowerLimit = 0.5 * maxWidth; // 33% of maxWidth
+    const middleLimit = 0.66 * maxWidth; // 60% of maxWidth
+
+    // Determine layout state
+    let layoutState = "small"; // Default to small layout
+    if (sheetWidth > middleLimit) {
+        layoutState = "wide";
+    } else if (sheetWidth > lowerLimit) {
+        layoutState = "medium";
+    }
+
+    // Column width percentages for each layout state
+    const columnWidthPercent = {
+        small: 100,
+        medium: 49,
+        wide: 32,
+    };
+
+    // Apply column width globally
+    const columnWidth = columnWidthPercent[layoutState];
+    html[0].style.setProperty("--column-width", `${columnWidth}%`);
+
+    // Query components
+    const twoSpanComponents = html[0].querySelectorAll(".two-span-selectable");
+    const threeSpanComponents = html[0].querySelectorAll(".three-span-selectable");
+
+    // State machine for component layout
+    switch (layoutState) {
+        case "small":
+            // Small layout: Reset all spans to single column
+            twoSpanComponents.forEach((component) => {
+                component.style.width = `var(--column-width)`;
+            });
+            threeSpanComponents.forEach((component) => {
+                component.style.width = `var(--column-width)`;
+            });
+            break;
+
+        case "medium":
+            // Medium layout: Two-span components span two columns
+            twoSpanComponents.forEach((component) => {
+                component.style.width = `calc(2 * var(--column-width) - 10px)`;
+            });
+            threeSpanComponents.forEach((component) => {
+                component.style.width = `var(--column-width)`; // Reset to single column
+            });
+            break;
+
+        case "wide":
+            // Wide layout: Three-span components span three columns
+            twoSpanComponents.forEach((component) => {
+                component.style.width = `calc(2 * var(--column-width) - 10px)`;
+            });
+            threeSpanComponents.forEach((component) => {
+                component.style.width = `calc(3 * var(--column-width) - 20px)`;
+            });
+            break;
+    }
 }

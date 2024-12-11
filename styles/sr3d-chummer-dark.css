@@ -336,7 +336,6 @@
 }
 .sr3d .sheet-component {
   box-sizing: border-box;
-  width: var(--column-width, 32%);
   min-width: 300px;
   margin-bottom: 10px;
 }
@@ -346,7 +345,7 @@
   width: 100%;
   height: 100%;
 }
-.sr3d .sheet-component .inner-background {
+.sr3d .sheet-component .inner-background-container .inner-background {
   padding: 0.5rem;
   width: 100%;
   height: auto;
@@ -372,7 +371,7 @@
   z-index: 1;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .movement-masonry-grid {
+.sr3d .sr3d.sheet.character .movement-masonry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
   gap: 1rem;
@@ -382,13 +381,13 @@
   will-change: transform, width, height;
   /* Optimize rendering */
 }
-.sr3d .movement-masonry-grid .movement-gutter-sizer {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-gutter-sizer {
   width: 0.5rem;
 }
-.sr3d .movement-masonry-grid .movement-grid-sizer {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-grid-sizer {
   min-width: 5.5rem;
 }
-.sr3d .movement-masonry-grid .movement-card {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   position: relative;
   text-align: center;
@@ -398,15 +397,15 @@
   margin-bottom: 0.5rem;
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
 }
-.sr3d .movement-masonry-grid .movement-card .movement-name {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .movement-name {
   background-color: #145b68;
   margin-bottom: 0.25rem;
 }
-.sr3d .movement-masonry-grid .movement-card .movement-name .movement-value {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .movement-name .movement-value {
   margin: 0px;
   text-align: center;
 }
-.sr3d .movement-masonry-grid .movement-card .horizontal-section {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section {
   position: absolute;
   top: 60%;
   left: 50%;
@@ -417,8 +416,8 @@
   gap: 0.125rem;
   padding: 0.25rem;
 }
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .decrement-movement,
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .increment-movement {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -429,26 +428,26 @@
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:hover,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:hover {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:hover,
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .increment-movement:hover {
   transform: scale(1.2);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   filter: brightness(1.15);
   z-index: 10;
 }
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:active,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement:active {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .decrement-movement:active,
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .increment-movement:active {
   transform: scale(1.15);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   filter: brightness(1);
 }
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .decrement-movement a.decrement-movement.disabled,
-.sr3d .movement-masonry-grid .movement-card .horizontal-section .increment-movement a.decrement-movement.disabled {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .decrement-movement a.decrement-movement.disabled,
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section .increment-movement a.decrement-movement.disabled {
   color: grey;
   pointer-events: none;
   opacity: 0.5;
 }
-.sr3d .movement-masonry-grid .movement-card:hover {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card:hover {
   background-color: #ff0095;
   z-index: 10;
 }
@@ -533,7 +532,7 @@
   background-color: #ff0095;
   z-index: 10;
 }
-.sr3d .dicepool-masonry-grid {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
   gap: 1rem;
@@ -543,13 +542,13 @@
   will-change: transform, width, height;
   /* Optimize rendering */
 }
-.sr3d .dicepool-masonry-grid .dicepool-gutter-sizer {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-gutter-sizer {
   width: 0.5rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-grid-sizer {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-grid-sizer {
   min-width: 5.5rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   position: relative;
   text-align: center;
@@ -559,21 +558,21 @@
   margin-bottom: 0.5rem;
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card h1 {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card h1 {
   font-size: 1.6rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card h3 {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card h3 {
   font-size: 0.9rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .dicepool-name {
   background-color: #145b68;
   margin-bottom: 0.25rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-name .dicepool-value {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .dicepool-name .dicepool-value {
   margin: 0px;
   text-align: center;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section {
   position: absolute;
   top: 60%;
   left: 50%;
@@ -584,8 +583,8 @@
   gap: 0.125rem;
   padding: 0.25rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool,
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -596,26 +595,26 @@
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:hover,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:hover {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:hover,
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:hover {
   transform: scale(1.2);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   filter: brightness(1.15);
   z-index: 10;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:active,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:active {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool:active,
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool:active {
   transform: scale(1.15);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   filter: brightness(1);
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool a.decrement-dicepool.disabled,
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool a.decrement-dicepool.disabled {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .decrement-dicepool a.decrement-dicepool.disabled,
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card .horizontal-section .increment-dicepool a.decrement-dicepool.disabled {
   color: grey;
   pointer-events: none;
   opacity: 0.5;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card:hover {
+.sr3d .sr3d.sheet.character .dicepool-masonry-grid .dicepool-card:hover {
   background-color: #ff0095;
   z-index: 10;
 }
@@ -626,8 +625,13 @@
 }
 .sr3d .sr3d.sheet.character .sheet-masonry-grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(var(22rem, 200px), 1fr));
+  margin: 0 auto;
+}
+.sr3d .sr3d.sheet.character .sheet-masonry-grid .layout-gutter-sizer {
+  width: 1rem;
+}
+.sr3d .sr3d.sheet.character .sheet-masonry-grid .layout-grid-sizer {
+  min-width: 300px;
 }
 .sr3d .sr3d.sheet.item .window-content {
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -1230,62 +1234,6 @@
   text-align: center;
   background-color: #283747;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container {
-  position: relative;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .item-create {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-  z-index: 10;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs {
-  position: relative;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs h2 {
-  margin: 0rem;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar {
-  display: flex;
-  justify-content: space-between;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tabs {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  width: max-content;
-  text-wrap: nowrap;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tabs .item {
-  min-width: 11.5rem;
-  margin-top: -1px;
-  flex: 1 1 auto;
-  width: 100%;
-  padding: 0.5rem 0.5rem;
-  background: #283747;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tabs .item:hover {
-  background: #6825c0;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tabs .item.active {
-  background: #145b68;
-  z-index: 2;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tab-content {
-  padding: 0rem;
-  margin-top: -1px;
-  clip-path: polygon(0rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tab-content .tab {
-  display: none;
-}
-.sr3d .sr3d .sheet-masonry-grid .sheet-component .inner-background-container .skills-tabs .skill-utility-bar .tab-content .tab.active {
-  display: block;
 }
 @font-face {
   font-family: 'Neonderthaw';

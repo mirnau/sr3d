@@ -1,18 +1,20 @@
-
+.sr3d.sheet.character {
     .dicepool-masonry-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
         gap: 1rem;
         width: 100%;
-        grid-auto-flow: dense; 
+        grid-auto-flow: dense;
         transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-        will-change: transform, width, height; /* Optimize rendering */
+        will-change: transform, width, height;
+        /* Optimize rendering */
 
         .dicepool-gutter-sizer {
             width: 0.5rem;
         }
+
         .dicepool-grid-sizer {
-            min-width: 5.5rem; 
+            min-width: 5.5rem;
         }
 
         .dicepool-card {
@@ -23,11 +25,12 @@
             min-height: 4rem;
             min-width: 5.5rem;
             margin-bottom: 0.5rem;
-            transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease,  background-color 1.3s ease;
+            transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
 
             h1 {
-                font-size:1.6rem;
+                font-size: 1.6rem;
             }
+
             h3 {
                 font-size: 0.9rem;
             }
@@ -91,7 +94,8 @@
             &:hover {
                 background-color: @accent-color;
                 z-index: 10;
-                
+
             }
         }
     }
+}
