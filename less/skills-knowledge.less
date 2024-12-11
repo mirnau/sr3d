@@ -1,59 +1,50 @@
 .knowledge-grid-container {
-    background-color: transparent;
+    background-color: @secondary-color;
     width: 100%;
-
-    .knowledge-skills-masonry-grid {
-        justify-content: center;
-
-        position: relative;
+    padding: 0.5rem;
+    
+    h1 {
+        margin: 0rem;
+    }
+    
+    .knowledge-skill-category {
         background-color: @primary-color;
-        width: 100%;
-        margin: 0 auto;
-        padding: .5rem;
-        .clipped-corners(1rem, 1rem, 1rem, 1rem);
+        padding: 0.5rem;
+        .clipped-corners(1rem, 1rem, 2rem, 1rem);
 
-        .knowledge-gutter-sizer {
-            width: var(--knowledge-gutter-width, 2%); 
-        }
-        .knowledge-grid-sizer {
-            width: var(--knowledge-computed-item-width, 23%); 
-            //min-width: 11.5rem;
-        }
-
-        .knowledge-skill-category {
-            background-color: @background-color;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            float: left;
-            width: var(--knowledge-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+        .knowledge-skills-masonry-grid {
+            justify-content: center;
+            position: relative;
+            background-color: @primary-color;
+            width: 100%;
+            margin: 0 auto;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+            .knowledge-gutter-sizer {
+                width: 0.5rem;
+            }
+
+            .knowledge-grid-sizer {
+                min-width: 11.5rem;
+            }
 
             .skill-specialization-card {
                 align-items: center;
             }
 
-            .skill-specialization-card,
-            .active-skill-container,
-            .knowledge-skill-container,
-            .language-card-container {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                box-sizing: border-box;
-                min-height: 2rem;
-                margin-bottom: 0.25rem;
-                padding: 0.5rem;
+            .knowledge-skill-item {
+                min-width: 11.5rem;
                 background-color: @secondary-color;
-                justify-content: space-between; // Space between name and value
-                gap: 0rem; // Space between rows or items
-                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                margin-bottom: 0.5rem;
+                padding: 0.5rem;
+                .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+                /* Removed nested .knowledge-skill-container */
 
                 .core-skill {
                     padding: 0.25rem;
                     width: 100%;
                     display: flex;
-                    flex-direction: row; // Ensure horizontal layout
                     align-items: center; // Align all children along the x-axis
                     justify-content: space-between; // Space between the skill name, icons, and value
                     position: relative;
@@ -64,12 +55,9 @@
                         right: -0.25rem;
                     }
 
-                    .language-card,
-                    .knowledge-card,
-                    .active-skill-card {
+                    .knowledge-skill-card { // Corrected class name
                         width: 100%;
                         display: flex;
-                        flex-direction: row;
                         align-items: center; // Align icons and values in the same row
                         gap: 0.5rem; // Add space between skill name and icons
                         justify-content: center;
@@ -80,7 +68,6 @@
 
                         .icons {
                             display: flex;
-                            flex-direction: row;
                             align-items: center;
                             gap: 0.25rem; // Space between icons
                         }
@@ -89,31 +76,29 @@
                             width: 3rem; // Adjust to fit the value display appropriately
                             text-align: center;
                             background-color: @primary-color;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
+                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
                         }
                     }
                 }
 
-                .active-specialization-card-color-override {
+                .active-specialization-card-color-override { // Corrected class name
                     background-color: @tertiary-color;
                     padding: 0.25rem;
                     flex-direction: row; // Children inside also aligned horizontally
                 }
 
-                .specialisation-container {
-
+                .specialization-container {
                     .specializations {
-                        padding: 0px;
-                        width: 50%;
+                        padding: 0;
+                        width: 100%;
+                        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
                         .specialization-name {
                             flex-direction: column;
                             flex-wrap: wrap;
-
                         }
 
                         .specialization-value {
-
                             width: 3rem;
                             text-align: center;
                             background-color: @quartiery-color;

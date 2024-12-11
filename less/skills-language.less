@@ -1,24 +1,23 @@
 .language-grid-container {
-    background-color: transparent;
+    background-color: @secondary-color;
+    padding: 0.5rem;
     width: 100%;
     /* Allows it to stretch with the parent */
+        
+    h1 {
+        margin: 0rem;
+    }
 
     .language-skills-masonry-grid {
-        justify-content: center;
-        /* Centers the grid */
-        position: relative;
-        background-color: @primary-color;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0.5rem;
+        display: grid;
+          margin: 0 auto;
         .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
         .language-gutter-sizer {
-            width: var(--language-gutter-width, 2%);
+            width: 0.5rem;
         }
         .language-grid-sizer {
-            width: var(--language-computed-item-width, 23%);
-            // min-width: 11.5rem;
+            min-width: 11.5rem;
         }
 
         .language-skill-category {
@@ -26,7 +25,7 @@
             margin-bottom: 0.5rem;
             padding: 0.5rem;
             float: left;
-            width: var(--language-computed-item-width, 23%);
+            min-width: 11.5rem;
             // min-width: 11.5rem;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
