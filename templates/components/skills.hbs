@@ -1,5 +1,5 @@
-<div class="skills-tabs">
 
+<div class="skills-tabs">
   <div class="skill-utility-bar">
     <nav class="tabs">
       <a class="item" data-tab="active-skills">
@@ -12,11 +12,6 @@
         <h2>{{localize "sr3d.item.skill.languageSkills"}}</h2>
       </a>
     </nav>
-    {{#if (isShoppingStateActive this.actor)}}
-    <a class="item-create" data-type="skill" data-skill-type="skill" title="{{localize " sr3d.sheet.addSkill"}}">
-      <h2><i class="fas fa-square-plus pulsing-green-cart"></i></h2>
-    </a>
-    {{/if}}
   </div>
 
   <div class="tab-content">
@@ -42,7 +37,7 @@
         <div class="language-skills-masonry-grid">
           <div class="language-grid-sizer"></div>
           <div class="language-gutter-sizer"></div>
-          {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
+          {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" this}}
         </div>
       </div>
     </section>

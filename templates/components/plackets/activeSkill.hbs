@@ -8,6 +8,22 @@
 
   {{#each this}}
   <div class="active-skill-container">
+
+    {{#if (isShoppingStateActive actor)}}
+    <div class="edit-icon">
+      <h4>
+        <a class="edit-skill" data-id="{{this._id}}">
+          <i class="fas fa-pen-to-square pulsing-green-cart"></i>
+        </a>
+      </h4>
+    </div>
+    {{else}}
+    <div class="checkmark">
+      <a class="select-skill">
+        <i class="fa-solid fa-circle-check"></i>
+      </a>
+    </div>
+    {{/if}}
     <div class="core-skill">
       <div class="active-skill-card">
         <div class="skill-name">
@@ -16,15 +32,6 @@
           </h3>
         </div>
 
-        {{#if (isShoppingStateActive actor)}}
-        <div class="icons">
-          <h4>
-            <a class="edit-skill" data-id="{{this._id}}">
-              <i class="fas fa-pen-to-square pulsing-green-cart"></i>
-            </a>
-          </h4>
-        </div>
-        {{/if}}
 
         <div class="skill-value h1-value">
           <h1>
@@ -33,11 +40,6 @@
         </div>
       </div>
 
-      <div class="checkmark">
-        <a>
-          <i class="fa-solid fa-circle-check"></i>
-        </a>
-      </div>
     </div>
 
     <!-- Display Specializations -->
@@ -51,8 +53,12 @@
             {{this.name}}
           </div>
           <div class="specialization-value specialization-font">
-            <h1>
+            <h1 class="no-margin">
+              {{#if this.value}}
               {{this.value}}
+              {{else}}
+              0
+              {{/if}}
             </h1>
           </div>
         </div>

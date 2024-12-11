@@ -2,8 +2,9 @@
     background-color: @secondary-color;
     width: 100%;
     padding: 0.5rem;
+    .clipped-corners(0rem, 1rem, 2rem, 1rem);
     
-    h1 {
+    h1, h2, h3, h4 {
         margin: 0rem;
     }
     
@@ -11,6 +12,10 @@
         background-color: @primary-color;
         padding: 0.5rem;
         .clipped-corners(1rem, 1rem, 2rem, 1rem);
+
+        h3 {
+            text-indent: 1rem;
+        }
 
         .knowledge-skills-masonry-grid {
             justify-content: center;
@@ -30,6 +35,7 @@
 
             .skill-specialization-card {
                 align-items: center;
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
             }
 
             .knowledge-skill-item {
@@ -39,70 +45,99 @@
                 padding: 0.5rem;
                 .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
-                /* Removed nested .knowledge-skill-container */
+                .checkmark {
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    z-index: 10;
+                }
+
+                .edit-icon {
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    z-index: 10;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center; // Keeps icons vertically centered within their container
+                    gap: 0.25rem; // Space between icons
+                }
 
                 .core-skill {
                     padding: 0.25rem;
                     width: 100%;
                     display: flex;
+                    flex-direction: row; // Ensure horizontal layout
                     align-items: center; // Align all children along the x-axis
                     justify-content: space-between; // Space between the skill name, icons, and value
                     position: relative;
 
-                    .checkmark {
-                        position: absolute;
-                        top: -0.25rem;
-                        right: -0.25rem;
+                    h3 {
+                        text-indent: 0.5rem;
                     }
 
-                    .knowledge-skill-card { // Corrected class name
+   
+                    .knowledge-skill-card {
                         width: 100%;
                         display: flex;
+                        flex-direction: row;
                         align-items: center; // Align icons and values in the same row
                         gap: 0.5rem; // Add space between skill name and icons
                         justify-content: center;
 
                         .skill-name {
-                            flex: 1; // Allow this to take up remaining space
-                        }
+                            overflow: hidden; // Hides overflowing text
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
 
-                        .icons {
-                            display: flex;
-                            align-items: center;
-                            gap: 0.25rem; // Space between icons
+                            flex: 1; // Allow this to take up remaining space
                         }
 
                         .skill-value {
                             width: 3rem; // Adjust to fit the value display appropriately
                             text-align: center;
                             background-color: @primary-color;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
                         }
                     }
                 }
 
-                .active-specialization-card-color-override { // Corrected class name
-                    background-color: @tertiary-color;
+                .knowledge-specialization-card-color-override {
+                    .apply-flex-distribute(row);
+                    background-color: @secondary-color;
                     padding: 0.25rem;
-                    flex-direction: row; // Children inside also aligned horizontally
+                    margin-top: 0.25rem;
                 }
+                
+                .specialisation-container {
 
-                .specialization-container {
+                    h4 {
+                        text-indent: 0.5rem;
+                    }
+
+                    padding: 0.25rem;
+                    background-color: @primary-color;
+                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
                     .specializations {
-                        padding: 0;
+                        text-indent: 0rem;
+                        padding: 0rem;
                         width: 100%;
-                        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
                         .specialization-name {
-                            flex-direction: column;
-                            flex-wrap: wrap;
+                            margin-left: 0.5rem;
+                            margin-right: 0.5rem;
+                            overflow: hidden; // Hides overflowing text
+                            text-overflow: ellipsis;
                         }
 
                         .specialization-value {
-                            width: 3rem;
+
+                            min-width: 3rem;
+                            height: 2rem;
                             text-align: center;
-                            background-color: @quartiery-color;
-                            .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                            background-color: @primary-color;
+                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
                         }
                     }
                 }

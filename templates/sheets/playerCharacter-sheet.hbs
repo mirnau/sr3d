@@ -49,12 +49,12 @@
             </div>
         </div>
 
-                <!-- Health Section -->
+        <!-- Health Section -->
         <div class="sheet-component two-span-selectable">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                <h1>{{localize "sr3d.actor.health.damageTracker"}}</h1>
+                    <h1>{{localize "sr3d.actor.health.damageTracker"}}</h1>
                     <p>Health Goes here</p>
                 </div>
             </div>
@@ -65,6 +65,12 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
+                    {{#if (isShoppingStateActive this.actor)}}
+                    <a class="item-create" data-type="skill" data-skill-type="skill" title="{{localize "
+                        sr3d.sheet.addSkill"}}">
+                        <h2><i class="fas fa-square-plus pulsing-green-cart"></i></h2>
+                    </a>
+                    {{/if}}
                     <h1>{{localize "sr3d.item.skill.skills"}}</h1>
                     {{> "systems/sr3d/templates/components/skills.hbs"}}
                 </div>
@@ -76,7 +82,7 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                     <h1>{{localize "sr3d.actor.budget.budget"}}</h1>
+                    <h1>{{localize "sr3d.actor.budget.budget"}}</h1>
                     <p>Income: {{system.budget.income}}</p>
                     <p>Expenses: {{system.budget.expenses}}</p>
                     <p>Debts: {{system.budget.debts}}</p>
@@ -89,14 +95,24 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                     <h1>{{localize "sr3d.actor.possessions.possessions"}}</h1>
+                    <h1>{{localize "sr3d.actor.possessions.possessions"}}</h1>
                     <div class="sheet-tabs">
                         <nav class="tabs">
-                            <a class="item" data-tab="loadout"><h2>{{localize "sr3d.actor.possessions.loadout"}}</h2></a>
-                            <a class="item" data-tab="inventory"><h2>{{localize "sr3d.actor.possessions.inventory"}}</h2></a>
-                            <a class="item" data-tab="arsenal"><h2>{{localize "sr3d.actor.possessions.arsenal"}}</h2></a>
-                            <a class="item" data-tab="arcane"><h2>{{localize "sr3d.actor.possessions.arcane"}}</h2></a>
-                            <a class="item" data-tab="garage"><h2>{{localize "sr3d.actor.possessions.garage"}}</h2></a>
+                            <a class="item" data-tab="loadout">
+                                <h2>{{localize "sr3d.actor.possessions.loadout"}}</h2>
+                            </a>
+                            <a class="item" data-tab="inventory">
+                                <h2>{{localize "sr3d.actor.possessions.inventory"}}</h2>
+                            </a>
+                            <a class="item" data-tab="arsenal">
+                                <h2>{{localize "sr3d.actor.possessions.arsenal"}}</h2>
+                            </a>
+                            <a class="item" data-tab="arcane">
+                                <h2>{{localize "sr3d.actor.possessions.arcane"}}</h2>
+                            </a>
+                            <a class="item" data-tab="garage">
+                                <h2>{{localize "sr3d.actor.possessions.garage"}}</h2>
+                            </a>
                         </nav>
                     </div>
                     <div class="tab-content">
