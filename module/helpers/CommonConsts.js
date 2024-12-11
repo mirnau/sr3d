@@ -1,5 +1,15 @@
 export const baseAttributes = ["body", "quickness", "strength", "charisma", "intelligence", "willpower"];
-export const baseAttributeDropdown = ["Uncategorized", "Body", "Quickness", "Strength", "Intelligence", "Willpower", "Charisma"]
+
+
+export const baseAttributeDropdown = 
+        ["Uncategorized", 
+        "Body", 
+        "Quickness", 
+        "Strength", 
+        "Intelligence", 
+        "Willpower", 
+        "Charisma", 
+        "Reaction"]
 
 export const flags = {
     namespace: "sr3d",
