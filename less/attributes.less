@@ -1,93 +1,87 @@
+.attribute-masonry-grid {
+    display: grid;
+    margin: 0 auto;
 
-    .attribute-masonry-grid {
-        display: grid;
-          margin: 0 auto;
+    h1,
+    h4 {
+        margin: 0;
+    }
 
-        .attribute-gutter-sizer {
-            width: 0.5rem; 
+    h1 {
+        text-indent: 0;
+    }
+
+    h4 {
+        text-align: center;
+    
+        &:hover {
+            color: @primary-color;
         }
-        .attribute-grid-sizer {
-            min-width: 5.5rem; 
-        }
+    }    
 
-        .attribute-card {
-            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-            position: relative; // Required for absolute positioning of child elements
+    .attribute-gutter-sizer {
+        width: 0.5rem; 
+    }
+
+    .attribute-grid-sizer,
+    .attribute-card {
+        min-width: 5rem;
+    }
+
+    .attribute-card {
+        .clipped-corners(0.5rem, 0.5rem, 1.0rem, 0.5rem);
+
+        background: @primary-color;
+        padding: 0.25rem;
+        min-height: 3rem;
+        transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+        margin-top: 0.25rem;
+
+        .attribute-value {
+            margin: 0;
             text-align: center;
-            background: @primary-color;
-            min-height: 4rem;
-            width: 5.5rem;
-            min-width: 5.5rem;
-            margin-bottom: 0.5rem;
-            transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease,  background-color 1.3s ease;
+        }
 
-            h1 {
-                font-size:1.6rem;
-            }
-            h3 {
-                font-size: 0.9rem;
-            }
+        .horizontal-section {
+            background-color: @secondary-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .clipped-corners(0.5rem, 0.5rem, 1.0rem, 0.5rem);
 
-            .attribute-name {
-                background-color: @secondary-color;
-                margin-bottom: 0.25rem; // Optional spacing
+            .decrement-attribute,
+            .increment-attribute {
+                justify-content: center;
+                font-size: 0.8rem;
+                color: @primary-color;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+                margin: 0.25rem;
 
-                .attribute-value {
-                    margin: 0px;
-                    text-align: center;
-                }
-            }
-
-            .horizontal-section {
-                position: absolute; // Make it absolutely positioned
-                top: 60%; // Move to vertical center
-                left: 50%; // Move to horizontal center
-                transform: translate(-50%, -50%); // Adjust to center itself
-                display: flex; // Flexbox for horizontal alignment
-                align-items: center; // Vertically align items in the horizontal section
-                justify-content: space-between; // Distribute buttons and value evenly
-                gap: 0.125rem; // Space between elements
-                padding: 0.25rem;
-
-                .decrement-attribute,
-                .increment-attribute {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    font-size: 1.2rem;
-                    color: @secondary-color;
-                    cursor: pointer;
-                    transition: transform 0.2s ease;
-
-                    &:hover {
-                        transform: scale(1.2); // Emphasized scaling on hover
-                        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Enhanced shadow for more depth
-                        filter: brightness(1.15); // Slightly brighten for more interactivity
-                        z-index: 10; // Ensure the element appears on top
-                    }
-
-                    &:active {
-                        transform: scale(1.15); // Slightly smaller scale for "pressed" effect
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); // Reduce shadow to mimic button press
-                        filter: brightness(1); // Reset brightness on press
-                    }
-
-                    a.decrement-attribute.disabled {
-                        color: grey;
-                        pointer-events: none;
-                        opacity: 0.5;
-                    }
+                &:hover {
+                    transform: scale(1.2);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+                    filter: brightness(1.15);
+                    z-index: 10;
                 }
 
+                &:active {
+                    transform: scale(1.15);
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+                    filter: brightness(1);
+                }
 
+                a.decrement-attribute.disabled {
+                    color: grey;
+                    pointer-events: none;
+                    opacity: 0.5;
+                }
             }
+        }
 
-            &:hover {
-                background-color: @accent-color;
-                z-index: 10;
-                
-            }
+        &:hover {
+            background-color: @accent-color;
+            z-index: 10;
         }
     }
+}

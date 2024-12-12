@@ -105,8 +105,8 @@ function layoutStateMachine(app, html) {
     // Column width percentages for each layout state
     const columnWidthPercent = {
         small: 100,
-        medium: 49,
-        wide: 32,
+        medium: 50,
+        wide: 25,
     };
 
     // Apply column width globally

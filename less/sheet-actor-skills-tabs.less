@@ -1,0 +1,48 @@
+.skills-tabs {
+    overflow: hidden;
+
+    .skill-utility-bar {
+ 
+        .tabs {
+            display: flex;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            .item {
+                flex: 1;
+                text-align: center;
+                background-color: @primary-color;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
+
+                h2 {
+                    margin: 0;
+                }
+
+                &:hover {
+                    background-color: @highlight-color-primary;
+                }
+
+                &.active {
+                    background-color: @secondary-color;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .tab-content {
+        background-color: @secondary-color;
+
+        .tab {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+
+        .clipped-corners(0rem, 0rem, 2rem, 1rem);
+    }
+}

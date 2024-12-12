@@ -68,7 +68,7 @@
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     {{#if (isShoppingStateActive this.actor)}}
-                    <a class="item-create" data-type="skill" data-skill-type="skill" title="{{localize "
+                    <a class="item-create-skill" data-type="skill" data-skill-type="skill" title="{{localize "
                         sr3d.sheet.addSkill"}}">
                         <h2><i class="fas fa-square-plus pulsing-green-cart"></i></h2>
                     </a>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Budget Section -->
         <div class="sheet-component">
             <div class="inner-background-container">
@@ -91,9 +91,11 @@
                 </div>
             </div>
         </div>
+        
+
 
         <!-- Tabs Navigation and Content Sections -->
-        <div class="sheet-component">
+        <div class="sheet-component two-span-selectable">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
