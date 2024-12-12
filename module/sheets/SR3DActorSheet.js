@@ -1,6 +1,6 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
-import { flags } from '../helpers/CommonConsts.js'
+import { baseAttributes, derivedAttributes, flags } from '../helpers/CommonConsts.js'
 import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
 import SR3DLog from '../SR3DLog.js';
 
@@ -42,7 +42,9 @@ export default class SR3DActorSheet extends ActorSheet {
         ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
         ctx.inventory = ActorDataService.prepareInventory(ctx.actor.items.contents);
 
-        console.log("Prepared Language Skills:", ctx.skills.language);
+        // NOTE: used for iteratotion
+        ctx.baseAttributes = baseAttributes;
+        ctx.derivedAttributes = derivedAttributes;
 
         return ctx;
     }

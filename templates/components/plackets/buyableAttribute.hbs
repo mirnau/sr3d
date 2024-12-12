@@ -3,9 +3,9 @@
         <h4>{{localize (concat "sr3d.actor.attributes." attribute)}}</h4>
     </div>
     <div class="horizontal-section">
-        {{#if (not actor.flags.sr3d.attributesDone)}}
-            <a class="decrement-attribute" data-attribute="{{attribute}}" 
-               class="{{#if (eq (getProperty (getProperty system attribute) "total") 0)}}disabled{{/if}}">
+        {{#if (isShoppingStateActive actor)}}
+            <a class="decrement-attribute" data-attribute="{{attribute}}"
+               {{#if (eq (getProperty (getProperty system attribute) "total") 0)}}disabled{{/if}}>
                 <i class="fa-solid fa-circle-chevron-down"></i>
             </a>
         {{/if}}
@@ -14,7 +14,7 @@
                 {{getProperty (getProperty system attribute) "total"}}/{{getProperty (getProperty system attribute) "mod"}}
             </h1>
         </div>
-        {{#if (not actor.flags.sr3d.attributesDone)}}
+        {{#if (isShoppingStateActive actor)}}
             <a class="increment-attribute" data-attribute="{{attribute}}">
                 <i class="fa-solid fa-circle-chevron-up"></i>
             </a>

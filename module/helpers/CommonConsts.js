@@ -1,5 +1,5 @@
 export const baseAttributes = ["body", "quickness", "strength", "charisma", "intelligence", "willpower"];
-
+export const derivedAttributes = ["reaction", "initiative", "magic", "essence"];
 
 export const baseAttributeDropdown = 
         ["Uncategorized", 

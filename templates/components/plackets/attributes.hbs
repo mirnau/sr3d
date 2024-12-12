@@ -2,18 +2,19 @@
     <div class="attribute-grid-sizer"></div>
     <div class="attribute-gutter-sizer"></div>
 
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="body"}}
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="quickness"}}
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="strength"}}
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="charisma"}}
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="intelligence"}}
-    {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" system=system actor=actor attribute="willpower"}}
+    {{!-- Base Attributes --}}
+    {{#each baseAttributes as |attribute|}}
+        {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" 
+            system=../system 
+            actor=../actor 
+            attribute=attribute}}
+    {{/each}}
 
-    {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" system=system attribute="reaction"}}
-    {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" system=system attribute="initiative"}}
-    {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" system=system attribute="magic"}}
-    {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" system=system attribute="essence"}}
-
+    {{!-- Derived Attributes --}}
+    {{#each derivedAttributes as |attribute|}}
+        {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" 
+            system=../system 
+            attribute=attribute}}
+    {{/each}}
+    
 </div>
-
-

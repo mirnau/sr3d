@@ -1,3 +1,4 @@
+import { baseAttributes } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
 export class ActorDataService {
@@ -25,7 +26,6 @@ export class ActorDataService {
             others: contents.filter(item => !["weapon", "armor", "consumable"].includes(item.type)),
         };
     }
-
 
     static prepareLanguages(items) {
         return items
@@ -55,7 +55,7 @@ export class ActorDataService {
                 return languageData;
             });
     }
-    
+
     static _categorizeAndSortSkills(skills, keyFn) {
         const categories = skills.reduce((acc, skill) => {
             const category = keyFn(skill) || "uncategorized";
@@ -79,7 +79,7 @@ export class ActorDataService {
             { priority: "E", name: "Human", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
             ...metahumans.map(metahuman => {
                 const foundryitemid = metahuman.id; // Extract the ID
-     
+
                 return {
                     foundryitemid, // Foundry's built-in object ID
                     priority: metahuman.priority, // Extract priority from system data
@@ -97,7 +97,7 @@ export class ActorDataService {
             { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
             ...magicTraditions.map(tradition => {
                 const foundryitemid = tradition.id; // Extract the ID
-    
+
                 return {
                     foundryitemid, // Foundry's built-in object ID
                     priority: tradition.priority, // Extract priority from system data
@@ -106,8 +106,6 @@ export class ActorDataService {
             })
         ];
     }
-    
-
 
     static getPriorities() {
         return {

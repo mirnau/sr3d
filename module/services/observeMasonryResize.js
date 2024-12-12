@@ -58,7 +58,8 @@ export function adjustMasonryOnResize(masonryResizeConfig) {
     const gridSizer = html[0]?.querySelector(gridSizerSelector);
     const gutter = html[0]?.querySelector(gutterSizerSelector);
 
-    if (!grid || !gridSizer) return;
+    if (!grid || !gridSizer || !gridItems) return;
+    if(gridItems.Length === 0) return;
 
     const parentPadding = parseFloat(getComputedStyle(grid.parentNode).paddingLeft) || 0;
     const gridWidthPx = grid.parentNode.offsetWidth - 2 * parentPadding;

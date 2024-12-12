@@ -122,11 +122,6 @@ function registerHooks() {
         });
 
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
-
-            console.log(actor);
-            SR3DLog.inspect("ACTOR" + actor);
-
-
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
 

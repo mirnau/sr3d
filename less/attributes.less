@@ -23,9 +23,10 @@
         width: 0.5rem; 
     }
 
+    //NOTE: the width is to account for double digits
     .attribute-grid-sizer,
     .attribute-card {
-        min-width: 5rem;
+        min-width: 6.5rem;
     }
 
     .attribute-card {
@@ -44,6 +45,7 @@
 
         .horizontal-section {
             background-color: @secondary-color;
+            
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,22 +54,18 @@
             .decrement-attribute,
             .increment-attribute {
                 justify-content: center;
+                text-align: center;
                 font-size: 0.8rem;
                 color: @primary-color;
                 cursor: pointer;
-                transition: transform 0.2s ease;
                 margin: 0.25rem;
 
                 &:hover {
-                    transform: scale(1.2);
-                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
                     filter: brightness(1.15);
                     z-index: 10;
                 }
 
                 &:active {
-                    transform: scale(1.15);
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
                     filter: brightness(1);
                 }
 
