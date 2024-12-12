@@ -30,11 +30,11 @@ export async function displayNeonName(app, html, data) {
 </div>
 `;
 
-    // Find the header element
-    const header = html.find("header.window-header")[0]; // Convert to raw DOM element
+    const appElement = html[0];
+    const header = appElement.querySelector("header.window-header");
 
-    // Insert the HTML before the header element
+    // Inject the rendered HTML after the header
     if (header) {
-        header.insertAdjacentHTML("beforebegin", renderedHTML);
+        header.insertAdjacentHTML("afterend", renderedHTML);
     }
 }
