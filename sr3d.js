@@ -1,6 +1,7 @@
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
+import { SR3DItem } from "./module/Items/SR3DItem.js";
 import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
@@ -73,6 +74,7 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
+    
     Hooks.once(hooks.ready, scopeCssToProject);
 
     function setItemFlags(item, options, userId) {
@@ -91,6 +93,7 @@ function registerHooks() {
     Hooks.once(hooks.init, function () {
 
         CONFIG.Actor.documentClass = SR3DActor;
+        CONFIG.Item.documentClass = SR3DItem;
         
         Items.unregisterSheet(flags.core, ItemSheet);
         Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });

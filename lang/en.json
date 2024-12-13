@@ -18,7 +18,9 @@
             "dossier": "Dossier",
             "deleteSkill": "Delete Skill",
             "purchaseSkills": "Purchase Skill Point",
-            "deleteSpecialisation": "Delete Specialisation"
+            "deleteSpecialisation": "Delete Specialisation",
+            "confirmSkill": "Confirm Skill Purchase",
+            "undo": "Undo"
         },
 
         "characterCreation": {

@@ -8,25 +8,37 @@
         
         .clipped-corners(1rem, 1rem, 2rem, 1rem);
 
-        .language-skill-display {
-            .apply-flex-distribute(row);
-            align-items: center;
-
-            h1 {
-                margin: 0rem;
-            }
-
-            .subskill-value{
-                width: 3rem;
-                text-align: center;
+        .language-envelope {
+            
+            position: relative;
+            
+            .subskill-icons {
+                position: absolute;
+                bottom:-0.5rem;
+                right: 1rem;
             }
             
-            margin-bottom: 0.5rem;
-            
-            background-color: @tertiary-color;
-            
-            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+            .language-skill-display {
+                .apply-flex-distribute(row);
+                align-items: center;
+                
+                h1 {
+                    margin: 0rem;
+                }
+                
+                .subskill-value{
+                    width: 3rem;
+                    text-align: center;
+                }
+                
+                
+                
+                margin-bottom: 0.5rem;
+                
+                background-color: @tertiary-color;
+                
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+            }
         }
     }
-
 }

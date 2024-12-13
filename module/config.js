@@ -6,7 +6,9 @@ sr3d.sheet ={
     dossier: "sr3d.sheet.dossier",
     deleteSkill: "sr3d.sheet.deleteSkill",
     purchaseSkills: "sr3d.sheet.purchaseSkills",
-    deleteSpecialisation: "sr3d.sheet.deleteSpecialisation"
+    deleteSpecialisation: "sr3d.sheet.deleteSpecialisation",
+    confirmSkill: "sr3d.sheet.confirmSkill",
+    undo: "sr3d.sheet.undo"    
 }
 
 sr3d.health = {

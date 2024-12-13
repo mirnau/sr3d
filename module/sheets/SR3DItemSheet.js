@@ -46,6 +46,11 @@ export default class SR3DItemSheet extends ItemSheet {
         const type = this.item.type;
 
         if (type === "skill") {
+
+            //Hitta köp, ångra
+            html.find('.buy-skill').click(this.item.onBuySkill.bind(this.item));
+            html.find('.undo-skill').click(this.item.onUndoSkill.bind(this.item));
+
             html.find('.add-specialization').click(this._onAddSpecialization.bind(this));
             html.find('.delete-specialization').click(this._onDeleteSpecialization.bind(this));
             html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
@@ -57,6 +62,18 @@ export default class SR3DItemSheet extends ItemSheet {
         // General cases
         html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
 
+    }
+
+    async close(options = {}) {
+        this.item.onClose();
+        await super.close(options);
+    }
+
+    _onUndoSkill() {
+        
+    }
+    _onConfirmSkill() {
+        
     }
 
     async _deleteOwnedInstance(event) {

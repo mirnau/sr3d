@@ -22,7 +22,6 @@ export default async function displayShoppingStateButton(app, html, data) {
             let isActive = app.object.getFlag(flags.namespace, flags.isShoppingStateActive);
             isActive = !isActive;
             await app.object.setFlag(flags.namespace, flags.isShoppingStateActive, isActive);
-            ui.notifications.info(`Shopping is now ${isActive ? 'enabled' : 'disabled'}.`);
 
             // Re-render the shopping cart button to reflect state change
             await renderShoppingCart();

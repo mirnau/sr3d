@@ -1,5 +1,6 @@
 import { getResizeObserver } from "./initializeMasonry.js";
 import { cacheResizeObserverOnActor } from "../sheets/Utilities.js";
+import { displayNewsFeed } from "../injections/displayNewsFeed.js";
 
 /**
  * Observes and manages the resizing behavior for the masonry layout.
@@ -24,12 +25,21 @@ export function observeMasonryResize(actor, masonryResizeConfig, isMainGrid = fa
 
             gridElement.masonryInstance = masonryInstance;
 
+            if (isMainGrid) {
+                gridElement.masonryInstance.on('layoutComplete', function () {
+                });
+            }
+
             let func = () => {
                 adjustMasonryOnResize(masonryResizeConfig);
-                if (isMainGrid) {
-                    layoutStateMachine(app, html);
-                }
             };
+            
+            if (isMainGrid) {
+                func = () => {
+                    adjustMasonryOnResize(masonryResizeConfig);
+                    layoutStateMachine(app, html);
+                };
+            }
 
             masonryResizeConfig.observer = getResizeObserver(masonryInstance, gridElement, childSelector, func);
         }
@@ -59,7 +69,7 @@ export function adjustMasonryOnResize(masonryResizeConfig) {
     const gutter = html[0]?.querySelector(gutterSizerSelector);
 
     if (!grid || !gridSizer || !gridItems) return;
-    if(gridItems.Length === 0) return;
+    if (gridItems.Length === 0) return;
 
     const parentPadding = parseFloat(getComputedStyle(grid.parentNode).paddingLeft) || 0;
     const gridWidthPx = grid.parentNode.offsetWidth - 2 * parentPadding;

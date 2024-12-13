@@ -580,6 +580,7 @@
 }
 .sr3d .skills-tabs .tab-content {
   background-color: #145b68;
+  min-height: 2rem;
   clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
 }
 .sr3d .skills-tabs .tab-content .tab {
@@ -588,7 +589,7 @@
 .sr3d .skills-tabs .tab-content .tab.active {
   display: block;
 }
-.sr3d .item-create-skill {
+.sr3d .item-create {
   position: absolute;
   right: 1.5rem;
   top: 1.5rem;
@@ -789,7 +790,15 @@
   margin-top: 0.5rem;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
-.sr3d .language-skill-section .subskill-card .language-skill-display {
+.sr3d .language-skill-section .subskill-card .language-envelope {
+  position: relative;
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .subskill-icons {
+  position: absolute;
+  bottom: -0.5rem;
+  right: 1rem;
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -799,10 +808,10 @@
   background-color: #6825c0;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-skill-section .subskill-card .language-skill-display h1 {
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display h1 {
   margin: 0rem;
 }
-.sr3d .language-skill-section .subskill-card .language-skill-display .subskill-value {
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display .subskill-value {
   width: 3rem;
   text-align: center;
 }
@@ -948,6 +957,7 @@
 .sr3d .knowledge-grid-container .knowledge-skill-category {
   background-color: #283747;
   padding: 0.5rem;
+  min-height: 3rem;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category h3 {
