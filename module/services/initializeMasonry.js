@@ -18,7 +18,7 @@ export function getResizeObserver(masonryInstance, gridElement, selector, func =
     
     resizeObserver.observe(gridElement);
 
-    SR3DLog.success(`Masonry Initiated for selector ${selector}`, getResizeObserver.name);
+    //SR3DLog.success(`Masonry Initiated for selector ${selector}`, getResizeObserver.name);
 
     return resizeObserver;
 }

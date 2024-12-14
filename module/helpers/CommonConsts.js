@@ -20,6 +20,7 @@ export const flags = {
     isDossierPanelOpened: "isDossierPanelOpened",
     isShoppingStateActive: "isShoppingStateActive",
     characterCreationCompleted: "characterCreationCompleted",
+    isCharacterCreationState: "isCharacterCreationState",
     core: "core",
     sr3d: "sr3d"
 };

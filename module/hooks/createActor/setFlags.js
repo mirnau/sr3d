@@ -8,5 +8,6 @@ export function setActorFlags(actor, options, userId) {
     actor.setFlag(flags.namespace, flags.attributesDone, false);
     actor.setFlag(game, flags.isDossierPanelOpened, false);
     actor.setFlag(flags.namespace, flags.isShoppingStateActive, true);
+    actor.setFlag(flags.namespace, flags.isCharacterCreationState, true);
 
 }

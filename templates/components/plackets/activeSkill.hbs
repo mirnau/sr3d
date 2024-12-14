@@ -43,11 +43,11 @@
     </div>
 
     <!-- Display Specializations -->
-    {{#if this.system.skill.activeSkill.specializations}}
+    {{#if this.system.activeSkill.specializations}}
     <div class="specialisation-container">
       <h4>{{localize "sr3d.item.skill.specializations"}}</h4>
       <div class="specializations">
-        {{#each this.system.skill.activeSkill.specializations}}
+        {{#each this.system.activeSkill.specializations}}
         <div class="skill-specialization-card active-specialization-card-color-override">
           <div class="specialization-name">
             {{this.name}}

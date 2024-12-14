@@ -1,7 +1,6 @@
 import { observeMasonryResize } from "../../services/observeMasonryResize.js";
 
 export function initializeMasonryLayout(app, html, data) {
-    console.log("MASONRY | Initializing on start");
 
     const actor = app.actor;
 
