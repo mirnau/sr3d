@@ -187,7 +187,7 @@ sr3d.skills = {
     language: "sr3d.item.skill.language",
     read: "sr3d.item.skill.read",
     write: "sr3d.item.skill.write",
-    speech: "sr3d.item.skill.speech"
+    speak: "sr3d.item.skill.speak"
 };
 
 

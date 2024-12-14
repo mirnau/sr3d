@@ -346,16 +346,16 @@
                 "specializations": []
             },
             "languageSkill": {
-                "speech": {
-                    "base": 0,
+                "speak": {
+                    "value": 0,
                     "specializations": []
                 },
                 "read": {
-                    "base": 0,
+                    "value": 0,
                     "specializations": []
                 },
                 "write": {
-                    "base": 0,
+                    "value": 0,
                     "specializations": []
                 }
             },

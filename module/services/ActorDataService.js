@@ -36,9 +36,9 @@ export class ActorDataService {
                     name: item.name,
                     skills: [
                         {
-                            type: game.i18n.localize("sr3d.item.skill.speech"),
-                            base: item.system.skill.languageSkill.speech?.base,
-                            specializations: item.system.skill.languageSkill.speech.specializations,
+                            type: game.i18n.localize("sr3d.item.skill.speak"),
+                            base: item.system.skill.languageSkill.speak?.base,
+                            specializations: item.system.skill.languageSkill.speak.specializations,
                         },
                         {
                             type: game.i18n.localize("sr3d.item.skill.write"),

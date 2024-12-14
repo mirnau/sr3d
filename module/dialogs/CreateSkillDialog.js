@@ -92,7 +92,7 @@ export class CreateSkillDialog extends Dialog {
                         skill: {
                             ...itemData.system.skill, // Preserve other potential properties under system.skill
                             languageSkill: {
-                                speech: { base: 0, specializations: [] },
+                                speak: { base: 0, specializations: [] },
                                 read: { base: 0, specializations: [] },
                                 write: { base: 0, specializations: [] },
                             },
