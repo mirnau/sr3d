@@ -32,7 +32,9 @@ sr3d.possessions = {
 
 sr3d.characterCreation = {
     instruction: "sr3d.characterCreation.instruction",
-    selectAnOption: "sr3d.characterCreation.selectAnOption"
+    selectAnOption: "sr3d.characterCreation.selectAnOption",
+    spendYourAttributPointsToProceed: "sr3d.characterCreation.spendYourAttributPointsToProceed",
+    spentAllAttributePoints: "sr3d.characterCreation.spentAllAttributePoints"
 }
 
 sr3d.freeActions = {

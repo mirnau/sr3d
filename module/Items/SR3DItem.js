@@ -1,4 +1,6 @@
 import SkillHandler from "../services/SkillHandler.js";
+import { flags } from "../helpers/CommonConsts.js";
+import SR3DLog from "../SR3DLog.js";
 
 export class SR3DItem extends Item {
     constructor(data, context = {}) {
@@ -33,6 +35,7 @@ export class SR3DItem extends Item {
     }
 
     onBuySkill(event) {
+
         event.preventDefault();
         this.skillHandler ||= new SkillHandler(this);
         this.skillHandler.onBuySkill(event);
@@ -57,14 +60,8 @@ export class SR3DItem extends Item {
     onUndoSpecialization(event) {
         event.preventDefault();
     
-        // Extract the index from the dataset
         const index = parseInt(event.currentTarget.closest(".specialization-actions").dataset.index, 10);
-    
-        if (isNaN(index)) {
-            SR3DLog.error("Invalid specialization index provided.", "onUndoSpecialization");
-            return;
-        }
-    
+   
         this.skillHandler ||= new SkillHandler(this);
         this.skillHandler.onUndoSpecialization(event, index);
     }

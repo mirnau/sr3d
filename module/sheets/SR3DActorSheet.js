@@ -172,33 +172,53 @@ export default class SR3DActorSheet extends ActorSheet {
     async _onItemCreate(event) {
         event.preventDefault();
     
-        const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
-        const ctx = { item: null, actor: this.actor }; // No item yet created
-    
-        console.log("Creating skill. Showing dialog.");
-        const dialogResult = await new Promise((resolve) => {
-            new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
-        });
-    
-        if (!dialogResult) {
-            console.log("Skill creation canceled.");
+        // Determine the type of item to create
+        const itemType = event.currentTarget.dataset.type || "skill"; // Default to "skill"
+        
+        if (itemType === "skill") {
+
+            if(!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
+                ui.notifications.info(game.i18n.localize("sr3d.characterCreation.spendYourAttributPointsToProceed"));
             return;
         }
+
+            const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
+            const ctx = { item: null, actor: this.actor }; // No item yet created
     
-        // Create the item
-        const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
+            console.log("Creating skill. Showing dialog.");
+            const dialogResult = await new Promise((resolve) => {
+                new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
+            });
     
-        if (createdItems.length > 0) {
-            const createdItem = createdItems[0]; // Retrieve the first created item
-            console.log("Skill successfully created:", createdItem.toObject());
+            if (!dialogResult) {
+                console.log("Skill creation canceled.");
+                return;
+            }
     
-            // Set a flag on the newly created item
-            await createdItem.setFlag("sr3d", "isInitialized", true);
-            console.log("Flag 'isInitialized' set to true for item:", createdItem.id);
+            // Create the skill item
+            const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
+    
+            if (createdItems.length > 0) {
+                const createdItem = createdItems[0]; // Retrieve the first created item
+                console.log("Skill successfully created:", createdItem.toObject());
+    
+                // Set a flag on the newly created item
+                await createdItem.setFlag("sr3d", "isInitialized", true);
+                console.log("Flag 'isInitialized' set to true for item:", createdItem.id);
+            } else {
+                console.error("No skill was created.");
+            }
+        } 
+        // Add more conditions for other item types in the future
+        else if (itemType === "gear") {
+            // Handle gear creation
+            console.log("Gear creation is not yet implemented.");
+            // Example: Render a gear-specific dialog here
         } else {
-            console.error("No item was created.");
+            console.warn(`Unhandled item type: ${itemType}`);
         }
     }
+    
     
 }
 

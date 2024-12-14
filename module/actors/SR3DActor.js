@@ -8,28 +8,36 @@ export default class SR3DActor extends Actor {
   adjustAttribute(attribute, amount) {
 
     const system = this.system;
-    const value = system[attribute].value;
-    const currentPoints = system.creation.attributePoints;
+    let value = system[attribute].value;
+    let currentPoints = system.creation.attributePoints;
 
-    if (amount > 0 && currentPoints < amount) {
-      new LockAttributesDialog(this).render(true);
-      return;
+    if(!this.getFlag(flags.namespace, flags.attributesDone)) {
+      
+      if (currentPoints <= 0 && amount > 0) {
+        ui.notifications.warn(game.i18n.localize("sr3d.characterCreation.spentAllAttributePoints"));
+        new LockAttributesDialog(this).render(true);
+        return;
+      }    
+      
+      if ((amount > 0) || (amount < 0 && system[attribute].value > 1)) {
+        system[attribute].value += amount;
+        system.creation.attributePoints -= amount;
+      }
+
+      value = system[attribute].value;
+      currentPoints = system.creation.attributePoints;
+
+      this.update({ system: system });
+      this.recalculateAttribute();
+
+      if (amount > 0 && currentPoints < amount) {
+        new LockAttributesDialog(this).render(true);
+        return;
+      }
+      
+    } else {
+      //Karma points!
     }
-
-    if (amount < 0 && value + amount < 0) {
-      ui.notifications.warn("Attribute cannot go below 0!");
-      return;
-    }
-
-    if ((amount > 0) || (amount < 0 && system[attribute].value > 1)) {
-      system[attribute].value += amount;
-      system.creation.attributePoints -= amount;
-    }
-
-
-    this.update({ system: system });
-
-    this.recalculateAttribute();
   }
 
   async recalculateAttribute() {

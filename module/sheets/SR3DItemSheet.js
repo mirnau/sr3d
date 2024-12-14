@@ -71,13 +71,6 @@ export default class SR3DItemSheet extends ItemSheet {
         await super.close(options);
     }
 
-    _onUndoSkill() {
-        
-    }
-    _onConfirmSkill() {
-        
-    }
-
     async _deleteOwnedInstance(event) {
         event.preventDefault();
 
