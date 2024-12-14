@@ -19,6 +19,7 @@
             "deleteSkill": "Delete Skill",
             "purchaseSkills": "Purchase Skill Point",
             "deleteSpecialisation": "Delete Specialisation",
+            "undoSpecialization": "Undo Specialisation",
             "confirmSkill": "Confirm Skill Purchase",
             "undo": "Undo"
         },

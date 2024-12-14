@@ -7,6 +7,7 @@ sr3d.sheet ={
     deleteSkill: "sr3d.sheet.deleteSkill",
     purchaseSkills: "sr3d.sheet.purchaseSkills",
     deleteSpecialisation: "sr3d.sheet.deleteSpecialisation",
+    undoSpecialization: "sr3d.sheet.undoSpecialization",
     confirmSkill: "sr3d.sheet.confirmSkill",
     undo: "sr3d.sheet.undo"    
 }
