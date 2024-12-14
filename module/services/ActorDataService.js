@@ -38,17 +38,17 @@ export class ActorDataService {
                         {
                             type: game.i18n.localize("sr3d.item.skill.speak"),
                             value: item.system.languageSkill.speak?.value,
-                            specializations: item.system.skill.languageSkill.speak.specializations,
+                            specializations: item.system.languageSkill.speak.specializations,
                         },
                         {
                             type: game.i18n.localize("sr3d.item.skill.write"),
                             value: item.system.languageSkill.read?.value,
-                            specializations: item.system.skill.languageSkill.read.specializations,
+                            specializations: item.system.languageSkill.read.specializations,
                         },
                         {
                             type: game.i18n.localize("sr3d.item.skill.read"),
                             value: item.system.languageSkill.write?.value,
-                            specializations: item.system.skill.languageSkill.write.specializations,
+                            specializations: item.system.languageSkill.write.specializations,
                         },
                     ],
                 };
