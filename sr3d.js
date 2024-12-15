@@ -24,6 +24,8 @@ import { initMovementMasonry } from "./module/hooks/renderSR3DActorSheet/initMov
 import { initKarmaMasonry } from "./module/hooks/renderSR3DActorSheet/initKarmaMasonry.js";
 import { monitorCreationPoints } from "./module/hooks/updateActor/monitorCreationPoints.js";
 import { sr3d } from "./module/config.js";
+import { transferKarmatoActor } from "./module/hooks/createItem/transferKarmatoActor.js";
+
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
     const folders = [
@@ -72,6 +74,7 @@ function registerHooks() {
     Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
     Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createItem, setItemFlags);
+    Hooks.on(hooks.createItem, transferKarmatoActor);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.updateActor, monitorCreationPoints);
     Hooks.on(hooks.renderSR3DActorSheet, injectCreationSidebar);
@@ -86,12 +89,10 @@ function registerHooks() {
         item.setFlag(flags.namespace, flags.isInitialized, false);
     }
 
-
     Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
     });
-
 
     Hooks.once(hooks.init, function () {
 
@@ -110,7 +111,6 @@ function registerHooks() {
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.actorTypes)) {
             CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
         }
-
 
         Items.unregisterSheet(flags.core, ItemSheet);
         Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
