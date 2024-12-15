@@ -31,7 +31,48 @@ export const hooks = {
     createItem: "createItem",
     renderSR3DActorSheet: "renderSR3DActorSheet",
     renderSR3DItemSheet: "renderSR3DItemSheet",
+    renderDialog: "renderDialog",
     createActor: "createActor",
     updateActor: "updateActor",
     ready: "ready"
+};
+
+export const skillConfig = {
+    activeSkill: {
+        pointsKey: "system.creation.activePoints",
+        skillKey: "system.activeSkill.value",
+        currentPointsKey: "currentActivePoints"
+    },
+    knowledgeSkill: {
+        pointsKey: "system.creation.knowledgePoints",
+        skillKey: "system.knowledgeSkill.value",
+        currentPointsKey: "currentKnowledgePoints"
+    },
+    languageSkill: {
+        speak: {
+            pointsKey: "system.creation.languagePoints",
+            skillKey: "system.languageSkill.speak.value",
+            currentPointsKey: "currentSpeakPoints"
+        },
+        read: {
+            pointsKey: "system.creation.languagePoints",
+            skillKey: "system.languageSkill.read.value",
+            currentPointsKey: "currentReadPoints"
+        },
+        write: {
+            pointsKey: "system.creation.languagePoints",
+            skillKey: "system.languageSkill.write.value",
+            currentPointsKey: "currentWritePoints"
+        }
+    }
+};
+
+export const skillPathMap = {
+    activeSkill: "system.activeSkill.specializations",
+    knowledgeSkill: "system.knowledgeSkill.specializations",
+    languageSkill: {
+        speak: "system.languageSkill.speak.specializations",
+        read: "system.languageSkill.read.specializations",
+        write: "system.languageSkill.write.specializations"
+    }
 };

@@ -189,7 +189,8 @@
             "misc",
             "metahuman",
             "skill",
-            "magicTradition"
+            "magicTradition",
+            "karma"
         ],
         "templates": {
             "commodity": {
@@ -367,6 +368,10 @@
             "drainResistanceAttribute": "",
             "totem": "",
             "priority":""
+        },
+        "karma": {
+            "value": 0
         }
+
     }
 }

@@ -12,6 +12,28 @@
             "astralProjection": "Astral Projection"
         },
 
+        "createItem": {
+            "weapon": "Weapon",
+            "vehicle": "Vehicle",
+            "vehicleMods": "Vehicle Mod",
+            "rocket": "Rocket",
+            "ammunition": "Ammunition",
+            "apparel": "Apparel",
+            "creditStick": "Credit Stick",
+            "enhancer": "Enhancer",
+            "cyberwear": "Cyberwear",
+            "misc": "Misc",
+            "metahuman": "Metahuman",
+            "skill": "Skill",
+            "magicTradition": "MagicTradition",
+            "karma": "Karma"
+        
+
+        },
+        "actorTypes": {
+             "playerCharacter": "Player Character"
+        },
+
         "sheet": {
             "addSkill": "Add a skill",
             "newItem": "New item",

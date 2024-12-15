@@ -422,6 +422,58 @@
   background-color: #ff0095;
   z-index: 10;
 }
+.sr3d .sr3d.sheet.character .sheet-component .karma-heart {
+  font-size: 0.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid {
+  display: grid;
+  margin: 0 auto;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid h1,
+.sr3d .sr3d.sheet.character .karma-masonry-grid h4 {
+  margin: 0;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid h1 {
+  text-indent: 0;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid h4 {
+  text-wrap: nowrap;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-gutter-sizer {
+  width: 0.5rem;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-grid-sizer,
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card {
+  min-width: 8rem;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  background: #283747;
+  padding: 0.25rem;
+  min-height: 3rem;
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+  margin-top: 0.25rem;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card .karma-value {
+  margin: 0;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card .horizontal-section {
+  background-color: #145b68;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card:hover {
+  background-color: #ff0095;
+  z-index: 10;
+}
 .sr3d .attribute-masonry-grid {
   display: grid;
   margin: 0 auto;

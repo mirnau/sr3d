@@ -5,7 +5,7 @@ import { SR3DItem } from "./module/Items/SR3DItem.js";
 import SR3DLog from "./module/SR3DLog.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
-import { displayCreationPointSidebar } from "./module/injections/displayCreationPointSidebar.js";
+import { injectCreationSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
 import { setActorFlags } from "./module/hooks/createActor/setFlags.js";
@@ -21,7 +21,9 @@ import { displayNewsFeed } from "./module/injections/displayNewsFeed.js";
 import { initAttributesMasonry } from "./module/hooks/renderSR3DActorSheet/initAttributesMasonry.js";
 import { initDicepoolMasonry } from "./module/hooks/renderSR3DActorSheet/initDicepoolMasonry.js";
 import { initMovementMasonry } from "./module/hooks/renderSR3DActorSheet/initMovementMasonry.js";
-
+import { initKarmaMasonry } from "./module/hooks/renderSR3DActorSheet/initKarmaMasonry.js";
+import { monitorCreationPoints } from "./module/hooks/updateActor/monitorCreationPoints.js";
+import { sr3d } from "./module/config.js";
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
     const folders = [
@@ -62,6 +64,7 @@ function registerHooks() {
         initAttributesMasonry(app, html, data);
         initDicepoolMasonry(app, html, data);
         initMovementMasonry(app, html, data);
+        initKarmaMasonry(app, html, data);
     });
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
@@ -70,12 +73,12 @@ function registerHooks() {
     Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createItem, setItemFlags);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
-    Hooks.on(hooks.renderSR3DActorSheet, displayCreationPointSidebar);
+    Hooks.on(hooks.updateActor, monitorCreationPoints);
+    Hooks.on(hooks.renderSR3DActorSheet, injectCreationSidebar);
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
-    
-    Hooks.once(hooks.ready, scopeCssToProject);
+    Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
 
     function setItemFlags(item, options, userId) {
         SR3DLog.info("Initiating Item Flags", "setItemFlags.js");
@@ -84,7 +87,7 @@ function registerHooks() {
     }
 
 
-    Hooks.once("ready", () => {
+    Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
     });
@@ -92,12 +95,26 @@ function registerHooks() {
 
     Hooks.once(hooks.init, function () {
 
+        CONFIG.sr3d = sr3d;
         CONFIG.Actor.documentClass = SR3DActor;
         CONFIG.Item.documentClass = SR3DItem;
-        
+
+        // NOTE: Updating FVVT's Item dropdown menus
+        CONFIG.Item.typeLabels = {};
+        for (const [type, locKey] of Object.entries(CONFIG.sr3d.itemTypes)) {
+            CONFIG.Item.typeLabels[type] = game.i18n.localize(locKey);
+        }
+
+        // NOTE: Updating FVVT's Actor dropdown menus
+        CONFIG.Actor.typeLabels = {};
+        for (const [type, locKey] of Object.entries(CONFIG.sr3d.actorTypes)) {
+            CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
+        }
+
+
         Items.unregisterSheet(flags.core, ItemSheet);
         Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
-        
+
         Actors.unregisterSheet(flags.core, ActorSheet);
         Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
 
@@ -132,7 +149,7 @@ function registerHooks() {
             return obj[attr];
         });
 
-        Handlebars.registerHelper('log', function(value) {
+        Handlebars.registerHelper('log', function (value) {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something
         });

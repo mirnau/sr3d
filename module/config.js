@@ -12,6 +12,27 @@ sr3d.sheet ={
     undo: "sr3d.sheet.undo"    
 }
 
+sr3d.itemTypes = {
+    weapon: "sr3d.createItem.weapon",
+    vehicle: "sr3d.createItem.vehicle",
+    vehicleMods: "sr3d.createItem.vehicleMods",
+    rocket: "sr3d.createItem.rocket",
+    ammunition: "sr3d.createItem.ammunition",
+    apparel: "sr3d.createItem.apparel",
+    creditStick: "sr3d.createItem.creditStick",
+    enhancer: "sr3d.createItem.enhancer",
+    cyberwear: "sr3d.createItem.cyberwear",
+    misc: "sr3d.createItem.misc",
+    metahuman: "sr3d.createItem.metahuman",
+    skill: "sr3d.createItem.skill",
+    magicTradition: "sr3d.createItem.magicTradition",
+    karma: "sr3d.createItem.karma"
+}
+
+sr3d.actorTypes = {
+    playerCharacter: "sr3d.actorTypes.playerCharacter",
+}
+
 sr3d.health = {
     health: "sr3d.actor.health.health",
     damageTracker: "sr3d.actor.health.damageTracker"

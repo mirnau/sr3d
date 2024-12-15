@@ -1,19 +1,16 @@
-export async function displayCreationPointSidebar(app, html) {
-    if (!app.actor.system.creation.complete) {
-        // Fetch the creation data
+export async function injectCreationSidebar(app, html) {
+    const namespace = "sr3d";
+    const creationStateFlag = "creation.complete";
+
+    if (!app.actor.getFlag(namespace, creationStateFlag)) {
         const creationData = app.actor.system.creation;
 
-        // Define the path to the Handlebars template
+        // Render the creation points template
         const templatePath = "systems/sr3d/templates/injections/creation-points.hbs";
-
-        // Render the template with the creation data
         const renderedHTML = await renderTemplate(templatePath, { creation: creationData });
 
-        // Identify the actor sheet container
-        const appElement = html[0];
-        const header = appElement.querySelector("header.window-header");
-
-        // Inject the rendered HTML after the header
+        // Inject after the header
+        const header = html[0].querySelector("header.window-header");
         if (header) {
             header.insertAdjacentHTML("afterend", renderedHTML);
         }
