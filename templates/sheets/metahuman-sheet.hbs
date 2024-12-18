@@ -10,7 +10,7 @@
                     <div class="image-mask">
                         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
                     </div>
-                    <h1>
+                    <h1 class="no-margin">
                         <input name="name" type="text" value="{{item.name}}"
                             placeholder="{{localize 'sr3d.item.metahuman.name'}}" />
                     </h1>
@@ -32,21 +32,24 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h3>{{localize "sr3d.item.metahuman.lifespan"}}</h3>
+                    <h3 class="no-margin">{{localize "sr3d.item.metahuman.lifespan"}}</h3>
                     <div class="stat-grid">
                         {{#each lifespan as |entry|}}
-                        <div class="info-field">
-                            <h4 class="card-header label">
-                                {{entry.label}}
-                            </h4>
-                            <!-- Hidden input to store the value for form submission -->
-                            <input type="number" value="{{entry.value}}" style="display: none;" />
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{entry.label}}</h4>
+                            </div>
+                            <div class="stat-label">
 
-                            <!-- Editable div for user interaction -->
-                            <div class="editable-div" contenteditable="true">
-                                <h1>
-                                    {{entry.value}}
-                                </h1>
+                                <!-- Hidden input to store the value for form submission -->
+                                <input type="number" value="{{entry.value}}" style="display: none;" />
+
+                                <!-- Editable div for user interaction -->
+                                <div class="editable-div" contenteditable="true">
+                                    <h1 class="no-margin">
+                                        {{entry.value}}
+                                    </h1>
+                                </div>
                             </div>
                         </div>
                         {{/each}}
@@ -55,26 +58,57 @@
             </div>
         </div>
 
-        <!-- Physical Attributes Div -->
+        <!-- Height Attributes Div -->
         <div class="item-sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h3>{{localize "sr3d.item.metahuman.physical"}}</h3>
+                    <h3 class="no-margin">{{localize "sr3d.item.metahuman.height"}}</h3>
                     <div class="stat-grid">
-                        {{#each physicalStats as |entry|}}
-                        <div class="info-field">
-                            <h4 class="card-header label">
-                                {{entry.label}}
-                            </h4>
-                            <!-- Hidden input -->
-                            <input type="number" value="{{entry.value}}" style="display: none;" />
+                        {{#each height as |entry|}}
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{entry.label}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <!-- Hidden input -->
+                                <input type="number" value="{{entry.value}}" style="display: none;" />
 
-                            <!-- Editable div -->
-                            <div class="editable-div" contenteditable="true">
-                                <h1>
-                                    {{entry.value}}
-                                </h1>
+                                <!-- Editable div -->
+                                <div class="editable-div" contenteditable="true">
+                                    <h1 class="no-margin">
+                                        {{entry.value}}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- Weight Attributes Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3 class="no-margin">{{localize "sr3d.item.metahuman.weight"}}</h3>
+                    <div class="stat-grid">
+                        {{#each weight as |entry|}}
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{entry.label}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <!-- Hidden input -->
+                                <input type="number" value="{{entry.value}}" style="display: none;" />
+
+                                <!-- Editable div -->
+                                <div class="editable-div" contenteditable="true">
+                                    <h1 class="no-margin">
+                                        {{entry.value}}
+                                    </h1>
+                                </div>
                             </div>
                         </div>
                         {{/each}}
@@ -88,22 +122,24 @@
                 <div class="inner-background-container">
                     <div class="fake-shadow"></div>
                     <div class="inner-background">
-                        <h3>{{localize "sr3d.item.metahuman.modifiers"}}</h3>
+                        <h3 class="no-margin">{{localize "sr3d.item.metahuman.modifiers"}}</h3>
                         <div class="grid-container">
                             <div class="stat-grid">
                                 {{#each attributeModifiers as |entry|}}
-                                <div class="info-field">
-                                    <h4 class="card-header">
-                                        {{entry.label}}
-                                    </h4>
-                                    <!-- Hidden input -->
-                                    <input type="number" value="{{entry.value}}" style="display: none;" />
+                                <div class="stat-card">
+                                    <div>
+                                        <h4 class="no-margin">{{entry.label}}</h4>
+                                    </div>
+                                    <div class="stat-label">
+                                        <!-- Hidden input -->
+                                        <input type="number" value="{{entry.value}}" style="display: none;" />
 
-                                    <!-- Editable div -->
-                                    <div class="editable-div" contenteditable="true">
-                                        <h1>
-                                            {{entry.value}}
-                                        </h1>
+                                        <!-- Editable div -->
+                                        <div class="editable-div" contenteditable="true">
+                                            <h1 class="no-margin">
+                                                {{entry.value}}
+                                            </h1>
+                                        </div>
                                     </div>
                                 </div>
                                 {{/each}}
@@ -120,24 +156,26 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h3>{{localize "sr3d.item.metahuman.attributeLimits"}}</h3>
+                    <h3 class="no-margin">{{localize "sr3d.item.metahuman.attributeLimits"}}</h3>
                     <div class="stat-grid">
                         {{#each attributeLimits as |entry|}}
-                        <div class="info-field">
-                            <h4 class="card-header">
-                                {{entry.label}}
-                            </h4>
-                            <!-- Hidden input -->
-                            <input type="number" value="{{entry.value}}" style="display: none;" />
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{entry.label}}</h4>
+                            </div>
+                            <div class="stat-label">
 
-                            <!-- Editable div -->
-                  
+                                <!-- Hidden input -->
+                                <input type="number" value="{{entry.value}}" style="display: none;" />
+
+                                <!-- Editable div -->
+
                                 <div class="editable-div" contenteditable="true">
-                                    <h1>
+                                    <h1 class="no-margin">
                                         {{entry.value}}
                                     </h1>
                                 </div>
-                  
+                            </div>
                         </div>
                         {{/each}}
                     </div>
@@ -150,8 +188,8 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h3>{{localize "sr3d.item.metahuman.vision"}}</h3>
-                    <div class="info-field">
+                    <h3 class="no-margin">{{localize "sr3d.item.metahuman.vision"}}</h3>
+                    <div class="stat-card">
                         <h4 class="label">{{localize "sr3d.item.metahuman.visionType"}}:</h4>
                         <select name="system.vision.visionType" class="vision-select">
                             <option value="normal" {{#if (eq system.vision.visionType "normal" )}}selected{{/if}}>
@@ -173,7 +211,7 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h3>{{localize "sr3d.sheet.notes"}}</h3>
+                    <h3 class="no-margin">{{localize "sr3d.sheet.notes"}}</h3>
                     <div class="editor-field">
                         {{editor '' content=system.metahuman.description owner=owner
                         button=true editable=editable}}

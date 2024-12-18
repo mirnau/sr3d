@@ -17,7 +17,7 @@ export default class ItemDataService {
         ];
     }
 
-    static physicalStats(ctx) {
+    static height(ctx) {
         return [
             {
                 label: game.i18n.localize(ctx.config.metahuman.min),
@@ -31,6 +31,10 @@ export default class ItemDataService {
                 label: game.i18n.localize(ctx.config.metahuman.max),
                 value: ctx.system.physical.height.max,
             },
+        ];
+    }
+    static weight(ctx) {
+        return [
             {
                 label: game.i18n.localize(ctx.config.metahuman.min),
                 value: ctx.system.physical.weight.min,

@@ -7,14 +7,6 @@
     height: 100%;
 }
 
-.apply-inner-background(@inner-background-color) {
-
-    padding: 0.5rem;
-    width: 100%;
-    height: auto;
-    background: @inner-background-color;
-}
-
 .fake-shadow(@fake-shadow-color) {
     position: absolute;
     top: 1.5rem;
@@ -36,6 +28,12 @@
 
 .sr3d.sheet.item,
 .sr3d.sheet.character {
+
+    .inner-background {
+        padding: 0.5rem;
+        width: 100%;
+        height: auto;
+    }
 
     .editor-field {
         z-index: 100;

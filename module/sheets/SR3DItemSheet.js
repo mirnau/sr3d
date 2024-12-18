@@ -37,7 +37,8 @@ export default class SR3DItemSheet extends ItemSheet {
 
     _getMetahumanData(ctx) {
         ctx.lifespan = ItemDataService.lifespan(ctx);
-        ctx.physicalStats = ItemDataService.physicalStats(ctx);
+        ctx.height = ItemDataService.height(ctx);
+        ctx.weight = ItemDataService.weight(ctx);
         ctx.attributeModifiers = ItemDataService.attributeModifiers(ctx);
         ctx.attributeLimits = ItemDataService.attributeLimits(ctx);
     }

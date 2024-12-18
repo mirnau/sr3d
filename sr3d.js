@@ -26,6 +26,7 @@ import { monitorCreationPoints } from "./module/hooks/updateActor/monitorCreatio
 import { sr3d } from "./module/config.js";
 import { transferKarmatoActor } from "./module/hooks/createItem/transferKarmatoActor.js";
 import { initMetahumanMasonry } from "./module/hooks/renderSR3DItemSheet/initMetahumanMasonry.js";
+import { attachLightEffect } from "./attachLightEffect.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -53,7 +54,7 @@ async function registerTemplatesFromPathsAsync() {
     for (const folder of folders) {
         await gatherFiles(folder);
     }
-
+    
     return loadTemplates(paths);
 }
 
@@ -87,6 +88,12 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
+
+    
+// Attach Hooks for ActorSheet and ItemSheet
+Hooks.on("renderActorSheet", (app, html) => attachLightEffect(html));
+Hooks.on("renderItemSheet", (app, html) => attachLightEffect(html));
+
 
     function setItemFlags(item, options, userId) {
         SR3DLog.info("Initiating Item Flags", "setItemFlags.js");

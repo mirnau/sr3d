@@ -1,8 +1,8 @@
-@primary-color:                      #283747; // Dark background
+@background-color:                   #212a2e;
+@primary-color:                      @primary-metal-gradient; // Dark background
 @secondary-color:                    #145b68; // Soft green
 @tertiary-color:                     #6825c0; // Soft green
 @quartiery-color:                    #552791; // Soft green
-@background-color:                   #212b35;
 
     @accent-color:                   #ff0095; // Neon blue
     @accent-apricot:                 #f4a370;
@@ -12,29 +12,54 @@
     @highlight-color-tertiary:       #48a564; // Pink for highlights
     @text-color:                     #c8d3f5;
 
+@primary-fake-shadow: #9ff7fc;
+
+@primary-metal-gradient: linear-gradient(
+    30deg, 
+    #465d60 0%, 
+    #465d60 20%, 
+    #9ff7fc 25%, 
+    #565047 30%, 
+    #565047 50%, 
+    #565047 70%, 
+    #E0F0ED 75%, 
+    #465d60 80%
+    #465d60 100%
+);
+
     //Main Window Background
     @transparent: transparent;
     @background-back-panel: transparent; // rgba(20, 49, 34, 0.4);
     @sheet-background-image: none;
 
+    //Default
+    @default-inner-background-color: @background-color;
+    @default-fake-shadow-color: @primary-fake-shadow;
+
     //Attribute Sheet Component 
    
     //Character Attribute Stat Card
-    @attribute-stat-card-color:         @accent-apricot;
-    @attribute-stat-card-label-color:   @highlight-color-secondary;
+    @attribute-stat-card-color:         @primary-color;
+    @attribute-stat-card-label-color:   @secondary-color;
     @attribute-stat-card-button-color:  @highlight-color-primary;
 
     //Character Dice Pool Stat Card
-    @dicepool-stat-card-color:         @accent-apricot;
-    @dicepool-stat-card-label-color:   @highlight-color-secondary;
+    @dicepool-stat-card-color:          @primary-color;
+    @dicepool-stat-card-label-color:    @secondary-color;
 
     //Character Movement Stat Card
-    @movement-stat-card-color:         @accent-apricot;
-    @movement-stat-card-label-color:   @highlight-color-secondary;
+    @movement-stat-card-color:          @primary-color;
+    @movement-stat-card-label-color:    @secondary-color;
 
     //Character Karma Stat Card
-    @karma-stat-card-color:         @accent-apricot;
-    @karma-stat-card-label-color:   @highlight-color-secondary;
+    @karma-stat-card-color:             @primary-color;
+    @karma-stat-card-label-color:       @secondary-color;
+
+    //Metahuman fake shadow
+    //Meta Human Item StatCard
+    @metahuman-stat-card-color:         @primary-color;
+    @metahuman-stat-card-label-color:   @secondary-color;
+    
 
 
     //Derivative styles:

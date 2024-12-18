@@ -1,8 +1,8 @@
-@primary-color:                      #283747; // Dark background
-@secondary-color:                    #145b68; // Soft green
+@background-color:                   #212a2e;
+@primary-color:                      #465d60; // Dark background
+@secondary-color:                    #3b5f68; // Soft green
 @tertiary-color:                     #6825c0; // Soft green
 @quartiery-color:                    #552791; // Soft green
-@background-color:                   #212b35;
 
     @accent-color:                   #ff0095; // Neon blue
     @accent-apricot:                 #f4a370;
@@ -12,10 +12,16 @@
     @highlight-color-tertiary:       #48a564; // Pink for highlights
     @text-color:                     #c8d3f5;
 
+@primary-fake-shadow: #9ff7fc;
+
     //Main Window Background
     @transparent: transparent;
     @background-back-panel: transparent; // rgba(20, 49, 34, 0.4);
     @sheet-background-image: none;
+
+    //Default
+    @default-inner-background-color: @background-color;
+    @default-fake-shadow-color: @primary-fake-shadow;
 
     //Attribute Sheet Component 
    
@@ -35,6 +41,12 @@
     //Character Karma Stat Card
     @karma-stat-card-color:             @primary-color;
     @karma-stat-card-label-color:       @secondary-color;
+
+    //Metahuman fake shadow
+    //Meta Human Item StatCard
+    @metahuman-stat-card-color:         @primary-color;
+    @metahuman-stat-card-label-color:   @secondary-color;
+    
 
 
     //Derivative styles:

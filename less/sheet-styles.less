@@ -33,6 +33,16 @@
         }
     }
 
+    .fake-shadow {
+        .fake-shadow(@default-fake-shadow-color);
+        .clipped-corners(1rem, 1rem, 2rem, 1rem);
+    }
+
+    .inner-background {
+        background: @default-inner-background-color;
+        .clipped-corners(1rem, 1rem, 2rem, 1rem);
+    }
+
     .image-mask {
         z-index: 1;
         min-width: 10rem;
