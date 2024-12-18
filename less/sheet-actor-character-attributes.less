@@ -25,38 +25,20 @@
 
     //NOTE: the width is to account for double digits
     .attribute-grid-sizer,
-    .attribute-card {
+    .stat-card {
         min-width: 6.5rem;
     }
 
-    .attribute-card {
-        .clipped-corners(0.5rem, 0.5rem, 1.0rem, 0.5rem);
-
-        background: @primary-color;
-        padding: 0.25rem;
-        min-height: 3rem;
-        transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-        margin-top: 0.25rem;
-
-        .attribute-value {
-            margin: 0;
-            text-align: center;
-        }
-
-        .horizontal-section {
-            background-color: @secondary-color;
-            
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .clipped-corners(0.5rem, 0.5rem, 1.0rem, 0.5rem);
-
+    .stat-card {
+        background-color: @attribute-stat-card-color;
+        .stat-label {
+            background-color: @attribute-stat-card-label-color;
             .decrement-attribute,
             .increment-attribute {
                 justify-content: center;
                 text-align: center;
                 font-size: 0.8rem;
-                color: @primary-color;
+                color: @attribute-stat-card-button-color;
                 cursor: pointer;
                 margin: 0.25rem;
 

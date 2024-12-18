@@ -18,7 +18,7 @@ export function initMovementMasonry(app, html, data) {
     const masonryResizeConfig = {
         html: html,
         parentSelector: '.movement-masonry-grid',
-        childSelector: '.movement-card',
+        childSelector: '.stat-card',
         gridSizerSelector: '.movement-grid-sizer',
         gutterSizerSelector: '.movement-gutter-sizer',
         itemCSSVar: '--movement-grid-sizer',

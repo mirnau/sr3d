@@ -1,0 +1,40 @@
+.dicepool-masonry-grid {
+    display: grid;
+    margin: 0 auto;
+
+    h1,
+    h4 {
+        margin: 0;
+    }
+
+    h1 {
+        text-indent: 0;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    .dicepool-gutter-sizer {
+        width: 0.5rem; 
+    }
+
+    .dicepool-grid-sizer,
+    .stat-card {
+        min-width: 5rem;
+    }
+
+    .stat-card {
+        background-color: @dicepool-stat-card-color;
+
+        //.stat-value {}
+
+        .stat-label {
+            background-color: @dicepool-stat-card-label-color;
+        }
+
+        &:hover {
+            z-index: 10;
+        }
+    }
+}

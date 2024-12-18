@@ -18,6 +18,26 @@
   text-indent: 0.5rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
+.sr3d .sr3d.sheet.item .stat-card,
+.sr3d .sr3d.sheet.character .stat-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  padding: 0.25rem;
+  min-height: 3rem;
+  margin-top: 0.25rem;
+}
+.sr3d .sr3d.sheet.item .stat-card .stat-value,
+.sr3d .sr3d.sheet.character .stat-card .stat-value {
+  margin: 0;
+}
+.sr3d .sr3d.sheet.item .stat-card .stat-label,
+.sr3d .sr3d.sheet.character .stat-card .stat-label {
+  display: flex;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .stat-card:hover,
+.sr3d .sr3d.sheet.character .stat-card:hover {
+  z-index: 10;
+}
 .sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
@@ -80,6 +100,25 @@
 }
 .sr3d .sr3d.sheet.item select:hover,
 .sr3d .sr3d.sheet.character select:hover {
+  background-color: #ff0095;
+}
+.sr3d .sr3d.sheet.item .stat-card,
+.sr3d .sr3d.sheet.character .stat-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+}
+.sr3d .sr3d.sheet.item .stat-card .stat-value,
+.sr3d .sr3d.sheet.character .stat-card .stat-value {
+  margin: 0;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .stat-card .stat-label,
+.sr3d .sr3d.sheet.character .stat-card .stat-label {
+  align-items: center;
+  justify-content: center;
+}
+.sr3d .sr3d.sheet.item .stat-card:hover,
+.sr3d .sr3d.sheet.character .stat-card:hover {
   background-color: #ff0095;
 }
 .sr3d .sr3d.sheet.item option,
@@ -436,30 +475,16 @@
   width: 0.5rem;
 }
 .sr3d .sr3d.sheet.character .movement-masonry-grid .movement-grid-sizer,
-.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card {
+.sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card {
   min-width: 8rem;
 }
-.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  background: #283747;
-  padding: 0.25rem;
-  min-height: 3rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-  margin-top: 0.25rem;
+.sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card {
+  background: #f4a370;
 }
-.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .movement-value {
-  margin: 0;
-  text-align: center;
+.sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card .stat-label {
+  background-color: #d13980;
 }
-.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card .horizontal-section {
-  background-color: #145b68;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.character .movement-masonry-grid .movement-card:hover {
-  background-color: #ff0095;
+.sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card:hover {
   z-index: 10;
 }
 .sr3d .sr3d.sheet.character .sheet-component .karma-heart {
@@ -488,30 +513,16 @@
   width: 0.5rem;
 }
 .sr3d .sr3d.sheet.character .karma-masonry-grid .karma-grid-sizer,
-.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card {
+.sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card {
   min-width: 8rem;
 }
-.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  background: #283747;
-  padding: 0.25rem;
-  min-height: 3rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-  margin-top: 0.25rem;
+.sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card {
+  background: #f4a370;
 }
-.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card .karma-value {
-  margin: 0;
-  text-align: center;
+.sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card .stat-label {
+  background-color: #d13980;
 }
-.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card .horizontal-section {
-  background-color: #145b68;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.character .karma-masonry-grid .karma-card:hover {
-  background-color: #ff0095;
+.sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card:hover {
   z-index: 10;
 }
 .sr3d .attribute-masonry-grid {
@@ -535,53 +546,40 @@
   width: 0.5rem;
 }
 .sr3d .attribute-masonry-grid .attribute-grid-sizer,
-.sr3d .attribute-masonry-grid .attribute-card {
+.sr3d .attribute-masonry-grid .stat-card {
   min-width: 6.5rem;
 }
-.sr3d .attribute-masonry-grid .attribute-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  background: #283747;
-  padding: 0.25rem;
-  min-height: 3rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-  margin-top: 0.25rem;
+.sr3d .attribute-masonry-grid .stat-card {
+  background-color: #f4a370;
 }
-.sr3d .attribute-masonry-grid .attribute-card .attribute-value {
-  margin: 0;
-  text-align: center;
+.sr3d .attribute-masonry-grid .stat-card .stat-label {
+  background-color: #d13980;
 }
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section {
-  background-color: #145b68;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute {
+.sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute,
+.sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute {
   justify-content: center;
   text-align: center;
   font-size: 0.8rem;
-  color: #283747;
+  color: #1df0ff;
   cursor: pointer;
   margin: 0.25rem;
 }
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:hover,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:hover {
+.sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute:hover,
+.sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute:hover {
   filter: brightness(1.15);
   z-index: 10;
 }
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute:active,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute:active {
+.sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute:active,
+.sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute:active {
   filter: brightness(1);
 }
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .decrement-attribute a.decrement-attribute.disabled,
-.sr3d .attribute-masonry-grid .attribute-card .horizontal-section .increment-attribute a.decrement-attribute.disabled {
+.sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute a.decrement-attribute.disabled,
+.sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute a.decrement-attribute.disabled {
   color: grey;
   pointer-events: none;
   opacity: 0.5;
 }
-.sr3d .attribute-masonry-grid .attribute-card:hover {
+.sr3d .attribute-masonry-grid .stat-card:hover {
   background-color: #ff0095;
   z-index: 10;
 }
@@ -603,30 +601,16 @@
   width: 0.5rem;
 }
 .sr3d .dicepool-masonry-grid .dicepool-grid-sizer,
-.sr3d .dicepool-masonry-grid .dicepool-card {
+.sr3d .dicepool-masonry-grid .stat-card {
   min-width: 5rem;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-  background: #283747;
-  padding: 0.25rem;
-  min-height: 3rem;
-  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-  margin-top: 0.25rem;
+.sr3d .dicepool-masonry-grid .stat-card {
+  background-color: #f4a370;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .dicepool-value {
-  margin: 0;
-  text-align: center;
+.sr3d .dicepool-masonry-grid .stat-card .stat-label {
+  background-color: #d13980;
 }
-.sr3d .dicepool-masonry-grid .dicepool-card .horizontal-section {
-  background-color: #145b68;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .dicepool-masonry-grid .dicepool-card:hover {
-  background-color: #ff0095;
+.sr3d .dicepool-masonry-grid .stat-card:hover {
   z-index: 10;
 }
 .sr3d .sr3d.sheet.character {
@@ -951,15 +935,11 @@
   gap: 0.5rem;
 }
 .sr3d .sr3d.sheet.item .info-field {
-  margin-top: 0.5rem;
-  background-color: #283747;
-  width: 100%;
+  background-color: #145b68;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.25rem;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1.5rem), calc(100% - 1.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  justify-content: center;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container {
   background-color: #145b68;

@@ -18,7 +18,7 @@ export function initDicepoolMasonry(app, html, data) {
     const masonryResizeConfig = {
         html: html,
         parentSelector: '.dicepool-masonry-grid',
-        childSelector: '.dicepool-card',
+        childSelector: '.stat-card',
         gridSizerSelector: '.dicepool-grid-sizer',
         gutterSizerSelector: '.dicepool-gutter-sizer',
         itemCSSVar: '--dicepool-grid-sizer',

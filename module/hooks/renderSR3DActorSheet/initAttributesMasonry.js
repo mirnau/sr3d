@@ -18,7 +18,7 @@ export function initAttributesMasonry(app, html, data) {
     const masonryResizeConfig = {
         html: html,
         parentSelector: '.attribute-masonry-grid',
-        childSelector: '.attribute-card',
+        childSelector: '.stat-card',
         gridSizerSelector: '.attribute-grid-sizer',
         gutterSizerSelector: '.attribute-gutter-sizer',
         itemCSSVar: '--attribute-grid-sizer',

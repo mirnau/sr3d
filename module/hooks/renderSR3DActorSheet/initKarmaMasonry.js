@@ -18,7 +18,7 @@ export function initKarmaMasonry(app, html, data) {
     const masonryResizeConfig = {
         html: html,
         parentSelector: '.karma-masonry-grid',
-        childSelector: '.karma-card',
+        childSelector: '.stat-card',
         gridSizerSelector: '.karma-grid-sizer',
         gutterSizerSelector: '.karma-gutter-sizer',
         itemCSSVar: '--karma-grid-sizer',

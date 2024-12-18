@@ -33,34 +33,20 @@
         }
     
         .karma-grid-sizer,
-        .karma-card {
+        .stat-card {
             min-width: 8rem;
         }
     
-        .karma-card {
-            .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+        .stat-card {
+            background: @karma-stat-card-color;
+
+            //.stat-value {}
     
-            background: @primary-color;
-            padding: 0.25rem;
-            min-height: 3rem;
-            transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
-            margin-top: 0.25rem;
-    
-            .karma-value {
-                margin: 0;
-                text-align: center;
-            }
-    
-            .horizontal-section {
-                background-color: @secondary-color;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+            .stat-label {
+                background-color: @karma-stat-card-label-color;
             }
     
             &:hover {
-                background-color: @accent-color;
                 z-index: 10;
             }
         }

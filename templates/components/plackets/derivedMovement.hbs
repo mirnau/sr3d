@@ -1,9 +1,9 @@
-<div class="movement-card">
-    <div class="movement-name">
+<div class="stat-card">
+    <div>
         <h4>{{localize (concat "sr3d.actor.movement." movement)}}</h4>
     </div>
-    <div class="horizontal-section">
-        <div class="movement-value">
+    <div class="stat-label">
+        <div class="stat-value">
             <h1>
                 {{getProperty (getProperty system movement) "total"}}
                 {{#if (getProperty (getProperty system movement) "mod")}}

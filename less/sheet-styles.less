@@ -64,6 +64,27 @@
         }
        
     }
+
+    .stat-card {
+        .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+        transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+
+        .stat-value {
+            margin: 0;
+            text-align: center;
+        }
+
+        .stat-label {
+            
+            align-items: center;
+            justify-content: center;
+        }
+
+        &:hover {
+            background-color: @accent-color;
+        }
+    }
+    
     option {
         background-color: @quartiery-color;
         border-radius: 0rem;
