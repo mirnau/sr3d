@@ -1,3 +1,8 @@
+.sr3d .sr3d.sheet.item .editor-field,
+.sr3d .sr3d.sheet.character .editor-field {
+  z-index: 100;
+  min-height: 20rem;
+}
 .sr3d .sr3d.sheet.item .window-content,
 .sr3d .sr3d.sheet.character .window-content {
   position: relative;
@@ -16,6 +21,10 @@
 .sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
+}
+.sr3d .sr3d.sheet.item .editor,
+.sr3d .sr3d.sheet.character .editor {
+  height: 100%;
 }
 .sr3d .sr3d.sheet.item .window-resizable-handle,
 .sr3d .sr3d.sheet.character .window-resizable-handle {
@@ -42,6 +51,25 @@
 .sr3d .sr3d.sheet.item img.large,
 .sr3d .sr3d.sheet.character img.large {
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .image-mask,
+.sr3d .sr3d.sheet.character .image-mask {
+  z-index: 1;
+  min-width: 10rem;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  position: relative;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .image-mask img,
+.sr3d .sr3d.sheet.character .image-mask img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
 }
 .sr3d .sr3d.sheet.item select,
 .sr3d .sr3d.sheet.character select {
@@ -84,68 +112,80 @@
   --color-scrollbar-track: transparent;
   /* Track background */
 }
-.sr3d .sr3d.sheet.item .window-content,
-.sr3d .sr3d.sheet.character .window-content {
+.sr3d .sr3d.sheet.item,
+.sr3d .sr3d.sheet.character {
   font-family: 'VT323', monospace;
   margin: 0.33rem 0;
   line-height: 1.2;
   color: #c8d3f5;
 }
-.sr3d .sr3d.sheet.item .window-content h1,
-.sr3d .sr3d.sheet.character .window-content h1 {
+.sr3d .sr3d.sheet.item h1,
+.sr3d .sr3d.sheet.character h1 {
   text-transform: uppercase;
   color: #1df0ff;
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   border: none;
 }
-.sr3d .sr3d.sheet.item .window-content h1.no-margin,
-.sr3d .sr3d.sheet.character .window-content h1.no-margin {
+.sr3d .sr3d.sheet.item h1.no-margin,
+.sr3d .sr3d.sheet.character h1.no-margin {
   margin: 0;
 }
-.sr3d .sr3d.sheet.item .window-content h2,
-.sr3d .sr3d.sheet.character .window-content h2 {
+.sr3d .sr3d.sheet.item h1 input,
+.sr3d .sr3d.sheet.character h1 input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-shadow: inherit;
+  text-transform: inherit;
+  line-height: inherit;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item h2,
+.sr3d .sr3d.sheet.character h2 {
   text-transform: uppercase;
   color: #d13980;
   border: none;
 }
-.sr3d .sr3d.sheet.item .window-content h3,
-.sr3d .sr3d.sheet.character .window-content h3 {
+.sr3d .sr3d.sheet.item h3,
+.sr3d .sr3d.sheet.character h3 {
   text-transform: uppercase;
   color: #48a564;
   border: none;
 }
-.sr3d .sr3d.sheet.item .window-content h3.no-margin,
-.sr3d .sr3d.sheet.character .window-content h3.no-margin {
+.sr3d .sr3d.sheet.item h3.no-margin,
+.sr3d .sr3d.sheet.character h3.no-margin {
   margin: 0;
 }
-.sr3d .sr3d.sheet.item .window-content h4,
-.sr3d .sr3d.sheet.character .window-content h4 {
+.sr3d .sr3d.sheet.item h4,
+.sr3d .sr3d.sheet.character h4 {
   text-transform: uppercase;
   color: #48a564;
 }
-.sr3d .sr3d.sheet.item .window-content h5,
-.sr3d .sr3d.sheet.character .window-content h5 {
+.sr3d .sr3d.sheet.item h5,
+.sr3d .sr3d.sheet.character h5 {
   text-transform: uppercase;
   color: #48a564;
 }
-.sr3d .sr3d.sheet.item .window-content h6,
-.sr3d .sr3d.sheet.character .window-content h6 {
+.sr3d .sr3d.sheet.item h6,
+.sr3d .sr3d.sheet.character h6 {
   text-transform: uppercase;
   color: #48a564;
 }
-.sr3d .sr3d.sheet.item .window-content select,
-.sr3d .sr3d.sheet.character .window-content select,
-.sr3d .sr3d.sheet.item .window-content input,
-.sr3d .sr3d.sheet.character .window-content input {
+.sr3d .sr3d.sheet.item select,
+.sr3d .sr3d.sheet.character select,
+.sr3d .sr3d.sheet.item input,
+.sr3d .sr3d.sheet.character input {
   font-family: 'VT323', monospace;
   margin: 0.33rem 0;
   line-height: 1.2;
   color: #c8d3f5;
 }
-.sr3d .sr3d.sheet.item .window-content select::placeholder,
-.sr3d .sr3d.sheet.character .window-content select::placeholder,
-.sr3d .sr3d.sheet.item .window-content input::placeholder,
-.sr3d .sr3d.sheet.character .window-content input::placeholder {
+.sr3d .sr3d.sheet.item select::placeholder,
+.sr3d .sr3d.sheet.character select::placeholder,
+.sr3d .sr3d.sheet.item input::placeholder,
+.sr3d .sr3d.sheet.character input::placeholder {
   color: #c8d3f5;
 }
 .sr3d .attribute-position {
@@ -866,6 +906,60 @@
 .sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display .subskill-value {
   width: 3rem;
   text-align: center;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid {
+  /* Set a fixed or max width and center it */
+  width: 40rem;
+  margin: 0 auto;
+  column-count: 2;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .fake-shadow {
+  background-color: magenta;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background {
+  display: grid;
+  background-color: #212b35;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background h1,
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background h4 {
+  margin: 0rem;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .card-header {
+  padding: 0rem;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .editable-div {
+  min-width: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #145b68;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .info-field {
+  margin-top: 0.5rem;
+  background-color: #283747;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1.5rem), calc(100% - 1.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container {
   background-color: #145b68;

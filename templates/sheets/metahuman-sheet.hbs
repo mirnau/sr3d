@@ -1,144 +1,185 @@
-<form class="{{cssClass}}" data-form="sheet" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-        <div class="form-group">
-            <label for="priority-select">Select Priority</label>
+<form class="{{cssClass}}" autocomplete="off">
 
-            <h1>
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "
-                    sr3d.item.metahuman.name"}}" />
-            </h1>
-            <select name="system.priority" id="priority-select" class="priority-select">
-                <option value="C" {{#if (eq system.priority "C" )}}selected{{/if}}>C</option>
-                <option value="D" {{#if (eq system.priority "D" )}}selected{{/if}}>D</option>
-            </select>
+    <div class="meta-human-grid">
+        <!-- Main Info Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+
+                    <div class="image-mask">
+                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+                    </div>
+                    <h1>
+                        <input name="name" type="text" value="{{item.name}}"
+                            placeholder="{{localize 'sr3d.item.metahuman.name'}}" />
+                    </h1>
+
+
+                    <h4 class="card-header" for="priority-select">Select Priority</h4>
+
+                    <select name="system.priority" id="priority-select" class="priority-select">
+                        <option value="C" {{#if (eq system.priority "C" )}}selected{{/if}}>C</option>
+                        <option value="D" {{#if (eq system.priority "D" )}}selected{{/if}}>D</option>
+                        <option value="E" {{#if (eq system.priority "E" )}}selected{{/if}}>E</option>
+                    </select>
+                </div>
+            </div>
         </div>
-    </header>
 
-    <div class="sheet-content">
-        <!-- Lifespan Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.lifespan"}}</legend>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.age"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
-                <input name="system.lifespan.min" type="number" value="{{system.lifespan.min}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.age"}}  ({{localize "sr3d.item.metahuman.average"}}):</label>
-                <input name="system.lifespan.average" type="number" value="{{system.lifespan.average}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.age"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
-                <input name="system.lifespan.max" type="number" value="{{system.lifespan.max}}" />
-            </div>
-        </fieldset>
+        <!-- Lifespan Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3>{{localize "sr3d.item.metahuman.lifespan"}}</h3>
+                    <div class="stat-grid">
+                        {{#each lifespan as |entry|}}
+                        <div class="info-field">
+                            <h4 class="card-header label">
+                                {{entry.label}}
+                            </h4>
+                            <!-- Hidden input to store the value for form submission -->
+                            <input type="number" value="{{entry.value}}" style="display: none;" />
 
-        <!-- Physical Attributes Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.physical"}}</legend>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
-                <input name="system.physical.height.min" type="number" value="{{system.physical.height.min}}" />
+                            <!-- Editable div for user interaction -->
+                            <div class="editable-div" contenteditable="true">
+                                <h1>
+                                    {{entry.value}}
+                                </h1>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.average"}}):</label>
-                <input name="system.physical.height.average" type="number" value="{{system.physical.height.average}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.height"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
-                <input name="system.physical.height.max" type="number" value="{{system.physical.height.max}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.min"}}):</label>
-                <input name="system.physical.weight.min" type="number" value="{{system.physical.weight.min}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.average"}}):</label>
-                <input name="system.physical.weight.average" type="number" value="{{system.physical.weight.average}}" />
-            </div>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.weight"}} ({{localize "sr3d.item.metahuman.max"}}):</label>
-                <input name="system.physical.weight.max" type="number" value="{{system.physical.weight.max}}" />
-            </div>
-        </fieldset>
+        </div>
 
-        <!-- Modifiers Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.modifiers"}}</legend>
-            <table>
-                <tr>
-                    <th>{{localize "sr3d.actor.attributes.strength"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.quickness"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.body"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.charisma"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.intelligence"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.willpower"}}</th>
-                </tr>
-                <tr>
-                    <td><input name="system.modifiers.strength" type="number" value="{{system.modifiers.strength}}" />
-                    </td>
-                    <td><input name="system.modifiers.quickness" type="number" value="{{system.modifiers.quickness}}" />
-                    </td>
-                    <td><input name="system.modifiers.body" type="number" value="{{system.modifiers.body}}" /></td>
-                    <td><input name="system.modifiers.charisma" type="number" value="{{system.modifiers.charisma}}" />
-                    </td>
-                    <td><input name="system.modifiers.intelligence" type="number"
-                            value="{{system.modifiers.intelligence}}" /></td>
-                    <td><input name="system.modifiers.willpower" type="number" value="{{system.modifiers.willpower}}" />
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
+        <!-- Physical Attributes Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3>{{localize "sr3d.item.metahuman.physical"}}</h3>
+                    <div class="stat-grid">
+                        {{#each physicalStats as |entry|}}
+                        <div class="info-field">
+                            <h4 class="card-header label">
+                                {{entry.label}}
+                            </h4>
+                            <!-- Hidden input -->
+                            <input type="number" value="{{entry.value}}" style="display: none;" />
 
-        <!-- Attribute Limits Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.attributeLimits"}}</legend>
-            <table>
-                <tr>
-                    <th>{{localize "sr3d.actor.attributes.strength"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.quickness"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.body"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.charisma"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.intelligence"}}</th>
-                    <th>{{localize "sr3d.actor.attributes.willpower"}}</th>
-                </tr>
-                <tr>
-                    <td><input name="system.attribute.strength" type="number"
-                            value="{{system.attributeLimits.strength}}" /></td>
-                    <td><input name="system.attribute.quickness" type="number"
-                            value="{{system.attributeLimits.quickness}}" /></td>
-                    <td><input name="system.attribute.body" type="number" value="{{system.attributeLimits.body}}" />
-                    </td>
-                    <td><input name="system.attribute.charisma" type="number"
-                            value="{{system.attributeLimits.charisma}}" /></td>
-                    <td><input name="system.attribute.intelligence" type="number"
-                            value="{{system.attributeLimits.intelligence}}" /></td>
-                    <td><input name="system.attribute.willpower" type="number"
-                            value="{{system.attributeLimits.willpower}}" /></td>
-                </tr>
-            </table>
-        </fieldset>
+                            <!-- Editable div -->
+                            <div class="editable-div" contenteditable="true">
+                                <h1>
+                                    {{entry.value}}
+                                </h1>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-grid">
+            <!-- Modifiers Div -->
+            <div class="item-sheet-component">
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        <h3>{{localize "sr3d.item.metahuman.modifiers"}}</h3>
+                        <div class="grid-container">
+                            <div class="stat-grid">
+                                {{#each attributeModifiers as |entry|}}
+                                <div class="info-field">
+                                    <h4 class="card-header">
+                                        {{entry.label}}
+                                    </h4>
+                                    <!-- Hidden input -->
+                                    <input type="number" value="{{entry.value}}" style="display: none;" />
 
-        <!-- Vision Section -->
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.vision"}}</legend>
-            <div>
-                <label>{{localize "sr3d.item.metahuman.visionType"}}:</label>
-                <select name="system.vision.visionType">
-                    <option value="normal" {{#if (eq system.vision.visionType "normal" )}}selected{{/if}}>{{localize
-                        "sr3d.item.metahuman.normal"}}</option>
-                    <option value="lowlight" {{#if (eq system.vision.visionType "lowlight" )}}selected{{/if}}>{{localize
-                        "sr3d.item.metahuman.lowlight"}}</option>
-                    <option value="thermographic" {{#if (eq system.vision.visionType "thermographic" )}}selected{{/if}}>
-                        {{localize "sr3d.item.metahuman.thermographic"}}</option>
-                </select>
+                                    <!-- Editable div -->
+                                    <div class="editable-div" contenteditable="true">
+                                        <h1>
+                                            {{entry.value}}
+                                        </h1>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
+        </div>
+
+
+        <!-- Attribute Limits Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3>{{localize "sr3d.item.metahuman.attributeLimits"}}</h3>
+                    <div class="stat-grid">
+                        {{#each attributeLimits as |entry|}}
+                        <div class="info-field">
+                            <h4 class="card-header">
+                                {{entry.label}}
+                            </h4>
+                            <!-- Hidden input -->
+                            <input type="number" value="{{entry.value}}" style="display: none;" />
+
+                            <!-- Editable div -->
+                  
+                                <div class="editable-div" contenteditable="true">
+                                    <h1>
+                                        {{entry.value}}
+                                    </h1>
+                                </div>
+                  
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-        </fieldset>
-        <fieldset>
-            <legend>{{localize "sr3d.item.metahuman.description"}}:</legend>
-            {{editor system.description owner=owner button=true editable=editable}}
-        </fieldset>
+        </div>
+
+        <!-- Vision Div -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3>{{localize "sr3d.item.metahuman.vision"}}</h3>
+                    <div class="info-field">
+                        <h4 class="label">{{localize "sr3d.item.metahuman.visionType"}}:</h4>
+                        <select name="system.vision.visionType" class="vision-select">
+                            <option value="normal" {{#if (eq system.vision.visionType "normal" )}}selected{{/if}}>
+                                {{localize "sr3d.item.metahuman.normal"}}
+                            </option>
+                            <option value="lowlight" {{#if (eq system.vision.visionType "lowlight" )}}selected{{/if}}>
+                                {{localize "sr3d.item.metahuman.lowlight"}}
+                            </option>
+                            <option value="thermographic" {{#if (eq system.vision.visionType "thermographic"
+                                )}}selected{{/if}}>
+                                {{localize "sr3d.item.metahuman.thermographic"}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3>{{localize "sr3d.sheet.notes"}}</h3>
+                    <div class="editor-field">
+                        {{editor '' content=system.metahuman.description owner=owner
+                        button=true editable=editable}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>

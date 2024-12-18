@@ -1,12 +1,12 @@
 <div class="dossier">
 
     {{#if (isDossierOpen actor)}}
-    <div class="version-one">
-        <img class="large" src="{{system.img}}" />
+    <div class="version-one image-mask">
+        <img class="" src="{{system.img}}" />
     </div>
     {{else}}
-    <div class="version-two">
-        <img class="large" src="{{actor.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="version-two image-mask">
+        <img class="" src="{{actor.img}}" data-edit="img" title="{{item.name}}"/>
     </div>
     {{/if}}
 

@@ -1,6 +1,10 @@
 .sr3d.sheet.item,
 .sr3d.sheet.character {
 
+    .editor {
+        height: 100%;
+    }
+
     box-shadow: none;
 
     .window-resizable-handle {
@@ -19,7 +23,7 @@
 
     img {
         border: none;
-
+        
         &.small {
             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
         }
@@ -28,6 +32,25 @@
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
         }
     }
+
+    .image-mask {
+        z-index: 1;
+        min-width: 10rem;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        position: relative;
+        .clipped-corners(1rem, 1rem, 1rem, 1rem);
+    
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          min-width: 100%;
+          min-height: 100%;
+          object-fit: cover;
+        }
+      }
 
     select {
         background-color: @quartiery-color;

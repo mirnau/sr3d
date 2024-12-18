@@ -40,6 +40,7 @@ export default class SR3DActor extends Actor {
     }
   }
 
+
   async recalculateAttribute() {
     const character = this.system;
 

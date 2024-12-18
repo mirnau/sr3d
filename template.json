@@ -165,7 +165,8 @@
             },
             "karma": {
                 "goodKarma": 0,
-                "karmaPool": 0,
+                "karmaPool": 1,
+                "lifetimeKarma": 0,
                 "miraculousSurvival": false
             },
             "damageTracker": {
@@ -177,44 +178,61 @@
     },
     "Item": {
         "types": [
-            "weapon",
-            "vehicle",
-            "vehicleMods",
-            "rocket",
             "ammunition",
             "apparel",
+            "clip",
             "creditStick",
-            "enhancer",
             "cyberwear",
-            "misc",
-            "metahuman",
-            "skill",
+            "enhancer",
+            "karma",
             "magicTradition",
-            "karma"
+            "metahuman",
+            "misc",
+            "rocket",
+            "skill",
+            "vehicle",
+            "vehicleMods",
+            "weapon"
         ],
         "templates": {
             "commodity": {
-                "availability": "00:00",
+                "availability": {"days": 0, "hours": 0 },
                 "cost": 0,
-                "streetIndex": 0.0,
+                "streetIndex": 1.0,
+                "legality": {"restrictionLevel": 0, "type": "", "category": ""},
                 "description": "Enter your description"
             },
-            "commonModifiable": {
+            "portability": {
                 "conceal": 0,
-                "legal": "select",
                 "weight": 0.0
             }
         },
         "weapon": {
             "templates": [
                 "commodity",
-                "commonModifiable"
+                "portability"
             ],
-            "ammo": "0(a)",
+            
             "mode": "select",
             "damage": "select",
             "range": 0,
             "recoilComp": 0.0
+        },
+        "ammunition": {
+            "templates": [
+                "commodity",
+                "portability"
+            ],
+            "compatibleWeapons": []
+        },
+        "clip": {
+            "templates": [
+                "commodity",
+                "portability"
+            ],
+            "maxAmount": 0,
+            "amountInClip": 0,
+            "compatibleWeapons":[]
         },
         "metahuman": {
             "name": "",
@@ -248,9 +266,11 @@
                 "quickness": 0,
                 "body": 0,
                 "charisma": 0,
-
                 "intelligence": 0,
                 "willpower": 0
+            },
+            "karmaAdvancementFraction": {
+                "value": 0
             },
             "vision": {
                 "visionType": "",
@@ -259,7 +279,8 @@
                     "darknessPenaltyNegation": ""
                 }
             },
-            "priority": ""
+            "priority": "",
+            "description": ""
         },
         "vehicle": {
             "templates": [
@@ -288,22 +309,17 @@
         "rocket": {
             "templates": [
                 "commodity",
-                "commonModifiable"
+                "portability"
             ],
             "damage": 0,
             "intelligence": 0,
             "blast": "0/0"
         },
-        "ammunition": {
-            "templates": [
-                "commodity"
-            ],
-            "weight": 0.0
-        },
+
         "apparel": {
             "templates": [
                 "commodity",
-                "commonModifiable"
+                "portability"
             ],
             "ballistic": 0,
             "impact": 0
@@ -372,6 +388,5 @@
         "karma": {
             "value": 0
         }
-
     }
 }

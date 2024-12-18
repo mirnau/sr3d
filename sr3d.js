@@ -1,13 +1,13 @@
 import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
-import { SR3DItem } from "./module/Items/SR3DItem.js";
 import SR3DLog from "./module/SR3DLog.js";
+import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
+import { SR3DItem } from "./module/Items/SR3DItem.js";
 import { onItemCreateIconChange } from "./module/hooks/preCreateItem/onItemCreateIconChange.js";
 import { initializeMasonryLayout } from "./module/hooks/renderSR3DActorSheet/initializeMasonrlyLayout.js";
 import { injectCreationSidebar } from "./module/injections/displayCreationPointSidebar.js";
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
-import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
 import { setActorFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
 import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
@@ -25,6 +25,7 @@ import { initKarmaMasonry } from "./module/hooks/renderSR3DActorSheet/initKarmaM
 import { monitorCreationPoints } from "./module/hooks/updateActor/monitorCreationPoints.js";
 import { sr3d } from "./module/config.js";
 import { transferKarmatoActor } from "./module/hooks/createItem/transferKarmatoActor.js";
+import { initMetahumanMasonry } from "./module/hooks/renderSR3DItemSheet/initMetahumanMasonry.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -39,11 +40,11 @@ async function registerTemplatesFromPathsAsync() {
     async function gatherFiles(folder) {
         const fileList = await FilePicker.browse("data", folder);
 
-        // Filter and collect .hbs files
+        // INFO: Filter and collect .hbs files
         const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
         paths.push(...hbsFiles);
 
-        // Recursively process subfolders
+        // INFO: Recursively process subfolders
         for (const subFolder of fileList.dirs) {
             await gatherFiles(subFolder);
         }
@@ -67,6 +68,10 @@ function registerHooks() {
         initDicepoolMasonry(app, html, data);
         initMovementMasonry(app, html, data);
         initKarmaMasonry(app, html, data);
+    });
+
+    Hooks.on(hooks.renderSR3DItemSheet, (app, html, data) => {
+        initMetahumanMasonry(app, html, data);
     });
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);

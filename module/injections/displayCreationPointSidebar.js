@@ -1,8 +1,8 @@
-export async function injectCreationSidebar(app, html) {
-    const namespace = "sr3d";
-    const creationStateFlag = "creation.complete";
+import { flags } from "../helpers/CommonConsts.js"
 
-    if (!app.actor.getFlag(namespace, creationStateFlag)) {
+export async function injectCreationSidebar(app, html) {
+
+    if (app.actor.getFlag(flags.namespace, flags.isCharacterCreationState)) {
         const creationData = app.actor.system.creation;
 
         // Render the creation points template

@@ -16,8 +16,10 @@
 
 
 .sr3d {
-    --color-scrollbar: rgba(30, 30, 0, 0.8); /* Smokey yellow tinge */
-    --color-scrollbar-track: transparent; /* Track background */
+    --color-scrollbar: rgba(30, 30, 0, 0.8);
+    /* Smokey yellow tinge */
+    --color-scrollbar-track: transparent;
+    /* Track background */
 }
 
 
@@ -34,55 +36,73 @@
 
 .sr3d.sheet.item,
 .sr3d.sheet.character {
-    .window-content {
-        .VTT323();
 
-        
-        
-        h1 {
-            .VTT323-header();
-            color: @h1-color;
-            text-shadow: @h1-color-bloom-primary;
-            border: none;
+    .VTT323();
 
-            &.no-margin {
-                margin: 0;
-            }
+    h1 {
+        .VTT323-header();
+        color: @h1-color;
+        text-shadow: @h1-color-bloom-primary;
+        border: none;
+    
+        &.no-margin {
+            margin: 0;
         }
-        h2 {
-            .VTT323-header();
-            color: @h2-color;
-            border: none;
-        }
-        h3 {
-            .VTT323-header();
-            color: @h3-color;
-            border: none;
-            
-            &.no-margin {
-                margin: 0;
-            }
-        }
-        h4 {
-            .VTT323-header();
-            color: @h4-color;
-        }
-        h5 {
-            .VTT323-header();
-            color: @h5-color;
-        }
-        h6 {
-            .VTT323-header();
-            color: @h6-color;
-        }
-
-        select,
+    
+        // Explicitly style input inside h1
         input {
-            .VTT323();
-
-            &::placeholder {
-                color: @text-color;
-            }
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            text-shadow: inherit;
+            text-transform: inherit;
+            line-height: inherit;
+    
+            display: inline-block;
+            width: 100%; // Adjust based on your layout
+            text-align: center; // Centers text inside the input
         }
     }
+    
+
+    h2 {
+        .VTT323-header();
+        color: @h2-color;
+        border: none;
+    }
+
+    h3 {
+        .VTT323-header();
+        color: @h3-color;
+        border: none;
+
+        &.no-margin {
+            margin: 0;
+        }
+    }
+
+    h4 {
+        .VTT323-header();
+        color: @h4-color;
+    }
+
+    h5 {
+        .VTT323-header();
+        color: @h5-color;
+    }
+
+    h6 {
+        .VTT323-header();
+        color: @h6-color;
+    }
+
+    select,
+    input {
+        .VTT323();
+
+        &::placeholder {
+            color: @text-color;
+        }
+    }
+
 }

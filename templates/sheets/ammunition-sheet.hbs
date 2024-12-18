@@ -1,0 +1,99 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <div class="sheet-content">
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+
+                    <header class="image-mask">
+                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+                        <div contenteditable="true" name="name" id="name-field" placeholder="{{localize 'Name'}}">
+                            <h1>
+                                {{item.name}}
+                            </h1>
+                        </div>
+                    </header>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="stat-grid">
+
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.common.cost"}}</h3>
+                            <div id="cost" contenteditable="true" data-dtype="String">
+                                <h1>{{system.cost}}</h1>
+                            </div>
+                        </div>
+
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.common.days"}} : {{localize "sr3d.item.common.hours"}}</h3>
+                            <div id="cost" contenteditable="true" data-dtype="String">
+                                <h1>
+                                    {{system.ammunition.availability.days}} : {{system.ammunition.availability.hours}}
+                                </h1>
+                            </div>
+                        </div>
+
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.common.streetIndex"}}</h3>
+                            <div id="cost" contenteditable="true" data-dtype="String">
+                                <h1>{{system.streetIndex}}</h1>
+                            </div>
+                        </div>
+
+
+                        <div class="info-field">
+                            <div class="info-field">
+                                <h3>{{localize "sr3d.item.common.restrictionLevel"}}</h3>
+                                <div id="cost" contenteditable="true" data-dtype="String">
+                                    <h1>{{system.streetIndex}}</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-field">
+                            <!-- Legality Type Dropdown -->
+                            <h3>{{localize "sr3d.item.common.legality"}}</h3>
+                            <select name="system.legality.type" data-dtype="String">
+                                {{#each config.legality as |label key|}}
+                                <option value="{{key}}" {{#if (eq ../system.legality.type key)}}selected{{/if}}>
+                                    {{localize label}}
+                                </option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="info-field">
+                            <!-- Category Dropdown -->
+                            <h3>{{localize "sr3d.item.common.category"}}</h3>
+                            <select name="system.legality.category" data-dtype="String">
+                                {{#each config.category as |label key|}}
+                                <option value="{{key}}" {{#if (eq ../system.legality.category key)}}selected{{/if}}>
+                                    {{label}}
+                                </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-sheet-component">
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        <div class="editor-field">
+                            {{editor system.description owner=owner button=true editable=editable}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

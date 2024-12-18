@@ -9,7 +9,8 @@ sr3d.sheet ={
     deleteSpecialisation: "sr3d.sheet.deleteSpecialisation",
     undoSpecialization: "sr3d.sheet.undoSpecialization",
     confirmSkill: "sr3d.sheet.confirmSkill",
-    undo: "sr3d.sheet.undo"    
+    undo: "sr3d.sheet.undo",
+    notes: "sr3d.sheet.notes"
 }
 
 sr3d.itemTypes = {
@@ -99,7 +100,8 @@ sr3d.metahuman = {
     lowlight: "sr3d.item.metahuman.lowlight",
     thermographic: "sr3d.item.metahuman.thermographic",
     description: "sr3d.item.metahuman.description",
-    newMetaHuman: "sr3d.item.metahuman.newMetaHuman"
+    newMetaHuman: "sr3d.item.metahuman.newMetaHuman",
+    description: "sr3d.item.metahuman.description"
 }
 
 sr3d.weapon = {
@@ -111,7 +113,41 @@ sr3d.weapon = {
     weight: "sr3d.item.weapon.weight",
     legal: "sr3d.item.weapon.legal",
     recoilComp: "sr3d.item.weapon.recoilComp",
-    newWeapon: "sr3d.item.weapon.newWeapon"
+    newWeapon: "sr3d.item.weapon.newWeapon",
+
+};
+
+sr3d.firingMode = {
+    singleshot: "sr3d.firingMode.singleshot",     
+    semiautomatic: "sr3d.firingMode.semiautomatic",
+    burstfire: "sr3d.firingMode.burstfire",        
+    fullauto: "sr3d.firingMode.fullauto"           
+};
+
+sr3d.ammo = {
+    clip: "sr3d.ammo.clip",               
+    breakaction: "sr3d.ammo.breakaction", 
+    magazine: "sr3d.ammo.magazine",       
+    cylinder: "sr3d.ammo.cylinder",       
+    belt: "sr3d.ammo.belt"                
+};
+
+sr3d.damageType = {
+    stun: "sr3d.damageType.stun", 
+    light: "sr3d.damageType.light",   
+    moderate: "sr3d.damageType.moderate",
+    serious: "sr3d.damageType.serious", 
+    deadly: "sr3d.damageType.deadly",  
+    flechette: "sr3d.damageType.flechette"
+};
+
+sr3d.legalCode = {
+    permissable: "sr3d.legalCode.permissable", 
+    restricted: "sr3d.legalCode.restricted",  
+    forbidden: "sr3d.legalCode.forbidden",  
+    exceptionbiased: "sr3d.legalCode.exceptionbiased", 
+    generallegality: "sr3d.legalCode.generallegality", 
+    permittedwithfineorrestriction: "sr3d.legalCode.permittedwithfineorrestriction"
 };
 
 sr3d.vehicle = {
@@ -258,16 +294,27 @@ sr3d.cyberwear = {
     essence: "sr3d.item.cyberwear.essence"
 };
 
-sr3d.misc = {
-    rating: "sr3d.item.misc.rating"
-};
-
 sr3d.common = {
     availability: "sr3d.item.common.availability",
     cost: "sr3d.item.common.cost",
+    days: "sr3d.item.common.days",
+    hours: "sr3d.item.common.hours",
     streetIndex: "sr3d.item.common.streetIndex",
     description: "sr3d.item.common.description",
     conceal: "sr3d.item.common.conceal",
-    legal: "sr3d.item.common.legal",
-    weight: "sr3d.item.common.weight"
+    legality: "sr3d.item.common.legality",
+    weight: "sr3d.item.common.weight",
+    restrictionLevel: "sr3d.item.common.restrictionLevel",
+    category: "sr3d.item.common.category"
 };
+
+sr3d.legality = {
+    general: "sr3d.legality.general",
+    permissable: "sr3d.legality.permissable",
+    restricted: "sr3d.legality.restricted",
+    forbidden: "sr3d.legality.forbidden",
+}
+
+sr3d.category = Object.fromEntries(
+    Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map(letter => [letter.toLowerCase(), letter])
+)

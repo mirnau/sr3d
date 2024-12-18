@@ -1,6 +1,7 @@
 import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
+import ItemDataService from "../services/ItemDataService.js";
 
 import SR3DLog from '../SR3DLog.js'
 
@@ -28,7 +29,17 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.system = ctx.item.system;
         ctx.isOwned = Boolean(this.item.parent);
 
+        if(ctx.item.type === "metahuman") {this._getMetahumanData(ctx);} 
+        //else if(ctx.item.type === "ammunition") { ctx.legality = ItemDataService.legality(ctx);}
+        
         return ctx;
+    }
+
+    _getMetahumanData(ctx) {
+        ctx.lifespan = ItemDataService.lifespan(ctx);
+        ctx.physicalStats = ItemDataService.physicalStats(ctx);
+        ctx.attributeModifiers = ItemDataService.attributeModifiers(ctx);
+        ctx.attributeLimits = ItemDataService.attributeLimits(ctx);
     }
 
     async render(force = false, options = {}) {
@@ -38,6 +49,18 @@ export default class SR3DItemSheet extends ItemSheet {
         }
 
         return super.render(force, options);
+    }
+
+    close(options = {}) {
+        if (this.item.observers) {
+            this.item.observers.forEach((observer, index) => {
+                if (observer) {
+                    observer.disconnect();
+                    this.item.observers[index] = null;
+                }
+            });
+        }
+        return super.close(options);
     }
 
     activateListeners(html) {

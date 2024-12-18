@@ -11,6 +11,12 @@
             "none": "",
             "astralProjection": "Astral Projection"
         },
+        "legality": {
+            "general": "General",
+            "permissable": "Persmissable",
+            "restricted": "Restricted",
+            "forbidden": "Forbidden"
+        },
 
         "createItem": {
             "weapon": "Weapon",
@@ -27,8 +33,6 @@
             "skill": "Skill",
             "magicTradition": "MagicTradition",
             "karma": "Karma"
-        
-
         },
         "actorTypes": {
              "playerCharacter": "Player Character"
@@ -43,7 +47,8 @@
             "deleteSpecialisation": "Delete Specialisation",
             "undoSpecialization": "Undo Specialisation",
             "confirmSkill": "Confirm Skill Purchase",
-            "undo": "Undo"
+            "undo": "Undo",
+            "notes": "Notes"
         },
 
         "characterCreation": {
@@ -160,8 +165,8 @@
             },
             "metahuman": {
                 "name": "Metahuman Type",
-                "lifespan": "Typical Shadowrunner Age-Range for Metahumans of this Kind",
-                "physical": "Typical Shadowrunner Stat-Ranges for Metahumans of this Kind",
+                "lifespan": "Expected Lifspan",
+                "physical": "Expected Appearance",
                 "average": "Average",
                 "age": "Age",
                 "max": "Max",
@@ -175,8 +180,8 @@
                 "normal": "Normal",
                 "lowlight": "Low-light",
                 "thermographic": "Thermographic",
-                "description": "Description",
-                "newMetaHuman": "New Metahuman"
+                "newMetaHuman": "New Metahuman",
+                "description": "Enter the text for the metahuman here..."
             },
             "vehicle": {
                 "handling": "Handling",
@@ -231,11 +236,15 @@
             "common": {
                 "availability": "Available in",
                 "cost": "Cost",
+                "days": "Days",
+                "hours": "Hours",
                 "streetIndex": "Street Index",
                 "description": "Description",
                 "conceal": "Conceal",
-                "legal": "Legal Status",
-                "weight": "Weight"
+                "legality": "Legal Status",
+                "weight": "Weight",
+                "restrictionLevel": "Restriction Level",
+                "category": "Offence Category"
             },
             
             
