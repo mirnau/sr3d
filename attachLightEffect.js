@@ -13,15 +13,19 @@ export function attachLightEffect(html) {
         return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
     }
 
-    // Define base RGB colors
-    const lightBlueRGB = rgb(63, 114, 131);       // Light Blue
-    const grayRGB = rgb(51, 51, 51);               // Dark Gray
-    const lightColor = rgb(121, 121, 121);   // Cherry Blossom Pink
-    const brushedBlackRGB1 = { r: 26, g: 26, b: 26 }; // #1a1a1a
-    const brushedBlackRGB2 = { r: 77, g: 77, b: 77 }; // #4d4d4d
+    // Define aluminum-like RGB colors
+    const silverRGB = rgb(158, 158, 158);
+    const lightGrayRGB = rgb(170, 170, 170);
+    const darkGrayRGB = rgb(105, 105, 105);
+    const highlightRGB = rgb(222, 136, 230); // Reflective highlight
 
-    // Predefine the brushed black gradient base
-    const brushedBlackBase = `linear-gradient(30deg, rgb(${brushedBlackRGB1.r}, ${brushedBlackRGB1.g}, ${brushedBlackRGB1.b}), rgb(${brushedBlackRGB2.r}, ${brushedBlackRGB2.g}, ${brushedBlackRGB2.b}))`;
+    // Predefine the brushed aluminum base gradient
+    const brushedAluminumBase = `repeating-linear-gradient(
+        0deg,
+        ${myColorAsString(silverRGB, 0.6)} 0px,
+        ${myColorAsString(lightGrayRGB, 0.6)} 3px,
+        ${myColorAsString(silverRGB, 0.6)} 6px
+    )`;
 
     // =========================
     //       Event Handling
@@ -54,42 +58,31 @@ export function attachLightEffect(html) {
             const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
             // Define the maximum distance for the light effect
-            const maxDistance = Math.max(rect.width, rect.height) * 1.5; // Adjust as needed
+            const maxDistance = Math.max(rect.width, rect.height) * 1.5;
 
             // Calculate the intensity based on distance (0 to 1)
             const intensity = Math.max(0, 1 - distance / maxDistance);
 
-            // Generate RGBA colors using helper functions
-            const lightBlue = myColorAsString(lightBlueRGB, intensity);                // Light blue opacity increases as mouse approaches
-            const gray = myColorAsString(grayRGB, 1 - intensity);                     // Gray opacity increases as mouse moves away
-            const cherryBlossom = myColorAsString(lightColor, intensity);        // Cherry blossom pink light opacity
+            // Generate RGBA colors for the dynamic highlights
+            const highlight = myColorAsString(highlightRGB, intensity);
+            const radialHighlight = myColorAsString(highlightRGB, intensity * 0.5);
 
-            // Generate the radial gradient for the light effect
+            // Generate the radial gradient for dynamic lighting
             const radialGradient = `radial-gradient(circle at ${mouseX}px ${mouseY}px, 
-                ${cherryBlossom} 0%, 
-                ${myColorAsString(lightColor, 0)} 80%
+                ${highlight} 0%, 
+                ${radialHighlight} 70%, 
+                ${myColorAsString(silverRGB, 0)} 100%
             )`;
 
-            // Generate the repeating linear gradient for the light and gray pattern
-            const repeatingLinearGradient = `repeating-linear-gradient(
-                45deg,
-                ${lightBlue} 1px, 
-                ${lightBlue} 2px, 
-                ${lightBlue} 1px, 
-                ${gray} 3px, 
-                ${gray} 1px, 
-                ${gray} 2px
-            )`;
-
-            // Combine all gradients with the brushed black base
+            // Combine the radial gradient with the brushed aluminum base
             const combinedBackground = `
                 ${radialGradient},
-                ${repeatingLinearGradient},
-                ${brushedBlackBase}
+                ${brushedAluminumBase}
             `;
 
             // Apply the combined background to the card
             card.style.background = combinedBackground;
+            card.style.backgroundBlendMode = "overlay"; // Enhance the metallic effect
         });
     });
 }

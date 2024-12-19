@@ -1,4 +1,4 @@
-@background-color:                   #212a2e;
+@background-color:                   #272b31;
 @primary-color:                      #465d60; // Dark background
 @secondary-color:                    #3b5f68; // Soft green
 @tertiary-color:                     #6825c0; // Soft green
@@ -12,12 +12,14 @@
     @highlight-color-tertiary:       #48a564; // Pink for highlights
     @text-color:                     #c8d3f5;
 
-@primary-fake-shadow: #9ff7fc;
+@primary-fake-shadow: @accent-color;
 
     //Main Window Background
+    @appwindow-background: none; //Makes the entire app transparent
     @transparent: transparent;
-    @background-back-panel: transparent; // rgba(20, 49, 34, 0.4);
+    @background-back-panel: none; // rgba(20, 49, 34, 0.4);
     @sheet-background-image: none;
+    @window-header-color: transparent;
 
     //Default
     @default-inner-background-color: @background-color;
@@ -54,7 +56,7 @@
     @h1-color: @highlight-color-primary;
     @h2-color: @highlight-color-secondary;
     @h3-color: @highlight-color-tertiary;
-    @h4-color: @highlight-color-tertiary;
+    @h4-color: @highlight-color-primary;
     @h5-color: @highlight-color-tertiary;
     @h6-color: @highlight-color-tertiary;
 
