@@ -2,6 +2,7 @@
     "name": "sr3d",
     "title": "Shadowrun Third Edition Homebrew",
     "description": "An unofficial fan system for Shadowrun Third Edition",
+    "background": "systems/sr3d/textures/ai-generated/cyberpunkcity.webp",
     "authors": [
             {
                 "name": "Otterbeast"
@@ -16,7 +17,8 @@
         "sr3d.js"
     ],
     "scripts": [
-        "https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"
+        "https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js",
+        "https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.min.js"
     ],
     "styles": [
         "styles/sr3d-chummer-dark.css",

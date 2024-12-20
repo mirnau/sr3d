@@ -1,0 +1,43 @@
+.sr3d.sheet.character {
+    .movement-masonry-grid {
+        display: grid;
+        margin: 0 auto;
+    
+        h1,
+        h4 {
+            margin: 0;
+        }
+    
+        h1 {
+            text-indent: 0;
+        }
+    
+        h4 {
+            text-wrap: nowrap;
+            text-align: center;
+        }
+    
+        .movement-gutter-sizer {
+            width: 0.5rem; 
+        }
+    
+        .movement-grid-sizer,
+        .stat-card {
+            min-width: 8rem;
+        }
+    
+        .stat-card {
+            background: @movement-stat-card-color;
+            
+            //.stat-value {}
+    
+            .stat-label {
+                background-color: @movement-stat-card-label-color;
+            }
+    
+            &:hover {
+                z-index: 10;
+            }
+        }
+     }
+}

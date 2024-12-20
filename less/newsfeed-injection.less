@@ -1,0 +1,56 @@
+.sr3d {
+    .window-header {
+        background-color: transparent;
+        align-content: center;
+        padding-top:1rem;
+        padding-bottom:1rem;
+        text-align: center;
+
+        
+        .window-title {
+            background-color: transparent;
+
+            .news-container {
+                overflow: hidden; /* Hide overflowing text */
+                white-space: nowrap; /* Prevent text from wrapping */
+                position: relative; /* For positioning the scrolling text */
+                width: 100%; /* Full width of the container */
+                height: 100%;
+                display: flex;
+                flex: 1; /* Allow it to grow in a flex container */
+                align-items: center;
+                text-align: center;
+            }
+            
+            .news-feed {
+                color: @h1-color;
+                text-shadow: @h1-color-bloom-primary;
+                padding: 0rem;
+                margin: 0rem;
+                line-height: 3rem;
+                font-size: 1.5rem;
+                display: inline-block; /* Ensure the text stays on one line */
+                position: absolute; /* Needed for movement */
+                animation: scroll-left 25s linear infinite; /* Apply scrolling animation */
+                align-items: center;
+                text-align: center;
+                
+                /* Make it take all available space */
+                min-width: 100%; /* Prevent shrinking */
+                min-height: 100%; /* Prevent shrinking */
+                white-space: nowrap; /* Ensure the text doesn't wrap */
+                
+            }
+            
+            /* Keyframes for the scrolling effect */
+            @keyframes scroll-left {
+                0% {
+                    transform: translateX(100%); /* Start off-screen to the right */
+                }
+                100% {
+                    transform: translateX(-100%); /* End off-screen to the left */
+                }
+            }
+        }
+    }
+}

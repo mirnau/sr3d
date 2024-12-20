@@ -1,36 +1,40 @@
+
 .attribute-position {
     position: absolute;
     width: 100px; /* Fixed size for square */
     height: 100px;
+    top: 0rem;
     left: -3rem;
     z-index: 1;
 
-    // Define spacing variable
-    @base-spacing: 4rem; // Base spacing value
-
-    // Position elements vertically
-    &:nth-of-type(1) {
-        top: 5rem;
-    }
-
-    &:nth-of-type(2) {
-        top: calc(5rem + @base-spacing * 2);
-    }
-
-    &:nth-of-type(3) {
-        top: calc(5rem + @base-spacing * 4);
-    }
-
-    &:nth-of-type(4) {
-        top: calc(5rem + @base-spacing * 6);
-    }
-
+    
     .attribute-point-container {
         position: relative;
         width: 100%; /* Match the parent width */
         height: 100%; /* Match the parent height */
         padding: 0;
         margin: 0;
+        
+        // Define spacing variable
+        @base-spacing: 0.5rem; // Base spacing value
+    
+        // Position elements vertically
+        &:nth-of-type(1) {
+            top: 5rem;
+        }
+    
+        &:nth-of-type(2) {
+            top: calc(5rem + @base-spacing * 2);
+        }
+    
+        &:nth-of-type(3) {
+            top: calc(5rem + @base-spacing * 4);
+        }
+    
+        &:nth-of-type(4) {
+            top: calc(5rem + @base-spacing * 6);
+        }
+
 
         .attribute-fake-shadow {
             --offset: 0.5rem; /* Custom property for offset */

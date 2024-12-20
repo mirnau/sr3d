@@ -11,6 +11,32 @@
             "none": "",
             "astralProjection": "Astral Projection"
         },
+        "legality": {
+            "general": "General",
+            "permissable": "Persmissable",
+            "restricted": "Restricted",
+            "forbidden": "Forbidden"
+        },
+
+        "createItem": {
+            "weapon": "Weapon",
+            "vehicle": "Vehicle",
+            "vehicleMods": "Vehicle Mod",
+            "rocket": "Rocket",
+            "ammunition": "Ammunition",
+            "apparel": "Apparel",
+            "creditStick": "Credit Stick",
+            "enhancer": "Enhancer",
+            "cyberwear": "Cyberwear",
+            "misc": "Misc",
+            "metahuman": "Metahuman",
+            "skill": "Skill",
+            "magicTradition": "MagicTradition",
+            "karma": "Karma"
+        },
+        "actorTypes": {
+             "playerCharacter": "Player Character"
+        },
 
         "sheet": {
             "addSkill": "Add a skill",
@@ -18,12 +44,18 @@
             "dossier": "Dossier",
             "deleteSkill": "Delete Skill",
             "purchaseSkills": "Purchase Skill Point",
-            "deleteSpecialisation": "Delete Specialisation"
+            "deleteSpecialisation": "Delete Specialisation",
+            "undoSpecialization": "Undo Specialisation",
+            "confirmSkill": "Confirm Skill Purchase",
+            "undo": "Undo",
+            "notes": "Notes"
         },
 
         "characterCreation": {
             "instruction": "Humans are weighted at 64% and magic users at 4%.",
-            "selectAnOption": "Select"
+            "selectAnOption": "Select",
+            "spendYourAttributPointsToProceed": "You need to spend all your attribute points to proceed!",
+            "spentAllAttributePoints": "You have no more attribute points to spend!"
         },
         "actor": {
             "race": {
@@ -74,13 +106,28 @@
                 "essence": "Essence"
             },
             "dicepools": {
+                "dicepools": "Dice Pools",
                 "combat": "Combat",
                 "astral": "Astral",
                 "hacking": "Hacking",
                 "control": "Control",
                 "spell": "Spell"
             },
-            
+            "health": {
+                "health": "Health",
+                "damageTracker": "Damage Tracker"
+            },
+            "budget": {
+                "budget": "Budget"
+            },
+            "possessions": {
+                "possessions": "Possessions",
+                "inventory": "Inventory",
+                "loadout": "Loadout",
+                "arsenal": "Arsenal",
+                "arcane": "Arcane",
+                "garage": "Garage"
+            },
             "movement": {
                 "movement": "Movement",
                 "walking": "Walking Speed",
@@ -118,8 +165,8 @@
             },
             "metahuman": {
                 "name": "Metahuman Type",
-                "lifespan": "Typical Shadowrunner Age-Range for Metahumans of this Kind",
-                "physical": "Typical Shadowrunner Stat-Ranges for Metahumans of this Kind",
+                "lifespan": "Expected Lifspan",
+                "physical": "Expected Appearance",
                 "average": "Average",
                 "age": "Age",
                 "max": "Max",
@@ -133,8 +180,8 @@
                 "normal": "Normal",
                 "lowlight": "Low-light",
                 "thermographic": "Thermographic",
-                "description": "Description",
-                "newMetaHuman": "New Metahuman"
+                "newMetaHuman": "New Metahuman",
+                "description": "Enter the text for the metahuman here..."
             },
             "vehicle": {
                 "handling": "Handling",
@@ -189,11 +236,15 @@
             "common": {
                 "availability": "Available in",
                 "cost": "Cost",
+                "days": "Days",
+                "hours": "Hours",
                 "streetIndex": "Street Index",
                 "description": "Description",
                 "conceal": "Conceal",
-                "legal": "Legal Status",
-                "weight": "Weight"
+                "legality": "Legal Status",
+                "weight": "Weight",
+                "restrictionLevel": "Restriction Level",
+                "category": "Offence Category"
             },
             
             
@@ -217,7 +268,7 @@
                 "linkedAttribute": "Linked Attribute",
                 "langauge": "Language",
                 "read": "Read",
-                "speech": "Speech",
+                "speak": "Speak",
                 "write": "Write"
             },
 

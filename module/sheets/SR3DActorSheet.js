@@ -1,7 +1,7 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
-import { flags } from '../helpers/CommonConsts.js'
-import { getResizeObserver } from '../services/initializeMasonry.js';
+import { baseAttributes, derivedAttributes, flags } from '../helpers/CommonConsts.js'
+import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
 import SR3DLog from '../SR3DLog.js';
 
 export default class SR3DActorSheet extends ActorSheet {
@@ -17,6 +17,11 @@ export default class SR3DActorSheet extends ActorSheet {
                     navSelector: ".sheet-tabs .tabs",
                     contentSelector: ".tab-content",
                     initial: "inventory"
+                },
+                {
+                    navSelector: ".skills-tabs .tabs", 
+                    contentSelector: ".skills-tabs .tab-content",
+                    initial: "active-skills"
                 }
             ]
         });
@@ -37,7 +42,42 @@ export default class SR3DActorSheet extends ActorSheet {
         ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
         ctx.inventory = ActorDataService.prepareInventory(ctx.actor.items.contents);
 
+        // NOTE: used for iteratotion
+        ctx.baseAttributes = baseAttributes;
+        ctx.derivedAttributes = derivedAttributes;
+
         return ctx;
+    }
+
+    async render(force = false, options = {}) {
+        // Check if the creation dialog is completed
+        let creationCompleted = this.actor.getFlag(flags.namespace, flags.characterCreationCompleted);
+
+        // If the flag doesn't exist, initialize it
+        if (creationCompleted === undefined) {
+            console.log("Flag 'creationDialogCompleted' not found. Creating and setting it to false.");
+            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, false);
+            creationCompleted = false;
+        }
+
+        // If the creation is not completed, show the dialog
+        if (!creationCompleted) {
+            console.log("Character creation not completed. Showing creation dialog.");
+
+            const dialogResult = await this._showCharacterCreationDialog(this.actor);
+
+            // If the dialog is canceled, delete the actor and prevent rendering
+            if (!dialogResult) {
+                console.log(`Character creation canceled for actor: ${this.actor.name}. Deleting actor.`);
+                await this.actor.delete();
+                return; // Halt rendering by exiting the `render` method
+            }
+
+            // Set the flag to true after the dialog is completed
+            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, true);
+            console.log("Character creation completed. Flag set to true.");
+        }
+        return super.render(force, options);
     }
 
     async _showCharacterCreationDialog(actor) {
@@ -65,39 +105,6 @@ export default class SR3DActorSheet extends ActorSheet {
         });
     }
 
-
-
-    async render(force = false, options = {}) {
-        // Check if the creation dialog is completed
-        let creationCompleted = this.actor.getFlag("sr3d", "creationDialogCompleted");
-
-        // If the flag doesn't exist, initialize it
-        if (creationCompleted === undefined) {
-            console.log("Flag 'creationDialogCompleted' not found. Creating and setting it to false.");
-            await this.actor.setFlag("sr3d", "creationDialogCompleted", false);
-            creationCompleted = false;
-        }
-
-        // If the creation is not completed, show the dialog
-        if (!creationCompleted) {
-            console.log("Character creation not completed. Showing creation dialog.");
-
-            const dialogResult = await this._showCharacterCreationDialog(this.actor);
-
-            // If the dialog is canceled, delete the actor and prevent rendering
-            if (!dialogResult) {
-                console.log(`Character creation canceled for actor: ${this.actor.name}. Deleting actor.`);
-                await this.actor.delete();
-                return; // Halt rendering by exiting the `render` method
-            }
-
-            // Set the flag to true after the dialog is completed
-            await this.actor.setFlag("sr3d", "creationDialogCompleted", true);
-            console.log("Character creation completed. Flag set to true.");
-        }
-        return super.render(force, options);
-    }
-
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -120,8 +127,6 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
-
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     close(options = {}) {
@@ -163,52 +168,57 @@ export default class SR3DActorSheet extends ActorSheet {
 
         skill.sheet.render(true);
     }
-
-    _onItemCreate(event) {
+   
+    async _onItemCreate(event) {
         event.preventDefault();
+    
+        // Determine the type of item to create
+        const itemType = event.currentTarget.dataset.type || "skill"; // Default to "skill"
+        
+        if (itemType === "skill") {
 
-        // Get the clicked element and skill type
-        const element = event.currentTarget;
-        const skillType = element.dataset.skillType; // Retrieve the skill type (e.g., activeSkill)
-        const itemType = element.dataset.type; // Retrieve the item type (always "skill" here)
-
-        // Ensure the skill type is valid
-        if (!itemType || !skillType) {
-            console.error("Invalid item or skill type specified:", { itemType, skillType });
+            if(!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
+                ui.notifications.info(game.i18n.localize("sr3d.characterCreation.spendYourAttributPointsToProceed"));
             return;
         }
 
-        // Prepare the item data
-        const itemData = {
-            name: game.i18n.localize("sr3d.sheet.newItem"),
-            type: itemType,
-            system: {
-                skillType: skillType // Set the specific skill type
+            const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
+            const ctx = { item: null, actor: this.actor }; // No item yet created
+    
+            console.log("Creating skill. Showing dialog.");
+            const dialogResult = await new Promise((resolve) => {
+                new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
+            });
+    
+            if (!dialogResult) {
+                console.log("Skill creation canceled.");
+                return;
             }
-        };
-
-        // Add specific default data for skill types (optional)
-        if (skillType === "activeSkill") {
-            itemData.system.activeSkill = { linkedAttribute: "", value: 0, specializations: [] };
-
-        } else if (skillType === "knowledgeSkill") {
-
-            itemData.system.knowledgeSkill = { linkedAttribute: "", value: 0, specializations: [] };
-
-        } else if (skillType === "languageSkill") {
-            itemData.system.languageSkill = {
-                speech: { value: 0, specializations: [] },
-                read: { value: 0, specializations: [] },
-                write: { value: 0, specializations: [] }
-            };
+    
+            // Create the skill item
+            const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
+    
+            if (createdItems.length > 0) {
+                const createdItem = createdItems[0]; // Retrieve the first created item
+                console.log("Skill successfully created:", createdItem.toObject());
+    
+                // Set a flag on the newly created item
+                await createdItem.setFlag("sr3d", "isInitialized", true);
+                console.log("Flag 'isInitialized' set to true for item:", createdItem.id);
+            } else {
+                console.error("No skill was created.");
+            }
+        } 
+        // Add more conditions for other item types in the future
+        else if (itemType === "gear") {
+            // Handle gear creation
+            console.log("Gear creation is not yet implemented.");
+            // Example: Render a gear-specific dialog here
+        } else {
+            console.warn(`Unhandled item type: ${itemType}`);
         }
-
-        // Create the item
-        return this.actor.createEmbeddedDocuments("Item", [itemData]).then(() => {
-            ui.notifications.info(`Created new ${skillType}`);
-        }).catch((error) => {
-            console.error("Error creating item:", error);
-            ui.notifications.error(`Failed to create new ${skillType}. Check console for details.`);
-        });
     }
+    
+    
 }
+

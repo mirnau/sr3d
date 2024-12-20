@@ -1,0 +1,67 @@
+.attribute-masonry-grid {
+    display: grid;
+    margin: 0 auto;
+
+    h1,
+    h4 {
+        margin: 0;
+    }
+
+    h1 {
+        text-indent: 0;
+    }
+
+    h4 {
+        text-align: center;
+    
+        &:hover {
+            color: @primary-color;
+        }
+    }    
+
+    .attribute-gutter-sizer {
+        width: 0.5rem; 
+    }
+
+    //NOTE: the width is to account for double digits
+    .attribute-grid-sizer,
+    .stat-card {
+        min-width: 6.5rem;
+    }
+
+    .stat-card {
+        background: @attribute-stat-card-color;
+        .stat-label {
+            background-color: @attribute-stat-card-label-color;
+            .decrement-attribute,
+            .increment-attribute {
+                justify-content: center;
+                text-align: center;
+                font-size: 0.8rem;
+                color: @attribute-stat-card-button-color;
+                cursor: pointer;
+                margin: 0.25rem;
+
+                &:hover {
+                    filter: brightness(1.15);
+                    z-index: 10;
+                }
+
+                &:active {
+                    filter: brightness(1);
+                }
+
+                a.decrement-attribute.disabled {
+                    color: grey;
+                    pointer-events: none;
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        &:hover {
+            background-color: @accent-color;
+            z-index: 10;
+        }
+    }
+}

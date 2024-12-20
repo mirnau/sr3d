@@ -1,0 +1,23 @@
+<div class="stat-card">
+    <div>
+        <h4>{{localize (concat "sr3d.actor.attributes." attribute)}}</h4>
+    </div>
+    <div class="stat-label">
+        {{#if (isShoppingStateActive actor)}}
+            <a class="decrement-attribute" data-attribute="{{attribute}}"
+               {{#if (eq (getProperty (getProperty system attribute) "total") 0)}}disabled{{/if}}>
+                <i class="fa-solid fa-circle-chevron-down"></i>
+            </a>
+        {{/if}}
+        <div class="stat-value">
+            <h1>
+                {{getProperty (getProperty system attribute) "total"}}/{{getProperty (getProperty system attribute) "mod"}}
+            </h1>
+        </div>
+        {{#if (isShoppingStateActive actor)}}
+            <a class="increment-attribute" data-attribute="{{attribute}}">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+            </a>
+        {{/if}}
+    </div>
+</div>

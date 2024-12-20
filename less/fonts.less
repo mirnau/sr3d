@@ -3,81 +3,110 @@
     src: url('../fonts/VT323/VT323-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap; // Ensures text is displayed immediately with fallback until VT323 loads
 }
 
-.sr3d h1,
-.sr3d h2,
-.sr3d h3,
-.sr3d h4,
-.sr3d h5,
-.sr3d h6 {
+@font-face {
+    font-family: 'Neonderthaw';
+    src: url('../fonts/Neonderthaw/Neonderthaw-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap; // Similarly ensures immediate text display
+}
+
+
+.sr3d {
+    --color-scrollbar: @accent-color;
+    /* Smokey yellow tinge */
+    --color-scrollbar-track: transparent;
+    /* Track background */
+}
+
+
+.VTT323-header() {
     text-transform: uppercase;
+}
+
+.VTT323() {
     font-family: 'VT323', monospace;
     margin: 0.33rem 0;
     line-height: 1.2;
-    border: none;
+    color: @text-color;
 }
 
-.sr3d .actor-sheet {
+.sr3d.sheet.item,
+.sr3d.sheet.character {
+
+    .VTT323();
 
     h1 {
+        .VTT323-header();
         color: @h1-color;
         text-shadow: @h1-color-bloom-primary;
-    }
-
-    .h1-value {
-        h1 {
-            margin: 0rem;
+        border: none;
+    
+        &.no-margin {
+            margin: 0;
         }
-    }
-
-    .specialization-font {
-        h1 {
-            margin: 0rem;
-            font-size: 1rem;
+    
+        // Explicitly style input inside h1
+        input {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            text-shadow: inherit;
+            text-transform: inherit;
+            line-height: inherit;
+    
+            display: inline-block;
+            width: 100%; // Adjust based on your layout
+            text-align: center; // Centers text inside the input
         }
     }
     
+
     h2 {
+        .VTT323-header();
         color: @h2-color;
+        border: none;
     }
-}
 
+    h3 {
+        .VTT323-header();
+        color: @h3-color;
+        border: none;
+        text-shadow: @h3-color-bloom-primary;
 
-.sr3d h3 {
-    color: @h3-color;
-}
+        &.no-margin {
+            margin: 0;
+        }
+    }
 
-.sr3d h4 {
-    color: @h4-color;
-}
+    h4 {
+        .VTT323-header();
+        color: @h4-color;
+        
+        &.no-margin {
+            margin: 0;
+        }
+    }
 
-.sr3d h5 {
-    color: @h4-color;
-}
+    h5 {
+        .VTT323-header();
+        color: @h5-color;
+    }
 
-.sr3d h6 {
-    color: @h4-color;
-}
+    h6 {
+        .VTT323-header();
+        color: @h6-color;
+    }
 
-p,
-span,
-a,
-button,
-input,
-textarea {
-    font-family: 'VT323', monospace;
-    font-size: @base-font-size;
-    line-height: @line-height;
-    color: @text-color;
-    /* Set font color */
-}
+    select,
+    input {
+        .VTT323();
 
-div,
-textarea {
-    font-family: 'VT323', monospace;
-    font-size: @base-font-size * 0.8; //set by rem
-    line-height: @line-height;
-    color: @text-color;
-    /* Set font color */
+        &::placeholder {
+            color: @text-color;
+        }
+    }
 }

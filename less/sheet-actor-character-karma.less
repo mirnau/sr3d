@@ -1,0 +1,54 @@
+.sr3d.sheet.character {
+
+    .sheet-component {
+        .karma-heart {
+            font-size: 0.5rem;
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+            z-index: 10;
+        }
+    }
+
+    .karma-masonry-grid {
+        display: grid;
+        margin: 0 auto;
+    
+        h1,
+        h4 {
+            margin: 0;
+        }
+    
+        h1 {
+            text-indent: 0;
+        }
+    
+        h4 {
+            text-wrap: nowrap;
+            text-align: center;
+        }
+    
+        .karma-gutter-sizer {
+            width: 0.5rem; 
+        }
+    
+        .karma-grid-sizer,
+        .stat-card {
+            min-width: 8rem;
+        }
+    
+        .stat-card {
+            background: @karma-stat-card-color;
+
+            //.stat-value {}
+    
+            .stat-label {
+                background-color: @karma-stat-card-label-color;
+            }
+    
+            &:hover {
+                z-index: 10;
+            }
+        }
+    }
+}

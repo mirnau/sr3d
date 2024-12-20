@@ -1,0 +1,12 @@
+<div class="stat-card">
+    <div>
+        <h4>{{localize (concat "sr3d.actor.attributes." attribute)}}</h4>
+    </div>
+    <div class="stat-label">
+        <div class="stat-value">
+            <h1>
+                {{getProperty (getProperty system attribute) "total"}}/{{getProperty (getProperty system attribute) "mod"}}
+            </h1>
+        </div>
+    </div>
+</div>

@@ -1,41 +1,39 @@
 .active-grid-container {
-    background-color: transparent;
+    padding: 0.5rem;
     width: 100%;
-    /* Allows it to stretch with the parent */
-
+    .clipped-corners(0rem, 1rem, 2rem, 1rem);
+    
+    h1, h2, h3, h4 {
+        margin: 0rem;
+    }
+    
     .active-skills-masonry-grid {
-        justify-content: center;
-        /* Centers the grid */
-        position: relative;
-        background-color: @primary-color;
-        width: 100%;
+        display: grid;
         margin: 0 auto;
-        padding: .5rem;
-        .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
         .active-gutter-sizer {
-            width: var(--active-gutter-width, 2%); 
+            width: 0.5rem;
         }
+
         .active-grid-sizer {
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+            min-width: 11.5rem;
         }
 
         .active-skill-category {
-            background-color: @background-color;
+            background-color: @primary-color;
             margin-bottom: 0.5rem;
             padding: 0.5rem;
-            float: left;
-            width: var(--active-computed-item-width, 23%); 
-            //min-width: 11.5rem;
+            min-width: 11.5rem;
+            text-indent: 0.5rem;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
 
             .skill-specialization-card {
                 align-items: center;
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
             }
 
-            .skill-specialization-card,
             .active-skill-container {
+                position: relative;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
@@ -48,73 +46,99 @@
                 gap: 0rem; // Space between rows or items
                 .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
+                .checkmark {
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    z-index: 10;
+                }
+
+                h1 {
+                    text-indent: 0rem;
+                }
+    
+                h3 {
+                    text-indent: 0.5rem;
+                }
+
+                .edit-icon {
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    z-index: 10;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center; // Keeps icons vertically centered within their container
+                    gap: 0.25rem; // Space between icons
+                }
+
                 .core-skill {
                     padding: 0.25rem;
                     width: 100%;
                     display: flex;
                     flex-direction: row; // Ensure horizontal layout
-                    align-items: center; // Align all children along the x-axis
                     justify-content: space-between; // Space between the skill name, icons, and value
                     position: relative;
-
-                    .checkmark {
-                        position: absolute;
-                        top: -0.25rem;
-                        right: -0.25rem;
-                    }
 
                     .active-skill-card {
                         width: 100%;
                         display: flex;
                         flex-direction: row;
-                        align-items: center; // Align icons and values in the same row
+                        align-items: center; // Align items to the top
                         gap: 0.5rem; // Add space between skill name and icons
-                        justify-content: center;
+                        justify-content: flex-start; // Align items to the start horizontally (optional)
 
                         .skill-name {
+                            overflow: hidden; // Hides overflowing text
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            text-indent: 0rem;
                             flex: 1; // Allow this to take up remaining space
                         }
 
-                        .icons {
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            gap: 0.25rem; // Space between icons
-                        }
-
                         .skill-value {
-                            width: 3rem; // Adjust to fit the value display appropriately
+                            text-indent: 0rem;
+                            min-width: 3rem;
+                            height: 2rem;
                             text-align: center;
-                            background-color: @primary-color;
+                            background-color: @secondary-color;
+                            box-shadow: inset 0 0 8px @highlight-color-primary;
                             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
                         }
                     }
+
                 }
 
                 .active-specialization-card-color-override {
-                    background-color: @tertiary-color;
+                    .apply-flex-distribute(row);
+                    background-color: @secondary-color;
                     padding: 0.25rem;
-                    flex-direction: row; // Children inside also aligned horizontally
+                    margin-top: 0.25rem;
                 }
 
                 .specialisation-container {
+                    padding: 0.25rem;
+                    background-color: @primary-color;
+                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
                     .specializations {
-                        padding: 0px;
-                        width: 50%;
+                        text-indent: 0rem;
+                        width: 100%;
 
                         .specialization-name {
-                            flex-direction: column;
-                            flex-wrap: wrap;
-
+                            margin-left: 0.5rem;
+                            margin-right: 0.5rem;
+                            overflow: hidden; // Hides overflowing text
+                            text-overflow: ellipsis;
                         }
 
                         .specialization-value {
-
-                            width: 3rem;
+                            text-indent: 0rem;
+                            min-width: 3rem;
+                            height: 2rem;
                             text-align: center;
-                            background-color: @quartiery-color;
-                            .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                            background-color: @primary-color;
+                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
                         }
                     }
                 }

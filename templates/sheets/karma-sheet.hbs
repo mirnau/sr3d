@@ -1,0 +1,21 @@
+<form class="{{cssClass}}" data-form="sheet" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}} of " height="64" width="64" />
+        <h2 class="item-name">{{item.name}}</h2>
+    </header>
+
+    <div class="sheet-content">
+        <section class="karma-section">
+            <label for="karma">{{localize "sr3d.actor.karma.karma"}}</label>
+            <input 
+                id="karma" 
+                name="system.karma.value" 
+                type="number" 
+                value="{{system.karma.value}}" 
+                min="0" 
+                max="10"
+                placeholder="0"
+            />
+        </section>
+    </div>
+</form>

@@ -9,27 +9,3 @@
             0px @left-top // Left-top corner
         );
 }
-
-
-    section.window-content {
-        background-color: red;
-    }
-
-    img {
-        border: 0px;
-        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem,)
-    }
-
-    input[type="text"] {
-        border: 0;
-        background-color: transparent;
-        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-
-        &:focus {
-            background-color: violet;
-            box-shadow: 0 0 10px 3px violet; // Bloom effect
-            outline: none; // Removes default browser focus outline
-        }
-    }
-
-

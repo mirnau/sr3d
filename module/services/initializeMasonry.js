@@ -6,23 +6,19 @@ export function getResizeObserver(masonryInstance, gridElement, selector, func =
 
     const resizeObserver = new ResizeObserver(() => {
         
+        //Must be called inside the resize observer
         if(func) {
             
             func();
         }
         
+        //Must be called inside the resize observer
         masonryInstance.layout()
     });
     
     resizeObserver.observe(gridElement);
 
-    gridElement.querySelectorAll('details').forEach((details) => {
-        details.addEventListener('toggle', () => {
-            masonryInstance.layout();
-        });
-    });
-
-    SR3DLog.success(`Masonry Initiated for selector ${selector}`, getResizeObserver.name);
+    //SR3DLog.success(`Masonry Initiated for selector ${selector}`, getResizeObserver.name);
 
     return resizeObserver;
 }

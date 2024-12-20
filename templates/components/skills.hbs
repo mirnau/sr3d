@@ -1,47 +1,45 @@
-<!-- THE SKILL SECTION OF THE CHARACTERSHEET-->
-<h1>
-  {{localize "sr3d.item.skill.skills"}}
-</h1>
 
-<!-- Active Skills -->
-<h2>{{localize "sr3d.item.skill.activeSkills"}}
-  <a class="item-create" data-type="skill" data-skill-type="activeSkill" title="{{localize " sr3d.sheet.addSkill"}}">
-    <i class="fas fa-square-plus"></i>
-  </a>
-</h2>
-<div class="active-grid-container">
-  <div class="active-skills-masonry-grid">
-    <div class="active-grid-sizer"></div>
-    <div class="active-gutter-sizer"></div>
-       {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
-    </div>
-</div>
-
-<!-- Knowledge Skills -->
-<h2>{{localize "sr3d.item.skill.knowledgeSkill"}}
-  <a class="item-create" data-type="skill" data-skill-type="knowledgeSkill" title="{{localize " sr3d.sheet.addSkill"}}">
-    <i class="fas fa-square-plus"></i>
-  </a>
-</h2>
-
-<div class="knowledge-grid-container">
-  <div class="knowledge-skills-masonry-grid">
-    <div class="knowledge-grid-sizer"></div>
-    <div class="knowledge-gutter-sizer"></div>
-      {{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
+<div class="skills-tabs">
+  <div class="skill-utility-bar">
+    <nav class="tabs">
+      <a class="item" data-tab="active-skills">
+        <h2>{{localize "sr3d.item.skill.activeSkills"}}</h2>
+      </a>
+      <a class="item" data-tab="knowledge-skills">
+        <h2>{{localize "sr3d.item.skill.knowledgeSkills"}}</h2>
+      </a>
+      <a class="item" data-tab="language-skills">
+        <h2>{{localize "sr3d.item.skill.languageSkills"}}</h2>
+      </a>
+    </nav>
   </div>
-</div>
 
-<!-- Language Skills -->
-<h2>{{localize "sr3d.item.skill.languageSkills"}}
-  <a class="item-create" data-type="skill" data-skill-type="languageSkill" title="{{localize " sr3d.sheet.addSkill"}}">
-    <i class="fas fa-square-plus"></i>
-  </a>
-</h2>
-<div class="language-grid-container">
-  <div class="language-skills-masonry-grid">
-    <div class="language-grid-sizer"></div>
-    <div class="language-gutter-sizer"></div>
-      {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" skills.language}}
+  <div class="tab-content">
+    <!-- Active Skills Tab -->
+    <section class="tab" data-tab="active-skills">
+      <div class="active-grid-container">
+        <div class="active-skills-masonry-grid">
+          <div class="active-grid-sizer"></div>
+          <div class="active-gutter-sizer"></div>
+          {{> "systems/sr3d/templates/components/plackets/activeSkill.hbs" skills.active}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Knowledge Skills Tab -->
+    <section class="tab" data-tab="knowledge-skills">
+      {{> "systems/sr3d/templates/components/plackets/knowledgeSkill.hbs" skills.knowledge}}
+    </section>
+
+    <!-- Language Skills Tab -->
+    <section class="tab" data-tab="language-skills">
+      <div class="language-grid-container">
+        <div class="language-skills-masonry-grid">
+          <div class="language-grid-sizer"></div>
+          <div class="language-gutter-sizer"></div>
+          {{> "systems/sr3d/templates/components/plackets/languageSkill.hbs" this}}
+        </div>
+      </div>
+    </section>
   </div>
 </div>

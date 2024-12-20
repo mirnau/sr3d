@@ -1,3 +1,4 @@
+import { baseAttributes } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
 export class ActorDataService {
@@ -26,7 +27,6 @@ export class ActorDataService {
         };
     }
 
-
     static prepareLanguages(items) {
         return items
             .filter(item => item.type === "skill" && item.system.skillType === "languageSkill")
@@ -36,26 +36,26 @@ export class ActorDataService {
                     name: item.name,
                     skills: [
                         {
-                            type: game.i18n.localize("sr3d.item.skill.speech"),
-                            base: item.system.skill.languageSkill.speech?.base,
-                            specializations: item.system.skill.languageSkill.speech.specializations,
+                            type: game.i18n.localize("sr3d.item.skill.speak"),
+                            value: item.system.languageSkill.speak?.value,
+                            specializations: item.system.languageSkill.speak.specializations,
                         },
                         {
                             type: game.i18n.localize("sr3d.item.skill.write"),
-                            base: item.system.skill.languageSkill.read?.base,
-                            specializations: item.system.skill.languageSkill.read.specializations,
+                            value: item.system.languageSkill.read?.value,
+                            specializations: item.system.languageSkill.read.specializations,
                         },
                         {
                             type: game.i18n.localize("sr3d.item.skill.read"),
-                            base: item.system.skill.languageSkill.write?.base,
-                            specializations: item.system.skill.languageSkill.write.specializations,
+                            value: item.system.languageSkill.write?.value,
+                            specializations: item.system.languageSkill.write.specializations,
                         },
                     ],
                 };
                 return languageData;
             });
     }
-    
+
     static _categorizeAndSortSkills(skills, keyFn) {
         const categories = skills.reduce((acc, skill) => {
             const category = keyFn(skill) || "uncategorized";
@@ -79,7 +79,7 @@ export class ActorDataService {
             { priority: "E", name: "Human", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
             ...metahumans.map(metahuman => {
                 const foundryitemid = metahuman.id; // Extract the ID
-     
+
                 return {
                     foundryitemid, // Foundry's built-in object ID
                     priority: metahuman.priority, // Extract priority from system data
@@ -97,7 +97,7 @@ export class ActorDataService {
             { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
             ...magicTraditions.map(tradition => {
                 const foundryitemid = tradition.id; // Extract the ID
-    
+
                 return {
                     foundryitemid, // Foundry's built-in object ID
                     priority: tradition.priority, // Extract priority from system data
@@ -106,8 +106,6 @@ export class ActorDataService {
             })
         ];
     }
-    
-
 
     static getPriorities() {
         return {

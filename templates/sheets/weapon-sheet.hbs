@@ -1,44 +1,99 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" /></h1>
-    </header>
 
     <div class="sheet-content">
-        <div class="field-group">
-            <label for="conceal">{{localize 'sr3d.item.weapon.conceal'}}</label>
-            <input id="conceal" name="system.conceal" type="text" value="{{system.conceal}}" data-dtype="Number" />
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+
+                    <header class="image-mask">
+                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+                        <div contenteditable="true" name="name" id="name-field" placeholder="{{localize 'Name'}}">
+                            <h1>
+                                {{item.name}}
+                            </h1>
+                        </div>
+                    </header>
+                </div>
+            </div>
         </div>
-        <div class="field-group">
-            <label for="ammo">{{localize 'sr3d.item.weapon.ammo'}}</label>
-            <input id="ammo" name="system.ammo" type="text" value="{{system.ammo}}" data-dtype="String" />
-        </div>
-        <div class="field-group">
-            <label for="mode">{{localize "sr3d.item.weapon.mode"}}</label>
-            <input id="mode" name="system.mode" type="text" value="{{system.mode}}" data-dtype="String" />
-        </div>
-        <div class="field-group">
-            <label for="damage">{{localize "sr3d.item.weapon.damage"}}</label>
-            <input id="damage" name="system.damage" type="text" value="{{system.damage}}" data-dtype="String" />
-        </div>
-        <div class="field-group">
-            <label for="range">{{localize "sr3d.item.weapon.range"}}</label>
-            <input id="range" name="system.range" type="text" value="{{system.range}}" data-dtype="Number" />
-        </div>
-        <div class="field-group">
-            <label for="weight">{{localize "sr3d.item.weapon.weight"}}</label>
-            <input id="weight" name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number" />
-        </div>
-        <div class="field-group">
-            <label for="legal">{{localize "sr3d.item.weapon.legal"}}</label>
-            <input id="legal" name="system.legal" type="text" value="{{system.legal}}" data-dtype="String" />
-        </div>
-        <div class="field-group">
-            <label for="recoilComp">{{localize "sr3d.item.weapon.recoilComp"}}</label>
-            <input id="recoilComp" name="system.recoilComp" type="text" value="{{system.recoilComp}}" data-dtype="Number" />
-        </div>
-        <div class="editor-field">
-            {{editor system.description owner=owner button=true editable=editable}}
+
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="stat-grid">
+                        <div class="info-field">
+                            <h3>{{localize 'sr3d.item.weapon.conceal'}}</h3>
+                            <div id="conceal" contenteditable="true" data-dtype="Number">
+                                <h1>{{system.conceal}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize 'sr3d.item.weapon.ammo'}}</h3>
+                            <div id="ammo" contenteditable="true" data-dtype="String">
+                                <h1>{{system.ammo}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.mode"}}</h3>
+                            <select id="mode" data-dtype="String">
+                                <option value="SS" {{#if (eq system.mode 'SS' )}}selected{{/if}}>{{localize
+                                    "sr3d.weapon.mode.singleShot"}}</option>
+                                <option value="SA" {{#if (eq system.mode 'SA' )}}selected{{/if}}>{{localize
+                                    "sr3d.weapon.mode.semiAuto"}}</option>
+                                <option value="BF" {{#if (eq system.mode 'BF' )}}selected{{/if}}>{{localize
+                                    "sr3d.weapon.mode.burstFire"}}</option>
+                                <option value="FA" {{#if (eq system.mode 'FA' )}}selected{{/if}}>{{localize
+                                    "sr3d.weapon.mode.fullAuto"}}</option>
+                            </select>
+                        </div>
+
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.damage"}}</h3>
+                            <div id="damage" contenteditable="true" data-dtype="String">
+                                <h1>{{system.damage}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.range"}}</h3>
+                            <div id="range" contenteditable="true" data-dtype="Number">
+                                <h1>{{system.range}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.weight"}}</h3>
+                            <div id="weight" contenteditable="true" data-dtype="Number">
+                                <h1>{{system.weight}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.legal"}}</h3>
+                            <div id="legal" contenteditable="true" data-dtype="String">
+                                <h1>{{system.legal}}</h1>
+                            </div>
+                        </div>
+                        <div class="info-field">
+                            <h3>{{localize "sr3d.item.weapon.recoilComp"}}</h3>
+                            <div id="recoilComp" contenteditable="true" data-dtype="Number">
+                                <h1>{{system.recoilComp}}</h1>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-sheet-component">
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        <div class="editor-field">
+                            {{editor system.description owner=owner button=true editable=editable}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

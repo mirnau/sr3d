@@ -1,6 +1,7 @@
-
 export function updateActorCreationPoints(actor, data, options, userId) {
-    // Find the relevant application for this actor
+    
+    //TODO: ticket flag
+
     const app = Object.values(ui.windows).find(
         (window) => window.actor && window.actor.id === actor.id
     );
