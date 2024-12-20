@@ -7,7 +7,7 @@
   </div>
 
   {{#each this}}
-  <div class="active-skill-container">
+  <div class="skill-card">
 
     {{#if (isShoppingStateActive actor)}}
     <div class="edit-icon">
@@ -25,21 +25,16 @@
     </div>
     {{/if}}
     <div class="core-skill">
-      <div class="active-skill-card">
         <div class="skill-name">
           <h3>
             {{this.name}}
           </h3>
         </div>
-
-
         <div class="skill-value h1-value">
           <h1>
             {{this.system.activeSkill.value}}
           </h1>
         </div>
-      </div>
-
     </div>
 
     <!-- Display Specializations -->
@@ -48,11 +43,11 @@
       <h4>{{localize "sr3d.item.skill.specializations"}}</h4>
       <div class="specializations">
         {{#each this.system.activeSkill.specializations}}
-        <div class="skill-specialization-card active-specialization-card-color-override">
+        <div class="skill-specialization-card">
           <div class="specialization-name">
             {{this.name}}
           </div>
-          <div class="specialization-value specialization-font">
+          <div class="specialization-value">
             <h1 class="no-margin">
               {{#if this.value}}
               {{this.value}}

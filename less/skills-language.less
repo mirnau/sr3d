@@ -3,7 +3,10 @@
     width: 100%;
     .clipped-corners(0rem, 1rem, 2rem, 1rem);
 
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
         margin: 0rem;
     }
 
@@ -69,75 +72,29 @@
                 min-height: 2rem;
                 margin-bottom: 0.25rem;
                 padding: 0.5rem;
-                background-color: @primary-color;
+                background-color: @secondary-color;
                 justify-content: space-between; // Space between name and value
                 gap: 0rem; // Space between rows or items
                 .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-
+ 
                 .core-skill {
-                    padding: 0.25rem;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row; // Ensure horizontal layout
-                    align-items: center; // Align all children along the x-axis
-                    justify-content: space-between; // Space between the skill name, icons, and value
-                    position: relative;
-  
-
-                    .language-card {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center; // Align icons and values in the same row
-                        gap: 0.5rem; // Add space between skill name and icons
-                        justify-content: center;
-
-                        .skill-name {
-                            flex: 1; // Allow this to take up remaining space
-                        }
-
-                        .skill-value {
-                            width: 3rem; // Adjust to fit the value display appropriately
-                            text-align: center;
-                            background-color: @secondary-color;
-                            box-shadow: inset 0 0 8px @highlight-color-primary;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
-                        }
+                    .skill-value {
+                        background-color: @secondary-color;
+                        box-shadow: inset 0 0 8px @highlight-color-primary;
+                        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
                     }
                 }
+            }
 
 
-                .language-specialization-card-color-override {
-                    .apply-flex-distribute(row);
-                    background-color: @secondary-color;
-                    padding: 0.25rem;
-                    margin-top: 0.25rem;
-                }
 
-                .specialisation-container {
-                    margin-top: 0.25rem;
-                    padding: 0.25rem;
-                    background-color: @primary-color;
-                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-
-                    .specializations {
-                        text-indent: 0rem;
-                        width: 100%;
-
-                        .specialization-name {
-                            margin-left: 0.5rem;
-                            margin-right: 0.5rem;
-                            overflow: hidden; // Hides overflowing text
-                            text-overflow: ellipsis;
-                        }
-
+             .specialisation-container {
+                .specializations {
+                    .skill-specialization-card {
+                        background-color: @secondary-color;
                         .specialization-value {
-                            text-indent: 0rem;
-                            min-width: 3rem;
-                            height: 2rem;
-                            text-align: center;
                             background-color: @primary-color;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                            box-shadow: inset 0 0 8px @highlight-color-primary;
                         }
                     }
                 }

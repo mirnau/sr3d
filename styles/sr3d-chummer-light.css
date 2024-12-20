@@ -53,6 +53,56 @@
 .sr3d .sr3d.sheet.character .stat-card:hover {
   z-index: 10;
 }
+.sr3d .sr3d.sheet.item .core-skill,
+.sr3d .sr3d.sheet.character .core-skill {
+  padding: 0.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  position: relative;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-name,
+.sr3d .sr3d.sheet.character .core-skill .skill-name {
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-value,
+.sr3d .sr3d.sheet.character .core-skill .skill-value {
+  min-width: 3rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container,
+.sr3d .sr3d.sheet.character .specialisation-container {
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #1c364b;
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-name,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-name {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-value,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-value {
+  min-width: 3rem;
+  height: 2rem;
+}
 .sr3d .sr3d.window-app.sr3d {
   background: none;
 }
@@ -187,6 +237,45 @@
 .sr3d .sr3d.sheet.item .stat-card:hover,
 .sr3d .sr3d.sheet.character .stat-card:hover {
   background-color: #ff0095;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-name,
+.sr3d .sr3d.sheet.character .core-skill .skill-name {
+  text-indent: 0rem;
+  text-overflow: ellipsis;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-value,
+.sr3d .sr3d.sheet.character .core-skill .skill-value {
+  text-indent: 0rem;
+  text-align: center;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 8px #1df0ff;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .specialisation-container,
+.sr3d .sr3d.sheet.character .specialisation-container {
+  background-color: #1b1f24;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations {
+  text-indent: 0rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-name,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-value,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-value {
+  text-indent: 0rem;
+  text-align: center;
+  background-color: #1b1f24;
+  box-shadow: inset 0 0 8px #1df0ff;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item option,
 .sr3d .sr3d.sheet.character option {
@@ -699,6 +788,8 @@
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active {
   background-color: #24354d;
   font-weight: bold;
+  box-shadow: inset 0 0 15px #e792cb;
+  transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .skills-tabs .tab-content {
   background-color: #24354d;
@@ -985,7 +1076,7 @@
   align-items: center;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card {
   position: relative;
   width: 100%;
   display: flex;
@@ -999,19 +1090,19 @@
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .checkmark {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .checkmark {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
   z-index: 10;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h1 {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card h1 {
   text-indent: 0rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h3 {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card h3 {
   text-indent: 0.5rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .edit-icon {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .edit-icon {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -1021,69 +1112,16 @@
   align-items: center;
   gap: 0.25rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill {
-  padding: 0.25rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: flex-start;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-indent: 0rem;
-  flex: 1;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .core-skill .skill-value {
   background-color: #1c364b;
   box-shadow: inset 0 0 8px #1df0ff;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .active-specialization-card-color-override {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .specialisation-container .specializations .skill-specialization-card {
   background-color: #1c364b;
-  padding: 0.25rem;
-  margin-top: 0.25rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container {
-  padding: 0.25rem;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .specialisation-container .specializations .skill-specialization-card .specialization-value {
   background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations {
-  text-indent: 0rem;
-  width: 100%;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations .specialization-name {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations .specialization-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
-  background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  box-shadow: inset 0 0 8px #1df0ff;
 }
 .sr3d .knowledge-grid-container {
   width: 100%;
@@ -1182,40 +1220,12 @@
   box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .knowledge-specialization-card-color-override {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
+.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .skill-specialization-card {
   background-color: #1c364b;
-  padding: 0.25rem;
-  margin-top: 0.25rem;
 }
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container {
-  padding: 0.25rem;
+.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .skill-specialization-card .specialization-value {
   background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container h4 {
-  text-indent: 0.5rem;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations {
-  text-indent: 0rem;
-  padding: 0rem;
-  width: 100%;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .specialization-name {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .specialization-value {
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
-  background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  box-shadow: inset 0 0 8px #1df0ff;
 }
 .sr3d .language-grid-container {
   padding: 0.5rem;
@@ -1281,79 +1291,23 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: #1b1f24;
+  background-color: #1c364b;
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill {
-  padding: 0.25rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card .skill-name,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-name {
-  flex: 1;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card .skill-value,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-value {
-  width: 3rem;
-  text-align: center;
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .skill-value,
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .skill-value {
   background-color: #1c364b;
   box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .language-specialization-card-color-override,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .language-specialization-card-color-override {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .specialisation-container .specializations .skill-specialization-card {
   background-color: #1c364b;
-  padding: 0.25rem;
-  margin-top: 0.25rem;
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container {
-  margin-top: 0.25rem;
-  padding: 0.25rem;
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .specialisation-container .specializations .skill-specialization-card .specialization-value {
   background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations {
-  text-indent: 0rem;
-  width: 100%;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations .specialization-name,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations .specialization-name {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations .specialization-value,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations .specialization-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
-  background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  box-shadow: inset 0 0 8px #1df0ff;
 }
 @font-face {
   font-family: 'Neonderthaw';

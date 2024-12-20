@@ -50,9 +50,21 @@ export function attachLightEffect(html, activeTheme) {
     // Attach the mousemove event listener
     windowContent.on("mousemove", (event) => {
         // Select all target elements within the sheet
-        const targetElements = html.find(
-            '.stat-card, .knowledge-skill-item, .language-skill-category, .active-skill-container, .specialisation-container'
-        );
+
+        const selectors = [
+            '.skill-specialization-card',
+            '.knowledge-skill-item',
+            '.language-card-container',
+            '.active-skill-container',
+            '.skill-card',
+            '.stat-card',
+            '.tab-content',
+            '.item'
+              
+        ];
+        
+        const targetElements = html.find(selectors.join(', '));
+        
 
         // Iterate over each target element to apply the light effect
         targetElements.each((index, element) => {

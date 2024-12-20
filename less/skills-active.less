@@ -32,7 +32,7 @@
                 .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
             }
 
-            .active-skill-container {
+            .skill-card {
                 position: relative;
                 width: 100%;
                 display: flex;
@@ -73,72 +73,20 @@
                 }
 
                 .core-skill {
-                    padding: 0.25rem;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row; // Ensure horizontal layout
-                    justify-content: space-between; // Space between the skill name, icons, and value
-                    position: relative;
-
-                    .active-skill-card {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center; // Align items to the top
-                        gap: 0.5rem; // Add space between skill name and icons
-                        justify-content: flex-start; // Align items to the start horizontally (optional)
-
-                        .skill-name {
-                            overflow: hidden; // Hides overflowing text
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            text-indent: 0rem;
-                            flex: 1; // Allow this to take up remaining space
-                        }
-
-                        .skill-value {
-                            text-indent: 0rem;
-                            min-width: 3rem;
-                            height: 2rem;
-                            text-align: center;
-                            background-color: @secondary-color;
-                            box-shadow: inset 0 0 8px @highlight-color-primary;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
-                        }
+                    .skill-value {
+                        background-color: @secondary-color;
+                        box-shadow: inset 0 0 8px @highlight-color-primary;
                     }
-
-                }
-
-                .active-specialization-card-color-override {
-                    .apply-flex-distribute(row);
-                    background-color: @secondary-color;
-                    padding: 0.25rem;
-                    margin-top: 0.25rem;
                 }
 
                 .specialisation-container {
-                    padding: 0.25rem;
-                    background-color: @primary-color;
-                    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-
                     .specializations {
-                        text-indent: 0rem;
-                        width: 100%;
-
-                        .specialization-name {
-                            margin-left: 0.5rem;
-                            margin-right: 0.5rem;
-                            overflow: hidden; // Hides overflowing text
-                            text-overflow: ellipsis;
-                        }
-
-                        .specialization-value {
-                            text-indent: 0rem;
-                            min-width: 3rem;
-                            height: 2rem;
-                            text-align: center;
-                            background-color: @primary-color;
-                            .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+                        .skill-specialization-card {
+                            background-color: @secondary-color;
+                            .specialization-value {
+                                background-color: @primary-color;
+                                box-shadow: inset 0 0 8px @highlight-color-primary;
+                            }
                         }
                     }
                 }

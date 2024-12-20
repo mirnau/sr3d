@@ -27,8 +27,6 @@
           </div>
           {{/if}}
         <div class="core-skill">
-          <div class="knowledge-skill-card">
-
             <div class="skill-name">
               <h3>
                 {{this.name}}
@@ -38,7 +36,6 @@
               <h1>
                 {{this.system.knowledgeSkill.value}}
               </h1>
-            </div>
           </div>
         </div>
 
@@ -48,11 +45,11 @@
           <h4>{{localize "sr3d.item.skill.specializations"}}</h4>
           <div class="specializations">
             {{#each this.system.knowledgeSkill.specializations}}
-            <div class="skill-specialization-card knowledge-specialization-card-color-override">
+            <div class="skill-specialization-card">
               <div class="specialization-name">
                 {{this.name}}
               </div>
-              <div class="specialization-value specialization-font">
+              <div class="specialization-value">
                 <h1 class="no-margin">
                   {{#if this.value}}
                   {{this.value}}
