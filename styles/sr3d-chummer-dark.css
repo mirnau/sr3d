@@ -84,7 +84,8 @@
 }
 .sr3d .sr3d.sheet.item input[type="text"],
 .sr3d .sr3d.sheet.character input[type="text"] {
-  background-color: #465d60;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 10px #4df083;
   border: none;
 }
 .sr3d .sr3d.sheet.item img,
@@ -113,7 +114,7 @@
 }
 .sr3d .sr3d.sheet.item .inner-background,
 .sr3d .sr3d.sheet.character .inner-background {
-  background: #235c41;
+  background: #e792cb;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
 }
 .sr3d .sr3d.sheet.item .inner-background::before,
@@ -122,7 +123,7 @@
   content: '';
   position: absolute;
   z-index: -1;
-  background: #272b31;
+  background: #1b1f24;
   top: 1px;
   left: 1px;
   width: calc(100% - 2px);
@@ -172,16 +173,15 @@
 }
 .sr3d .sr3d.sheet.item .stat-card .stat-label,
 .sr3d .sr3d.sheet.character .stat-card .stat-label {
-  background-color: #465d60;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 10px black;
+  box-shadow: inset 0 0 8px #1df0ff;
   /* Inner glow */
   transition: box-shadow 0.3s ease-in;
 }
 .sr3d .sr3d.sheet.item .stat-card .stat-label:hover,
 .sr3d .sr3d.sheet.character .stat-card .stat-label:hover {
-  box-shadow: inset 0 0 20px #1df0ff;
+  box-shadow: inset 0 0 25px #1df0ff;
   /* Inner glow */
 }
 .sr3d .sr3d.sheet.item .stat-card:hover,
@@ -193,10 +193,6 @@
   background-color: #552791;
   border-radius: 0rem;
   border: none;
-}
-.sr3d .sr3d.sheet.item option:hover,
-.sr3d .sr3d.sheet.character option:hover {
-  background-color: red;
 }
 @font-face {
   font-family: 'VT323';
@@ -213,7 +209,7 @@
   font-display: swap;
 }
 .sr3d .sr3d {
-  --color-scrollbar: rgba(255, 0, 247, 0.281);
+  --color-scrollbar: #ff0095;
   /* Smokey yellow tinge */
   --color-scrollbar-track: transparent;
   /* Track background */
@@ -251,14 +247,15 @@
 .sr3d .sr3d.sheet.item h2,
 .sr3d .sr3d.sheet.character h2 {
   text-transform: uppercase;
-  color: #d13980;
+  color: #ff0095;
   border: none;
 }
 .sr3d .sr3d.sheet.item h3,
 .sr3d .sr3d.sheet.character h3 {
   text-transform: uppercase;
-  color: #48a564;
+  color: #4df083;
   border: none;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
 }
 .sr3d .sr3d.sheet.item h3.no-margin,
 .sr3d .sr3d.sheet.character h3.no-margin {
@@ -276,12 +273,12 @@
 .sr3d .sr3d.sheet.item h5,
 .sr3d .sr3d.sheet.character h5 {
   text-transform: uppercase;
-  color: #48a564;
+  color: #4df083;
 }
 .sr3d .sr3d.sheet.item h6,
 .sr3d .sr3d.sheet.character h6 {
   text-transform: uppercase;
-  color: #48a564;
+  color: #4df083;
 }
 .sr3d .sr3d.sheet.item select,
 .sr3d .sr3d.sheet.character select,
@@ -377,7 +374,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: #d13980;
+  background-color: #ff0095;
   box-sizing: border-box;
   padding: 0.5rem;
   z-index: 2;
@@ -526,10 +523,10 @@
   min-width: 8rem;
 }
 .sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card {
-  background: #465d60;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card .stat-label {
-  background-color: #3b5f68;
+  background-color: #1c364b;
 }
 .sr3d .sr3d.sheet.character .movement-masonry-grid .stat-card:hover {
   z-index: 10;
@@ -564,10 +561,10 @@
   min-width: 8rem;
 }
 .sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card {
-  background: #465d60;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card .stat-label {
-  background-color: #3b5f68;
+  background-color: #1c364b;
 }
 .sr3d .sr3d.sheet.character .karma-masonry-grid .stat-card:hover {
   z-index: 10;
@@ -587,7 +584,7 @@
   text-align: center;
 }
 .sr3d .attribute-masonry-grid h4:hover {
-  color: #465d60;
+  color: #1b1f24;
 }
 .sr3d .attribute-masonry-grid .attribute-gutter-sizer {
   width: 0.5rem;
@@ -597,10 +594,10 @@
   min-width: 6.5rem;
 }
 .sr3d .attribute-masonry-grid .stat-card {
-  background-color: #465d60;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .attribute-masonry-grid .stat-card .stat-label {
-  background-color: #3b5f68;
+  background-color: #1c364b;
 }
 .sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute,
 .sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute {
@@ -652,10 +649,10 @@
   min-width: 5rem;
 }
 .sr3d .dicepool-masonry-grid .stat-card {
-  background-color: #465d60;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .dicepool-masonry-grid .stat-card .stat-label {
-  background-color: #3b5f68;
+  background-color: #1c364b;
 }
 .sr3d .dicepool-masonry-grid .stat-card:hover {
   z-index: 10;
@@ -686,7 +683,7 @@
 .sr3d .skills-tabs .skill-utility-bar .tabs .item {
   flex: 1;
   text-align: center;
-  background-color: #465d60;
+  background-color: #27303d;
   cursor: pointer;
   transition: background-color 0.3s ease;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
@@ -695,14 +692,16 @@
   margin: 0;
 }
 .sr3d .skills-tabs .skill-utility-bar .tabs .item:hover {
-  background-color: #1df0ff;
+  background-color: #27303d;
+  box-shadow: inset 0 0 15px #e792cb;
+  transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active {
-  background-color: #3b5f68;
+  background-color: #24354d;
   font-weight: bold;
 }
 .sr3d .skills-tabs .tab-content {
-  background-color: #3b5f68;
+  background-color: #24354d;
   min-height: 2rem;
   clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
 }
@@ -790,7 +789,7 @@
 }
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
   background-color: #552791;
-  box-shadow: 0 0 10px 3px #272b31;
+  box-shadow: 0 0 10px 3px #1b1f24;
   outline: none;
 }
 .sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
@@ -940,10 +939,10 @@
   text-align: center;
 }
 .sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card {
-  background-color: #465d60;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card .stat-label {
-  background-color: #3b5f68;
+  background-color: #1c364b;
 }
 .sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card:hover {
   z-index: 10;
@@ -954,7 +953,6 @@
   gap: 0.5rem;
 }
 .sr3d .active-grid-container {
-  background-color: #3b5f68;
   padding: 0.5rem;
   width: 100%;
   clip-path: polygon(0rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
@@ -976,7 +974,7 @@
   min-width: 11.5rem;
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category {
-  background-color: #465d60;
+  background-color: #1b1f24;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   min-width: 11.5rem;
@@ -996,7 +994,7 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: #3b5f68;
+  background-color: #1c364b;
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -1006,6 +1004,12 @@
   top: 0.5rem;
   right: 0.5rem;
   z-index: 10;
+}
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h1 {
+  text-indent: 0rem;
+}
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h3 {
+  text-indent: 0.5rem;
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .edit-icon {
   position: absolute;
@@ -1045,7 +1049,8 @@
   min-width: 3rem;
   height: 2rem;
   text-align: center;
-  background-color: #465d60;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .active-specialization-card-color-override {
@@ -1053,13 +1058,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  background-color: #3b5f68;
+  background-color: #1c364b;
   padding: 0.25rem;
   margin-top: 0.25rem;
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container {
   padding: 0.25rem;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations {
@@ -1077,11 +1082,10 @@
   min-width: 3rem;
   height: 2rem;
   text-align: center;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container {
-  background-color: #3b5f68;
   width: 100%;
   padding: 0.5rem;
   clip-path: polygon(0rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
@@ -1093,7 +1097,7 @@
   margin: 0rem;
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category {
-  background-color: #465d60;
+  background-color: #1b1f24;
   padding: 0.5rem;
   min-height: 3rem;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -1104,7 +1108,7 @@
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid {
   justify-content: center;
   position: relative;
-  background-color: #465d60;
+  background-color: #1b1f24;
   width: 100%;
   margin: 0 auto;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
@@ -1121,10 +1125,10 @@
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item {
   min-width: 11.5rem;
-  background-color: #3b5f68;
+  background-color: #1c364b;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .checkmark {
   position: absolute;
@@ -1151,6 +1155,9 @@
   justify-content: space-between;
   position: relative;
 }
+.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .core-skill h1 {
+  text-indent: 0rem;
+}
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .core-skill h3 {
   text-indent: 0.5rem;
 }
@@ -1171,7 +1178,8 @@
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .core-skill .knowledge-skill-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #465d60;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .knowledge-specialization-card-color-override {
@@ -1179,13 +1187,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  background-color: #3b5f68;
+  background-color: #1c364b;
   padding: 0.25rem;
   margin-top: 0.25rem;
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container {
   padding: 0.25rem;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container h4 {
@@ -1206,11 +1214,10 @@
   min-width: 3rem;
   height: 2rem;
   text-align: center;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .language-grid-container {
-  background-color: #3b5f68;
   padding: 0.5rem;
   width: 100%;
   clip-path: polygon(0rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
@@ -1233,12 +1240,15 @@
   min-width: 11.5rem;
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category {
-  background-color: #465d60;
+  background-color: #1b1f24;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   float: left;
   min-width: 11.5rem;
   clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category h1 {
+  text-indent: 0rem;
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category h3 {
   text-indent: 0.5rem;
@@ -1271,7 +1281,7 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: #3b5f68;
+  background-color: #1b1f24;
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -1303,7 +1313,8 @@
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-value {
   width: 3rem;
   text-align: center;
-  background-color: #3b5f68;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .language-specialization-card-color-override,
@@ -1312,7 +1323,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  background-color: #3b5f68;
+  background-color: #1c364b;
   padding: 0.25rem;
   margin-top: 0.25rem;
 }
@@ -1320,7 +1331,7 @@
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container {
   margin-top: 0.25rem;
   padding: 0.25rem;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations,
@@ -1341,7 +1352,7 @@
   min-width: 3rem;
   height: 2rem;
   text-align: center;
-  background-color: #465d60;
+  background-color: #1b1f24;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 @font-face {

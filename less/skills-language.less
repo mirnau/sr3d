@@ -1,5 +1,4 @@
 .language-grid-container {
-    background-color: @secondary-color;
     padding: 0.5rem;
     width: 100%;
     .clipped-corners(0rem, 1rem, 2rem, 1rem);
@@ -29,6 +28,11 @@
             min-width: 11.5rem;
             // min-width: 11.5rem;
             .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+
+            h1 {
+                text-indent: 0rem;
+            }
 
             h3 {
                 text-indent: 0.5rem;
@@ -65,7 +69,7 @@
                 min-height: 2rem;
                 margin-bottom: 0.25rem;
                 padding: 0.5rem;
-                background-color: @secondary-color;
+                background-color: @primary-color;
                 justify-content: space-between; // Space between name and value
                 gap: 0rem; // Space between rows or items
                 .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
@@ -96,6 +100,7 @@
                             width: 3rem; // Adjust to fit the value display appropriately
                             text-align: center;
                             background-color: @secondary-color;
+                            box-shadow: inset 0 0 8px @highlight-color-primary;
                             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
                         }
                     }

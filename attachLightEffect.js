@@ -1,4 +1,4 @@
-export function attachLightEffect(html) {
+export function attachLightEffect(html, activeTheme) {
     // =========================
     //       Color Definitions
     // =========================
@@ -13,18 +13,31 @@ export function attachLightEffect(html) {
         return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
     }
 
-    // Define aluminum-like RGB colors
-    const silverRGB = rgb(158, 158, 158);
-    const lightGrayRGB = rgb(170, 170, 170);
-    const darkGrayRGB = rgb(105, 105, 105);
-    const highlightRGB = rgb(222, 136, 230); // Reflective highlight
+    // Define colors for light and dark themes
+    const colors = {
+        light: {
+            silverRGB: rgb(158, 158, 158),
+            lightGrayRGB: rgb(170, 170, 170),
+            darkGrayRGB: rgb(105, 105, 105),
+            highlightRGB: rgb(222, 136, 230), // Reflective highlight
+        },
+        dark: {
+            silverRGB: rgb(81, 106, 134), // Bluish brushed aluminum
+            lightGrayRGB: rgb(57, 77, 100),
+            darkGrayRGB: rgb(31, 44, 66),
+            highlightRGB: rgb(89, 120, 151), // Subtle blue highlight
+        }
+    };
 
-    // Predefine the brushed aluminum base gradient
+    // Select the theme colors
+    const themeColors = activeTheme === "chummer-dark" ? colors.dark : colors.light;
+
+    // Predefine the brushed aluminum base gradient for the selected theme
     const brushedAluminumBase = `repeating-linear-gradient(
         0deg,
-        ${myColorAsString(silverRGB, 0.6)} 0px,
-        ${myColorAsString(lightGrayRGB, 0.6)} 3px,
-        ${myColorAsString(silverRGB, 0.6)} 6px
+        ${myColorAsString(themeColors.silverRGB, 0.6)} 1px,
+        ${myColorAsString(themeColors.lightGrayRGB, 0.6)} 5px,
+        ${myColorAsString(themeColors.silverRGB, 0.6)} 2px
     )`;
 
     // =========================
@@ -36,42 +49,44 @@ export function attachLightEffect(html) {
 
     // Attach the mousemove event listener
     windowContent.on("mousemove", (event) => {
-        // Select all .stat-card elements within the sheet
-        const statCards = html.find('.stat-card');
+        // Select all target elements within the sheet
+        const targetElements = html.find(
+            '.stat-card, .knowledge-skill-item, .language-skill-category, .active-skill-container, .specialisation-container'
+        );
 
-        // Iterate over each stat card to apply the light effect
-        statCards.each((index, card) => {
-            // Get the bounding rectangle of the card
-            const rect = card.getBoundingClientRect();
+        // Iterate over each target element to apply the light effect
+        targetElements.each((index, element) => {
+            // Get the bounding rectangle of the element
+            const rect = element.getBoundingClientRect();
 
-            // Calculate the center coordinates of the card
-            const cardCenterX = rect.width / 2;
-            const cardCenterY = rect.height / 2;
+            // Calculate the center coordinates of the element
+            const elementCenterX = rect.width / 2;
+            const elementCenterY = rect.height / 2;
 
-            // Calculate the mouse position relative to the card's top-left corner
+            // Calculate the mouse position relative to the element's top-left corner
             const mouseX = event.clientX - rect.left;
             const mouseY = event.clientY - rect.top;
 
-            // Calculate the distance between the mouse and the card's center
-            const deltaX = mouseX - cardCenterX;
-            const deltaY = mouseY - cardCenterY;
+            // Calculate the distance between the mouse and the element's center
+            const deltaX = mouseX - elementCenterX;
+            const deltaY = mouseY - elementCenterY;
             const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
             // Define the maximum distance for the light effect
-            const maxDistance = Math.max(rect.width, rect.height) * 1.5;
+            const maxDistance = Math.max(rect.width, rect.height) * 2.5;
 
             // Calculate the intensity based on distance (0 to 1)
             const intensity = Math.max(0, 1 - distance / maxDistance);
 
             // Generate RGBA colors for the dynamic highlights
-            const highlight = myColorAsString(highlightRGB, intensity);
-            const radialHighlight = myColorAsString(highlightRGB, intensity * 0.5);
+            const highlight = myColorAsString(themeColors.highlightRGB, intensity);
+            const radialHighlight = myColorAsString(themeColors.highlightRGB, intensity * 0.5);
 
             // Generate the radial gradient for dynamic lighting
             const radialGradient = `radial-gradient(circle at ${mouseX}px ${mouseY}px, 
                 ${highlight} 0%, 
                 ${radialHighlight} 70%, 
-                ${myColorAsString(silverRGB, 0)} 100%
+                ${myColorAsString(themeColors.silverRGB, 0)} 100%
             )`;
 
             // Combine the radial gradient with the brushed aluminum base
@@ -80,9 +95,8 @@ export function attachLightEffect(html) {
                 ${brushedAluminumBase}
             `;
 
-            // Apply the combined background to the card
-            card.style.background = combinedBackground;
-            card.style.backgroundBlendMode = "overlay"; // Enhance the metallic effect
+            // Apply the combined background to the element
+            element.style.background = combinedBackground;
         });
     });
 }

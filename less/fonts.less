@@ -16,7 +16,7 @@
 
 
 .sr3d {
-    --color-scrollbar: rgba(255, 0, 247, 0.281);
+    --color-scrollbar: @accent-color;
     /* Smokey yellow tinge */
     --color-scrollbar-track: transparent;
     /* Track background */
@@ -75,6 +75,7 @@
         .VTT323-header();
         color: @h3-color;
         border: none;
+        text-shadow: @h3-color-bloom-primary;
 
         &.no-margin {
             margin: 0;
@@ -108,5 +109,4 @@
             color: @text-color;
         }
     }
-
 }

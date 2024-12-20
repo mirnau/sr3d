@@ -1,63 +1,71 @@
-@background-color:                   #212a2e;
-@primary-color:                      @primary-metal-gradient; // Dark background
-@secondary-color:                    #145b68; // Soft green
+@background-color:                   #1b1f24;
+@primary-color:                      #1b1f24; // Dark background
+@secondary-color:                    #1c364b; // Soft green
 @tertiary-color:                     #6825c0; // Soft green
 @quartiery-color:                    #552791; // Soft green
 
     @accent-color:                   #ff0095; // Neon blue
     @accent-apricot:                 #f4a370;
-    @accent-dark-apricot:            #f59153;
+    @accent-cherry-blossom:          #e792cb;
     @highlight-color-primary:        #1df0ff; // Pink for highlights
-    @highlight-color-secondary:      #d13980; // Pink for highlights
-    @highlight-color-tertiary:       #48a564; // Pink for highlights
+    @highlight-color-secondary:      #ff0095; // Pink for highlights
+    @highlight-color-tertiary:       #4df083; // Pink for highlights
     @text-color:                     #c8d3f5;
 
-@primary-fake-shadow: #9ff7fc;
+@primary-fake-shadow: @accent-color;
 
-@primary-metal-gradient: linear-gradient(
-    30deg, 
-    #465d60 0%, 
-    #465d60 20%, 
-    #9ff7fc 25%, 
-    #565047 30%, 
-    #565047 50%, 
-    #565047 70%, 
-    #E0F0ED 75%, 
-    #465d60 80%
-    #465d60 100%
-);
+
+@chummer-dark-fallback: repeating-linear-gradient(
+    0deg,
+    rgba(81, 106, 134, 0.6) 1px,
+    rgba(57, 77, 100, 0.6) 5px,
+    rgba(31, 44, 66, 0.6) 2px,
+  );
 
     //Main Window Background
+    @appwindow-background: none; //Makes the entire app transparent
     @transparent: transparent;
-    @background-back-panel: transparent; // rgba(20, 49, 34, 0.4);
+    @background-back-panel: none; // rgba(20, 49, 34, 0.4);
     @sheet-background-image: none;
+    @window-header-color: transparent;
 
     //Default
     @default-inner-background-color: @background-color;
     @default-fake-shadow-color: @primary-fake-shadow;
+    @default-sheet-border-color: @accent-cherry-blossom;
+    
+    //Default Input element 
+    @input-background: rgb(40, 202, 40);
 
     //Attribute Sheet Component 
    
     //Character Attribute Stat Card
-    @attribute-stat-card-color:         @primary-color;
+    @attribute-stat-card-color:         @chummer-dark-fallback;
     @attribute-stat-card-label-color:   @secondary-color;
     @attribute-stat-card-button-color:  @highlight-color-primary;
 
     //Character Dice Pool Stat Card
-    @dicepool-stat-card-color:          @primary-color;
+    @dicepool-stat-card-color:          @chummer-dark-fallback;
     @dicepool-stat-card-label-color:    @secondary-color;
 
     //Character Movement Stat Card
-    @movement-stat-card-color:          @primary-color;
+    @movement-stat-card-color:          @chummer-dark-fallback;
     @movement-stat-card-label-color:    @secondary-color;
 
     //Character Karma Stat Card
-    @karma-stat-card-color:             @primary-color;
+    @karma-stat-card-color:             @chummer-dark-fallback;
     @karma-stat-card-label-color:       @secondary-color;
+
+    //Character Tabs
+    @tab-idle: #27303d;
+    @tab-active: #24354d;
+    @tab-hover:  @accent-cherry-blossom;
+    @tab-neon-border: inset 0 0 15px @accent-cherry-blossom;
+
 
     //Metahuman fake shadow
     //Meta Human Item StatCard
-    @metahuman-stat-card-color:         @primary-color;
+    @metahuman-stat-card-color:         @chummer-dark-fallback;
     @metahuman-stat-card-label-color:   @secondary-color;
     
 
@@ -67,7 +75,7 @@
     @h1-color: @highlight-color-primary;
     @h2-color: @highlight-color-secondary;
     @h3-color: @highlight-color-tertiary;
-    @h4-color: @highlight-color-tertiary;
+    @h4-color: @highlight-color-primary;
     @h5-color: @highlight-color-tertiary;
     @h6-color: @highlight-color-tertiary;
 
@@ -86,7 +94,8 @@
     @shopping-cart-bloom-primary:   #45d06b;
     @shopping-cart-bloom-secondary: #e6ff8d;
     @h1-color-bloom-primary:        0 0 10px @shopping-cart-bloom-primary, 0 0 20px @shopping-cart-bloom-secondary;
-    @h1-color-bloom-secondary:      0 0 10px @shopping-cart-bloom-primary, 0 0 20px @shopping-cart-bloom-secondary;
+    
+    @h3-color-bloom-primary:      0 0 10px @shopping-cart-bloom-primary, 0 0 20px @shopping-cart-bloom-secondary;
     
     @component-unit: 22rem;
     @base-font-size: 16px; //1rem

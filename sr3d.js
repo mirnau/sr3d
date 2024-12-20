@@ -54,7 +54,7 @@ async function registerTemplatesFromPathsAsync() {
     for (const folder of folders) {
         await gatherFiles(folder);
     }
-    
+
     return loadTemplates(paths);
 }
 
@@ -89,21 +89,38 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
 
+    Hooks.once(hooks.ready, () => {
+        const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
+        setTheme(savedTheme); // Apply the saved theme on startup
+    });
+
     
-// Attach Hooks for ActorSheet and ItemSheet
-Hooks.on("renderActorSheet", (app, html) => attachLightEffect(html));
-Hooks.on("renderItemSheet", (app, html) => attachLightEffect(html));
+    // Attach Hooks for ActorSheet and ItemSheet
+    Hooks.on(hooks.renderSR3DActorSheet, (app, html) => {
+        const activeTheme = game.settings.get("sr3d", "theme");
+        if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
+            attachLightEffect(html, activeTheme);
+        }
+    });
 
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
+    Hooks.on(hooks.renderSR3DItemSheet, (app, html) => {
+        const activeTheme = game.settings.get("sr3d", "theme");
+        if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
+            attachLightEffect(html, activeTheme);
+        }
+    });
 
 
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
 
 
     function setItemFlags(item, options, userId) {
@@ -112,10 +129,7 @@ Hooks.on("renderItemSheet", (app, html) => attachLightEffect(html));
         item.setFlag(flags.namespace, flags.isInitialized, false);
     }
 
-    Hooks.once(hooks.ready, () => {
-        const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
-        setTheme(savedTheme); // Apply the saved theme on startup
-    });
+
 
     Hooks.once(hooks.init, function () {
 

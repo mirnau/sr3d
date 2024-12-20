@@ -1,5 +1,4 @@
 .knowledge-grid-container {
-    background-color: @secondary-color;
     width: 100%;
     padding: 0.5rem;
     .clipped-corners(0rem, 1rem, 2rem, 1rem);
@@ -44,7 +43,7 @@
                 background-color: @secondary-color;
                 margin-bottom: 0.5rem;
                 padding: 0.5rem;
-                .clipped-corners(1rem, 1rem, 1rem, 1rem);
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
 
                 .checkmark {
                     position: absolute;
@@ -72,11 +71,13 @@
                     align-items: center; // Align all children along the x-axis
                     justify-content: space-between; // Space between the skill name, icons, and value
                     position: relative;
-
+                    h1 {
+                        text-indent: 0rem;
+                    }
+        
                     h3 {
                         text-indent: 0.5rem;
                     }
-
    
                     .knowledge-skill-card {
                         width: 100%;
@@ -97,7 +98,8 @@
                         .skill-value {
                             width: 3rem; // Adjust to fit the value display appropriately
                             text-align: center;
-                            background-color: @primary-color;
+                            background-color: @secondary-color;
+                            box-shadow: inset 0 0 8px @highlight-color-primary;
                             .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
                         }
                     }
