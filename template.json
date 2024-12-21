@@ -223,6 +223,7 @@
                 "commodity",
                 "portability"
             ],
+            "rounds": 10,
             "compatibleWeapons": []
         },
         "clip": {

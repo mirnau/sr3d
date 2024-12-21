@@ -5,22 +5,90 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <header class="image-mask">
-                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-                    </header>
-                    <div contenteditable="true" name="name" id="name-field" placeholder="{{localize 'Name'}}">
-                        <h1>
-                            {{item.name}}
-                        </h1>
-                    </div>
-                    <div class="stat-grid">
 
+                    <!-- Item Common Header Start -->
+                    <div class="simple-item-header">
+                        <div class="item-image">
+                            <img class="small" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+                        </div>
+                        <div class="skill-value">
+
+                            {{#if system.rounds}}
+                            {{system.rounds}}
+                            {{else}}
+                            0
+                            {{/if}}
+                        </div>
+
+                        <div class="edit-panel">
+                            <div class="skill-title">
+                                <h1 class="h1">{{localize "sr3d.item.ammunition.ammunition"}}</h1>
+                            </div>
+
+                            {{#if isOwned}}
+                            <div class="skill-icons">
+
+                                <a class="delete-owned-instance danger-zone" title="{{localize "
+                                    sr3d.sheet.deleteSkill"}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <input type="text" class="item-name" name="name" placeholder="{{localize 'Name'}}"
+                        value="{{item.name}}" />
+
+                    <!-- Item Common Header End -->
+                    <!-- Weapon Compatability -->
+                    <div class="choice-component">
+                        <div class="list-box">
+                            <h3>Available Weapons</h3>
+                            <select id="available-weapons" size="5" multiple>
+                                {{#each availableWeapons}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="links">
+                            <a id="to-compatible">
+                                <h1><i class="fas fa-arrow-right"></i></h1>
+                            </a>
+                            <a id="to-available">
+                                <h1><i class="fas fa-arrow-left"></i></h1>
+                            </a>
+                        </div>
+                        <div class="list-box">
+                            <h3>Compatible Weapons</h3>
+                            <select id="compatible-weapons" size="5" multiple>
+                                {{#each compatibleWeapons}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="stat-grid">
                         <div class="stat-card">
                             <div>
-                                <h3>{{localize "sr3d.item.common.cost"}}</h3>
+                                <h4>{{localize "sr3d.item.common.rounds"}}</h4>
                             </div>
                             <div class="stat-label">
-                                <div class="stat-value">
+                                <div class="stat-value" contenteditable="true">
+                                    <h1>
+                                        {{system.rounds}}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div>
+                                <h4>{{localize "sr3d.item.common.cost"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" contenteditable="true">
                                     <h1>
                                         {{system.cost}}
                                     </h1>
@@ -30,21 +98,26 @@
 
                         <div class="stat-card">
                             <div>
-                                <h3>{{localize "sr3d.item.common.days"}} : {{localize "sr3d.item.common.hours"}}</h3>
+                                <h4>{{localize "sr3d.item.common.days"}} : {{localize "sr3d.item.common.hours"}}</h4>
                             </div>
                             <div class="stat-label">
-                                <div class="stat-value">
+                                <div class="stat-value" contenteditable="true" data-field="system.availability">
                                     <h1>
-                                        {{system.ammunition.availability.days}} :
-                                        {{system.ammunition.availability.hours}}
+                                        {{system.availability.days}}
+                                    </h1>
+                                </div>
+                                <span><h1>:</h1></span>
+                                <div class="stat-value" contenteditable="true" data-field="system.availability">
+                                    <h1>
+                                        {{system.availability.hours}}
                                     </h1>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" contenteditable="true">
                             <div>
-                                <h3>{{localize "sr3d.item.common.streetIndex"}}</h3>
+                                <h4>{{localize "sr3d.item.common.streetIndex"}}</h4>
                             </div>
                             <div class="stat-label">
                                 <div class="stat-value">
@@ -55,18 +128,18 @@
 
                         <div class="stat-card">
                             <div>
-                                <h3>{{localize "sr3d.item.common.restrictionLevel"}}</h3>
+                                <h4>{{localize "sr3d.item.common.restrictionLevel"}}</h4>
                             </div>
                             <div class="stat-label">
-                                <div class="stat-value">
-                                    <h1>{{system.restrictionLevel}}</h1>
+                                <div class="stat-value" contenteditable="true">
+                                    <h1>{{system.legality.restrictionLevel}}</h1>
                                 </div>
                             </div>
                         </div>
 
                         <div class="stat-card">
                             <div>
-                                <h3>{{localize "sr3d.item.common.legality"}}</h3>
+                                <h4>{{localize "sr3d.item.common.legality"}}</h4>
                             </div>
                             <div class="stat-label">
                                 <select name="system.legality.type" data-dtype="String">
@@ -81,7 +154,7 @@
 
                         <div class="stat-card">
                             <div>
-                                <h3>{{localize "sr3d.item.common.category"}}</h3>
+                                <h4>{{localize "sr3d.item.common.category"}}</h4>
                             </div>
                             <div class="stat-label">
                                 <select name="system.legality.category" data-dtype="String">
@@ -93,7 +166,6 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -1,7 +1,4 @@
 // NOTE: LESS mixins for brevity
-
-
-
 .apply-container() {
     position: relative;
     padding: 0.5rem;
@@ -34,14 +31,14 @@
         .apply-container();
 
     }
-    
-    
+
+
     .inner-background {
         .apply-container();
         position: relative;
         z-index: 10;
     }
-    
+
     .editor-field {
         z-index: 100;
         min-height: 20rem;
@@ -84,27 +81,97 @@
         }
     }
 
+    .stat-grid {
+        height: 100%;
+    }
+
     //Skills display on character sheet
     .core-skill {
         padding: 0.25rem;
         width: 100%;
         display: flex;
         flex-direction: row;
-        align-items: center; 
+        align-items: center;
         gap: 0.5rem;
         justify-content: flex-start;
         position: relative;
-    
+
         .skill-name {
             overflow: hidden;
             white-space: nowrap;
-             flex: 1;
+            flex: 1;
         }
-    
+
         .skill-value {
             min-width: 3rem;
         }
     }
+
+    .choice-component {
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+        background-color: @secondary-color;
+        padding: 0.5rem;
+
+        select {
+            background-color: @primary-color;
+
+            option {
+                background-color: transparent;
+            }
+
+            &:hover {
+                background-color: @primary-color;
+                box-shadow: inst 0 0 19px @accent-color;
+            }
+        }
+    
+        h3 {
+            text-align: center;
+        }
+    
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch; /* Changed from bottom to stretch */
+        gap: 0.5rem;
+    
+        .list-box {
+            text-indent: 0.5rem;
+            flex: 1;
+            /* Ensure the list boxes take up equal width */
+            /* Removed height: 100%; */
+    
+            display: flex;
+            flex-direction: column;
+    
+            select {
+                width: 100%;
+                flex: 1; /* Make the select element take up available vertical space */
+            }
+        }
+    
+        .links {
+            display: flex;
+            flex-direction: column;
+            margin-top: auto; // Pushes the column to the bottom of the container
+        
+            a {
+                text-decoration: none;
+                color: inherit;
+                cursor: pointer;
+        
+                i {
+                    transition: color 0.3s;
+                }
+        
+                &:hover i {
+                    color: #007bff; // Hover color
+                }
+            }
+        }
+        
+    }
+    
+
 
     .specialisation-container {
         margin-top: 0.25rem;
@@ -118,12 +185,12 @@
                 background-color: @secondary-color;
                 padding: 0.25rem;
                 margin-top: 0.25rem;
-                
+
                 .specialization-name {
                     margin-left: 0.5rem;
                     margin-right: 0.5rem;
                 }
-                
+
                 .specialization-value {
                     min-width: 3rem;
                     height: 2rem;

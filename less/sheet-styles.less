@@ -2,7 +2,6 @@
     background: @appwindow-background;
 }
 
-
 .sr3d.sheet.item,
 .sr3d.sheet.character {
 
@@ -19,11 +18,10 @@
 
     .window-header {
         background-color: @window-header-color;
-        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
         box-shadow: inset 0 0 10px @accent-color;
-        /* Inner glow */
         margin-left: 0.5rem;
         border: none;
+        .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
     }
 
 
@@ -31,6 +29,7 @@
         background: @transparent;
         background-image: @sheet-background-image;
     }
+
 
     input[type="text"] {
         background-color: @input-background;

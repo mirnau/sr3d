@@ -43,6 +43,11 @@ sr3d.budget = {
     budget: "sr3d.actor.budget.budget"
 }
 
+sr3d.ammunition = {
+    ammunition: "sr3d.item.ammunition.ammunition",
+    rounds: "sr3d.item.ammuntion.rounds"
+}
+
 sr3d.possessions = {
     possessions: "sr3d.actor.possessions.possessions", //all items
     inventory: "sr3d.actor.possessions.inventory", //clothes, bioware, cyberwear
@@ -305,11 +310,12 @@ sr3d.common = {
     legality: "sr3d.item.common.legality",
     weight: "sr3d.item.common.weight",
     restrictionLevel: "sr3d.item.common.restrictionLevel",
-    category: "sr3d.item.common.category"
+    category: "sr3d.item.common.category",
+    rounds: "sr3d.item.common.rounds"
 };
 
 sr3d.legality = {
-    general: "sr3d.legality.general",
+    legal: "sr3d.legality.legal",
     permissable: "sr3d.legality.permissable",
     restricted: "sr3d.legality.restricted",
     forbidden: "sr3d.legality.forbidden",

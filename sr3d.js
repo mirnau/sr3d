@@ -116,8 +116,8 @@ function registerHooks() {
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
-
-
+   
+    
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
@@ -191,6 +191,12 @@ function registerHooks() {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something
         });
+
+        Handlebars.registerHelper("validateTime", function(value) {
+            const timeRegex = /^(\d+):([0-1]?[0-9]|2[0-3])$/; // Match `days:hours`
+            return timeRegex.test(value) ? value : "00:00";
+        });
+        
 
         const themeChoices = {
             "chummer-dark": "Chummer Dark",

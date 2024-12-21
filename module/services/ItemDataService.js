@@ -108,4 +108,8 @@ export default class ItemDataService {
         ];
         
     }
+
+    static availableWeapons() {
+        return game.items.filter(item => item.type === "weapon");
+      }
 }

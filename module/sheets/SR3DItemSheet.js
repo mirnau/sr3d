@@ -29,8 +29,12 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.system = ctx.item.system;
         ctx.isOwned = Boolean(this.item.parent);
 
-        if(ctx.item.type === "metahuman") {this._getMetahumanData(ctx);} 
-        //else if(ctx.item.type === "ammunition") { ctx.legality = ItemDataService.legality(ctx);}
+        if(ctx.item.type === "metahuman") {
+            this._getMetahumanData(ctx);
+        } 
+        else if(ctx.item.type ==="ammunition") {
+            ctx.availableWeapons = ItemDataService.availableWeapons();
+        }
         
         return ctx;
     }
