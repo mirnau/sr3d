@@ -16,7 +16,8 @@
 .sr3d .sr3d.sheet.item .editor-field,
 .sr3d .sr3d.sheet.character .editor-field {
   z-index: 100;
-  min-height: 20rem;
+  min-height: 10rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content,
 .sr3d .sr3d.sheet.character .window-content {
@@ -52,6 +53,11 @@
 .sr3d .sr3d.sheet.item .stat-card:hover,
 .sr3d .sr3d.sheet.character .stat-card:hover {
   z-index: 10;
+}
+.sr3d .sr3d.sheet.item .stat-card select,
+.sr3d .sr3d.sheet.character .stat-card select {
+  height: 2rem;
+  width: 100%;
 }
 .sr3d .sr3d.sheet.item .stat-grid,
 .sr3d .sr3d.sheet.character .stat-grid {
@@ -190,6 +196,7 @@
   background-color: transparent;
   box-shadow: inset 0 0 10px #ff0095;
   margin-left: 0.5rem;
+  margin-right: 0.4rem;
   border: none;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
 }
@@ -268,14 +275,18 @@
 }
 .sr3d .sr3d.sheet.item select,
 .sr3d .sr3d.sheet.character select {
-  background-color: #552791;
+  background-color: #1b1f24;
   border: none;
-  border-radius: 0%;
+  border-radius: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item select:hover,
-.sr3d .sr3d.sheet.character select:hover {
-  background-color: #ff0095;
+.sr3d .sr3d.sheet.item option,
+.sr3d .sr3d.sheet.character option {
+  text-indent: 0.5rem;
+  background-color: transparent;
+  border-radius: 0rem;
+  border: none;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
 }
 .sr3d .sr3d.sheet.item .stat-card,
 .sr3d .sr3d.sheet.character .stat-card {
@@ -287,18 +298,20 @@
   margin: 0;
   text-align: center;
 }
+.sr3d .sr3d.sheet.item .stat-card select,
+.sr3d .sr3d.sheet.character .stat-card select,
 .sr3d .sr3d.sheet.item .stat-card .stat-label,
 .sr3d .sr3d.sheet.character .stat-card .stat-label {
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 8px #1df0ff;
-  /* Inner glow */
   transition: box-shadow 0.3s ease-in;
 }
+.sr3d .sr3d.sheet.item .stat-card select:hover,
+.sr3d .sr3d.sheet.character .stat-card select:hover,
 .sr3d .sr3d.sheet.item .stat-card .stat-label:hover,
 .sr3d .sr3d.sheet.character .stat-card .stat-label:hover {
   box-shadow: inset 0 0 25px #1df0ff;
-  /* Inner glow */
 }
 .sr3d .sr3d.sheet.item .stat-card:hover,
 .sr3d .sr3d.sheet.character .stat-card:hover {
@@ -342,12 +355,6 @@
   background-color: #1b1f24;
   box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item option,
-.sr3d .sr3d.sheet.character option {
-  background-color: #552791;
-  border-radius: 0rem;
-  border: none;
 }
 @font-face {
   font-family: 'VT323';
@@ -1381,6 +1388,32 @@
   background-color: #1c364b;
 }
 .sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card:hover {
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet {
+  /* Set a fixed or max width and center it */
+  width: 20rem;
+  margin: 0 auto;
+  column-count: 1;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background {
+  display: grid;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card {
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card .stat-label {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card:hover {
   z-index: 10;
 }
 .sr3d .sr3d.sheet.item .stat-grid {

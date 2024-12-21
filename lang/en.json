@@ -208,7 +208,19 @@
             },
             "ammunition": {
                 "ammunition": "Ammunition",
-                "rounds": "Rounds"
+                "rounds": "Rounds",
+                "types": {
+                    "regular": "Regular",
+                    "apds": "Armor-Piercing Discarding Sabot)",
+                    "belt": "Belt",
+                    "assaultCanon": "Assault Canon",
+                    "explosive": "Explosive",
+                    "exexplosive": "EX Explosive",
+                    "flechette": "Flechette",
+                    "tracer": "Tracer",
+                    "tracerdart": "Tracer Dart",
+                    "gel": "Gel"
+                }
             },
             "apparel": {
                 "conceal": "Conceal",
@@ -241,8 +253,8 @@
                 "conceal": "Conceal",
                 "legality": "Legal Status",
                 "weight": "Weight",
-                "restrictionLevel": "Restriction Level",
-                "category": "Offence Category",
+                "restrictionLevel": "Restr. Lvl",
+                "category": "Category",
                 "rounds": "Rounds"
             },
             "skill": {

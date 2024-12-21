@@ -109,7 +109,14 @@ export default class ItemDataService {
         
     }
 
-    static availableWeapons() {
-        return game.items.filter(item => item.type === "weapon");
+    static compatibleWeapons(ctx) {
+        const ids = ctx.system.compatibleWeaponIds || [];
+        return ids.map(id => game.items.get(id)).filter(i => i);
       }
+
+      static availableWeapons(ctx) {
+        const ids = ctx.system.compatibleWeaponIds || [];
+        return game.items.filter(item => item.type === "weapon" && !ids.includes(item.id));
+      }
+    
 }

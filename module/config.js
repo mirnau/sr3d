@@ -45,7 +45,19 @@ sr3d.budget = {
 
 sr3d.ammunition = {
     ammunition: "sr3d.item.ammunition.ammunition",
-    rounds: "sr3d.item.ammuntion.rounds"
+    rounds: "sr3d.item.ammuntion.rounds",
+    types: {
+        apds: "sr3d.item.ammunition.types.apds",
+        belt: "sr3d.item.ammunition.types.belt",
+        assaultCanon: "sr3d.item.ammunition.types.assaultCanon",
+        explosive: "sr3d.item.ammunition.types.explosive",
+        exexplosive: "sr3d.item.ammunition.types.exexplosive",
+        flechette: "sr3d.item.ammunition.types.flechette",
+        regular: "sr3d.item.ammunition.types.regular",
+        tracer: "sr3d.item.ammunition.types.tracer",
+        tracerdart: "sr3d.item.ammunition.types.tracerdart",
+        gel: "sr3d.item.ammunition.types.gel",
+    }
 }
 
 sr3d.possessions = {

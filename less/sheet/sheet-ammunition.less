@@ -1,10 +1,11 @@
 .sr3d.sheet.item {
   .ammunition-sheet {
     /* Set a fixed or max width and center it */
-    width: 40rem;
+    width: 20rem;
     margin: 0 auto;
-    column-count: 2;
+    column-count: 1;
     column-gap: 0.5rem;
+
 
     .item-sheet-component {
       display: inline-block;
@@ -22,12 +23,12 @@
         text-align: center;
 
         .stat-card {
-          background-color: @metahuman-stat-card-color;
+          background-color: @ammuntion-stat-card-color;
 
           //.stat-value {}
 
           .stat-label {
-            background-color: @metahuman-stat-card-label-color;
+            background-color: @ammuntion-stat-card-label-color;
           }
 
           &:hover {

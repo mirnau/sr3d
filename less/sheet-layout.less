@@ -40,9 +40,12 @@
     }
 
     .editor-field {
+
         z-index: 100;
-        min-height: 20rem;
+        min-height: 10rem;
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
     }
+
 
     .window-content {
         position: relative;
@@ -78,6 +81,11 @@
 
         &:hover {
             z-index: 10;
+        }
+
+        select {
+            height: 2rem;
+            width: 100%;
         }
     }
 
@@ -124,53 +132,55 @@
                 box-shadow: inst 0 0 19px @accent-color;
             }
         }
-    
+
         h3 {
             text-align: center;
         }
-    
+
         display: flex;
         justify-content: space-between;
-        align-items: stretch; /* Changed from bottom to stretch */
+        align-items: stretch;
+        /* Changed from bottom to stretch */
         gap: 0.5rem;
-    
+
         .list-box {
             text-indent: 0.5rem;
             flex: 1;
             /* Ensure the list boxes take up equal width */
             /* Removed height: 100%; */
-    
+
             display: flex;
             flex-direction: column;
-    
+
             select {
                 width: 100%;
-                flex: 1; /* Make the select element take up available vertical space */
+                flex: 1;
+                /* Make the select element take up available vertical space */
             }
         }
-    
+
         .links {
             display: flex;
             flex-direction: column;
             margin-top: auto; // Pushes the column to the bottom of the container
-        
+
             a {
                 text-decoration: none;
                 color: inherit;
                 cursor: pointer;
-        
+
                 i {
                     transition: color 0.3s;
                 }
-        
+
                 &:hover i {
                     color: #007bff; // Hover color
                 }
             }
         }
-        
+
     }
-    
+
 
 
     .specialisation-container {

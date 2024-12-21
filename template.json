@@ -224,7 +224,7 @@
                 "portability"
             ],
             "rounds": 10,
-            "compatibleWeapons": []
+            "compatibleWeaponIds": []
         },
         "clip": {
             "templates": [
@@ -233,7 +233,7 @@
             ],
             "maxAmount": 0,
             "amountInClip": 0,
-            "compatibleWeapons":[]
+            "compatibleWeaponIds":[]
         },
         "metahuman": {
             "name": "",
