@@ -1,6 +1,6 @@
 import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
-import { baseAttributes, derivedAttributes, flags } from '../helpers/CommonConsts.js'
+import { baseAttributes, derivedAttributes, flags, itemCategory } from '../helpers/CommonConsts.js'
 import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
 import SR3DLog from '../SR3DLog.js';
 
@@ -14,12 +14,12 @@ export default class SR3DActorSheet extends ActorSheet {
             height: 600,
             tabs: [
                 {
-                    navSelector: ".sheet-tabs .tabs",
-                    contentSelector: ".tab-content",
+                    navSelector: ".possessions-tabs .tabs",
+                    contentSelector: ".possessions-tab-content",
                     initial: "inventory"
                 },
                 {
-                    navSelector: ".skills-tabs .tabs", 
+                    navSelector: ".skills-tabs .tabs",
                     contentSelector: ".skills-tabs .tab-content",
                     initial: "active-skills"
                 }
@@ -36,13 +36,14 @@ export default class SR3DActorSheet extends ActorSheet {
         const ctx = super.getData();
         ctx.system = ctx.actor.system;
         ctx.config = CONFIG.sr3d;
-        ctx.cssClass = "actorSheet";
 
         ctx.skills = ActorDataService.prepareSkills(ctx.actor.items.contents);
         ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
-        ctx.inventory = ActorDataService.prepareInventory(ctx.actor.items.contents);
 
-        // NOTE: used for iteratotion
+        console.log(ctx.actor.items.contents);
+        console.log(ctx.general);
+
+        // NOTE: used for populating UI-elements
         ctx.baseAttributes = baseAttributes;
         ctx.derivedAttributes = derivedAttributes;
 
@@ -127,6 +128,44 @@ export default class SR3DActorSheet extends ActorSheet {
             this.actor.adjustAttribute(attribute, -1);
             this._updateButtons(attribute);
         });
+
+        html.on('click', '.delete-owned-instance', async (event) => {
+            event.preventDefault();
+
+            const target = $(event.currentTarget);
+
+            const itemId = target.data('item-id');
+            if (!itemId) return;
+
+            const confirmDelete = await Dialog.confirm({
+                title: "Delete Item",
+                content: "<p>Are you sure you want to delete this item?</p>"
+            });
+
+            if (!confirmDelete) return;
+            await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+
+        });
+
+        // NOTE: Save the state of the panels when toggled
+        const detailsPanels = html.find('details');
+
+        detailsPanels.each((index, details) => {
+            $(details).on('toggle', () => {
+                const key = `actor-${this.actor.id}-panel-${index}`;
+                localStorage.setItem(key, details.open);
+            });
+        });
+
+        detailsPanels.each((index, details) => {
+            const key = `actor-${this.actor.id}-panel-${index}`;
+            const savedState = localStorage.getItem(key);
+            if (savedState === 'true') {
+                details.setAttribute('open', 'true');
+            } else {
+                details.removeAttribute('open');
+            }
+        });
     }
 
     close(options = {}) {
@@ -168,47 +207,47 @@ export default class SR3DActorSheet extends ActorSheet {
 
         skill.sheet.render(true);
     }
-   
+
     async _onItemCreate(event) {
         event.preventDefault();
-    
+
         // Determine the type of item to create
         const itemType = event.currentTarget.dataset.type || "skill"; // Default to "skill"
-        
+
         if (itemType === "skill") {
 
-            if(!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
+            if (!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
                 ui.notifications.info(game.i18n.localize("sr3d.characterCreation.spendYourAttributPointsToProceed"));
-            return;
-        }
+                return;
+            }
 
             const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
             const ctx = { item: null, actor: this.actor }; // No item yet created
-    
+
             console.log("Creating skill. Showing dialog.");
             const dialogResult = await new Promise((resolve) => {
                 new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
             });
-    
+
             if (!dialogResult) {
                 console.log("Skill creation canceled.");
                 return;
             }
-    
+
             // Create the skill item
             const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
-    
+
             if (createdItems.length > 0) {
                 const createdItem = createdItems[0]; // Retrieve the first created item
                 console.log("Skill successfully created:", createdItem.toObject());
-    
+
                 // Set a flag on the newly created item
                 await createdItem.setFlag("sr3d", "isInitialized", true);
                 console.log("Flag 'isInitialized' set to true for item:", createdItem.id);
             } else {
                 console.error("No skill was created.");
             }
-        } 
+        }
         // Add more conditions for other item types in the future
         else if (itemType === "gear") {
             // Handle gear creation
@@ -218,7 +257,7 @@ export default class SR3DActorSheet extends ActorSheet {
             console.warn(`Unhandled item type: ${itemType}`);
         }
     }
-    
-    
+
+
 }
 

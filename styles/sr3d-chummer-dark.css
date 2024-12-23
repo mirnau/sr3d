@@ -183,6 +183,10 @@
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
 }
+.sr3d .sr3d.sheet.item a,
+.sr3d .sr3d.sheet.character a {
+  text-decoration: none;
+}
 .sr3d .sr3d.sheet.item .editor,
 .sr3d .sr3d.sheet.character .editor {
   height: 100%;
@@ -464,7 +468,7 @@
   height: 100px;
   top: 0rem;
   left: -3rem;
-  z-index: 1;
+  z-index: 99;
 }
 .sr3d .attribute-position .attribute-point-container {
   position: relative;
@@ -833,6 +837,51 @@
 }
 .sr3d .sr3d.sheet.character .sheet-masonry-grid .layout-grid-sizer {
   min-width: 300px;
+}
+.sr3d .possessions-tabs {
+  overflow: hidden;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs {
+  display: flex;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item {
+  flex: 1;
+  text-align: center;
+  background-color: #27303d;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item h2 {
+  margin: 0;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item:hover {
+  background-color: #27303d;
+  box-shadow: inset 0 0 15px #e792cb;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item.active {
+  background-color: #24354d;
+  font-weight: bold;
+  box-shadow: inset 0 0 15px #4df083;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item.active h2 {
+  color: #4df083;
+  text-shadow: #4df083;
+}
+.sr3d .possessions-tabs .possessions-tab-content {
+  background-color: #24354d;
+  min-height: 2rem;
+  clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
+}
+.sr3d .possessions-tabs .possessions-tab-content .tab {
+  display: none;
+}
+.sr3d .possessions-tabs .possessions-tab-content .tab.active {
+  display: block;
 }
 .sr3d .skills-tabs {
   overflow: hidden;
@@ -1416,10 +1465,130 @@
 .sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card:hover {
   z-index: 10;
 }
+.sr3d .sr3d.sheet.item .weapon-sheet {
+  /* Set a fixed or max width and center it */
+  width: 20rem;
+  margin: 0 auto;
+  column-count: 1;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background {
+  display: grid;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card {
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card .stat-label {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card:hover {
+  z-index: 10;
+}
 .sr3d .sr3d.sheet.item .stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
+}
+.sr3d .inventory-summary {
+  background-color: #1c364b;
+  font-size: 1.2rem;
+  min-height: 2rem;
+  color: #ff0095;
+  display: flex;
+  /* Ensure flexbox for alignment */
+  align-items: center;
+  /* Center vertically */
+  justify-content: center;
+  /* Center horizontally */
+  text-align: left;
+  /* Additional safety for text alignment */
+  text-transform: capitalize;
+  clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0rem);
+  /* Retain your custom corners */
+}
+.sr3d .inventory-summary-nth {
+  background-color: #1c364b;
+  font-size: 1.2rem;
+  min-height: 2rem;
+  color: #ff0095;
+  display: flex;
+  /* Ensure flexbox for alignment */
+  align-items: center;
+  /* Center vertically */
+  justify-content: center;
+  /* Center horizontally */
+  text-align: center;
+  /* Additional safety for text alignment */
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list {
+  /* Reset table defaults */
+  border-collapse: separate;
+  border-spacing: 0 0.25rem;
+  margin: 0rem;
+  padding: 0rem;
+  width: 100%;
+  border: none;
+  /* Ensures no outer table borders */
+  /* Remove any extra space or borders in thead, tbody, and tfoot */
+  /* Remove border from rows */
+  /* Reset cell defaults */
+  /* Style alternating rows */
+  /* Optional: Adjust font and layout for visibility */
+}
+.sr3d .inventory-list img {
+  max-height: 1rem;
+  max-width: 1rem;
+}
+.sr3d .inventory-list thead,
+.sr3d .inventory-list tbody,
+.sr3d .inventory-list tfoot {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+.sr3d .inventory-list tr {
+  color: #1df0ff;
+  border: none;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list th,
+.sr3d .inventory-list td {
+  margin: 0rem;
+  padding: 0rem;
+  border: none;
+  text-align: left;
+}
+.sr3d .inventory-list tbody tr:first-child {
+  padding-left: 0.5rem;
+}
+.sr3d .inventory-list tbody tr:nth-child(odd) {
+  box-shadow: inset 0 0 16px #1df0ff;
+  background-color: #1b1f24;
+}
+.sr3d .inventory-list tbody tr:nth-child(even) {
+  background-color: #1c364b;
+  box-shadow: inset 0 0 16px #1df0ff;
+}
+.sr3d .inventory-list tbody tr:last-child {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list th {
+  font-weight: bold;
+  padding: 0.25rem;
+  /* Adjust header cell padding */
+}
+.sr3d .inventory-list td {
+  padding: 0.25rem;
+  /* Adjust data cell padding */
 }
 @font-face {
   font-family: 'Neonderthaw';

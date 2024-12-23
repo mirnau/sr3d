@@ -5,6 +5,7 @@ export async function onItemCreateIconChange(item) {
         metahuman: { defaultImg: defaultImages.metahuman },
         karma: { defaultImg: defaultImages.karma },
         weapon: { defaultImg: defaultImages.weapon },
+        ammunition: { defaultImg: defaultImages.ammunition },
         magicTradition: { defaultImg: defaultImages.magicTradition },
         skill: { defaultImg: defaultImages.skill.default }
     };

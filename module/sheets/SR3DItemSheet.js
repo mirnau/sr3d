@@ -2,6 +2,7 @@ import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
 import ItemDataService from "../services/ItemDataService.js";
+import { itemCategory } from "../helpers/CommonConsts.js";
 
 import SR3DLog from '../SR3DLog.js'
 
@@ -22,23 +23,29 @@ export default class SR3DItemSheet extends ItemSheet {
 
     async getData() {
         const ctx = super.getData();
-
+    
         // Add attributes to the context
         ctx.attributes = baseAttributeDropdown;
         ctx.config = CONFIG.sr3d;
         ctx.system = ctx.item.system;
         ctx.isOwned = Boolean(this.item.parent);
-
+    
         if (ctx.item.type === "metahuman") {
             this._getMetahumanData(ctx);
         }
         else if (ctx.item.type === "ammunition") {
             ctx.availableWeapons = ItemDataService.availableWeapons(ctx);
             ctx.compatibleWeapons = ItemDataService.compatibleWeapons(ctx);
+            SR3DLog.inspect(ctx.system.category);
         }
-
+        else if (ctx.item.type === "weapon") {
+            ctx.weaponDamage = ItemDataService.weaponDamage(ctx);
+            ctx.system.category = "apple";
+        }
+    
         return ctx;
     }
+    
 
     _getMetahumanData(ctx) {
         ctx.lifespan = ItemDataService.lifespan(ctx);

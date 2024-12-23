@@ -137,7 +137,6 @@
                     "base": 0,
                     "mod": 0
                 }
-                
             }
         },
         "playerCharacter": {
@@ -187,7 +186,6 @@
             "karma",
             "magicTradition",
             "metahuman",
-            "misc",
             "rocket",
             "skill",
             "vehicle",
@@ -196,10 +194,18 @@
         ],
         "templates": {
             "commodity": {
-                "availability": {"days": 0, "hours": 0 },
+                "availability": {
+                    "days": 0,
+                    "hours": 0
+                },
                 "cost": 0,
                 "streetIndex": 1.0,
-                "legality": {"restrictionLevel": 0, "type": "", "category": ""},
+                "legality": {
+                    "restrictionLevel": 0,
+                    "type": "",
+                    "category": ""
+                },
+                "isBroken": true,
                 "description": "Enter your description"
             },
             "portability": {
@@ -212,17 +218,18 @@
                 "commodity",
                 "portability"
             ],
-            
             "mode": "select",
             "damage": "select",
             "range": 0,
-            "recoilComp": 0.0
+            "recoilComp": 0.0,
+            "currentClipId": ""
         },
         "ammunition": {
             "templates": [
                 "commodity",
                 "portability"
             ],
+            "type": "regular",
             "rounds": 10,
             "compatibleWeaponIds": []
         },
@@ -233,12 +240,15 @@
             ],
             "maxAmount": 0,
             "amountInClip": 0,
-            "compatibleWeaponIds":[]
+            "compatibleWeaponIds": []
         },
         "metahuman": {
+            "templates": [
+                "category"
+            ],
             "name": "",
             "lifespan": {
-                "min":0,
+                "min": 0,
                 "average": 0,
                 "max": 0
             },
@@ -316,7 +326,6 @@
             "intelligence": 0,
             "blast": "0/0"
         },
-
         "apparel": {
             "templates": [
                 "commodity",
@@ -344,12 +353,6 @@
                 "commodity"
             ],
             "essence": 0.0
-        },
-        "misc": {
-            "templates": [
-                "commodity"
-            ],
-            "rating": 0
         },
         "skill": {
             "skillType": "activeSkill",
@@ -384,7 +387,7 @@
             "focus": "",
             "drainResistanceAttribute": "",
             "totem": "",
-            "priority":""
+            "priority": ""
         },
         "karma": {
             "value": 0

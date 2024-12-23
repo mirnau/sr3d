@@ -1,0 +1,41 @@
+.sr3d.sheet.item {
+  .weapon-sheet {
+    /* Set a fixed or max width and center it */
+    width: 20rem;
+    margin: 0 auto;
+    column-count: 1;
+    column-gap: 0.5rem;
+
+
+    .item-sheet-component {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      break-inside: avoid;
+    }
+
+    .inner-background-container {
+      
+      //.fake-shadow { background-color: magenta; }
+
+      .inner-background {
+        display: grid;
+        text-align: center;
+
+        .stat-card {
+          background-color: @weapon-stat-card-color;
+
+          //.stat-value {}
+
+          .stat-label {
+            background-color: @weapon-stat-card-label-color;
+          }
+
+          &:hover {
+            z-index: 10;
+          }
+        }
+      }
+    }
+  }
+}

@@ -76,3 +76,13 @@ export const skillPathMap = {
         write: "system.languageSkill.write.specializations"
     }
 };
+
+export const itemCategory = {
+    general: "general",
+    abstract: "abstract",
+    expendable: "expendable",
+    arsenal: "arsenal",
+    arcane: "arcane",
+    garage: "garage",
+    implants: "implants"
+};

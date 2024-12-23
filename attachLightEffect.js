@@ -59,8 +59,10 @@ export function attachLightEffect(html, activeTheme) {
             '.skill-card',
             '.stat-card',
             '.tab-content',
-            '.item'
-              
+            '.item',
+            '.possessions-table-header'
+            
+            
         ];
         
         const targetElements = html.find(selectors.join(', '));

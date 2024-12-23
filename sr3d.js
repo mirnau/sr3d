@@ -27,6 +27,7 @@ import { sr3d } from "./module/config.js";
 import { transferKarmatoActor } from "./module/hooks/createItem/transferKarmatoActor.js";
 import { initMetahumanMasonry } from "./module/hooks/renderSR3DItemSheet/initMetahumanMasonry.js";
 import { attachLightEffect } from "./attachLightEffect.js";
+import { itemCategory } from "./module/helpers/CommonConsts.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -117,7 +118,7 @@ function registerHooks() {
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
    
-    
+       
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////

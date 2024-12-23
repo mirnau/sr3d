@@ -5,6 +5,10 @@
 .sr3d.sheet.item,
 .sr3d.sheet.character {
 
+    a {
+        text-decoration: none;
+    }
+
     .editor {
         height: 100%;
     }
@@ -15,7 +19,6 @@
         background-color: @accent-color;
     }
 
-
     .window-header {
         background-color: @window-header-color;
         box-shadow: inset 0 0 10px @accent-color;
@@ -25,12 +28,10 @@
         .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
     }
 
-
     .window-content {
         background: @transparent;
         background-image: @sheet-background-image;
     }
-
 
     input[type="text"] {
         background-color: @input-background;

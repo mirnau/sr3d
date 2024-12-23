@@ -17,6 +17,12 @@
             "restricted": "Restricted",
             "forbidden": "Forbidden"
         },
+        "firingMode": {
+            "singleshot": "Single Shot",     
+            "semiauto": "Semi Auto",
+            "burstfire": "Burst Fire",        
+            "fullauto": "Full Auto"     
+        },
         "createItem": {
             "weapon": "Weapon",
             "vehicle": "Vehicle",
@@ -35,6 +41,13 @@
         },
         "actorTypes": {
             "playerCharacter": "Player Character"
+        },
+        "weaponDamage": {
+            "stun": "Stun", 
+            "light": "Light",   
+            "moderate": "Moderate",
+            "serious": "Serious", 
+            "deadly": "Deadly"  
         },
         "sheet": {
             "addSkill": "Add a skill",
@@ -150,14 +163,16 @@
         },
         "item": {
             "weapon": {
+                "weapon": "Weapon",
+                "weapons": "Weapons",
                 "conceal": "Conceal",
-                "ammo": "Ammo",
+                "clip": "Clip",
                 "mode": "Mode",
                 "damage": "Damage",
                 "range": "Range",
                 "weight": "Weight",
                 "legal": "Legal",
-                "recoilComp": "Recoil Compensation",
+                "recoilComp": "Recoil Comp.",
                 "newWeapon": "New Weapon"
             },
             "metahuman": {
@@ -238,6 +253,7 @@
                 "modifier": "Modifier Amount"
             },
             "cyberwear": {
+                "implants": "Implants",
                 "essence": "Essence Cost"
             },
             "misc": {
@@ -255,7 +271,7 @@
                 "weight": "Weight",
                 "restrictionLevel": "Restr. Lvl",
                 "category": "Category",
-                "rounds": "Rounds"
+                "type": "Type"
             },
             "skill": {
                 "newSkill": "New Skill",

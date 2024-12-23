@@ -78,7 +78,7 @@ export default class ItemDataService {
             },
         ];
     }
-    
+
     static attributeLimits(ctx) {
         return [
             {
@@ -106,17 +106,25 @@ export default class ItemDataService {
                 value: ctx.system.attributeLimits.willpower,
             },
         ];
-        
+
     }
 
     static compatibleWeapons(ctx) {
         const ids = ctx.system.compatibleWeaponIds || [];
         return ids.map(id => game.items.get(id)).filter(i => i);
-      }
+    }
 
-      static availableWeapons(ctx) {
+    static availableWeapons(ctx) {
         const ids = ctx.system.compatibleWeaponIds || [];
         return game.items.filter(item => item.type === "weapon" && !ids.includes(item.id));
-      }
-    
+    }
+
+    // NOTE: returns the translation of the type of the damage
+    static weaponDamage(ctx) {
+        const damageKeys = Object.keys(ctx.config.weaponDamage);
+        return damageKeys.map(key => ({
+            key,
+            label: game.i18n.localize(ctx.config.weaponDamage[key])
+        }));
+    }   
 }

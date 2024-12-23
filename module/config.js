@@ -45,7 +45,7 @@ sr3d.budget = {
 
 sr3d.ammunition = {
     ammunition: "sr3d.item.ammunition.ammunition",
-    rounds: "sr3d.item.ammuntion.rounds",
+    rounds: "sr3d.item.ammunition.rounds",
     types: {
         apds: "sr3d.item.ammunition.types.apds",
         belt: "sr3d.item.ammunition.types.belt",
@@ -122,8 +122,10 @@ sr3d.metahuman = {
 }
 
 sr3d.weapon = {
+    weapon: "sr3d.item.weapon.weapon",
+    weapons: "sr3d.item.weapon.weapons",
     conceal: "sr3d.item.weapon.conceal",
-    ammo: "sr3d.item.weapon.ammo",
+    clip: "sr3d.item.weapon.clip",
     mode: "sr3d.item.weapon.mode",
     damage: "sr3d.item.weapon.damage",
     range: "sr3d.item.weapon.range",
@@ -136,7 +138,7 @@ sr3d.weapon = {
 
 sr3d.firingMode = {
     singleshot: "sr3d.firingMode.singleshot",     
-    semiautomatic: "sr3d.firingMode.semiautomatic",
+    semiauto: "sr3d.firingMode.semiautomatic",
     burstfire: "sr3d.firingMode.burstfire",        
     fullauto: "sr3d.firingMode.fullauto"           
 };
@@ -149,13 +151,12 @@ sr3d.ammo = {
     belt: "sr3d.ammo.belt"                
 };
 
-sr3d.damageType = {
-    stun: "sr3d.damageType.stun", 
-    light: "sr3d.damageType.light",   
-    moderate: "sr3d.damageType.moderate",
-    serious: "sr3d.damageType.serious", 
-    deadly: "sr3d.damageType.deadly",  
-    flechette: "sr3d.damageType.flechette"
+sr3d.weaponDamage = {
+    stun: "sr3d.weaponDamage.stun", 
+    light: "sr3d.weaponDamage.light",   
+    moderate: "sr3d.weaponDamage.moderate",
+    serious: "sr3d.weaponDamage.serious", 
+    deadly: "sr3d.weaponDamage.deadly",  
 };
 
 sr3d.legalCode = {
@@ -308,6 +309,7 @@ sr3d.enhancer = {
 };
 
 sr3d.cyberwear = {
+    implants: "sr3d.item.cyberwear.implants",
     essence: "sr3d.item.cyberwear.essence"
 };
 
@@ -323,7 +325,8 @@ sr3d.common = {
     weight: "sr3d.item.common.weight",
     restrictionLevel: "sr3d.item.common.restrictionLevel",
     category: "sr3d.item.common.category",
-    rounds: "sr3d.item.common.rounds"
+    rounds: "sr3d.item.common.rounds",
+    type: "sr3d.item.common.type"
 };
 
 sr3d.legality = {

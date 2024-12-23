@@ -1,4 +1,4 @@
-import { baseAttributes } from "../helpers/CommonConsts.js";
+import { baseAttributes, itemCategory } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
 export class ActorDataService {
@@ -18,14 +18,6 @@ export class ActorDataService {
         };
     }
 
-    static prepareInventory(contents) {
-        return {
-            weapons: contents.filter(item => item.type === "weapon"),
-            armor: contents.filter(item => item.type === "armor"),
-            consumables: contents.filter(item => item.type === "consumable"),
-            others: contents.filter(item => !["weapon", "armor", "consumable"].includes(item.type)),
-        };
-    }
 
     static prepareLanguages(items) {
         return items
