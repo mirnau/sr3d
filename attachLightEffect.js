@@ -61,8 +61,6 @@ export function attachLightEffect(html, activeTheme) {
             '.tab-content',
             '.item',
             '.possessions-table-header'
-            
-            
         ];
         
         const targetElements = html.find(selectors.join(', '));

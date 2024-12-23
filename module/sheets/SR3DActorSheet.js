@@ -113,6 +113,8 @@ export default class SR3DActorSheet extends ActorSheet {
         // html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
+        html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
+
 
         // Increment attribute
         html.find('.increment-attribute').click((event) => {
@@ -180,6 +182,13 @@ export default class SR3DActorSheet extends ActorSheet {
         return super.close(options);
     }
 
+    _openOwnedInstance(event) {
+        event.preventDefault();
+        const itemId = $(event.currentTarget).data('itemId');
+        const item = this.actor.items.get(itemId);
+        item.sheet.render(true);
+    }
+    
 
     // NOTE: This boolean is read in a hook in sr3d.js
     _onDetailPanelOpened(_, event) {

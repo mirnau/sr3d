@@ -99,13 +99,14 @@ export default class SR3DItemSheet extends ItemSheet {
             html.find('#to-compatible').click(() => this._moveToCompatible(html));
             html.find('#to-available').click(() => this._moveToAvailable(html));
             html.find('.rounds-editable, .cost-editable').on('input', this._updateTotalCost.bind(this, html));
-        }
-        
+        }        
 
-        // General cases
         html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
-
+       
     }
+
+  
+    
 
     _updateTotalCost(html, event) {
         const target = event.currentTarget;

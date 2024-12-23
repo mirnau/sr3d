@@ -29,7 +29,13 @@
                     <td>
                         <img src="{{this.img}}" alt="{{this.name}}">
                     </td>
-                    <td><h3 class="no-margin">{{this.name}}</h3></td>
+
+                    <td>
+                        <a class="open-owned-item" data-item-id="{{this.id}}">
+                            <h3 class="no-margin">{{this.name}}</h3>
+                        </a>
+                    </td>
+
                     <td>{{this.system.damage}}</td>
                     <td>{{this.system.range}}</td>
                     <td>{{this.system.weight}}</td>
@@ -54,7 +60,7 @@
 <details>
     <summary class="inventory-summary-nth">
         {{localize @root.config.ammunition.ammunition}}
-        </summary>
+    </summary>
     <div class="table-container">
         <table class="inventory-list">
             <thead>
@@ -85,7 +91,9 @@
                     <td>
                         <img src="{{this.img}}" alt="{{this.name}}">
                     </td>
-                    <td><h3 class="no-margin">{{this.name}}</h3></td>
+                    <td>
+                        <h3 class="no-margin">{{this.name}}</h3>
+                    </td>
                     <td>{{this.system.type}}</td>
                     <td>{{this.system.rounds}}</td>
                     <td>{{this.system.weight}}</td>
