@@ -28,6 +28,7 @@ import { transferKarmatoActor } from "./module/hooks/createItem/transferKarmatoA
 import { initMetahumanMasonry } from "./module/hooks/renderSR3DItemSheet/initMetahumanMasonry.js";
 import { attachLightEffect } from "./attachLightEffect.js";
 import { itemCategory } from "./module/helpers/CommonConsts.js";
+import { injectFooter } from "./module/injections/injectFooter.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -88,6 +89,7 @@ function registerHooks() {
     Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
     Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
     Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
+    Hooks.on(hooks.renderSR3DActorSheet, injectFooter);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
 
     Hooks.once(hooks.ready, () => {
@@ -95,7 +97,7 @@ function registerHooks() {
         setTheme(savedTheme); // Apply the saved theme on startup
     });
 
-    
+
     // Attach Hooks for ActorSheet and ItemSheet
     Hooks.on(hooks.renderSR3DActorSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
@@ -111,14 +113,14 @@ function registerHooks() {
         }
     });
 
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
 
-    
-    ////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-   
-       
+
+
+
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
@@ -130,8 +132,6 @@ function registerHooks() {
 
         item.setFlag(flags.namespace, flags.isInitialized, false);
     }
-
-
 
     Hooks.once(hooks.init, function () {
 
@@ -193,11 +193,11 @@ function registerHooks() {
             return ''; // Handlebars requires the helper to return something
         });
 
-        Handlebars.registerHelper("validateTime", function(value) {
+        Handlebars.registerHelper("validateTime", function (value) {
             const timeRegex = /^(\d+):([0-1]?[0-9]|2[0-3])$/; // Match `days:hours`
             return timeRegex.test(value) ? value : "00:00";
         });
-        
+
 
         const themeChoices = {
             "chummer-dark": "Chummer Dark",
