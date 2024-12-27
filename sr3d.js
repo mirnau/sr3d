@@ -29,6 +29,8 @@ import { initMetahumanMasonry } from "./module/hooks/renderSR3DItemSheet/initMet
 import { attachLightEffect } from "./attachLightEffect.js";
 import { itemCategory } from "./module/helpers/CommonConsts.js";
 import { injectFooter } from "./module/injections/injectFooter.js";
+import { WeaponItem } from "./module/Items/WeaponItem.js";
+import WeaponSheet from "./module/sheets/WeaponSheet.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -142,8 +144,13 @@ function registerHooks() {
             CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
         }
 
+        CONFIG.Item.typeClasses = { 
+            weapon: WeaponItem
+        }
+
         Items.unregisterSheet(flags.core, ItemSheet);
-        Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
+        //Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
+        Items.registerSheet("sr3d", WeaponSheet, { types: ["weapon"], makeDefault: true });
 
         Actors.unregisterSheet(flags.core, ActorSheet);
         Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });

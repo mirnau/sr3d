@@ -3,7 +3,7 @@ import KarmaHandler from "../services/KarmaHandler.js";
 import { flags } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
-export class SR3DItem extends Item {
+export class WeaponItem extends Item {
     constructor(data, context = {}) {
         super(data, context);
 
@@ -15,7 +15,13 @@ export class SR3DItem extends Item {
 
         this.isNotCharacterCreation = false;
 
-        console.log("SR3D ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
 
     }
 

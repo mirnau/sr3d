@@ -6,7 +6,7 @@ import { itemCategory } from "../helpers/CommonConsts.js";
 
 import SR3DLog from '../SR3DLog.js'
 
-export default class SR3DItemSheet extends ItemSheet {
+export default class WeaponSheet extends ItemSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -18,7 +18,7 @@ export default class SR3DItemSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/sr3d/templates/sheets/${this.item.type}-sheet.hbs`;
+        return `systems/sr3d/templates/sheets/weapon-sheet.hbs`;
     }
 
     async getData() {
@@ -42,9 +42,8 @@ export default class SR3DItemSheet extends ItemSheet {
             ctx.weaponDamage = ItemDataService.weaponDamage(ctx);
             ctx.system.category = "apple";
         }
-
-        console.log("SR3DItemSheet has been Called");
     
+        console.log("WeaponSheet has been Called");
         return ctx;
     }
     
