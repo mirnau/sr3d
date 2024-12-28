@@ -1,4 +1,3 @@
-import SR3DItemSheet from "./module/sheets/SR3DItemSheet.js";
 import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
 import SR3DLog from "./module/SR3DLog.js";
@@ -36,6 +35,12 @@ import MetahumanSheet from "./module/sheets/MetahumanSheet.js";
 import MagicSheet from "./module/sheets/MagicSheet.js";
 import SkillSheet from "./module/sheets/SkillSheet.js";
 import KarmaSheet from "./module/sheets/KarmaSheet.js";
+import WeaponModel from "./module/dataModels/WeaponModel.js";
+import AmmunitionModel from "./module/dataModels/SkillModel.js";
+import SkillModel from "./module/dataModels/SkillModel.js";
+import KarmaModel from "./module/dataModels/KarmaModel.js";
+import MetahumanModel from "./module/dataModels/Metahuman.js";
+import MagicModel from "./module/dataModels/MagicModel.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -151,15 +156,29 @@ function registerHooks() {
         }
         */
 
+        //CONFIG.Item.dataModels.weapon = WeaponModel;
+        //CONFIG.Item.dataModels.ammunition = AmmunitionModel;
+        
         Items.unregisterSheet(flags.core, ItemSheet);
+        Actors.unregisterSheet(flags.core, ActorSheet);
+
+        CONFIG.Item.dataModels = {
+            weapon: WeaponModel,
+            ammunition: AmmunitionModel,
+            skill: SkillModel,
+            karma: KarmaModel,
+            metahuman: MetahumanModel,
+            magic: MagicModel
+        }
+
+        Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
         Items.registerSheet(flags.namespace, AmmunitionSheet, { types: ["ammunition"], makeDefault: true });
         Items.registerSheet(flags.namespace, KarmaSheet, { types: ["karma"], makeDefault: true });
-        Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
         Items.registerSheet(flags.namespace, MetahumanSheet, { types: ["metahuman"], makeDefault: true });
         Items.registerSheet(flags.namespace, SkillSheet, { types: ["skill"], makeDefault: true });
-        Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
 
-        Actors.unregisterSheet(flags.core, ActorSheet);
+        Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
+
         Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
 
 

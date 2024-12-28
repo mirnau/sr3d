@@ -24,6 +24,22 @@
         "styles/sr3d-chummer-dark.css",
         "styles/sr3d-chummer-light.css"
     ],
+    "itemTypes": [
+        "weapon",
+        "ammunition",
+        "skill",
+        "karma",
+        "metahuman"
+   ],
+    "documentTypes": {
+        "Item": {
+            "weapon": {},
+            "ammunition": {},
+            "skill": {},
+            "karma": {},
+            "metahuman": {}
+        }
+    },
     "packs": [
 
     ],

@@ -13,7 +13,7 @@ export default class MetahumanSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/sr3d/templates/sheets/${this.item.type}-sheet.hbs`;
+        return `systems/sr3d/templates/sheets/metahuman-sheet.hbs`;
     }
 
     async getData() {

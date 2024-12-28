@@ -16,26 +16,16 @@ export class WeaponItem extends Item {
         this.isNotCharacterCreation = false;
 
         console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-
     }
 
     prepareData() {
         super.prepareData();
-
         console.log("WEAPON ITEM has been called");
+    }
+    
+    static get schema() {
         console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-        console.log("WEAPON ITEM has been called");
-
+        return WeaponDataModel;
     }
 
     _isNotCharacterCreation() {
