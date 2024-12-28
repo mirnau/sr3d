@@ -6,7 +6,7 @@ export async function onItemCreateIconChange(item) {
         karma: { defaultImg: defaultImages.karma },
         weapon: { defaultImg: defaultImages.weapon },
         ammunition: { defaultImg: defaultImages.ammunition },
-        magicTradition: { defaultImg: defaultImages.magicTradition },
+        magic: { defaultImg: defaultImages.magic },
         skill: { defaultImg: defaultImages.skill.default }
     };
 

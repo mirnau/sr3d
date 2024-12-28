@@ -2,7 +2,6 @@ import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
 import ItemDataService from "../services/ItemDataService.js";
-import { itemCategory } from "../helpers/CommonConsts.js";
 
 import SR3DLog from '../SR3DLog.js'
 
@@ -18,7 +17,7 @@ export default class SR3DItemSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/sr3d/templates/sheets/${this.item.type}-sheet.hbs`;
+        return `systems/sr3d/templates/sheets/magic-sheet.hbs`;
     }
 
     async getData() {
@@ -94,9 +93,9 @@ export default class SR3DItemSheet extends ItemSheet {
             html.find('.add-specialization').click(this.item.onAddSpecialization.bind(this.item));
             html.find('.delete-specialization').click(this.item.onDeleteSpecialization.bind(this.item));
             html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
-        } else if (type === "magicTradition") {
+        } else if (type === "magic") {
             html.find('select[name="system.metahuman.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
-            html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
+            html.find('select[name="system.magic.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
         } else if (type === "ammunition") {
             html.find('#to-compatible').click(() => this._moveToCompatible(html));
             html.find('#to-available').click(() => this._moveToAvailable(html));
@@ -201,7 +200,7 @@ export default class SR3DItemSheet extends ItemSheet {
         event.preventDefault();
 
         // Determine the correct field from the name attribute
-        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magicTradition.priority"
+        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magic.priority"
         const selectedPriority = event.target.value;
 
         // Update the correct field dynamically

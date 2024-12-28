@@ -16,6 +16,25 @@ export class SR3DItem extends Item {
         this.isNotCharacterCreation = false;
 
         console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
+        console.log("SR3D ITEM has been called");
 
     }
 

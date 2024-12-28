@@ -1,7 +1,7 @@
 export const defaultImages = {
     metahuman: "people-group-svgrepo-com.svg",
     weapon: "gun-svgrepo-com.svg",
-    magicTradition: "magic-square-2-svgrepo-com.svg",
+    magic: "magic-square-2-svgrepo-com.svg",
     karma: "karma-svgrepo-com.svg",
     ammunition: "ammo-bag-svgrepo-com.svg",
     skill: {

@@ -10,7 +10,7 @@ import { injectCreationSidebar } from "./module/injections/displayCreationPointS
 import { updateActorCreationPoints } from "./module/hooks/updateActor/updateActorCreationPoints.js";
 import { setActorFlags } from "./module/hooks/createActor/setFlags.js";
 import { enforceSingleMetahumanLimit } from "./module/hooks/preCreateItem/enforceSingleMetahumanLimit.js";
-import { enforceSingleMagicTradition } from "./module/hooks/preCreateItem/enforceSingleMagicTradition.js";
+import enforceSingleMagic from "./module/hooks/preCreateItem/enforceSingleMagic.js";
 import { flags, hooks } from "./module/helpers/CommonConsts.js";
 import { scopeCssToProject } from "./module/hooks/ready/scopeCssToProject.js";
 import { initActiveSkillMasonry } from "./module/hooks/renderSR3DActorSheet/initActiveSkillMasonry.js";
@@ -30,7 +30,12 @@ import { attachLightEffect } from "./attachLightEffect.js";
 import { itemCategory } from "./module/helpers/CommonConsts.js";
 import { injectFooter } from "./module/injections/injectFooter.js";
 import { WeaponItem } from "./module/Items/WeaponItem.js";
+import AmmunitionSheet from "./module/sheets/AmmunitionSheet.js";
 import WeaponSheet from "./module/sheets/WeaponSheet.js";
+import MetahumanSheet from "./module/sheets/MetahumanSheet.js";
+import MagicSheet from "./module/sheets/MagicSheet.js";
+import SkillSheet from "./module/sheets/SkillSheet.js";
+import KarmaSheet from "./module/sheets/KarmaSheet.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -81,7 +86,7 @@ function registerHooks() {
 
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
-    Hooks.on(hooks.preCreateItem, enforceSingleMagicTradition);
+    Hooks.on(hooks.preCreateItem, enforceSingleMagic);
     Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createItem, setItemFlags);
     Hooks.on(hooks.createItem, transferKarmatoActor);
@@ -132,7 +137,8 @@ function registerHooks() {
         CONFIG.Actor.documentClass = SR3DActor;
         CONFIG.Item.documentClass = SR3DItem;
 
-        // NOTE: Updating FVVT's Item dropdown menus
+        // TODO: Investigate if this should be moved to system.json
+        /*
         CONFIG.Item.typeLabels = {};
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.itemTypes)) {
             CONFIG.Item.typeLabels[type] = game.i18n.localize(locKey);
@@ -143,14 +149,15 @@ function registerHooks() {
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.actorTypes)) {
             CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
         }
-
-        CONFIG.Item.typeClasses = { 
-            weapon: WeaponItem
-        }
+        */
 
         Items.unregisterSheet(flags.core, ItemSheet);
-        //Items.registerSheet(flags.sr3d, SR3DItemSheet, { makeDefault: true });
-        Items.registerSheet("sr3d", WeaponSheet, { types: ["weapon"], makeDefault: true });
+        Items.registerSheet(flags.namespace, AmmunitionSheet, { types: ["ammunition"], makeDefault: true });
+        Items.registerSheet(flags.namespace, KarmaSheet, { types: ["karma"], makeDefault: true });
+        Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
+        Items.registerSheet(flags.namespace, MetahumanSheet, { types: ["metahuman"], makeDefault: true });
+        Items.registerSheet(flags.namespace, SkillSheet, { types: ["skill"], makeDefault: true });
+        Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
 
         Actors.unregisterSheet(flags.core, ActorSheet);
         Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });

@@ -82,12 +82,12 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     async _showCharacterCreationDialog(actor) {
-        // Fetch all items of type "metahuman" and "magicTradition"
+        // Fetch all items of type "metahuman" and "magic"
         const metahumans = game.items.filter(item => item.type === "metahuman");
-        const magicTraditions = game.items.filter(item => item.type === "magicTradition");
+        const magics = game.items.filter(item => item.type === "magic");
 
         const allMetahumans = ActorDataService.getAllMetaHumans(metahumans);
-        const allMagicTraditions = ActorDataService.getAllMagicTraditions(magicTraditions);
+        const allMagics = ActorDataService.getAllMagics(magics);
 
         // Data for priority tables
         const priorities = ActorDataService.getPriorities();
@@ -96,7 +96,7 @@ export default class SR3DActorSheet extends ActorSheet {
         const dialogData = {
             actor: this.actor,
             metahumans: allMetahumans,
-            magicTraditions: allMagicTraditions,
+            magics: allMagics,
             ...priorities
         };
         const content = await renderTemplate('systems/sr3d/templates/dialogs/character-creation-dialog.hbs', dialogData);

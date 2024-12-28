@@ -179,17 +179,10 @@
         "types": [
             "ammunition",
             "apparel",
-            "clip",
-            "creditStick",
-            "cyberwear",
-            "enhancer",
             "karma",
-            "magicTradition",
+            "magic",
             "metahuman",
-            "rocket",
             "skill",
-            "vehicle",
-            "vehicleMods",
             "weapon"
         ],
         "templates": {
@@ -382,7 +375,7 @@
             },
             "description": ""
         },
-        "magicTradition": {
+        "magic": {
             "type": "",
             "focus": "",
             "drainResistanceAttribute": "",

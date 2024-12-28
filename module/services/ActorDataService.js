@@ -81,13 +81,13 @@ export class ActorDataService {
         ];
     }
 
-    static getAllMagicTraditions(magicTraditions) {
-        console.log("Input magicTraditions data:", magicTraditions); // Log the input data
+    static getAllMagics(magics) {
+        console.log("Input magics data:", magics); // Log the input data
         return [
             { priority: "E", name: "Unawakened", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
             { priority: "D", name: "Unawakened", foundryitemid: "D-foundryItemId" },
             { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
-            ...magicTraditions.map(tradition => {
+            ...magics.map(tradition => {
                 const foundryitemid = tradition.id; // Extract the ID
 
                 return {

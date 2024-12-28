@@ -36,7 +36,7 @@
             "misc": "Misc",
             "metahuman": "Metahuman",
             "skill": "Skill",
-            "magicTradition": "MagicTradition",
+            "magic": "Magic",
             "karma": "Karma"
         },
         "actorTypes": {
@@ -296,12 +296,12 @@
                 "speak": "Speak",
                 "write": "Write"
             },
-            "magicTradition": {
+            "magic": {
                 "type": "Type of Mage",
                 "focus": "Focus",
                 "drainResistanceAttribute": "Drain Resistance Attribute",
                 "totem": "Totem Animal",
-                "newMagicTradition": "New Magic Tradition"
+                "newMagic": "New Magic Tradition"
             }
         }
     }

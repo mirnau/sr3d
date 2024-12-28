@@ -25,6 +25,19 @@ export class WeaponItem extends Item {
 
     }
 
+    prepareData() {
+        super.prepareData();
+
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+        console.log("WEAPON ITEM has been called");
+
+    }
+
     _isNotCharacterCreation() {
         return !this.parent.getFlag(flags.namespace, flags.isCharacterCreationState);
     }
@@ -39,6 +52,8 @@ export class WeaponItem extends Item {
 
         this.skillHandler = null;
         this.karmaHandler = null;
+
+
     }
 
     onAddSpecialization(event) {

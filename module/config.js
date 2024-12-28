@@ -26,7 +26,7 @@ sr3d.itemTypes = {
     misc: "sr3d.createItem.misc",
     metahuman: "sr3d.createItem.metahuman",
     skill: "sr3d.createItem.skill",
-    magicTradition: "sr3d.createItem.magicTradition",
+    magic: "sr3d.createItem.magic",
     karma: "sr3d.createItem.karma"
 }
 
@@ -268,12 +268,12 @@ sr3d.skills = {
 };
 
 
-sr3d.magicTradition = {
+sr3d.magic = {
     type: "sr3d.item.magicTradtion.type",
     focus: "sr3d.item.magicTradtion.focus",
     drainResistanceAttribute: "sr3d.item.magicTradtion.drainResistanceAttribute",
     totem: "sr3d.item.magicTradtion.totem",
-    newMagicTradition: "sr3d.item.magicTradition.newMagicTradition"
+    newMagic: "sr3d.item.magic.newMagic"
 }
 
 

@@ -34,7 +34,7 @@ export class CharacterCreationDialog extends Dialog {
                 const itemSelectors = Array.from(html.find('.item-select'));
                 const allSelectors = [...prioritySelectors, ...itemSelectors];
                 const metahumanDropdown = html.find('[name="metahuman"] option');
-                const magicTraditionDropdown = html.find('[name="magic"] option');
+                const magicDropdown = html.find('[name="magic"] option');
 
                 this._addEmptyDefaultToAllDropdowns(allSelectors);
 
@@ -49,7 +49,7 @@ export class CharacterCreationDialog extends Dialog {
                 });
 
                 const randomizeActions = [
-                    { method: this._randomizeAll, args: [metahumanDropdown, magicTraditionDropdown, prioritySelectors, html] },
+                    { method: this._randomizeAll, args: [metahumanDropdown, magicDropdown, prioritySelectors, html] },
                     { method: this._updateAgeSlider, args: [html, metahumanDropdown] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "weight"] },
                     { method: this._updatePhysicalSlider, args: [html, metahumanDropdown, "height"] },
@@ -154,7 +154,7 @@ export class CharacterCreationDialog extends Dialog {
     }
 
 
-    _randomizeAll(metahumanDropdown, magicTraditionDropdown, prioritySelectors, html) {
+    _randomizeAll(metahumanDropdown, magicDropdown, prioritySelectors, html) {
         const prioritizer = new Prioritizer();
         const randomPriority = prioritizer.generatePriorityCombination();
         let selectionId = "";
@@ -192,7 +192,7 @@ export class CharacterCreationDialog extends Dialog {
             }
         }
 
-        const magicTraditionDropdownItems = Array.from(magicTraditionDropdown)
+        const magicDropdownItems = Array.from(magicDropdown)
             .filter(option => option.value !== "")
             .map(option => {
                 const item = game.items.get(option.value);
@@ -206,16 +206,16 @@ export class CharacterCreationDialog extends Dialog {
 
         if (randomPriority.magic !== "A" || randomPriority.magic !== "B") {
 
-            console.log("Random Priority (magicTradition):", randomPriority.magic);
-            console.log("MagicTradition Items:", magicTraditionDropdownItems);
-            const unawakenedDropdownItem = magicTraditionDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.magic);
+            console.log("Random Priority (magic):", randomPriority.magic);
+            console.log("Magic Items:", magicDropdownItems);
+            const unawakenedDropdownItem = magicDropdownItems.find(dropdownItem => dropdownItem.priority === randomPriority.magic);
             html.find('[name="magic"]').val(unawakenedDropdownItem.id).change();
 
         } else {
-            // Handle awakened magicTraditions (may have duplicates)
-            const randomMagicTradition = magicTraditionDropdownItems.find(item => item.priority === randomPriority.magic);
-            const magicTraditionPriority = randomMagicTradition?.priority;
-            const listOfAllDuplicatesWithTheSamePriority = magicTraditionDropdownItems.filter(item => item.priority === magicTraditionPriority);
+            // Handle awakened magics (may have duplicates)
+            const randomMagic = magicDropdownItems.find(item => item.priority === randomPriority.magic);
+            const magicPriority = randomMagic?.priority;
+            const listOfAllDuplicatesWithTheSamePriority = magicDropdownItems.filter(item => item.priority === magicPriority);
             const selection = listOfAllDuplicatesWithTheSamePriority[randomInRange(0, listOfAllDuplicatesWithTheSamePriority.length - 1)];
             if (selection) {
                 html.find('[name="magic"]').val(selection.id).change();
@@ -250,7 +250,7 @@ export class CharacterCreationDialog extends Dialog {
 
         // Fetch selected values from the HTML
         const selectedMetahumanId = html.find('[name="metahuman"]').val();
-        const selectedMagicTraditionId = html.find('[name="magic"]').val();
+        const selectedMagicId = html.find('[name="magic"]').val();
         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
@@ -275,7 +275,7 @@ export class CharacterCreationDialog extends Dialog {
 
         // Log selected values for debugging
         SR3DLog.inspect("Selected Metahuman ID", selectedMetahumanId);
-        SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicTraditionId);
+        SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicId);
 
         // Handle Metahuman item creation
         if (selectedMetahumanId) {
@@ -287,11 +287,11 @@ export class CharacterCreationDialog extends Dialog {
         }
 
         // Handle Magic Tradition item creation
-        if (selectedMagicTraditionId) {
-            const magicTraditionItem = game.items.get(selectedMagicTraditionId);
-            if (magicTraditionItem) {
-                await actor.createEmbeddedDocuments("Item", [magicTraditionItem.toObject()]);
-                SR3DLog.success(`Magic Tradition item created on actor: ${magicTraditionItem.name}`, "Actor Creation");
+        if (selectedMagicId) {
+            const magicItem = game.items.get(selectedMagicId);
+            if (magicItem) {
+                await actor.createEmbeddedDocuments("Item", [magicItem.toObject()]);
+                SR3DLog.success(`Magic Tradition item created on actor: ${magicItem.name}`, "Actor Creation");
             }
         }
 
