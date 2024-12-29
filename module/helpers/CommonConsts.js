@@ -1,5 +1,6 @@
 export const baseAttributes = ["body", "quickness", "strength", "charisma", "intelligence", "willpower"];
 export const derivedAttributes = ["reaction", "initiative", "magic", "essence"];
+export const dicePools = ["control", "spell", "astral", "hacking", "combat"];
 
 export const baseAttributeDropdown = 
         ["Uncategorized", 

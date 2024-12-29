@@ -1,4 +1,4 @@
-import { baseAttributes, itemCategory } from "../helpers/CommonConsts.js";
+import { baseAttributes, derivedAttributes, dicePools } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
 export class ActorDataService {
@@ -63,7 +63,7 @@ export class ActorDataService {
         return skills.sort((a, b) => a.name.localeCompare(b.name));
     }
     static getBaseAttributes(attributes) {
-        const baseAttributeNames = ['body', 'quickness', 'strength', 'charisma', 'intelligence'];
+        const baseAttributeNames = baseAttributes;
         return baseAttributeNames.map(attr => ({
             name: attr,
             data: attributes[attr]
@@ -71,12 +71,21 @@ export class ActorDataService {
     }
 
     static getDerivedAttributes(attributes) {
-        const derivedAttributeNames = ['initiative', 'reaction', 'willpower'];
+        const derivedAttributeNames = derivedAttributes;
         return derivedAttributeNames.map(attr => ({
             name: attr,
             data: attributes[attr]
         }));
     }
+
+    static getDicePools(attributes) {
+        const dicePoolNames = dicePools;
+        return dicePoolNames.map(pool => ({
+            name: pool,
+            data: attributes[pool]
+        }));
+    }
+    
 
     // NOTE: Character Creation starts here
 

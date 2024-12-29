@@ -4,9 +4,15 @@
     <div>
         <h4>{{localize (concat "sr3d.actor.attributes." name)}}</h4>
     </div>
-    <div class="stat-value">
-        <h1>
-            {{data.total}} / {{data.mod}}
-        </h1>
+    <div class="stat-label">
+        <div class="stat-value">
+            <h1>
+                {{data.total}}
+
+                {{#if data.mod}}
+                / {{data.mod}}
+                {{/if}}
+            </h1>
+        </div>
     </div>
 </div>

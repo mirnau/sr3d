@@ -5,8 +5,7 @@
     <div class="stat-label">
         <div class="stat-value">
             <h1>
-                {{data.total}}
-
+                {{data.total}} <!-- Hard fail if data.total is undefined -->
                 {{#if data.mod}}
                 / {{data.mod}}
                 {{/if}}

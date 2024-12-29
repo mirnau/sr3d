@@ -1,6 +1,12 @@
 <div class="movement-masonry-grid">
     <div class="movement-grid-sizer"></div>
     <div class="movement-gutter-sizer"></div>
-            {{> "systems/sr3d/templates/components/plackets/derivedMovement.hbs" system=system actor=actor movement="walking"}}
-            {{> "systems/sr3d/templates/components/plackets/derivedMovement.hbs" system=system actor=actor movement="running"}}
+    
+    {{> "systems/sr3d/templates/components/plackets/derivedMovement.hbs" 
+        movement="walking" 
+        data=system.attributes.walking}}
+    
+    {{> "systems/sr3d/templates/components/plackets/derivedMovement.hbs" 
+        movement="running" 
+        data=system.attributes.running}}
 </div>
