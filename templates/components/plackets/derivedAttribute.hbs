@@ -1,12 +1,12 @@
+<!-- systems/sr3d/templates/components/plackets/derivedAttribute.hbs -->
+
 <div class="stat-card">
     <div>
-        <h4>{{localize (concat "sr3d.actor.attributes." attribute)}}</h4>
+        <h4>{{localize (concat "sr3d.actor.attributes." name)}}</h4>
     </div>
-    <div class="stat-label">
-        <div class="stat-value">
-            <h1>
-                {{getProperty (getProperty system attribute) "total"}}/{{getProperty (getProperty system attribute) "mod"}}
-            </h1>
-        </div>
+    <div class="stat-value">
+        <h1>
+            {{data.total}} / {{data.mod}}
+        </h1>
     </div>
 </div>

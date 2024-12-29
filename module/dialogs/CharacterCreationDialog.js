@@ -331,6 +331,12 @@ export class CharacterCreationDialog extends Dialog {
             modeAge = 30;
         }
 
+        if (ageMin === 0 && ageMax === 0 && modeAge === 0) {
+            console.warn("No age data found for the selected metahuman item.");
+            ui.notifications.warn("No age data found for the selected metahuman item.");
+        }
+
+        ui.notifications.warn("")
         // Generate a random age within the range
         const randomAge = getRandomBellCurveWithMode(ageMin, ageMax, modeAge);
 

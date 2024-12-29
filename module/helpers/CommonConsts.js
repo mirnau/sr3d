@@ -29,7 +29,7 @@ export const hooks = {
     init: "init",
     preCreateItem: "preCreateItem",
     createItem: "createItem",
-    renderSR3DActorSheet: "renderSR3DActorSheet",
+    renderCharacterSheet: "renderCharacterSheet",
     renderSR3DItemSheet: "renderSR3DItemSheet",
     renderDialog: "renderDialog",
     createActor: "createActor",

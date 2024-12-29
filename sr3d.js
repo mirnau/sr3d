@@ -1,4 +1,4 @@
-import SR3DActorSheet from "./module/sheets/SR3DActorSheet.js";
+import CharacterSheet from "./module/sheets/CharacterSheet.js";
 import SR3DActor from "./module/actors/SR3DActor.js";
 import SR3DLog from "./module/SR3DLog.js";
 import displayShoppingStateButton from "./module/injections/displayShoppingStateButton.js";
@@ -35,12 +35,13 @@ import MetahumanSheet from "./module/sheets/MetahumanSheet.js";
 import MagicSheet from "./module/sheets/MagicSheet.js";
 import SkillSheet from "./module/sheets/SkillSheet.js";
 import KarmaSheet from "./module/sheets/KarmaSheet.js";
-import WeaponModel from "./module/dataModels/WeaponModel.js";
-import AmmunitionModel from "./module/dataModels/SkillModel.js";
-import SkillModel from "./module/dataModels/SkillModel.js";
-import KarmaModel from "./module/dataModels/KarmaModel.js";
-import MetahumanModel from "./module/dataModels/Metahuman.js";
-import MagicModel from "./module/dataModels/MagicModel.js";
+import WeaponModel from "./module/dataModels/items/WeaponModel.js";
+import AmmunitionModel from "./module/dataModels/items/SkillModel.js";
+import SkillModel from "./module/dataModels/items/SkillModel.js";
+import KarmaModel from "./module/dataModels/items/KarmaModel.js";
+import MetahumanModel from "./module/dataModels/items/Metahuman.js";
+import MagicModel from "./module/dataModels/items/MagicModel.js";
+import CharacterModel from "./module/dataModels/actor/CharacterModel.js";
 
 // NOTE: Any .hbs file from these folders will be registered
 async function registerTemplatesFromPathsAsync() {
@@ -74,7 +75,7 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
-    Hooks.on(hooks.renderSR3DActorSheet, (app, html, data) => {
+    Hooks.on(hooks.renderCharacterSheet, (app, html, data) => {
         initializeMasonryLayout(app, html, data);
         initActiveSkillMasonry(app, html, data);
         initKnowledgeSkillMasonry(app, html, data);
@@ -97,11 +98,11 @@ function registerHooks() {
     Hooks.on(hooks.createItem, transferKarmatoActor);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.updateActor, monitorCreationPoints);
-    Hooks.on(hooks.renderSR3DActorSheet, injectCreationSidebar);
-    Hooks.on(hooks.renderSR3DActorSheet, displayShoppingStateButton);
-    Hooks.on(hooks.renderSR3DActorSheet, displayNeonName);
-    Hooks.on(hooks.renderSR3DActorSheet, displayNewsFeed);
-    Hooks.on(hooks.renderSR3DActorSheet, injectFooter);
+    Hooks.on(hooks.renderCharacterSheet, injectCreationSidebar);
+    Hooks.on(hooks.renderCharacterSheet, displayShoppingStateButton);
+    Hooks.on(hooks.renderCharacterSheet, displayNeonName);
+    Hooks.on(hooks.renderCharacterSheet, displayNewsFeed);
+    Hooks.on(hooks.renderCharacterSheet, injectFooter);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
 
     Hooks.once(hooks.ready, () => {
@@ -162,6 +163,10 @@ function registerHooks() {
         Items.unregisterSheet(flags.core, ItemSheet);
         Actors.unregisterSheet(flags.core, ActorSheet);
 
+        CONFIG.Actor.dataModels = { 
+            character: CharacterModel
+        };
+
         CONFIG.Item.dataModels = {
             weapon: WeaponModel,
             ammunition: AmmunitionModel,
@@ -179,7 +184,7 @@ function registerHooks() {
 
         Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
 
-        Actors.registerSheet(flags.sr3d, SR3DActorSheet, { makeDefault: true });
+        Actors.registerSheet(flags.sr3d, CharacterSheet, { makeDefault: true });
 
 
         registerTemplatesFromPathsAsync();
@@ -207,11 +212,11 @@ function registerHooks() {
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
-
+/*
         Handlebars.registerHelper('getProperty', function (obj, attr) {
             return obj[attr];
         });
-
+*/
         Handlebars.registerHelper('log', function (value) {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something

@@ -2,13 +2,11 @@ import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { baseAttributes, derivedAttributes, flags, itemCategory } from '../helpers/CommonConsts.js'
 import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
-import SR3DLog from '../SR3DLog.js';
 
-export default class SR3DActorSheet extends ActorSheet {
+export default class CharacterSheet extends ActorSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            template: "systems/sr3d/templates/sheets/playerCharacter-sheet.hbs",
             classes: ["sr3d", "sheet", "character"],
             width: 1300,
             height: 600,
@@ -28,7 +26,7 @@ export default class SR3DActorSheet extends ActorSheet {
     }
 
     get template() {
-        return `systems/sr3d/templates/sheets/${this.actor.type}-sheet.hbs`;
+        return `systems/sr3d/templates/sheets/character-sheet.hbs`;
     }
 
     async getData() {
@@ -44,8 +42,10 @@ export default class SR3DActorSheet extends ActorSheet {
         console.log(ctx.general);
 
         // NOTE: used for populating UI-elements
-        ctx.baseAttributes = baseAttributes;
-        ctx.derivedAttributes = derivedAttributes;
+        ctx.baseAttributes = ActorDataService.getBaseAttributes(ctx.actor.system.attributes);
+        ctx.derivedAttributes = ActorDataService.getDerivedAttributes(ctx.actor.system.attributes);
+
+        console.log(this.actor.system);
 
         return ctx;
     }
@@ -199,7 +199,7 @@ export default class SR3DActorSheet extends ActorSheet {
     // Update Button States
     _updateButtons(attribute) {
         const decrementButton = document.querySelector(`[data-attribute="${attribute}"].decrement-attribute`);
-        if (this.actor.system[attribute].value === 0) {
+        if (this.actor.system.attributes[attribute].value === 1) {
             decrementButton.classList.add("disabled");
         } else {
             decrementButton.classList.remove("disabled");

@@ -5,9 +5,10 @@
     <div class="stat-label">
         <div class="stat-value">
             <h1>
-                {{getProperty (getProperty system movement) "total"}}
-                {{#if (getProperty (getProperty system movement) "mod")}}
-                    /{{getProperty (getProperty system movement) "mod"}}
+                {{data.total}}
+
+                {{#if data.mod}}
+                / {{data.mod}}
                 {{/if}}
             </h1>
         </div>

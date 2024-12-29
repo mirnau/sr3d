@@ -1,5 +1,5 @@
-import CommodityModel from "./components/commodity.js";
-import PortabilityModel from "./components/portability.js";
+import CommodityModel from "./components/Commodity.js";
+import PortabilityModel from "./components/Portability.js";
 
 export default class WeaponModel extends foundry.abstract.DataModel {
     static defineSchema() {

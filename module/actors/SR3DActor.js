@@ -7,8 +7,8 @@ export default class SR3DActor extends Actor {
 
   adjustAttribute(attribute, amount) {
 
-    const system = this.system;
-    let value = system[attribute].value;
+  const system = this.system;
+    let value = system.attributes[attribute].value;
     let currentPoints = system.creation.attributePoints;
 
     if(!this.getFlag(flags.namespace, flags.attributesDone)) {
@@ -19,12 +19,12 @@ export default class SR3DActor extends Actor {
         return;
       }    
       
-      if ((amount > 0) || (amount < 0 && system[attribute].value > 1)) {
-        system[attribute].value += amount;
+      if ((amount > 0) || (amount < 0 && system.attributes[attribute].value > 1)) {
+        system.attributes[attribute].value += amount;
         system.creation.attributePoints -= amount;
       }
 
-      value = system[attribute].value;
+      value = system.attributes[attribute].value;
       currentPoints = system.creation.attributePoints;
 
       this.update({ system: system });
@@ -42,7 +42,7 @@ export default class SR3DActor extends Actor {
 
 
   async recalculateAttribute() {
-    const character = this.system;
+    const system = this.system;
 
     let metahumanItem = this.items.find(item => item.type === "metahuman") || null;
 
@@ -50,44 +50,44 @@ export default class SR3DActor extends Actor {
 
       SR3DLog.info("Attribute adjustment for metahumanity", this.name);
 
-      character.body.meta = metahumanItem.system.modifiers.body;
-      character.quickness.meta = metahumanItem.system.modifiers.quickness;
-      character.strength.meta = metahumanItem.system.modifiers.strength;
-      character.charisma.meta = metahumanItem.system.modifiers.charisma;
-      character.intelligence.meta = metahumanItem.system.modifiers.intelligence;
-      character.willpower.meta = metahumanItem.system.modifiers.willpower;
+      system.attributes.body.meta = metahumanItem.system.modifiers.body;
+      system.attributes.quickness.meta = metahumanItem.system.modifiers.quickness;
+      system.attributes.strength.meta = metahumanItem.system.modifiers.strength;
+      system.attributes.charisma.meta = metahumanItem.system.modifiers.charisma;
+      system.attributes.intelligence.meta = metahumanItem.system.modifiers.intelligence;
+      system.attributes.willpower.meta = metahumanItem.system.modifiers.willpower;
     }
 
-    character.body.total = character.body.value + character.body.meta;
-    character.quickness.total = character.quickness.value + character.quickness.meta;
-    character.strength.total = character.strength.value + character.strength.meta;
-    character.charisma.total = character.charisma.value + character.charisma.meta;
-    character.intelligence.total = character.intelligence.value + character.intelligence.meta;
-    character.willpower.total = character.willpower.value + character.willpower.meta;
-    character.essence.total = character.essence.value;
+    system.attributes.body.total = system.attributes.body.value + system.attributes.body.meta;
+    system.attributes.quickness.total = system.attributes.quickness.value + system.attributes.quickness.meta;
+    system.attributes.strength.total = system.attributes.strength.value + system.attributes.strength.meta;
+    system.attributes.charisma.total = system.attributes.charisma.value + system.attributes.charisma.meta;
+    system.attributes.intelligence.total = system.attributes.intelligence.value + system.attributes.intelligence.meta;
+    system.attributes.willpower.total = system.attributes.willpower.value + system.attributes.willpower.meta;
+    system.attributes.essence.total = system.attributes.essence.value;
 
-    character.magic.total = character.magic.value;
+    system.attributes.magic.total = system.attributes.magic.value;
 
     const attributesDone = this.getFlag(flags.namespace, flags.attributesDone);
 
-    if (!attributesDone || character.creation.attributePoints > 0) {
+    if (!attributesDone || creation.attributePoints > 0) {
 
-      character.creation.knowledgePoints = character.intelligence.value * 5;
-      character.creation.languagePoints = Math.floor(character.intelligence.value * 1.5);
+      system.creation.knowledgePoints = system.attributes.intelligence.value * 5;
+      system.creation.languagePoints = Math.floor(system.attributes.intelligence.value * 1.5);
     }
 
-    character.body.mod = character.body.total;
-    character.quickness.mod = character.quickness.total;
-    character.strength.mod = character.strength.total;
-    character.charisma.mod = character.charisma.total;
-    character.intelligence.mod = character.intelligence.total;
-    character.willpower.mod = character.willpower.total;
+    system.attributes.body.mod = system.attributes.body.total;
+    system.attributes.quickness.mod = system.attributes.quickness.total;
+    system.attributes.strength.mod = system.attributes.strength.total;
+    system.attributes.charisma.mod = system.attributes.charisma.total;
+    system.attributes.intelligence.mod = system.attributes.intelligence.total;
+    system.attributes.willpower.mod = system.attributes.willpower.total;
 
-    character.reaction.total = Math.floor((character.quickness.mod + character.intelligence.mod) * 0.5);
-    character.reaction.total = Math.floor((character.quickness.mod + character.intelligence.mod) * 0.5);
+    system.attributes.reaction.total = Math.floor((system.attributes.quickness.mod + system.attributes.intelligence.mod) * 0.5);
+    system.attributes.reaction.total = Math.floor((system.attributes.quickness.mod + system.attributes.intelligence.mod) * 0.5);
 
 
-    this.update({ system: character });
+    this.update({ system: system });
   }
 
   canGoblinizeTo(metaHumanItem) {
@@ -106,7 +106,7 @@ export default class SR3DActor extends Actor {
 
   awakenToMagic() {
     const character = this.system;
-    character.magic.value = 6;
+    character.attributes.magic.value = 6;
     this.recalculateAttribute();
   }
 
@@ -114,20 +114,22 @@ export default class SR3DActor extends Actor {
   characterSetup() {
 
     SR3DLog.info("characterSetup entered", this.name);
-    const character = this.system
 
+    const attributes = this.system.attributes;
+    const creation = this.system.creation;
+    
     baseAttributes.forEach((attr) => {
-      if (character[attr].value === 0) {
-        character[attr].value += 3;
-        character.creation.attributePoints -= 3;
+      if (attributes[attr].value === 0) {
+        attributes[attr].value += 3;
+        creation.attributePoints -= 3;
       }
     });
 
-    character.essence.value = 6;
-    character.magic.value = 0;
+    attributes.essence.value = 6;
+    attributes.magic.value = 0;
 
     this.recalculateAttribute();
-    this.update({ system: character });
+    this.update({ system: attributes });
   }
  
 }

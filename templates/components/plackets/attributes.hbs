@@ -1,20 +1,21 @@
+<!-- systems/sr3d/templates/character-sheet.hbs -->
+
 <div class="attribute-masonry-grid">
     <div class="attribute-grid-sizer"></div>
     <div class="attribute-gutter-sizer"></div>
 
-    {{!-- Base Attributes --}}
     {{#each baseAttributes as |attribute|}}
         {{> "systems/sr3d/templates/components/plackets/buyableAttribute.hbs" 
+            name=attribute.name 
+            data=attribute.data 
             system=../system 
-            actor=../actor 
-            attribute=attribute}}
+            actor=../actor}}
     {{/each}}
 
-    {{!-- Derived Attributes --}}
     {{#each derivedAttributes as |attribute|}}
         {{> "systems/sr3d/templates/components/plackets/derivedAttribute.hbs" 
-            system=../system 
-            attribute=attribute}}
+            name=attribute.name 
+            data=attribute.data 
+            system=../system}}
     {{/each}}
-    
 </div>

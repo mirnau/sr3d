@@ -62,6 +62,21 @@ export class ActorDataService {
     static _sortSkillsByName(skills) {
         return skills.sort((a, b) => a.name.localeCompare(b.name));
     }
+    static getBaseAttributes(attributes) {
+        const baseAttributeNames = ['body', 'quickness', 'strength', 'charisma', 'intelligence'];
+        return baseAttributeNames.map(attr => ({
+            name: attr,
+            data: attributes[attr]
+        }));
+    }
+
+    static getDerivedAttributes(attributes) {
+        const derivedAttributeNames = ['initiative', 'reaction', 'willpower'];
+        return derivedAttributeNames.map(attr => ({
+            name: attr,
+            data: attributes[attr]
+        }));
+    }
 
     // NOTE: Character Creation starts here
 

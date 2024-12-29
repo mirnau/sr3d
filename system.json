@@ -17,27 +17,34 @@
         "sr3d.js"
     ],
     "scripts": [
-        "https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js",
-        "https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.min.js"
+        "https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"
     ],
     "styles": [
         "styles/sr3d-chummer-dark.css",
         "styles/sr3d-chummer-light.css"
+    ],
+    "actorTypes": [
+        "character"
     ],
     "itemTypes": [
         "weapon",
         "ammunition",
         "skill",
         "karma",
-        "metahuman"
+        "metahuman",
+        "magic"
    ],
     "documentTypes": {
+        "Actor" : {
+            "character": {}
+        },
         "Item": {
             "weapon": {},
             "ammunition": {},
             "skill": {},
             "karma": {},
-            "metahuman": {}
+            "metahuman": {},
+            "magic": {}
         }
     },
     "packs": [
