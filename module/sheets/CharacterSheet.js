@@ -38,16 +38,11 @@ export default class CharacterSheet extends ActorSheet {
         ctx.skills = ActorDataService.prepareSkills(ctx.actor.items.contents);
         ctx.skills.language = ActorDataService.prepareLanguages(ctx.actor.items.contents);
 
-        console.log(ctx.actor.items.contents);
-        console.log(ctx.general);
-
         // NOTE: used for populating UI-elements
         ctx.baseAttributes = ActorDataService.getBaseAttributes(ctx.actor.system.attributes);
         ctx.derivedAttributes = ActorDataService.getDerivedAttributes(ctx.actor.system.attributes);
         ctx.dicePools = ActorDataService.getDicePools(ctx.actor.system.attributes);
-
-        console.log(this.actor.system);
-
+        
         return ctx;
     }
 

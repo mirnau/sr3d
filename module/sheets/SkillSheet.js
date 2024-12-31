@@ -1,8 +1,11 @@
 import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
+import ItemDataService from "../services/ItemDataService.js";
 
-export default class SkillSheet extends ItemSheet {
+import SR3DLog from '../SR3DLog.js'
+
+export default class SR3DItemSheet extends ItemSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -20,44 +23,51 @@ export default class SkillSheet extends ItemSheet {
     async getData() {
         const ctx = super.getData();
 
+        // Add attributes to the context
         ctx.attributes = baseAttributeDropdown;
         ctx.config = CONFIG.sr3d;
         ctx.system = ctx.item.system;
         ctx.isOwned = Boolean(this.item.parent);
 
+        console.log("SKILL ITEM");
+        console.log(this.item);
+
         return ctx;
     }
-
     async render(force = false, options = {}) {
-
-        if (this.item.type === "skill") {
-            await handleRenderSkills(this);
-        }
-
+        await handleRenderSkills(this);
         return super.render(force, options);
+    }
+
+    close(options = {}) {
+        if (this.item.observers) {
+            this.item.observers.forEach((observer, index) => {
+                if (observer) {
+                    observer.disconnect();
+                    this.item.observers[index] = null;
+                }
+            });
+        }
+        this.item.onClose();
+        return super.close(options);
     }
 
     activateListeners(html) {
         super.activateListeners(html);
 
-        const type = this.item.type;
-
         html.find('.buy-skill').click(this.item.onBuySkill.bind(this.item));
         html.find('.undo-skill').click(this.item.onUndoSkill.bind(this.item));
+
+        //Left to check:
         html.find('.buy-specialization').click(event => this.item.onBuySpecialization(event));
         html.find('.undo-specialization').click(event => this.item.onUndoSpecialization(event));
+
 
         html.find('.add-specialization').click(this.item.onAddSpecialization.bind(this.item));
         html.find('.delete-specialization').click(this.item.onDeleteSpecialization.bind(this.item));
         html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
 
         html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
-
-    }
-
-    async close(options = {}) {
-        this.item.onClose();
-        await super.close(options);
     }
 
     async _deleteOwnedInstance(event) {
@@ -85,9 +95,32 @@ export default class SkillSheet extends ItemSheet {
         }
     }
 
+    _onDynamicPriorityChange(event) {
+        event.preventDefault();
+
+        // Determine the correct field from the name attribute
+        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magic.priority"
+        const selectedPriority = event.target.value;
+
+        // Update the correct field dynamically
+        this.item.update({
+            [fieldName]: selectedPriority // Use computed property name to dynamically set the field
+        }).then(() => {
+            console.log(`Successfully updated ${fieldName} to: ${selectedPriority}`);
+            console.log("Updated item data:", this.item.system);
+
+            // Re-render the sheet to reflect the changes
+            this.render();
+            ui.notifications.info(`Priority updated to: ${selectedPriority}`);
+        }).catch(err => {
+            console.error(`Failed to update ${fieldName}:`, err);
+            ui.notifications.error('Could not update priority. Check the console for details.');
+        });
+    }
+
+    // DEBUG: Show the form data in the console
     async _updateObject(event, formData) {
         console.log("Form Data Submitted:", formData);
-
         await this.object.update(formData);
     }
 
@@ -109,4 +142,14 @@ export default class SkillSheet extends ItemSheet {
             actor.sheet.render(); // Trigger a re-render of the actor sheet
         }
     }
+
+    /*
+    _resolveSpecializationsPath(skillType, subfield = null) {
+        if (skillType === "languageSkill" && subfield) {
+            return `system.skill.languageSkill.${subfield}.specializations`;
+        }
+        return `system.skill.${skillType}.specializations`;
+    }
+
+   */
 }
