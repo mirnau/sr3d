@@ -1,19 +1,23 @@
 export async function displayNewsFeed(app, html, data) {
-    // INFO: Clear window of unwanted stuff
-    const title = html.find('h4.window-title'); // Use jQuery object
+    
+    const title = html.find('h4.window-title');
 
-    if (title.length) {
-        title.empty(); // Clear the content inside <h4>
-    }
+    // NOTE: Could not find a way to get rid of the h4 tag,
+    // which is injected by the core over and over
+    // therefore I hid it in css/less with display: none
 
-    //html.find('i.fa-solid.fa-passport').remove(); // Remove unwanted icon
-
-
-    // INFO: Set up the handlebars data context and html
     const htmlTemplate = "systems/sr3d/templates/injections/news-feed.hbs";
     const hbsDataContext = { actor: app.object };
     const renderedHTML = await renderTemplate(htmlTemplate, hbsDataContext);
 
-    // INFO: Inject the HTML as content inside the <h4>
-    title.html(renderedHTML);
+    title.before(renderedHTML);
+
+    const injectedLink = html.find('.document-id-link-injection');
+    injectedLink.on('click', async (event) => {
+        event.preventDefault();
+
+        const actorUuid = app.object.uuid;
+        await navigator.clipboard.writeText(actorUuid);
+        ui.notifications.info(`Copied UUID: ${actorUuid}`);
+    });
 }

@@ -43,33 +43,18 @@ import MetahumanModel from "./module/dataModels/items/Metahuman.js";
 import MagicModel from "./module/dataModels/items/MagicModel.js";
 import CharacterModel from "./module/dataModels/actor/CharacterModel.js";
 
-// NOTE: Any .hbs file from these folders will be registered
+//NOTE: Recursively gather .hbs files from the folder structure
 async function registerTemplatesFromPathsAsync() {
-    const folders = [
-        "systems/sr3d/templates/components/",
-        "systems/sr3d/templates/injections/",
-        "systems/sr3d/templates/dialogs/"
-    ];
-
+    const rootFolder = "systems/sr3d/templates/";
     const paths = [];
 
     async function gatherFiles(folder) {
-        const fileList = await FilePicker.browse("data", folder);
-
-        // INFO: Filter and collect .hbs files
-        const hbsFiles = fileList.files.filter(file => file.endsWith(".hbs"));
-        paths.push(...hbsFiles);
-
-        // INFO: Recursively process subfolders
-        for (const subFolder of fileList.dirs) {
-            await gatherFiles(subFolder);
-        }
+        const { files, dirs } = await FilePicker.browse("data", folder);
+        paths.push(...files.filter(file => file.endsWith(".hbs")));
+        await Promise.all(dirs.map(gatherFiles));
     }
 
-    for (const folder of folders) {
-        await gatherFiles(folder);
-    }
-
+    await gatherFiles(rootFolder);
     return loadTemplates(paths);
 }
 
@@ -156,13 +141,13 @@ function registerHooks() {
             CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
         }
         */
-        
+
         Items.unregisterSheet(flags.core, ItemSheet);
         Actors.unregisterSheet(flags.core, ActorSheet);
 
         // NOTE: Following pattern is necessary for databinding to work
         // https://foundryvtt.com/api/classes/foundry.abstract.TypeDataModel.html
-        CONFIG.Actor.dataModels = { 
+        CONFIG.Actor.dataModels = {
             "sr3d.character": CharacterModel
         };
 
@@ -211,11 +196,11 @@ function registerHooks() {
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
-/*
-        Handlebars.registerHelper('getProperty', function (obj, attr) {
-            return obj[attr];
-        });
-*/
+        /*
+                Handlebars.registerHelper('getProperty', function (obj, attr) {
+                    return obj[attr];
+                });
+        */
         Handlebars.registerHelper('log', function (value) {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something

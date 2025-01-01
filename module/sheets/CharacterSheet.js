@@ -115,7 +115,19 @@ export default class CharacterSheet extends ActorSheet {
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
         html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
-
+        
+        html.find('.document-id-link-injection').click((event) => {
+            event.preventDefault();
+            const actorUuid = this.actor.uuid; // Get the actor's UUID
+            navigator.clipboard.writeText(actorUuid)
+                .then(() => {
+                    ui.notifications.info(`Copied UUID: ${actorUuid}`);
+                })
+                .catch((err) => {
+                    console.error("Failed to copy UUID:", err);
+                    ui.notifications.error("Failed to copy UUID.");
+                });
+        });
 
         // Increment attribute
         html.find('.increment-attribute').click((event) => {
