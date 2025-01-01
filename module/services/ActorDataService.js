@@ -1,4 +1,4 @@
-import { baseAttributes } from "../helpers/CommonConsts.js";
+import { baseAttributes, derivedAttributes, dicePools } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
 export class ActorDataService {
@@ -18,14 +18,6 @@ export class ActorDataService {
         };
     }
 
-    static prepareInventory(contents) {
-        return {
-            weapons: contents.filter(item => item.type === "weapon"),
-            armor: contents.filter(item => item.type === "armor"),
-            consumables: contents.filter(item => item.type === "consumable"),
-            others: contents.filter(item => !["weapon", "armor", "consumable"].includes(item.type)),
-        };
-    }
 
     static prepareLanguages(items) {
         return items
@@ -70,6 +62,30 @@ export class ActorDataService {
     static _sortSkillsByName(skills) {
         return skills.sort((a, b) => a.name.localeCompare(b.name));
     }
+    static getBaseAttributes(attributes) {
+        const baseAttributeNames = baseAttributes;
+        return baseAttributeNames.map(attr => ({
+            name: attr,
+            data: attributes[attr]
+        }));
+    }
+
+    static getDerivedAttributes(attributes) {
+        const derivedAttributeNames = derivedAttributes;
+        return derivedAttributeNames.map(attr => ({
+            name: attr,
+            data: attributes[attr]
+        }));
+    }
+
+    static getDicePools(attributes) {
+        const dicePoolNames = dicePools;
+        return dicePoolNames.map(pool => ({
+            name: pool,
+            data: attributes[pool]
+        }));
+    }
+    
 
     // NOTE: Character Creation starts here
 
@@ -89,13 +105,13 @@ export class ActorDataService {
         ];
     }
 
-    static getAllMagicTraditions(magicTraditions) {
-        console.log("Input magicTraditions data:", magicTraditions); // Log the input data
+    static getAllMagics(magics) {
+        console.log("Input magics data:", magics); // Log the input data
         return [
             { priority: "E", name: "Unawakened", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
             { priority: "D", name: "Unawakened", foundryitemid: "D-foundryItemId" },
             { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
-            ...magicTraditions.map(tradition => {
+            ...magics.map(tradition => {
                 const foundryitemid = tradition.id; // Extract the ID
 
                 return {

@@ -1,5 +1,6 @@
 export const baseAttributes = ["body", "quickness", "strength", "charisma", "intelligence", "willpower"];
 export const derivedAttributes = ["reaction", "initiative", "magic", "essence"];
+export const dicePools = ["control", "spell", "astral", "hacking", "combat"];
 
 export const baseAttributeDropdown = 
         ["Uncategorized", 
@@ -29,7 +30,7 @@ export const hooks = {
     init: "init",
     preCreateItem: "preCreateItem",
     createItem: "createItem",
-    renderSR3DActorSheet: "renderSR3DActorSheet",
+    renderCharacterSheet: "renderCharacterSheet",
     renderSR3DItemSheet: "renderSR3DItemSheet",
     renderDialog: "renderDialog",
     createActor: "createActor",
@@ -75,4 +76,14 @@ export const skillPathMap = {
         read: "system.languageSkill.read.specializations",
         write: "system.languageSkill.write.specializations"
     }
+};
+
+export const itemCategory = {
+    general: "general",
+    abstract: "abstract",
+    expendable: "expendable",
+    arsenal: "arsenal",
+    arcane: "arcane",
+    garage: "garage",
+    implants: "implants"
 };

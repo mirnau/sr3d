@@ -14,7 +14,6 @@ export class SR3DItem extends Item {
         this.karmaHandler = null;
 
         this.isNotCharacterCreation = false;
-
     }
 
     _isNotCharacterCreation() {

@@ -1,0 +1,104 @@
+.language-grid-container {
+    padding: 0.5rem;
+    width: 100%;
+    .clipped-corners(0rem, 1rem, 2rem, 1rem);
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0rem;
+    }
+
+    .language-skills-masonry-grid {
+        display: grid;
+        margin: 0 auto;
+        .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+        .language-gutter-sizer {
+            width: 0.5rem;
+        }
+
+        .language-grid-sizer {
+            min-width: 11.5rem;
+        }
+
+        .language-skill-category {
+            background-color: @primary-color;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            float: left;
+            min-width: 11.5rem;
+            // min-width: 11.5rem;
+            .clipped-corners(1rem, 1rem, 1rem, 1rem);
+
+
+            h1 {
+                text-indent: 0rem;
+            }
+
+            h3 {
+                text-indent: 0.5rem;
+            }
+
+            .checkmark {
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                z-index: 10;
+            }
+
+            .edit-icon {
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                z-index: 10;
+                display: flex;
+                flex-direction: row;
+                align-items: center; // Keeps icons vertically centered within their container
+                gap: 0.25rem; // Space between icons
+            }
+
+            .skill-specialization-card {
+                align-items: center;
+            }
+
+            .skill-specialization-card,
+            .language-card-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                min-height: 2rem;
+                margin-bottom: 0.25rem;
+                padding: 0.5rem;
+                background-color: @secondary-color;
+                justify-content: space-between; // Space between name and value
+                gap: 0rem; // Space between rows or items
+                .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+ 
+                .core-skill {
+                    .skill-value {
+                        background-color: @secondary-color;
+                        box-shadow: inset 0 0 8px @highlight-color-primary;
+                        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem); // Assuming this adds styling
+                    }
+                }
+            }
+
+
+
+             .specialisation-container {
+                .specializations {
+                    .skill-specialization-card {
+                        background-color: @secondary-color;
+                        .specialization-value {
+                            background-color: @primary-color;
+                            box-shadow: inset 0 0 8px @highlight-color-primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

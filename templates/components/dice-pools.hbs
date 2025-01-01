@@ -1,9 +1,13 @@
 <div class="dicepool-masonry-grid">
     <div class="dicepool-grid-sizer"></div>
     <div class="dicepool-gutter-sizer"></div>
-            {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" system=system actor=actor dicepool="combat"}}
-            {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" system=system actor=actor dicepool="control"}}
-            {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" system=system actor=actor dicepool="hacking"}}
-            {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" system=system actor=actor dicepool="astral"}}
-            {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" system=system actor=actor dicepool="spell"}}
+
+    {{#each dicePools as |dicepool|}}
+        {{> "systems/sr3d/templates/components/plackets/derivedDicepool.hbs" 
+            name=dicepool.name 
+            data=dicepool.data 
+            config=../config 
+            system=../system 
+            actor=../actor}}
+    {{/each}}
 </div>

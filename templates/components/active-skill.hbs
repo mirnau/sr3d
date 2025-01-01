@@ -1,38 +1,40 @@
 <section class="active-skill-section" data-skill-type="activeSkill">
-    <div class="item-header">
+
+<!-- Item Common Header Start -->
+    <div class="simple-item-header">
         <div class="item-image">
             <img class="small" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         </div>
+        <div class="skill-value">
+            {{system.activeSkill.value}}
+        </div>
 
-        <div class="item-middle-header">
-            <div class="skill-header">
+        <div class="edit-panel">
+            <div class="skill-title">
                 <h1 class="h1">{{localize "sr3d.item.skill.activeSkill"}}</h1>
             </div>
 
             <div class="skill-icons">
 
                 {{#if isOwned}}
-                <a class="delete-owned-instance" title="{{localize " sr3d.sheet.deleteSkill"}}">
+                <a class="delete-owned-instance danger-zone" title="{{localize " sr3d.sheet.deleteSkill"}}">
                     <i class="fas fa-trash-alt"></i>
                 </a>
                 <a class="buy-skill" title="{{localize " sr3d.sheet.purchaseSkills"}}">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
                 <a class="undo-skill" title="{{localize " sr3d.sheet.undo"}}">
-                    <i class="fas fa-undo-alt"></i>S
+                    <i class="fas fa-undo-alt"></i>
                 </a>
                 {{/if}}
+
             </div>
         </div>
-
-        <div class="skill-value">
-            {{system.activeSkill.value}}
-        </div>
     </div>
 
-    <div class="item-name">
-        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
-    </div>
+    <input type="text" class="item-name" name="name" placeholder="{{localize 'Name'}}" value="{{item.name}}" />
+
+<!-- Item Common Header End -->
 
     <div class="skill-type" data-skill-type="activeSkill">
 
@@ -70,7 +72,7 @@
 
             <div class="specializations-list">
 
-                <div class="specializations-list">
+    
 
                     {{#each system.activeSkill.specializations}}
 
@@ -88,7 +90,7 @@
 
                             <!-- Hidden input to store the value -->
                             <input type="hidden" name="system.activeSkill.specializations.[{{@index}}].value"
-                                value="{{this.value}}"/>
+                                value="{{this.value}}" />
                         </div>
 
                         <div class="specialization-actions" data-index="{{@index}}">
@@ -108,7 +110,6 @@
                     <div>Create a speciality by pressing the "+" icon.</div>
                     {{/each}}
 
-                </div>
 
 
             </div>

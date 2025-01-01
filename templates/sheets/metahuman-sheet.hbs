@@ -15,14 +15,17 @@
                             placeholder="{{localize 'sr3d.item.metahuman.name'}}" />
                     </h1>
 
+                    <div class="stat-card">
+                        <div>
+                            <h4 class="card-header" for="priority-select">Select Priority</h4>
+                        </div>
+                        <select name="system.priority" id="priority-select" class="priority-select">
+                            <option value="C" {{#if (eq system.priority "C" )}}selected{{/if}}>C</option>
+                            <option value="D" {{#if (eq system.priority "D" )}}selected{{/if}}>D</option>
+                            <option value="E" {{#if (eq system.priority "E" )}}selected{{/if}}>E</option>
+                        </select>
 
-                    <h4 class="card-header" for="priority-select">Select Priority</h4>
-
-                    <select name="system.priority" id="priority-select" class="priority-select">
-                        <option value="C" {{#if (eq system.priority "C" )}}selected{{/if}}>C</option>
-                        <option value="D" {{#if (eq system.priority "D" )}}selected{{/if}}>D</option>
-                        <option value="E" {{#if (eq system.priority "E" )}}selected{{/if}}>E</option>
-                    </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,7 +90,7 @@
                 </div>
             </div>
         </div>
-                <!-- Weight Attributes Div -->
+        <!-- Weight Attributes Div -->
         <div class="item-sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>

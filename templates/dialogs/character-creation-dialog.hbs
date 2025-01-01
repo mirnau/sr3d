@@ -50,9 +50,9 @@
 
   <!-- Magic Tradition Selection -->
   <div class="form-group">
-    <label for="magicTradition-select">Select Magic Tradition:</label>
-    <select class="item-select" name="magic" id="magicTradition-select">
-      {{#each magicTraditions}}
+    <label for="magic-select">Select Magic Tradition:</label>
+    <select class="item-select" name="magic" id="magic-select">
+      {{#each magics}}
       <option value="{{foundryitemid}}" {{#if default}}selected{{/if}}>
         {{name}} (Priority: {{priority}})
       </option>

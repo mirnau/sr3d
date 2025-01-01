@@ -1,0 +1,113 @@
+<details>
+    <summary class="inventory-summary first">
+        {{localize @root.config.weapon.weapons}}
+    </summary>
+    <div class="table-container">
+        <table class="inventory-list">
+            <thead>
+                <tr>
+                    <th><!--Image--></th>
+                    <th><!--Icons--></th>
+                    <th>{{localize @root.config.weapon.weapon}}</th>
+                    <th>{{localize @root.config.weapon.damage}}</th>
+                    <th>{{localize @root.config.weapon.range}}</th>
+                    <th>{{localize @root.config.weapon.weight}}</th>
+                    <th>{{localize @root.config.weapon.conceal}}</th>
+                    <th>{{localize @root.config.weapon.clip}}</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each actor.items.contents}}
+                {{#if (eq this.type "weapon")}}
+                <tr data-type="{{this.type}}">
+                    <td>
+                        <a data-item-id="{{this.id}}">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <img src="{{this.img}}" alt="{{this.name}}">
+                    </td>
+
+                    <td>
+                        <a class="open-owned-item" data-item-id="{{this.id}}">
+                            <h3 class="no-margin">{{this.name}}</h3>
+                        </a>
+                    </td>
+
+                    <td>{{this.system.damage}}</td>
+                    <td>{{this.system.range}}</td>
+                    <td>{{this.system.weight}}</td>
+                    <td>{{this.system.conceal}}</td>
+                    <td>{{this.system.weight}}</td>
+                    <td>
+                        <a data-item-id="{{this.id}}" class="item-link">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a data-item-id="{{this.id}}" class="delete-owned-instance">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</details>
+
+<details>
+    <summary class="inventory-summary-nth">
+        {{localize @root.config.ammunition.ammunition}}
+    </summary>
+    <div class="table-container">
+        <table class="inventory-list">
+            <thead>
+                <tr>
+                    <th><!--Image--></th>
+                    <th><!--Icons--></th>
+                    <th>{{localize @root.config.ammunition.ammunition}}</th>
+                    <th>{{localize @root.config.common.type}}</th>
+                    <th>{{localize @root.config.ammunition.rounds}}</th>
+                    <th>{{localize @root.config.common.weight}}</th>
+                    <th>{{localize @root.config.common.conceal}}</th>
+                    <th><!--Placeholder--></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each actor.items.contents}}
+                {{#if (eq this.type "ammunition")}}
+                <tr data-type="{{this.type}}">
+                    <td>
+                        <a data-item-id="{{this.id}}" class="delete-owned-instance">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                        <a data-item-id="{{this.id}}">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <img src="{{this.img}}" alt="{{this.name}}">
+                    </td>
+                    <td>
+                        <h3 class="no-margin">{{this.name}}</h3>
+                    </td>
+                    <td>{{this.system.type}}</td>
+                    <td>{{this.system.rounds}}</td>
+                    <td>{{this.system.weight}}</td>
+                    <td>{{this.system.conceal}}</td>
+                    <td><!--Placeholder--></td>
+                    <td>
+                        <a data-item-id="{{this.id}}" class="item-link">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</details>

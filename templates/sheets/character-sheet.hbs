@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Attributes Section -->
         <div class="sheet-component">
             <div class="inner-background-container">
@@ -26,8 +25,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Dice Pools Section -->
+         <!-- Dice Pools Section -->
         <div class="sheet-component">
 
             <div class="inner-background-container">
@@ -105,58 +103,7 @@
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <h1>{{localize "sr3d.actor.possessions.possessions"}}</h1>
-                    <div class="sheet-tabs">
-                        <nav class="tabs">
-                            <a class="item" data-tab="loadout">
-                                <h2>{{localize "sr3d.actor.possessions.loadout"}}</h2>
-                            </a>
-                            <a class="item" data-tab="inventory">
-                                <h2>{{localize "sr3d.actor.possessions.inventory"}}</h2>
-                            </a>
-                            <a class="item" data-tab="arsenal">
-                                <h2>{{localize "sr3d.actor.possessions.arsenal"}}</h2>
-                            </a>
-                            <a class="item" data-tab="arcane">
-                                <h2>{{localize "sr3d.actor.possessions.arcane"}}</h2>
-                            </a>
-                            <a class="item" data-tab="garage">
-                                <h2>{{localize "sr3d.actor.possessions.garage"}}</h2>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="tab-content">
-                        <section class="tab" data-tab="inventory">
-                            {{#if system.inventory.weapons.length}}
-                            <ul class="inventory-list">
-                                {{#each system.inventory.weapons as |weapon|}}
-                                {{> "systems/sr3d/templates/components/inventory.hbs" weapon=weapon}}
-                                {{/each}}
-                            </ul>
-                            {{else}}
-                            <p>No weapons available.</p>
-                            {{/if}}
-                        </section>
-                        <section class="tab" data-tab="loadout">
-                            <h2>Loadout</h2>
-                            <p>Carried items go here...</p>
-                        </section>
-                        <section class="tab" data-tab="inventory">
-                            <h2>Inventory</h2>
-                            <p>Inventory content goes here...</p>
-                        </section>
-                        <section class="tab" data-tab="inventory">
-                            <h2>Arsenal</h2>
-                            <p>Weapons content goes here...</p>
-                        </section>
-                        <section class="tab" data-tab="arcane">
-                            <h2>Arcane</h2>
-                            <p>Magic content goes here...</p>
-                        </section>
-                        <section class="tab" data-tab="garage">
-                            <h2>Garage</h2>
-                            <p>Vehicles content goes here...</p>
-                        </section>
-                    </div>
+                       {{> "systems/sr3d/templates/components/possessions.hbs"}}                    
                 </div>
             </div>
         </div>

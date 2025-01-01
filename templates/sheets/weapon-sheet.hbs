@@ -1,96 +1,271 @@
 <form class="{{cssClass}}" autocomplete="off">
 
-    <div class="sheet-content">
+    <div class="weapon-sheet">
+        <!-- First "panel" / block -->
         <div class="item-sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
 
-                    <header class="image-mask">
-                        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-                        <div contenteditable="true" name="name" id="name-field" placeholder="{{localize 'Name'}}">
-                            <h1>
-                                {{item.name}}
-                            </h1>
+                    <!-- Header-ish -->
+                    <div class="simple-item-header">
+                        <div class="item-image">
+                            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
                         </div>
-                    </header>
+                        <div class="edit-panel">
+                            <div class="skill-title">
+                                <h1 class="h1">{{localize "sr3d.item.weapon.weapon"}}</h1>
+                            </div>
+                            <!-- If owned, show any icons you'd want -->
+                            {{#if isOwned}}
+                            <div class="skill-icons">
+                                <a class="delete-owned-instance danger-zone" title="{{localize "
+                                    sr3d.sheet.deleteWeapon"}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <!-- Name field -->
+                    <h1>
+                        <input type="text" class="item-name" name="name" placeholder="{{localize 'Name'}}"
+                            value="{{item.name}}" />
+                    </h1>
                 </div>
             </div>
         </div>
 
+        <!-- Second "panel" / block -->
         <div class="item-sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <div class="stat-grid">
-                        <div class="info-field">
-                            <h3>{{localize 'sr3d.item.weapon.conceal'}}</h3>
-                            <div id="conceal" contenteditable="true" data-dtype="Number">
-                                <h1>{{system.conceal}}</h1>
+                        <!-- Cost -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.cost"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <span>
+                                    <h1 class="no-margin">¥</h1>
+                                </span>
+                                <div class="stat-value cost-editable" contenteditable="true">
+                                    <h1 class="no-margin">{{system.cost}}</h1>
+                                </div>
+                                <input type="hidden" name="system.cost" value="{{system.cost}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize 'sr3d.item.weapon.ammo'}}</h3>
-                            <div id="ammo" contenteditable="true" data-dtype="String">
-                                <h1>{{system.ammo}}</h1>
+                        <!-- Availability (Days and Hours) -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.days"}} : {{localize
+                                    "sr3d.item.common.hours"}}
+                                </h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" contenteditable="true"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.availability.days}}</h1>
+                                </div>
+                                <input type="hidden" name="system.availability.days"
+                                    value="{{system.availability.days}}">
+                                <span>
+                                    <h1 class="no-margin">:</h1>
+                                </span>
+                                <div class="stat-value" contenteditable="true"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.availability.hours}}</h1>
+                                </div>
+                                <input type="hidden" name="system.availability.hours"
+                                    value="{{system.availability.hours}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.mode"}}</h3>
-                            <select id="mode" data-dtype="String">
-                                <option value="SS" {{#if (eq system.mode 'SS' )}}selected{{/if}}>{{localize
-                                    "sr3d.weapon.mode.singleShot"}}</option>
-                                <option value="SA" {{#if (eq system.mode 'SA' )}}selected{{/if}}>{{localize
-                                    "sr3d.weapon.mode.semiAuto"}}</option>
-                                <option value="BF" {{#if (eq system.mode 'BF' )}}selected{{/if}}>{{localize
-                                    "sr3d.weapon.mode.burstFire"}}</option>
-                                <option value="FA" {{#if (eq system.mode 'FA' )}}selected{{/if}}>{{localize
-                                    "sr3d.weapon.mode.fullAuto"}}</option>
+
+                        <!-- Street Index -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.streetIndex"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" contenteditable="true"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.streetIndex}}</h1>
+                                </div>
+                                <input type="hidden" name="system.streetIndex" value="{{system.streetIndex}}">
+                            </div>
+                        </div>
+
+                        <!-- Conceal -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize 'sr3d.item.weapon.conceal'}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" id="conceal" contenteditable="true" data-dtype="Number"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.conceal}}</h1>
+                                </div>
+                                <input type="hidden" name="system.conceal" value="{{system.conceal}}">
+                            </div>
+                        </div>
+
+
+                        <!-- Ammo -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize 'sr3d.item.weapon.ammo'}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" id="ammo" contenteditable="true" data-dtype="String">
+                                    <h1 class="no-margin">{{system.ammo}}</h1>
+                                </div>
+                                <input type="hidden" name="system.ammo" value="{{system.ammo}}">
+                            </div>
+                        </div>
+
+                        <!-- Mode -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.weapon.mode"}}</h4>
+                            </div>
+
+                            <select name="system.mode" id="mode" data-dtype="String">
+                                <option value="SS" {{#if (eq system.mode "SS" )}}selected{{/if}}>
+                                    {{localize "sr3d.firingMode.singleshot"}}
+                                </option>
+                                <option value="SA" {{#if (eq system.mode "SA" )}}selected{{/if}}>
+                                    {{localize "sr3d.firingMode.semiauto"}}
+                                </option>
+                                <option value="BF" {{#if (eq system.mode "BF" )}}selected{{/if}}>
+                                    {{localize "sr3d.firingMode.burstfire"}}
+                                </option>
+                                <option value="FA" {{#if (eq system.mode "FA" )}}selected{{/if}}>
+                                    {{localize "sr3d.firingMode.fullauto"}}
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <!-- Damage -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.weapon.damage"}}</h4>
+                            </div>
+                            <select id="damage" name="system.damage">
+                                {{#each weaponDamage}}
+                                <option value="{{this.key}}" {{#if (eq ../system.damage this.key)}}selected{{/if}}>
+                                    {{this.label}}
+                                </option>
+                                {{/each}}
                             </select>
                         </div>
 
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.damage"}}</h3>
-                            <div id="damage" contenteditable="true" data-dtype="String">
-                                <h1>{{system.damage}}</h1>
+                        <!-- Recoil Compensation -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.weapon.recoilComp"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" id="recoilComp" contenteditable="true" data-dtype="Number"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                      <h1 class="no-margin">{{system.recoilComp}}</h1>
+                                </div>
+                                <input type="hidden" name="system.recoilComp" value="{{system.recoilComp}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.range"}}</h3>
-                            <div id="range" contenteditable="true" data-dtype="Number">
-                                <h1>{{system.range}}</h1>
+                        <!-- Range -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.weapon.range"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" id="range" contenteditable="true" data-dtype="Number"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.range}}</h1>
+                                </div>
+                                <input type="hidden" name="system.range" value="{{system.range}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.weight"}}</h3>
-                            <div id="weight" contenteditable="true" data-dtype="Number">
-                                <h1>{{system.weight}}</h1>
+
+                        <!-- Weight -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.weapon.weight"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" id="weight" contenteditable="true" data-dtype="Number"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.weight}}</h1>
+                                </div>
+                                <input type="hidden" name="system.weight" value="{{system.weight}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.legal"}}</h3>
-                            <div id="legal" contenteditable="true" data-dtype="String">
-                                <h1>{{system.legal}}</h1>
+
+                        <!-- Restriction Level -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.restrictionLevel"}}</h4>
+                            </div>
+                            <div class="stat-label">
+                                <div class="stat-value" contenteditable="true"
+                                    oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                    <h1 class="no-margin">{{system.legality.restrictionLevel}}</h1>
+                                </div>
+                                <input type="hidden" name="system.legality.restrictionLevel"
+                                    value="{{system.legality.restrictionLevel}}">
                             </div>
                         </div>
-                        <div class="info-field">
-                            <h3>{{localize "sr3d.item.weapon.recoilComp"}}</h3>
-                            <div id="recoilComp" contenteditable="true" data-dtype="Number">
-                                <h1>{{system.recoilComp}}</h1>
+
+
+                        <!-- Legality -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.legality"}}</h4>
                             </div>
+
+                            <select name="system.legality.type" data-dtype="String">
+                                {{#each config.legality as |label key|}}
+                                <option value="{{key}}" {{#if (eq ../system.legality.type key)}}selected{{/if}}>
+                                    {{localize label}}
+                                </option>
+                                {{/each}}
+                            </select>
+
                         </div>
+
+                        <!-- Category -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.common.category"}}</h4>
+                            </div>
+
+                            <select name="system.legality.category" data-dtype="String">
+                                {{#each config.category as |label key|}}
+                                <option value="{{key}}" {{#if (eq ../system.legality.category key)}}selected{{/if}}>
+                                    {{label}}
+                                </option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+
 
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="item-sheet-component">
-                <div class="inner-background-container">
-                    <div class="fake-shadow"></div>
-                    <div class="inner-background">
-                        <div class="editor-field">
-                            {{editor system.description owner=owner button=true editable=editable}}
-                        </div>
+        <!-- Notes / description block -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <h3 class="no-margin">{{localize "sr3d.sheet.notes"}}</h3>
+                    <div class="editor-field">
+                        {{editor system.description owner=owner button=true editable=editable}}
                     </div>
                 </div>
             </div>

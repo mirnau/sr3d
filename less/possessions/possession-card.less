@@ -1,0 +1,93 @@
+.inventory-summary {
+    background-color: @secondary-color;
+    font-size: 1.2rem;
+    min-height: 2rem;
+    color: @h2-color;
+    display: flex; /* Ensure flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-align: left; /* Additional safety for text alignment */
+    text-transform: capitalize;
+    .clipped-corners(0rem, 0rem, 0.5rem, 0.5rem); /* Retain your custom corners */
+}
+
+.inventory-summary-nth {
+    background-color: @secondary-color;
+    font-size: 1.2rem;
+    min-height: 2rem;
+    color:@h2-color;
+    display: flex; /* Ensure flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-align: center; /* Additional safety for text alignment */
+    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.inventory-list {
+    /* Reset table defaults */
+    border-collapse: separate;
+    border-spacing: 0 0.25rem;
+    margin: 0rem;
+    padding: 0rem;
+    width: 100%;
+    border: none; /* Ensures no outer table borders */
+
+
+    img {
+        max-height: 1rem; 
+        max-width: 1rem;
+    }
+
+    /* Remove any extra space or borders in thead, tbody, and tfoot */
+    thead, tbody, tfoot {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+    }
+
+    /* Remove border from rows */
+    tr {
+        color: @h1-color;
+        border: none;
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+    }
+
+    /* Reset cell defaults */
+    th, td {
+        margin: 0rem;
+        padding: 0rem;
+        border: none;
+        text-align: left;
+
+    }
+
+    tbody tr:first-child {
+       padding-left: 0.5rem;
+    }
+
+    /* Style alternating rows */
+    tbody tr:nth-child(odd) {
+        box-shadow: inset 0 0 16px @highlight-color-primary;
+        background-color: @primary-color;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: @secondary-color;
+        box-shadow: inset 0 0 16px @highlight-color-primary;
+    }
+
+    tbody tr:last-child {
+        .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+    }
+
+    /* Optional: Adjust font and layout for visibility */
+    th {
+        font-weight: bold;
+        padding: 0.25rem; /* Adjust header cell padding */
+    }
+
+    td {
+        padding: 0.25rem; /* Adjust data cell padding */
+    }
+}

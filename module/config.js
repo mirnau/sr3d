@@ -26,7 +26,7 @@ sr3d.itemTypes = {
     misc: "sr3d.createItem.misc",
     metahuman: "sr3d.createItem.metahuman",
     skill: "sr3d.createItem.skill",
-    magicTradition: "sr3d.createItem.magicTradition",
+    magic: "sr3d.createItem.magic",
     karma: "sr3d.createItem.karma"
 }
 
@@ -41,6 +41,23 @@ sr3d.health = {
 
 sr3d.budget = {
     budget: "sr3d.actor.budget.budget"
+}
+
+sr3d.ammunition = {
+    ammunition: "sr3d.item.ammunition.ammunition",
+    rounds: "sr3d.item.ammunition.rounds",
+    types: {
+        apds: "sr3d.item.ammunition.types.apds",
+        belt: "sr3d.item.ammunition.types.belt",
+        assaultCanon: "sr3d.item.ammunition.types.assaultCanon",
+        explosive: "sr3d.item.ammunition.types.explosive",
+        exexplosive: "sr3d.item.ammunition.types.exexplosive",
+        flechette: "sr3d.item.ammunition.types.flechette",
+        regular: "sr3d.item.ammunition.types.regular",
+        tracer: "sr3d.item.ammunition.types.tracer",
+        tracerdart: "sr3d.item.ammunition.types.tracerdart",
+        gel: "sr3d.item.ammunition.types.gel",
+    }
 }
 
 sr3d.possessions = {
@@ -105,8 +122,10 @@ sr3d.metahuman = {
 }
 
 sr3d.weapon = {
+    weapon: "sr3d.item.weapon.weapon",
+    weapons: "sr3d.item.weapon.weapons",
     conceal: "sr3d.item.weapon.conceal",
-    ammo: "sr3d.item.weapon.ammo",
+    clip: "sr3d.item.weapon.clip",
     mode: "sr3d.item.weapon.mode",
     damage: "sr3d.item.weapon.damage",
     range: "sr3d.item.weapon.range",
@@ -119,7 +138,7 @@ sr3d.weapon = {
 
 sr3d.firingMode = {
     singleshot: "sr3d.firingMode.singleshot",     
-    semiautomatic: "sr3d.firingMode.semiautomatic",
+    semiauto: "sr3d.firingMode.semiautomatic",
     burstfire: "sr3d.firingMode.burstfire",        
     fullauto: "sr3d.firingMode.fullauto"           
 };
@@ -132,13 +151,12 @@ sr3d.ammo = {
     belt: "sr3d.ammo.belt"                
 };
 
-sr3d.damageType = {
-    stun: "sr3d.damageType.stun", 
-    light: "sr3d.damageType.light",   
-    moderate: "sr3d.damageType.moderate",
-    serious: "sr3d.damageType.serious", 
-    deadly: "sr3d.damageType.deadly",  
-    flechette: "sr3d.damageType.flechette"
+sr3d.weaponDamage = {
+    stun: "sr3d.weaponDamage.stun", 
+    light: "sr3d.weaponDamage.light",   
+    moderate: "sr3d.weaponDamage.moderate",
+    serious: "sr3d.weaponDamage.serious", 
+    deadly: "sr3d.weaponDamage.deadly",  
 };
 
 sr3d.legalCode = {
@@ -250,12 +268,12 @@ sr3d.skills = {
 };
 
 
-sr3d.magicTradition = {
+sr3d.magic = {
     type: "sr3d.item.magicTradtion.type",
     focus: "sr3d.item.magicTradtion.focus",
     drainResistanceAttribute: "sr3d.item.magicTradtion.drainResistanceAttribute",
     totem: "sr3d.item.magicTradtion.totem",
-    newMagicTradition: "sr3d.item.magicTradition.newMagicTradition"
+    newMagic: "sr3d.item.magic.newMagic"
 }
 
 
@@ -291,6 +309,7 @@ sr3d.enhancer = {
 };
 
 sr3d.cyberwear = {
+    implants: "sr3d.item.cyberwear.implants",
     essence: "sr3d.item.cyberwear.essence"
 };
 
@@ -305,11 +324,13 @@ sr3d.common = {
     legality: "sr3d.item.common.legality",
     weight: "sr3d.item.common.weight",
     restrictionLevel: "sr3d.item.common.restrictionLevel",
-    category: "sr3d.item.common.category"
+    category: "sr3d.item.common.category",
+    rounds: "sr3d.item.common.rounds",
+    type: "sr3d.item.common.type"
 };
 
 sr3d.legality = {
-    general: "sr3d.legality.general",
+    legal: "sr3d.legality.legal",
     permissable: "sr3d.legality.permissable",
     restricted: "sr3d.legality.restricted",
     forbidden: "sr3d.legality.forbidden",

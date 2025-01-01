@@ -1,15 +1,16 @@
 export async function transferKarmatoActor(item, options, userId) {
     if (!item.actor || item.type !== "karma") return;
 
-    const karmaValue = item.system.karma.value || 0;
-    const actor = item.actor;
+    const karmaReward = item.system.karma.goodKarma || 0;
+   
+    const karma = actor.system.karma;
 
-    const currentKarma = actor.system.karma.goodKarma || 0;
-    const updatedKarma = currentKarma + karmaValue;
-
-    await actor.update({ "system.karma.goodKarma": updatedKarma });
-
-    console.log(`Transferred ${karmaValue} Karma to ${actor.name}. New Karma: ${updatedKarma}`);
+    karma.goodKarma += karmaReward;
+    karma.liftimeKarma += karmaReward;
+    
+    await actor.update({ "system.karma": karma });
+    
+    console.log(`Transferred ${karmaReward} Karma to ${actor.name}. New Karma: ${karma.goodKarma}`);
 
     await item.delete();
 

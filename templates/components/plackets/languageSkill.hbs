@@ -2,55 +2,55 @@
 {{#each skills.language}}
 <div class="language-skill-category">
 
-   {{#if (isShoppingStateActive ../actor)}}
-          <div class="edit-icon">
-            <h4>
-              <a class="edit-skill" data-id="{{id}}">
-                <i class="fas fa-pen-to-square pulsing-green-cart"></i>
-              </a>
-            </h4>
-          </div>
-          {{else}}
-          <div class="checkmark">
-            <a class="select-skill">
-              <i class="fa-solid fa-circle-check"></i>
-            </a>
-          </div>
-          {{/if}}
+  {{#if (isShoppingStateActive ../actor)}}
+  <div class="edit-icon">
+    <h4>
+      <a class="edit-skill" data-id="{{id}}">
+        <i class="fas fa-pen-to-square pulsing-green-cart"></i>
+      </a>
+    </h4>
+  </div>
+  {{else}}
+  <div class="checkmark">
+    <a class="select-skill">
+      <i class="fa-solid fa-circle-check"></i>
+    </a>
+  </div>
+  {{/if}}
 
-      <!-- Main Skill Name -->
-    <div class="language-skill-name">
-      <h3>{{name}}</h3>
-    </div>
-    
-    <div class="language-card-container">
-      <!-- Subskills -->
-      {{#each skills}}
-      <div class="specialisation-container">
-        <div class="core-skill">
-          <div class="language-card">
-            <div class="skill-name">
-              <h3>{{type}}</h3>
-            </div>
-            <div class="skill-value h1-value">
-              <h1 class="no-margin">
-                {{#if value}}
-                {{value}}
-                {{else}}
-                0
-                {{/if}}
-              </h1>
-            </div>
-          </div>
+  <!-- Main Skill Name -->
+  <div class="language-skill-name">
+    <h3>{{name}}</h3>
+  </div>
+
+  <div class="language-card-container">
+    <!-- Subskills -->
+    {{#each skills}}
+    <div>
+      <div class="core-skill">
+        <div class="skill-name">
+          <h3>{{type}}</h3>
         </div>
-        {{#if specializations}}
+        <div class="skill-value h1-value">
+          <h1 class="no-margin">
+            {{#if value}}
+            {{value}}
+            {{else}}
+            0
+            {{/if}}
+          </h1>
+        </div>
+      </div>
+      {{#if specializations}}
+      <div class="specialisation-container">
         <div class="specializations">
+          <h4>{{localize "sr3d.item.skill.specializations"}}</h4>
           {{#each specializations}}
-          <div class="skill-specialization-card language-specialization-card-color-override">
+          <div class="skill-specialization-card">
             <div class="specialization-name">
               {{name}}
             </div>
-            <div class="specialization-value specialization-font">
+            <div class="specialization-value">
               <h1 class="no-margin">
                 {{#if value}}
                 {{value}}
@@ -62,9 +62,10 @@
           </div>
           {{/each}}
         </div>
-        {{/if}}
       </div>
-      {{/each}}
+      {{/if}}
     </div>
+    {{/each}}
   </div>
-  {{/each}}
+</div>
+{{/each}}

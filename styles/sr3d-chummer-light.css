@@ -16,7 +16,8 @@
 .sr3d .sr3d.sheet.item .editor-field,
 .sr3d .sr3d.sheet.character .editor-field {
   z-index: 100;
-  min-height: 20rem;
+  min-height: 10rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content,
 .sr3d .sr3d.sheet.character .window-content {
@@ -53,12 +54,138 @@
 .sr3d .sr3d.sheet.character .stat-card:hover {
   z-index: 10;
 }
+.sr3d .sr3d.sheet.item .stat-card select,
+.sr3d .sr3d.sheet.character .stat-card select {
+  height: 2rem;
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .stat-grid,
+.sr3d .sr3d.sheet.character .stat-grid {
+  height: 100%;
+}
+.sr3d .sr3d.sheet.item .core-skill,
+.sr3d .sr3d.sheet.character .core-skill {
+  padding: 0.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  position: relative;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-name,
+.sr3d .sr3d.sheet.character .core-skill .skill-name {
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-value,
+.sr3d .sr3d.sheet.character .core-skill .skill-value {
+  min-width: 3rem;
+}
+.sr3d .sr3d.sheet.item .choice-component,
+.sr3d .sr3d.sheet.character .choice-component {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  background-color: #1c364b;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  /* Changed from bottom to stretch */
+  gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .choice-component select,
+.sr3d .sr3d.sheet.character .choice-component select {
+  background-color: #1b1f24;
+}
+.sr3d .sr3d.sheet.item .choice-component select option,
+.sr3d .sr3d.sheet.character .choice-component select option {
+  background-color: transparent;
+}
+.sr3d .sr3d.sheet.item .choice-component select:hover,
+.sr3d .sr3d.sheet.character .choice-component select:hover {
+  background-color: #1b1f24;
+  box-shadow: inst 0 0 19px #ff0095;
+}
+.sr3d .sr3d.sheet.item .choice-component h3,
+.sr3d .sr3d.sheet.character .choice-component h3 {
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .choice-component .list-box,
+.sr3d .sr3d.sheet.character .choice-component .list-box {
+  text-indent: 0.5rem;
+  flex: 1;
+  /* Ensure the list boxes take up equal width */
+  /* Removed height: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+.sr3d .sr3d.sheet.item .choice-component .list-box select,
+.sr3d .sr3d.sheet.character .choice-component .list-box select {
+  width: 100%;
+  flex: 1;
+  /* Make the select element take up available vertical space */
+}
+.sr3d .sr3d.sheet.item .choice-component .links,
+.sr3d .sr3d.sheet.character .choice-component .links {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+.sr3d .sr3d.sheet.item .choice-component .links a,
+.sr3d .sr3d.sheet.character .choice-component .links a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.sr3d .sr3d.sheet.item .choice-component .links a i,
+.sr3d .sr3d.sheet.character .choice-component .links a i {
+  transition: color 0.3s;
+}
+.sr3d .sr3d.sheet.item .choice-component .links a:hover i,
+.sr3d .sr3d.sheet.character .choice-component .links a:hover i {
+  color: #007bff;
+}
+.sr3d .sr3d.sheet.item .specialisation-container,
+.sr3d .sr3d.sheet.character .specialisation-container {
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #1c364b;
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-name,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-name {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-value,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-value {
+  min-width: 3rem;
+  height: 2rem;
+}
 .sr3d .sr3d.window-app.sr3d {
   background: none;
 }
 .sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
+}
+.sr3d .sr3d.sheet.item a,
+.sr3d .sr3d.sheet.character a {
+  text-decoration: none;
 }
 .sr3d .sr3d.sheet.item .editor,
 .sr3d .sr3d.sheet.character .editor {
@@ -71,11 +198,11 @@
 .sr3d .sr3d.sheet.item .window-header,
 .sr3d .sr3d.sheet.character .window-header {
   background-color: transparent;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   box-shadow: inset 0 0 10px #ff0095;
-  /* Inner glow */
   margin-left: 0.5rem;
+  margin-right: 0.4rem;
   border: none;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content,
 .sr3d .sr3d.sheet.character .window-content {
@@ -84,7 +211,7 @@
 }
 .sr3d .sr3d.sheet.item input[type="text"],
 .sr3d .sr3d.sheet.character input[type="text"] {
-  background-color: #28ca28;
+  background-color: #1c364b;
   box-shadow: inset 0 0 10px #4df083;
   border: none;
 }
@@ -152,14 +279,18 @@
 }
 .sr3d .sr3d.sheet.item select,
 .sr3d .sr3d.sheet.character select {
-  background-color: #552791;
+  background-color: #1b1f24;
   border: none;
-  border-radius: 0%;
+  border-radius: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.item select:hover,
-.sr3d .sr3d.sheet.character select:hover {
-  background-color: #ff0095;
+.sr3d .sr3d.sheet.item option,
+.sr3d .sr3d.sheet.character option {
+  text-indent: 0.5rem;
+  background-color: transparent;
+  border-radius: 0rem;
+  border: none;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
 }
 .sr3d .sr3d.sheet.item .stat-card,
 .sr3d .sr3d.sheet.character .stat-card {
@@ -171,28 +302,63 @@
   margin: 0;
   text-align: center;
 }
+.sr3d .sr3d.sheet.item .stat-card select,
+.sr3d .sr3d.sheet.character .stat-card select,
 .sr3d .sr3d.sheet.item .stat-card .stat-label,
 .sr3d .sr3d.sheet.character .stat-card .stat-label {
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 8px #1df0ff;
-  /* Inner glow */
   transition: box-shadow 0.3s ease-in;
 }
+.sr3d .sr3d.sheet.item .stat-card select:hover,
+.sr3d .sr3d.sheet.character .stat-card select:hover,
 .sr3d .sr3d.sheet.item .stat-card .stat-label:hover,
 .sr3d .sr3d.sheet.character .stat-card .stat-label:hover {
   box-shadow: inset 0 0 25px #1df0ff;
-  /* Inner glow */
 }
 .sr3d .sr3d.sheet.item .stat-card:hover,
 .sr3d .sr3d.sheet.character .stat-card:hover {
   background-color: #ff0095;
 }
-.sr3d .sr3d.sheet.item option,
-.sr3d .sr3d.sheet.character option {
-  background-color: #552791;
-  border-radius: 0rem;
-  border: none;
+.sr3d .sr3d.sheet.item .core-skill .skill-name,
+.sr3d .sr3d.sheet.character .core-skill .skill-name {
+  text-indent: 0rem;
+  text-overflow: ellipsis;
+}
+.sr3d .sr3d.sheet.item .core-skill .skill-value,
+.sr3d .sr3d.sheet.character .core-skill .skill-value {
+  text-indent: 0rem;
+  text-align: center;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 8px #1df0ff;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .specialisation-container,
+.sr3d .sr3d.sheet.character .specialisation-container {
+  background-color: #1b1f24;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations {
+  text-indent: 0rem;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-name,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sr3d .sr3d.sheet.item .specialisation-container .specializations .skill-specialization-card .specialization-value,
+.sr3d .sr3d.sheet.character .specialisation-container .specializations .skill-specialization-card .specialization-value {
+  text-indent: 0rem;
+  text-align: center;
+  background-color: #1b1f24;
+  box-shadow: inset 0 0 8px #1df0ff;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 @font-face {
   font-family: 'VT323';
@@ -302,7 +468,8 @@
   height: 100px;
   top: 0rem;
   left: -3rem;
-  z-index: 1;
+  z-index: 99;
+  pointer-events: none;
 }
 .sr3d .attribute-position .attribute-point-container {
   position: relative;
@@ -483,6 +650,16 @@
     color: cyan;
     text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   }
+}
+.sr3d .window-app-footer {
+  height: 2rem;
+  box-shadow: inset 0 0 16px #ff0095;
+  position: absolute;
+  bottom: -2rem;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+  clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0rem);
 }
 .sr3d .sheet-component {
   box-sizing: border-box;
@@ -672,6 +849,51 @@
 .sr3d .sr3d.sheet.character .sheet-masonry-grid .layout-grid-sizer {
   min-width: 300px;
 }
+.sr3d .possessions-tabs {
+  overflow: hidden;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs {
+  display: flex;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item {
+  flex: 1;
+  text-align: center;
+  background-color: #27303d;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item h2 {
+  margin: 0;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item:hover {
+  background-color: #27303d;
+  box-shadow: inset 0 0 15px #e792cb;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item.active {
+  background-color: #24354d;
+  font-weight: bold;
+  box-shadow: inset 0 0 15px #4df083;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.sr3d .possessions-tabs .possession-utility-bar .tabs .item.active h2 {
+  color: #4df083;
+  text-shadow: #4df083;
+}
+.sr3d .possessions-tabs .possessions-tab-content {
+  background-color: #24354d;
+  min-height: 2rem;
+  clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
+}
+.sr3d .possessions-tabs .possessions-tab-content .tab {
+  display: none;
+}
+.sr3d .possessions-tabs .possessions-tab-content .tab.active {
+  display: block;
+}
 .sr3d .skills-tabs {
   overflow: hidden;
 }
@@ -699,6 +921,12 @@
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active {
   background-color: #24354d;
   font-weight: bold;
+  box-shadow: inset 0 0 15px #4df083;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.sr3d .skills-tabs .skill-utility-bar .tabs .item.active h2 {
+  color: #4df083;
+  text-shadow: #4df083;
 }
 .sr3d .skills-tabs .tab-content {
   background-color: #24354d;
@@ -710,247 +938,6 @@
 }
 .sr3d .skills-tabs .tab-content .tab.active {
   display: block;
-}
-.sr3d .item-create {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-}
-.sr3d .sr3d.sheet.item .window-content {
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  align-items: top;
-  background-color: #552791;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.5rem;
-  align-items: top;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header h1 {
-  margin: 0;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .skill-icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  padding: 0rem;
-  align-items: center;
-  width: 100%;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-middle-header .skill-icons a {
-  padding: 0rem;
-  font-size: 1.5rem;
-  text-align: center;
-  flex: 0 1 auto;
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .item-image {
-  background-color: #6825c0;
-  max-width: 5rem;
-  max-height: 5rem;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-header .skill-value {
-  background-color: #6825c0;
-  width: 100%;
-  height: 100%;
-  width: 5rem;
-  height: 5rem;
-  font-size: 4rem;
-  color: #1df0ff;
-  text-align: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-name {
-  text-align: center;
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"] {
-  margin: 0rem;
-  text-transform: uppercase;
-  font-size: 2.5rem;
-  height: 3rem;
-  background-color: #552791;
-  color: #1df0ff;
-  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]:focus {
-  background-color: #552791;
-  box-shadow: 0 0 10px 3px #1b1f24;
-  outline: none;
-}
-.sr3d .sr3d.sheet.item .window-content .item-name input[type="text"]::placeholder {
-  color: #c8d3f5;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component {
-  padding: 0rem;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  min-width: 300px;
-  background: transparent;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background-container {
-  position: relative;
-  padding: 0.5rem;
-  width: 100%;
-  height: 100%;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background {
-  position: realtive;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  background-color: #552791;
-  min-height: 3rem;
-  margin-bottom: 0.5rem;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute .attribute-header {
-  flex: 0 1 auto;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute .attribute-select {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: flex-end;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .linked-attribute select {
-  width: 100%;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background input[type="text"] {
-  background-color: #6825c0;
-  padding: 0rem;
-  margin-bottom: 0.5rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section {
-  background: #552791;
-  margin-bottom: 0rem;
-  height: 100%;
-  padding: 0.5rem;
-  padding-bottom: 1rem;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specialization-add {
-  display: flex;
-  align-items: center;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specialization-add .add-specialization {
-  padding: 0.5rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list {
-  display: flex;
-  flex-direction: column;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container {
-  padding: 0rem;
-  position: relative;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  align-items: center;
-  background: #6825c0;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card .specialization-value {
-  text-align: center;
-  width: 3rem;
-  padding: 0rem;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card input[type="text"] {
-  width: 100%;
-  margin: 0rem;
-  background-color: #552791;
-}
-.sr3d .sr3d.sheet.item .window-content .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-actions {
-  z-index: 10;
-  position: absolute;
-  bottom: 0rem;
-  right: 1rem;
-}
-.sr3d .language-skill-section .subskill-card {
-  background-color: #552791;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
-}
-.sr3d .language-skill-section .subskill-card .language-envelope {
-  position: relative;
-}
-.sr3d .language-skill-section .subskill-card .language-envelope .subskill-icons {
-  position: absolute;
-  bottom: -0.5rem;
-  right: 1rem;
-}
-.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  background-color: #6825c0;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display h1 {
-  margin: 0rem;
-}
-.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display .subskill-value {
-  width: 3rem;
-  text-align: center;
-}
-.sr3d .sr3d.sheet.item .meta-human-grid {
-  /* Set a fixed or max width and center it */
-  width: 40rem;
-  margin: 0 auto;
-  column-count: 2;
-  column-gap: 0.5rem;
-}
-.sr3d .sr3d.sheet.item .meta-human-grid .item-sheet-component {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  break-inside: avoid;
-}
-.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background {
-  display: grid;
-  text-align: center;
-}
-.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card {
-  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
-}
-.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card .stat-label {
-  background-color: #1c364b;
-}
-.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card:hover {
-  z-index: 10;
-}
-.sr3d .sr3d.sheet.item .stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
 }
 .sr3d .active-grid-container {
   padding: 0.5rem;
@@ -985,7 +972,7 @@
   align-items: center;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card {
   position: relative;
   width: 100%;
   display: flex;
@@ -999,19 +986,19 @@
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .checkmark {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .checkmark {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
   z-index: 10;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h1 {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card h1 {
   text-indent: 0rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container h3 {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card h3 {
   text-indent: 0.5rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .edit-icon {
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .edit-icon {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -1021,69 +1008,16 @@
   align-items: center;
   gap: 0.25rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill {
-  padding: 0.25rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: flex-start;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-indent: 0rem;
-  flex: 1;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .core-skill .active-skill-card .skill-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .core-skill .skill-value {
   background-color: #1c364b;
   box-shadow: inset 0 0 8px #1df0ff;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .active-specialization-card-color-override {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .specialisation-container .specializations .skill-specialization-card {
   background-color: #1c364b;
-  padding: 0.25rem;
-  margin-top: 0.25rem;
 }
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container {
-  padding: 0.25rem;
+.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .skill-card .specialisation-container .specializations .skill-specialization-card .specialization-value {
   background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations {
-  text-indent: 0rem;
-  width: 100%;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations .specialization-name {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .active-grid-container .active-skills-masonry-grid .active-skill-category .active-skill-container .specialisation-container .specializations .specialization-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
-  background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  box-shadow: inset 0 0 8px #1df0ff;
 }
 .sr3d .knowledge-grid-container {
   width: 100%;
@@ -1182,40 +1116,12 @@
   box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .knowledge-specialization-card-color-override {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
+.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .skill-specialization-card {
   background-color: #1c364b;
-  padding: 0.25rem;
-  margin-top: 0.25rem;
 }
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container {
-  padding: 0.25rem;
+.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .skill-specialization-card .specialization-value {
   background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container h4 {
-  text-indent: 0.5rem;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations {
-  text-indent: 0rem;
-  padding: 0rem;
-  width: 100%;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .specialization-name {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .knowledge-grid-container .knowledge-skill-category .knowledge-skills-masonry-grid .knowledge-skill-item .specialisation-container .specializations .specialization-value {
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
-  background-color: #1b1f24;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  box-shadow: inset 0 0 8px #1df0ff;
 }
 .sr3d .language-grid-container {
   padding: 0.5rem;
@@ -1281,79 +1187,419 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: #1b1f24;
+  background-color: #1c364b;
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill {
-  padding: 0.25rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card .skill-name,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-name {
-  flex: 1;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .language-card .skill-value,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .language-card .skill-value {
-  width: 3rem;
-  text-align: center;
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .core-skill .skill-value,
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .core-skill .skill-value {
   background-color: #1c364b;
   box-shadow: inset 0 0 8px #1df0ff;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .language-specialization-card-color-override,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .language-specialization-card-color-override {
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .specialisation-container .specializations .skill-specialization-card {
+  background-color: #1c364b;
+}
+.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .specialisation-container .specializations .skill-specialization-card .specialization-value {
+  background-color: #1b1f24;
+  box-shadow: inset 0 0 8px #1df0ff;
+}
+.sr3d .item-create {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+.sr3d .sr3d.sheet.item {
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .simple-item-header {
+  background-color: #1c364b;
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .simple-item-header h1 {
+  margin: 0;
+}
+.sr3d .sr3d.sheet.item .simple-item-header .edit-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding: 0.25rem;
+  height: 100%;
+  background-color: #1b1f24;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .simple-item-header .edit-panel .skill-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  color: #1df0ff;
   background-color: #1c364b;
   padding: 0.25rem;
-  margin-top: 0.25rem;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container {
-  margin-top: 0.25rem;
-  padding: 0.25rem;
-  background-color: #1b1f24;
+  align-items: center;
+  width: 100%;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations {
-  text-indent: 0rem;
-  width: 100%;
+.sr3d .sr3d.sheet.item .simple-item-header .edit-panel .skill-icons .danger-zone {
+  color: #ff0095;
 }
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations .specialization-name,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations .specialization-name {
+.sr3d .sr3d.sheet.item .simple-item-header .edit-panel .skill-icons a {
+  padding: 0.25rem;
+  font-size: 1rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .simple-item-header .item-image {
+  background-color: #1b1f24;
+  max-width: 5rem;
+  max-height: 5rem;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .simple-item-header .skill-value {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .skill-specialization-card .specialisation-container .specializations .specialization-value,
-.sr3d .language-grid-container .language-skills-masonry-grid .language-skill-category .language-card-container .specialisation-container .specializations .specialization-value {
-  text-indent: 0rem;
-  min-width: 3rem;
-  height: 2rem;
-  text-align: center;
   background-color: #1b1f24;
+  width: 100%;
+  height: 100%;
+  width: 5rem;
+  height: 5rem;
+  font-size: 4rem;
+  color: #1df0ff;
+  text-align: center;
+  justify-content: center;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .item-name {
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .item-name input[type="text"] {
+  margin: 0rem;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  height: 3rem;
+  background-color: #552791;
+  color: #1df0ff;
+  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .item-name input[type="text"]:focus {
+  background-color: #552791;
+  box-shadow: 0 0 10px 3px #1b1f24;
+  outline: none;
+}
+.sr3d .sr3d.sheet.item .item-name input[type="text"]::placeholder {
+  color: #c8d3f5;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component {
+  padding: 0rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  background: transparent;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background-container {
+  position: relative;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background {
+  position: realtive;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .linked-attribute {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #552791;
+  min-height: 3rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .linked-attribute .attribute-header {
+  flex: 0 1 auto;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .linked-attribute .attribute-select {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .linked-attribute select {
+  width: 100%;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background input[type="text"] {
+  background-color: #6825c0;
+  padding: 0rem;
+  margin-bottom: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section {
+  background: #552791;
+  margin-bottom: 0rem;
+  height: 100%;
+  padding: 0.5rem;
+  padding-bottom: 1rem;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specialization-add {
+  display: flex;
+  align-items: center;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specialization-add .add-specialization {
+  padding: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list {
+  display: flex;
+  flex-direction: column;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container {
+  padding: 0rem;
+  position: relative;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  background: #6825c0;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card .specialization-value {
+  text-align: center;
+  width: 3rem;
+  padding: 0rem;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-card input[type="text"] {
+  width: 100%;
+  margin: 0rem;
+  background-color: #552791;
+}
+.sr3d .sr3d.sheet.item .item-sheet-component .inner-background .specializations-section .specializations-list .specialization-container .specialization-actions {
+  z-index: 10;
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+}
+.sr3d .language-skill-section .subskill-card {
+  background-color: #552791;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  clip-path: polygon(1rem 0px, calc(100% - 1rem) 0px, 100% 1rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 1rem);
+}
+.sr3d .language-skill-section .subskill-card .language-envelope {
+  position: relative;
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .subskill-icons {
+  position: absolute;
+  bottom: -0.5rem;
+  right: 1rem;
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background-color: #6825c0;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display h1 {
+  margin: 0rem;
+}
+.sr3d .language-skill-section .subskill-card .language-envelope .language-skill-display .subskill-value {
+  width: 3rem;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid {
+  /* Set a fixed or max width and center it */
+  width: 40rem;
+  margin: 0 auto;
+  column-count: 2;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background {
+  display: grid;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card {
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card .stat-label {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .meta-human-grid .inner-background-container .inner-background .stat-card:hover {
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet {
+  /* Set a fixed or max width and center it */
+  width: 20rem;
+  margin: 0 auto;
+  column-count: 1;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background {
+  display: grid;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card {
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card .stat-label {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .ammunition-sheet .inner-background-container .inner-background .stat-card:hover {
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet {
+  /* Set a fixed or max width and center it */
+  width: 20rem;
+  margin: 0 auto;
+  column-count: 1;
+  column-gap: 0.5rem;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .item-sheet-component {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background {
+  display: grid;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card {
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card .stat-label {
+  background-color: #1c364b;
+}
+.sr3d .sr3d.sheet.item .weapon-sheet .inner-background-container .inner-background .stat-card:hover {
+  z-index: 10;
+}
+.sr3d .sr3d.sheet.item .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.sr3d .inventory-summary {
+  background-color: #1c364b;
+  font-size: 1.2rem;
+  min-height: 2rem;
+  color: #ff0095;
+  display: flex;
+  /* Ensure flexbox for alignment */
+  align-items: center;
+  /* Center vertically */
+  justify-content: center;
+  /* Center horizontally */
+  text-align: left;
+  /* Additional safety for text alignment */
+  text-transform: capitalize;
+  clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0rem);
+  /* Retain your custom corners */
+}
+.sr3d .inventory-summary-nth {
+  background-color: #1c364b;
+  font-size: 1.2rem;
+  min-height: 2rem;
+  color: #ff0095;
+  display: flex;
+  /* Ensure flexbox for alignment */
+  align-items: center;
+  /* Center vertically */
+  justify-content: center;
+  /* Center horizontally */
+  text-align: center;
+  /* Additional safety for text alignment */
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list {
+  /* Reset table defaults */
+  border-collapse: separate;
+  border-spacing: 0 0.25rem;
+  margin: 0rem;
+  padding: 0rem;
+  width: 100%;
+  border: none;
+  /* Ensures no outer table borders */
+  /* Remove any extra space or borders in thead, tbody, and tfoot */
+  /* Remove border from rows */
+  /* Reset cell defaults */
+  /* Style alternating rows */
+  /* Optional: Adjust font and layout for visibility */
+}
+.sr3d .inventory-list img {
+  max-height: 1rem;
+  max-width: 1rem;
+}
+.sr3d .inventory-list thead,
+.sr3d .inventory-list tbody,
+.sr3d .inventory-list tfoot {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+.sr3d .inventory-list tr {
+  color: #1df0ff;
+  border: none;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list th,
+.sr3d .inventory-list td {
+  margin: 0rem;
+  padding: 0rem;
+  border: none;
+  text-align: left;
+}
+.sr3d .inventory-list tbody tr:first-child {
+  padding-left: 0.5rem;
+}
+.sr3d .inventory-list tbody tr:nth-child(odd) {
+  box-shadow: inset 0 0 16px #1df0ff;
+  background-color: #1b1f24;
+}
+.sr3d .inventory-list tbody tr:nth-child(even) {
+  background-color: #1c364b;
+  box-shadow: inset 0 0 16px #1df0ff;
+}
+.sr3d .inventory-list tbody tr:last-child {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .inventory-list th {
+  font-weight: bold;
+  padding: 0.25rem;
+  /* Adjust header cell padding */
+}
+.sr3d .inventory-list td {
+  padding: 0.25rem;
+  /* Adjust data cell padding */
 }
 @font-face {
   font-family: 'Neonderthaw';
@@ -1538,60 +1784,81 @@
 .sr3d .sr3d .window-header {
   background-color: transparent;
   align-content: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-.sr3d .sr3d .window-header .window-title {
-  background-color: transparent;
   /* Keyframes for the scrolling effect */
 }
-.sr3d .sr3d .window-header .window-title .news-container {
-  overflow: hidden;
-  /* Hide overflowing text */
-  white-space: nowrap;
-  /* Prevent text from wrapping */
-  position: relative;
-  /* For positioning the scrolling text */
-  width: 100%;
-  /* Full width of the container */
+.sr3d .sr3d .window-header h4.window-title {
+  display: none;
+}
+.sr3d .sr3d .window-header .passport-injection {
+  max-width: 1rem;
+  text-indent: 0rem;
+  margin: 0rem;
+  padding: 0rem;
+  color: #ff0095;
+}
+.sr3d .sr3d .window-header .left-gradient,
+.sr3d .sr3d .window-header .right-gradient {
   height: 100%;
+  min-width: 0.5rem;
+  max-width: 1rem;
+}
+.sr3d .sr3d .window-header .right-gradient {
+  right: 0;
+  background: linear-gradient(to right, #ff0095 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
+}
+.sr3d .sr3d .window-header .left-gradient {
+  left: 0;
+  background: linear-gradient(to left, #ff0095 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
+}
+.sr3d .sr3d .window-header .news-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 1rem;
   display: flex;
   flex: 1;
-  /* Allow it to grow in a flex container */
   align-items: center;
   text-align: center;
+  backdrop-filter: blur(8px);
 }
-.sr3d .sr3d .window-header .window-title .news-feed {
-  color: #1df0ff;
-  text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
-  padding: 0rem;
-  margin: 0rem;
-  line-height: 3rem;
-  font-size: 1.5rem;
-  display: inline-block;
-  /* Ensure the text stays on one line */
+.sr3d .sr3d .window-header .news-container::before,
+.sr3d .sr3d .window-header .news-container::after {
+  content: "";
   position: absolute;
-  /* Needed for movement */
+  top: 0;
+  bottom: 0;
+  width: 10rem;
+  pointer-events: none;
+  z-index: 3;
+}
+.sr3d .sr3d .window-header .news-container::before {
+  left: 0;
+  width: 25%;
+  background: linear-gradient(to right, #ff0095 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 100%);
+}
+.sr3d .sr3d .window-header .news-container::after {
+  width: 25%;
+  right: 0;
+  background: linear-gradient(to left, #ff0095 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 100%);
+}
+.sr3d .sr3d .window-header .news-feed {
+  line-height: 0rem;
+  display: inline-block;
+  position: absolute;
   animation: scroll-left 25s linear infinite;
-  /* Apply scrolling animation */
   align-items: center;
   text-align: center;
-  /* Make it take all available space */
-  min-width: 100%;
-  /* Prevent shrinking */
-  min-height: 100%;
-  /* Prevent shrinking */
   white-space: nowrap;
-  /* Ensure the text doesn't wrap */
 }
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
+    transform: translateX(150%);
     /* Start off-screen to the right */
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-150%);
     /* End off-screen to the left */
   }
 }

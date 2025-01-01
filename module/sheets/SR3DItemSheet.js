@@ -17,23 +17,36 @@ export default class SR3DItemSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/sr3d/templates/sheets/${this.item.type}-sheet.hbs`;
+        return `systems/sr3d/templates/sheets/magic-sheet.hbs`;
     }
 
     async getData() {
         const ctx = super.getData();
-        
+    
         // Add attributes to the context
         ctx.attributes = baseAttributeDropdown;
         ctx.config = CONFIG.sr3d;
         ctx.system = ctx.item.system;
         ctx.isOwned = Boolean(this.item.parent);
+    
+        if (ctx.item.type === "metahuman") {
+            this._getMetahumanData(ctx);
+        }
+        else if (ctx.item.type === "ammunition") {
+            ctx.availableWeapons = ItemDataService.availableWeapons(ctx);
+            ctx.compatibleWeapons = ItemDataService.compatibleWeapons(ctx);
+            SR3DLog.inspect(ctx.system.category);
+        }
+        else if (ctx.item.type === "weapon") {
+            ctx.weaponDamage = ItemDataService.weaponDamage(ctx);
+            ctx.system.category = "apple";
+        }
 
-        if(ctx.item.type === "metahuman") {this._getMetahumanData(ctx);} 
-        //else if(ctx.item.type === "ammunition") { ctx.legality = ItemDataService.legality(ctx);}
-        
+        console.log("SR3DItemSheet has been Called");
+    
         return ctx;
     }
+    
 
     _getMetahumanData(ctx) {
         ctx.lifespan = ItemDataService.lifespan(ctx);
@@ -75,20 +88,83 @@ export default class SR3DItemSheet extends ItemSheet {
             html.find('.undo-skill').click(this.item.onUndoSkill.bind(this.item));
             html.find('.buy-specialization').click(event => this.item.onBuySpecialization(event));
             html.find('.undo-specialization').click(event => this.item.onUndoSpecialization(event));
-            
+
 
             html.find('.add-specialization').click(this.item.onAddSpecialization.bind(this.item));
             html.find('.delete-specialization').click(this.item.onDeleteSpecialization.bind(this.item));
             html.find('select[name="system.skill.activeSkill.linkedAttribute"]').on('change', this._onActiveSkillLinkedAttributeChange.bind(this));
-        } else if (type === "magicTradition") {
+        } else if (type === "magic") {
             html.find('select[name="system.metahuman.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
-            html.find('select[name="system.magicTradition.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
-        }
+            html.find('select[name="system.magic.priority"]').on('change', this._onDynamicPriorityChange.bind(this));
+        } else if (type === "ammunition") {
+            html.find('#to-compatible').click(() => this._moveToCompatible(html));
+            html.find('#to-available').click(() => this._moveToAvailable(html));
+            html.find('.rounds-editable, .cost-editable').on('input', this._updateTotalCost.bind(this, html));
+        }        
 
-        // General cases
         html.find('.delete-owned-instance').on('click', this._deleteOwnedInstance.bind(this));
-
+       
     }
+
+  
+    
+
+    _updateTotalCost(html, event) {
+        const target = event.currentTarget;
+        let fieldName;
+    
+        if (target.classList.contains('rounds-editable')) {
+            fieldName = 'system.rounds';
+        } else if (target.classList.contains('cost-editable')) {
+            fieldName = 'system.cost';
+        } else {
+            return; 
+        }
+        
+        let newValue = target.textContent.trim();
+
+        newValue = parseFloat(newValue);
+        if (isNaN(newValue) || newValue < 0) {
+            newValue = 0;
+            target.textContent = newValue;
+        }
+    
+        html.find(`input[name="${fieldName}"]`).val(newValue);
+    
+        const rounds = parseFloat(html.find('input[name="system.rounds"]').val()) || 0;
+        const cost = parseFloat(html.find('input[name="system.cost"]').val()) || 0;
+    
+        const totalCost = rounds * cost;
+    
+        html.find('.total-cost h1').text(`${totalCost}`);
+    }
+    
+    _moveToCompatible(html) {
+        const selectedIds = [...html.find('#available-weapons option:selected')].map(o => o.value);
+        if (!selectedIds.length) return;
+      
+        const currentCompatible = foundry.utils.getProperty(this.object, 'system.compatibleWeaponIds') || [];
+        const updatedCompatible = [...new Set([...currentCompatible, ...selectedIds])];
+      
+        this.object.update({ 'system.compatibleWeaponIds': updatedCompatible })
+          .then(() => {
+            this.render(false);
+          });
+      }
+      
+      _moveToAvailable(html) {
+        const selectedIds = [...html.find('#compatible-weapons option:selected')].map(o => o.value);
+      
+        if (!selectedIds.length) return;
+      
+        const currentCompatible = foundry.utils.getProperty(this.object, 'system.compatibleWeaponIds') || [];
+        const updatedCompatible = currentCompatible.filter(id => !selectedIds.includes(id));
+      
+        this.object.update({ 'system.compatibleWeaponIds': updatedCompatible })
+          .then(() => {
+            this.render(false);
+          });
+      }
 
     async close(options = {}) {
         this.item.onClose();
@@ -124,7 +200,7 @@ export default class SR3DItemSheet extends ItemSheet {
         event.preventDefault();
 
         // Determine the correct field from the name attribute
-        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magicTradition.priority"
+        const fieldName = event.target.name; // e.g., "system.metahuman.priority" or "system.magic.priority"
         const selectedPriority = event.target.value;
 
         // Update the correct field dynamically

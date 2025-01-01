@@ -1,0 +1,44 @@
+<div class="possessions-tabs">
+    <div class="possession-utility-bar">
+        <nav class="tabs">
+            <a class="item" data-tab="loadout">
+                <h2>{{localize "sr3d.actor.possessions.loadout"}}</h2>
+            </a>
+            <a class="item" data-tab="inventory">
+                <h2>{{localize "sr3d.actor.possessions.inventory"}}</h2>
+            </a>
+            <a class="item" data-tab="arsenal">
+                <h2>{{localize "sr3d.actor.possessions.arsenal"}}</h2>
+            </a>
+            <a class="item" data-tab="arcane">
+                <h2>{{localize "sr3d.actor.possessions.arcane"}}</h2>
+            </a>
+            <a class="item" data-tab="garage">
+                <h2>{{localize "sr3d.actor.possessions.garage"}}</h2>
+            </a>
+            <a class="item" data-tab="cyberwear">
+                <h2>{{localize "sr3d.item.cyberwear.implants"}}</h2>
+            </a>
+        </nav>
+    </div>
+</div>
+<div class="possessions-tab-content">
+    <section class="tab" data-tab="inventory">
+          {{> "systems/sr3d/templates/components/possessions/inventory.hbs" possessions=system.possessions }}
+    </section>
+    <section class="tab" data-tab="loadout">
+           {{> "systems/sr3d/templates/components/possessions/loadout.hbs" possessions}}
+    </section>
+    <section class="tab" data-tab="arsenal">
+          {{> "systems/sr3d/templates/components/possessions/arsenal.hbs" possessions}}
+    </section>
+    <section class="tab" data-tab="arcane">
+           {{> "systems/sr3d/templates/components/possessions/arcane.hbs" possessions}}
+    </section>
+    <section class="tab" data-tab="garage">
+          {{> "systems/sr3d/templates/components/possessions/garage.hbs" possessions}}
+    </section>
+    <section class="tab" data-tab="cyberwear">
+          {{> "systems/sr3d/templates/components/possessions/garage.hbs" possessions}}
+    </section>
+</div>

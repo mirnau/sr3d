@@ -12,12 +12,17 @@
             "astralProjection": "Astral Projection"
         },
         "legality": {
-            "general": "General",
+            "legal": "Legal",
             "permissable": "Persmissable",
             "restricted": "Restricted",
             "forbidden": "Forbidden"
         },
-
+        "firingMode": {
+            "singleshot": "Single Shot",     
+            "semiauto": "Semi Auto",
+            "burstfire": "Burst Fire",        
+            "fullauto": "Full Auto"     
+        },
         "createItem": {
             "weapon": "Weapon",
             "vehicle": "Vehicle",
@@ -31,13 +36,19 @@
             "misc": "Misc",
             "metahuman": "Metahuman",
             "skill": "Skill",
-            "magicTradition": "MagicTradition",
+            "magic": "Magic",
             "karma": "Karma"
         },
         "actorTypes": {
-             "playerCharacter": "Player Character"
+            "playerCharacter": "Player Character"
         },
-
+        "weaponDamage": {
+            "stun": "Stun", 
+            "light": "Light",   
+            "moderate": "Moderate",
+            "serious": "Serious", 
+            "deadly": "Deadly"  
+        },
         "sheet": {
             "addSkill": "Add a skill",
             "newItem": "New item",
@@ -50,7 +61,6 @@
             "undo": "Undo",
             "notes": "Notes"
         },
-
         "characterCreation": {
             "instruction": "Humans are weighted at 64% and magic users at 4%.",
             "selectAnOption": "Select",
@@ -153,15 +163,17 @@
         },
         "item": {
             "weapon": {
+                "weapon": "Weapon",
+                "weapons": "Weapons",
                 "conceal": "Conceal",
-                "ammo": "Ammo",
+                "clip": "Clip",
                 "mode": "Mode",
                 "damage": "Damage",
                 "range": "Range",
                 "weight": "Weight",
                 "legal": "Legal",
-                "recoilComp": "Recoil Compensation",
-                "newWeapon": "New Weapon" 
+                "recoilComp": "Recoil Comp.",
+                "newWeapon": "New Weapon"
             },
             "metahuman": {
                 "name": "Metahuman Type",
@@ -210,7 +222,20 @@
                 "weight": "Weight"
             },
             "ammunition": {
-                "weight": "Weight"
+                "ammunition": "Ammunition",
+                "rounds": "Rounds",
+                "types": {
+                    "regular": "Regular",
+                    "apds": "Armor-Piercing Discarding Sabot)",
+                    "belt": "Belt",
+                    "assaultCanon": "Assault Canon",
+                    "explosive": "Explosive",
+                    "exexplosive": "EX Explosive",
+                    "flechette": "Flechette",
+                    "tracer": "Tracer",
+                    "tracerdart": "Tracer Dart",
+                    "gel": "Gel"
+                }
             },
             "apparel": {
                 "conceal": "Conceal",
@@ -228,6 +253,7 @@
                 "modifier": "Modifier Amount"
             },
             "cyberwear": {
+                "implants": "Implants",
                 "essence": "Essence Cost"
             },
             "misc": {
@@ -243,17 +269,16 @@
                 "conceal": "Conceal",
                 "legality": "Legal Status",
                 "weight": "Weight",
-                "restrictionLevel": "Restriction Level",
-                "category": "Offence Category"
+                "restrictionLevel": "Restr. Lvl",
+                "category": "Category",
+                "type": "Type"
             },
-            
-            
             "skill": {
                 "newSkill": "New Skill",
                 "attributePoints": "Attribute Points",
-                "activePoints":"Active Skill Points",
-                "knowledgePoints":"Knowledge Skill Points",
-                "languagePoints":"Language Skill Points",
+                "activePoints": "Active Skill Points",
+                "knowledgePoints": "Knowledge Skill Points",
+                "languagePoints": "Language Skill Points",
                 "skills": "Skills",
                 "placeholder": "Hold my beer...",
                 "name": "Skill",
@@ -271,13 +296,12 @@
                 "speak": "Speak",
                 "write": "Write"
             },
-
-            "magicTradition": {
+            "magic": {
                 "type": "Type of Mage",
                 "focus": "Focus",
                 "drainResistanceAttribute": "Drain Resistance Attribute",
                 "totem": "Totem Animal",
-                "newMagicTradition": "New Magic Tradition"
+                "newMagic": "New Magic Tradition"
             }
         }
     }
