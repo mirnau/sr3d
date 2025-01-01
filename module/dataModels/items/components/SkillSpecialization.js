@@ -1,13 +1,15 @@
+
 export default class SkillSpecializationModel extends foundry.abstract.DataModel {
     static defineSchema() {
         return {
-            conceal: new foundry.data.fields.NumberField({
+            name: new foundry.data.fields.StringField({
                 required: true,
-                default: 0,
+                initial: ""
             }),
-            weight: new foundry.data.fields.NumberField({
+            value: new foundry.data.fields.NumberField({
                 required: true,
-                default: 0.0,
+                integer: true,
+                initial: 0,
             }),
         };
     }

@@ -48,13 +48,16 @@ export default class SR3DItemSheet extends ItemSheet {
                 }
             });
         }
+        console.log("Final State of Specializations on Close:", this.item.system.activeSkill.specializations);
         this.item.onClose();
+        console.log("Final State of Specializations on Close:", this.item.system.activeSkill.specializations);
         return super.close(options);
     }
 
     activateListeners(html) {
         super.activateListeners(html);
 
+        //Works as expected
         html.find('.buy-skill').click(this.item.onBuySkill.bind(this.item));
         html.find('.undo-skill').click(this.item.onUndoSkill.bind(this.item));
 

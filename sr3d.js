@@ -156,24 +156,23 @@ function registerHooks() {
             CONFIG.Actor.typeLabels[type] = game.i18n.localize(locKey);
         }
         */
-
-        //CONFIG.Item.dataModels.weapon = WeaponModel;
-        //CONFIG.Item.dataModels.ammunition = AmmunitionModel;
         
         Items.unregisterSheet(flags.core, ItemSheet);
         Actors.unregisterSheet(flags.core, ActorSheet);
 
+        // NOTE: Following pattern is necessary for databinding to work
+        // https://foundryvtt.com/api/classes/foundry.abstract.TypeDataModel.html
         CONFIG.Actor.dataModels = { 
-            character: CharacterModel
+            "sr3d.character": CharacterModel
         };
 
         CONFIG.Item.dataModels = {
-            weapon: WeaponModel,
-            ammunition: AmmunitionModel,
-            skill: SkillModel,
-            karma: KarmaModel,
-            metahuman: MetahumanModel,
-            magic: MagicModel
+            "sr3d.weapon": WeaponModel,
+            "sr3d.ammunition": AmmunitionModel,
+            "sr3d.skill": SkillModel,
+            "sr3d.karma": KarmaModel,
+            "sr3d.metahuman": MetahumanModel,
+            "sr3d.magic": MagicModel
         }
 
         Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });

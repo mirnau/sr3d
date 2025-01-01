@@ -14,15 +14,6 @@ export class SR3DItem extends Item {
         this.karmaHandler = null;
 
         this.isNotCharacterCreation = false;
-
-        console.log("SR3D ITEM has been called");
-        console.log("SR3D ITEM has been called");
-        console.log("SR3D ITEM has been called");
-        console.log("SR3D ITEM has been called");
-        console.log("SR3D ITEM has been called");
-        console.log("SR3D ITEM has been called");
-
-
     }
 
     _isNotCharacterCreation() {
