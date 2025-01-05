@@ -24,7 +24,8 @@
         "styles/sr3d-chummer-light.css"
     ],
     "actorTypes": [
-        "character"
+        "character",
+        "newsbroadcast"
     ],
     "itemTypes": [
         "weapon",
@@ -32,11 +33,15 @@
         "skill",
         "karma",
         "metahuman",
-        "magic"
+        "magic",
+        "transaction"
    ],
     "documentTypes": {
         "Actor" : {
-            "character": {}
+            "character": {},
+            "newsbroadcast": {
+                "label": "News Broadcast"
+            }
         },
         "Item": {
             "weapon": {},
@@ -44,7 +49,8 @@
             "skill": {},
             "karma": {},
             "metahuman": {},
-            "magic": {}
+            "magic": {},
+            "transaction": {}
         }
     },
     "packs": [

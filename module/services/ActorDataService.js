@@ -130,4 +130,14 @@ export class ActorDataService {
             resourcesPriorities: { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 }
         };
     }
+
+    static getTransactions(items) {
+        const transactions = items.filter(item => item.type === "transaction");
+        return {
+            all: transactions,
+            assets: transactions.filter(item => item.system.type === "Income"),
+            expenses: transactions.filter(item => item.system.type === "Expense"),
+            debts: transactions.filter(item => item.system.type === "Debt"),
+        };
+    }
 }

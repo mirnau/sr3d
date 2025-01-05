@@ -1,0 +1,133 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <div class="transaction-sheet">
+        <!-- First "panel" / block -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+
+                    <!-- Header-ish -->
+                    <div class="simple-item-header">
+                        <div class="item-image">
+                            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
+                        </div>
+                        <div class="edit-panel">
+                            <div class="transaction-title">
+                                <h1 class="h1">{{localize "sr3d.item.transaction.transaction"}}</h1>
+                            </div>
+                            <!-- If owned, show any icons you'd want -->
+                            {{#if isOwned}}
+                            <div class="transaction-icons">
+                                <a class="delete-owned-instance danger-zone" title="{{localize "
+                                    sr3d.sheet.deleteTransaction"}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <!-- Name field -->
+                    <h1>
+                        <input type="text" class="item-name" name="name" placeholder="{{localize 'Name'}}"
+                            value="{{item.name}}" />
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second "panel" / block -->
+        <div class="item-sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="stat-grid">
+                        <!-- Amount -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.amount"}}</h4>
+                            </div>
+                            <div>
+                                <h1 class="no-margin distribute-horizontally">¥</h1>
+                                <input type="number" name="system.amount" value="{{system.amount}}"
+                                    class="stat-value" />
+                            </div>
+                        </div>
+
+                        <!-- Type -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.type"}}</h4>
+                            </div>
+
+                            <select name="system.type">
+                                <option value="Income" {{#if (eq system.type "Income" )}}selected{{/if}}>{{localize
+                                    "sr3d.item.transaction.income"}}</option>
+                                <option value="Expense" {{#if (eq system.type "Expense" )}}selected{{/if}}>{{localize
+                                    "sr3d.item.transaction.expense"}}</option>
+                                <option value="Debt" {{#if (eq system.type "Debt" )}}selected{{/if}}>{{localize
+                                    "sr3d.item.transaction.debt"}}</option>
+                            </select>
+
+                        </div>
+
+                        <!-- Creditor (conditional) -->
+                        {{#if (eq system.type "Debt")}}
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.creditor"}}</h4>
+                            </div>
+
+                            <select name="system.creditorID" data-dtype="String">
+                                {{#each actors as |actor|}}
+                                <option value="{{actor.id}}" data-actor-name="{{actor.name}}" {{#if (eq actor.id
+                                    system.creditorID)}}selected{{/if}}>
+                                    {{actor.name}}
+                                </option>
+                                {{/each}}
+                            </select>
+
+
+                        </div>
+
+                        <!-- Interest Per Month (conditional) -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.interest"}}</h4>
+                            </div>
+                            <div>
+                                <input type="number" name="system.interestPerMonth" value="{{system.interestPerMonth}}"
+                                    class="stat-value" />
+                                <h1 class="no-margin distribute-horizontally">%</h1>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <!-- Recurrent -->
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.recurrent"}}</h4>
+                            </div>
+
+                            <input type="checkbox" name="system.recurrent" {{#if system.recurrent}}checked{{/if}} />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="item-sheet-component">
+                <div class="inner-background-container">
+                    <div class="fake-shadow"></div>
+                    <div class="inner-background">
+                        <h3 class="no-margin">{{localize "sr3d.sheet.notes"}}</h3>
+                        <div class="editor-field">
+                            {{editor '' content=system.description owner=owner button=true editable=editable}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

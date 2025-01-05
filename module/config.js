@@ -30,6 +30,26 @@ sr3d.itemTypes = {
     karma: "sr3d.createItem.karma"
 }
 
+sr3d.transaction = { 
+    transaction: "sr3d.item.transaction.transaction",
+    transactions: "sr3d.item.transaction.transactions",
+    amount: "sr3d.item.transaction.amount",
+    recurrent: "sr3d.item.transaction.recurrent",
+    type: "sr3d.item.transaction.type",
+    description: "sr3d.item.transaction.description",
+    assets: "sr3d.item.transaction.assets",
+    income: "sr3d.item.transaction.income",
+    expenses: "sr3d.item.transaction.expenses",
+    expense: "sr3d.item.transaction.expense",
+    debts: "sr3d.item.transaction.debts",
+    debt: "sr3d.item.transaction.debt",
+    payment: "sr3d.item.transaction.payment",
+    type: "sr3d.item.transaction.type",
+    interest: "sr3d.item.transaction.interest",
+    creditor: "sr3d.item.transaction.creditor",
+    total: "sr3d.item.transaction.total"
+}
+
 sr3d.actorTypes = {
     playerCharacter: "sr3d.actorTypes.playerCharacter",
 }
@@ -37,10 +57,6 @@ sr3d.actorTypes = {
 sr3d.health = {
     health: "sr3d.actor.health.health",
     damageTracker: "sr3d.actor.health.damageTracker"
-}
-
-sr3d.budget = {
-    budget: "sr3d.actor.budget.budget"
 }
 
 sr3d.ammunition = {

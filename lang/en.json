@@ -127,9 +127,6 @@
                 "health": "Health",
                 "damageTracker": "Damage Tracker"
             },
-            "budget": {
-                "budget": "Budget"
-            },
             "possessions": {
                 "possessions": "Possessions",
                 "inventory": "Inventory",
@@ -195,6 +192,26 @@
                 "newMetaHuman": "New Metahuman",
                 "description": "Enter the text for the metahuman here..."
             },
+            "transaction": {
+                "transaction": "Transaction",
+                "amount": "Amount",
+                "recipient": "Recipient",
+                "sender": "Sender",
+                "date": "Date",
+                "description": "Description",
+                "income": "Income",
+                "assets": "Assets",
+                "expense": "Expense",
+                "expenses": "Expenses",
+                "debt": "Debt",
+                "debts": "Debts",
+                "type": "Type",
+                "recurrent": "Recurrent",
+                "interest": "Interest",
+                "creditor": "Creditor",
+                "total": "Total"
+            },
+
             "vehicle": {
                 "handling": "Handling",
                 "speed": "Speed",

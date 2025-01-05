@@ -1,0 +1,105 @@
+<div>
+    <!-- Assets Table -->
+    <div class="assets">
+        <h2>{{localize "sr3d.item.transaction.assets"}}</h2>
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>{{localize "sr3d.item.transaction.amount"}}</th>
+                    <th>{{localize "sr3d.item.transaction.description"}}</th>
+                    <th>{{localize "sr3d.item.transaction.recurrent"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transactions.assets as |transaction|}}
+                <tr>
+                    <td>{{transaction.system.amount}}</td>
+                    <td><a class="open-owned-item" data-item-id="{{transaction.id}}">{{transaction.name}}</a></td>
+                    <td>{{#if transaction.system.recurrent}}<i class="fa fa-repeat">{{/if}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td>{{localize "sr3d.item.transaction.total"}}: {{sum "system.amount" transactions.assets}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Expenses Table -->
+    <div class="expenses">
+        <h2>{{localize "sr3d.item.transaction.expenses"}}</h2>
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>{{localize "sr3d.item.transaction.amount"}}</th>
+                    <th>{{localize "sr3d.item.transaction.description"}}</th>
+                    <th>{{localize "sr3d.item.transaction.recurrent"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transactions.expenses as |transaction|}}
+                <tr>
+                    <td>{{transaction.system.amount}}</td>
+                    <td><a class="open-owned-item" data-item-id="{{transaction.id}}">{{transaction.name}}</a></td>
+                    <td>{{#if transaction.system.recurrent}}<i class="fa fa-repeat">{{/if}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td>{{localize "sr3d.item.transaction.total"}}: {{sum "system.amount" transactions.expenses}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Debts Table -->
+    <div class="debts">
+        <h2>{{localize "sr3d.item.transaction.debts"}}</h2>
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>{{localize "sr3d.item.transaction.amount"}}</th>
+                    <th>{{localize "sr3d.item.transaction.creditor"}}</th>
+                    <th>{{localize "sr3d.item.transaction.interest"}}</th>
+                    <th>{{localize "sr3d.item.transaction.recurrent"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transactions.debts as |transaction|}}
+                <tr>
+                    <td>{{transaction.system.amount}}</td>
+                    <td><a class="creditor" data-actor-id="{{transaction.system.creditorID}}">{{transaction.system.creditorName}}</a></td>
+                    <td>{{transaction.system.interestPerMonth}}</td>
+                    <td>{{#if transaction.system.recurrent}}<i class="fa fa-repeat">{{/if}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td>{{localize "sr3d.item.transaction.total"}}: {{sum "system.amount" transactions.debts}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Table -->
+    <div class="total">
+        <h2>{{localize "sr3d.item.transaction.total"}}</h2>
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>{{localize "sr3d.item.transaction.amount"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{localize "sr3d.item.transaction.total"}}: {{sum "system.amount" transactions.debts transactions.credits transactions.assets transactions.expenses}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -42,6 +42,10 @@ import KarmaModel from "./module/dataModels/items/KarmaModel.js";
 import MetahumanModel from "./module/dataModels/items/Metahuman.js";
 import MagicModel from "./module/dataModels/items/MagicModel.js";
 import CharacterModel from "./module/dataModels/actor/CharacterModel.js";
+import NewsBroadcastModel from "./module/dataModels/actor/NewsBroadcastModel.js";
+import NewsBroadcastSheet from "./module/sheets/NewsBroadcastSheet.js";
+import TransactionSheet from "./module/sheets/TransactionSheet.js";
+import TransactionModel from "./module/dataModels/items/TransactionModel.js";
 
 //NOTE: Recursively gather .hbs files from the folder structure
 async function registerTemplatesFromPathsAsync() {
@@ -75,6 +79,7 @@ function registerHooks() {
         initMetahumanMasonry(app, html, data);
     });
 
+
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
@@ -97,14 +102,14 @@ function registerHooks() {
 
 
     // Attach Hooks for ActorSheet and ItemSheet
-    Hooks.on(hooks.renderSR3DActorSheet, (app, html) => {
+    Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
         }
     });
 
-    Hooks.on(hooks.renderSR3DItemSheet, (app, html) => {
+    Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
@@ -148,7 +153,8 @@ function registerHooks() {
         // NOTE: Following pattern is necessary for databinding to work
         // https://foundryvtt.com/api/classes/foundry.abstract.TypeDataModel.html
         CONFIG.Actor.dataModels = {
-            "sr3d.character": CharacterModel
+            "sr3d.character": CharacterModel,
+            "sr3d.newsbroadcast": NewsBroadcastModel
         };
 
         CONFIG.Item.dataModels = {
@@ -157,7 +163,8 @@ function registerHooks() {
             "sr3d.skill": SkillModel,
             "sr3d.karma": KarmaModel,
             "sr3d.metahuman": MetahumanModel,
-            "sr3d.magic": MagicModel
+            "sr3d.magic": MagicModel,
+            "sr3d.transaction": TransactionModel
         }
 
         Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
@@ -165,13 +172,34 @@ function registerHooks() {
         Items.registerSheet(flags.namespace, KarmaSheet, { types: ["karma"], makeDefault: true });
         Items.registerSheet(flags.namespace, MetahumanSheet, { types: ["metahuman"], makeDefault: true });
         Items.registerSheet(flags.namespace, SkillSheet, { types: ["skill"], makeDefault: true });
+        Items.registerSheet(flags.namespace, TransactionSheet, { types: ["transaction"], makeDefault: true });
 
         Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
 
-        Actors.registerSheet(flags.sr3d, CharacterSheet, { makeDefault: true });
+        Actors.registerSheet(flags.namespace, CharacterSheet, { types: ["character"], makeDefault: true });
+        Actors.registerSheet(flags.namespace, NewsBroadcastSheet, { types: ["newsbroadcast"], makeDefault: true });
 
 
         registerTemplatesFromPathsAsync();
+
+        Handlebars.registerHelper('sum', function (field, ...args) {
+            args.pop(); // Remove the options argument
+
+            let total = 0;
+
+            args.forEach(array => {
+                if (Array.isArray(array)) {
+                    array.forEach(item => {
+                        const value = parseFloat(foundry.utils.getProperty(item, field));
+                        if (!isNaN(value)) {
+                            total += value;
+                        }
+                    });
+                }
+            });
+
+            return total.toFixed(2);
+        });
 
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
@@ -196,11 +224,7 @@ function registerHooks() {
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
-        /*
-                Handlebars.registerHelper('getProperty', function (obj, attr) {
-                    return obj[attr];
-                });
-        */
+
         Handlebars.registerHelper('log', function (value) {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something

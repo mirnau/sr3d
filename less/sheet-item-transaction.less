@@ -1,0 +1,20 @@
+.transaction-sheet {
+    .stat-card {
+      /* The second div inside .stat-card is the container holding the yen sign + input */
+      > div:nth-of-type(2) {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+  
+        h1 {
+          margin: 0; /* in case .no-margin isn't enough */
+          display: inline-block;
+        }
+  
+        input {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  
