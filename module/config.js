@@ -38,7 +38,7 @@ sr3d.transaction = {
     type: "sr3d.item.transaction.type",
     description: "sr3d.item.transaction.description",
     assets: "sr3d.item.transaction.assets",
-    income: "sr3d.item.transaction.income",
+    asset: "sr3d.item.transaction.asset",
     expenses: "sr3d.item.transaction.expenses",
     expense: "sr3d.item.transaction.expense",
     debts: "sr3d.item.transaction.debts",
@@ -47,7 +47,8 @@ sr3d.transaction = {
     type: "sr3d.item.transaction.type",
     interest: "sr3d.item.transaction.interest",
     creditor: "sr3d.item.transaction.creditor",
-    total: "sr3d.item.transaction.total"
+    total: "sr3d.item.transaction.total",
+    creditstick: "sr3d.item.transaction.creditstick"
 }
 
 sr3d.actorTypes = {
@@ -227,7 +228,7 @@ sr3d.character = {
     looks: "sr3d.actor.character.looks",
     quote: "sr3d.actor.character.quote",
     ratsrace: "sr3d.actor.character.ratsrace",
-    income: "sr3d.actor.character.income",
+    asset: "sr3d.actor.character.asset",
     post: "sr3d.actor.character.post",
     expenses: "sr3d.actor.character.expenses",
     debts: "sr3d.actor.character.debts",

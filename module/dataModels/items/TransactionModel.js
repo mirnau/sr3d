@@ -9,10 +9,14 @@ export default class TransactionModel extends foundry.abstract.DataModel {
         required: true,
         initial: false,
       }),
+      isCreditStick: new foundry.data.fields.BooleanField({
+        required: true,
+        initial: false,
+      }),
       type: new foundry.data.fields.StringField({
         required: true,
-        choices: ["Payment", "Income", "Expense", "Debt"],
-        initial: "Income",
+        choices: ["Asset", "Expense", "Debt"],
+        initial: "Expense",
       }),
       description: new foundry.data.fields.StringField({
         required: true,

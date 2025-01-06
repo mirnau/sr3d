@@ -62,8 +62,8 @@
                             </div>
 
                             <select name="system.type">
-                                <option value="Income" {{#if (eq system.type "Income" )}}selected{{/if}}>{{localize
-                                    "sr3d.item.transaction.income"}}</option>
+                                <option value="Asset" {{#if (eq system.type "Asset" )}}selected{{/if}}>{{localize
+                                    "sr3d.item.transaction.asset"}}</option>
                                 <option value="Expense" {{#if (eq system.type "Expense" )}}selected{{/if}}>{{localize
                                     "sr3d.item.transaction.expense"}}</option>
                                 <option value="Debt" {{#if (eq system.type "Debt" )}}selected{{/if}}>{{localize
@@ -87,8 +87,6 @@
                                 </option>
                                 {{/each}}
                             </select>
-
-
                         </div>
 
                         <!-- Interest Per Month (conditional) -->
@@ -103,15 +101,28 @@
                             </div>
                         </div>
                         {{/if}}
+
                         <!-- Recurrent -->
                         <div class="stat-card">
                             <div>
                                 <h4 class="no-margin">{{localize "sr3d.item.transaction.recurrent"}}</h4>
                             </div>
 
-                            <input type="checkbox" name="system.recurrent" {{#if system.recurrent}}checked{{/if}} />
-
+                            <input type="checkbox" id="recurrent-checkbox" name="system.recurrent" {{#if system.recurrent}}checked{{/if}} {{#if
+                                system.creditStick}}disabled{{/if}} />
                         </div>
+
+                        <!-- isCreditStick (conditional) -->
+                        {{#if (eq system.type "Asset")}}
+                        <div class="stat-card">
+                            <div>
+                                <h4 class="no-margin">{{localize "sr3d.item.transaction.creditstick"}}</h4>
+                            </div>
+
+                            <input type="checkbox" id="creditstick-checkbox" name="system.isCreditStick" {{#if
+                                system.isCreditStick}}checked{{/if}} />
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

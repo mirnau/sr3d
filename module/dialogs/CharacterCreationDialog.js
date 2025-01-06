@@ -264,7 +264,7 @@ export class CharacterCreationDialog extends Dialog {
         const systemUpdates = {
             "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
             "system.creation.activePoints": dialogData.skillsPriorities[selectedSkillsPriority],
-            "system.ratsrace.income.post": {
+            "system.ratsrace.asset.post": {
                 amount: dialogData.resourcesPriorities[selectedResourcesPriority],
                 recurrent: false,
             },

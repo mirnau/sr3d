@@ -135,7 +135,7 @@ export class ActorDataService {
         const transactions = items.filter(item => item.type === "transaction");
         return {
             all: transactions,
-            assets: transactions.filter(item => item.system.type === "Income"),
+            assets: transactions.filter(item => item.system.type === "Asset"),
             expenses: transactions.filter(item => item.system.type === "Expense"),
             debts: transactions.filter(item => item.system.type === "Debt"),
         };

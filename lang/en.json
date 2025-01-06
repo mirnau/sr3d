@@ -94,7 +94,7 @@
                 "looks": "Looks",
                 "quote": "Quote",
                 "ratsrace": "Rat's Race",
-                "income": "Income",
+                "asset": "Asset",
                 "post": "Post",
                 "expenses": "Expenses",
                 "debts": "Debts",
@@ -199,7 +199,7 @@
                 "sender": "Sender",
                 "date": "Date",
                 "description": "Description",
-                "income": "Income",
+                "asset": "Asset",
                 "assets": "Assets",
                 "expense": "Expense",
                 "expenses": "Expenses",
@@ -209,7 +209,8 @@
                 "recurrent": "Recurrent",
                 "interest": "Interest",
                 "creditor": "Creditor",
-                "total": "Total"
+                "total": "Total",
+                "creditstick": "CreditStick"
             },
 
             "vehicle": {
