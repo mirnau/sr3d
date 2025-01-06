@@ -2,6 +2,7 @@ import { ActorDataService } from '../services/ActorDataService.js';
 import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { baseAttributes, derivedAttributes, flags, itemCategory } from '../helpers/CommonConsts.js'
 import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
+import EcgAnimator from '../helpers/EcgAnimator.js';
 
 export default class CharacterSheet extends ActorSheet {
 
@@ -187,6 +188,49 @@ export default class CharacterSheet extends ActorSheet {
                 details.removeAttribute('open');
             }
         });
+
+        ////////////////////////////////////////////////////////////////////
+        // Grab the canvas
+        const ecgCanvas = html.find('#ecg-canvas')[0];
+        if (!ecgCanvas) return;
+
+        // Get context
+        const ctx = ecgCanvas.getContext('2d');
+
+        // Resize helper
+        function resizeCanvas() {
+            ecgCanvas.width = ecgCanvas.offsetWidth * window.devicePixelRatio;
+            ecgCanvas.height = ecgCanvas.offsetHeight * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        // Call it right away and on window resize
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Create your ECG animator instance
+        this.ecgAnimator = new EcgAnimator(ecgCanvas, {
+            freq: 2,      // ~120 BPM
+            amp: 30,      // bigger amplitude
+            color: 'lime',
+            lineWidth: 2
+        });
+
+        // Start the loop
+        this.ecgAnimator.start();
+
+        // Hook up frequency/amplitude controls
+        html.find('.ecg-frequency').on('change', (event) => {
+            const val = Number(event.currentTarget.value);
+            if (!isNaN(val)) this.ecgAnimator.setFrequency(val);
+        });
+
+        html.find('.ecg-amplitude').on('change', (event) => {
+            const val = Number(event.currentTarget.value);
+            if (!isNaN(val)) this.ecgAnimator.setAmplitude(val);
+        });
+        ////////////////////////////////////////////////////////////////////
+
     }
 
     onNewsFeedIterationCompleted(html, event) {

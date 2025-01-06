@@ -1218,6 +1218,27 @@
   justify-content: space-between;
   padding: 0.5rem;
 }
+.sr3d #ecg-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sr3d #ecg-canvas {
+  width: 100%;
+}
+.sr3d #controls {
+  margin-top: 10px;
+}
+.sr3d .ecg-container {
+  border: 0rem;
+  width: 100%;
+  height: 5rem;
+}
+.sr3d .ecg-animation {
+  width: 100%;
+  max-height: 5rem;
+  border: 0;
+}
 .sr3d .sr3d.sheet.character .broadcaster-sheet h1 {
   text-indent: 0rem;
   text-align: left;
