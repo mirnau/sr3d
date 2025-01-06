@@ -198,9 +198,32 @@ function registerHooks() {
                 }
             });
 
-            return total.toFixed(2);
+            return Number(total);
         });
 
+        Handlebars.registerHelper('add', function (...args) {
+            // Remove the last argument (options object from Handlebars)
+            args.pop();
+        
+            // Parse all arguments as numbers and sum them
+            const total = args.reduce((sum, value) => {
+                const number = parseFloat(value);
+                return !isNaN(number) ? sum + number : sum;
+            }, 0);
+        
+            return total; // Return the numeric sum
+        });
+        
+
+        Handlebars.registerHelper('multiply', (value, factor) => {
+            return Number(value * factor); // Converts and limits to 1 decimal places
+        });
+        
+        Handlebars.registerHelper("currency", function (value) {
+            return `¥${Number(value).toLocaleString()}`;
+        });
+
+        
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
         });
@@ -209,13 +232,6 @@ function registerHooks() {
             arg1 === arg2 ? options.fn(this) : options.inverse(this)
         );
 
-        Handlebars.registerHelper("currency", function (value) {
-            return `¥${Number(value).toLocaleString()}`;
-        });
-
-        Handlebars.registerHelper('multiply', (value, factor) => {
-            return (value * factor).toFixed(1); // Converts and limits to 1 decimal places
-        });
 
         Handlebars.registerHelper("isDossierOpen", function (actor) {
             return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);

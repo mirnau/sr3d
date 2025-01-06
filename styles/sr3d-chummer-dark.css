@@ -1212,6 +1212,12 @@
   background-color: #1b1f24;
   box-shadow: inset 0 0 8px #1df0ff;
 }
+.sr3d .total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
 .sr3d .sr3d.sheet.character .broadcaster-sheet h1 {
   text-indent: 0rem;
   text-align: left;
@@ -1719,19 +1725,24 @@
   border: none;
   text-align: left;
 }
+.sr3d .inventory-list a.creditor {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .sr3d .inventory-list tbody tr:first-child {
   padding-left: 0.5rem;
 }
 .sr3d .inventory-list tbody tr:nth-child(odd) {
-  box-shadow: inset 0 0 16px #1df0ff;
+  box-shadow: inset 0 0 14px #1df0ff;
   background-color: #1b1f24;
 }
 .sr3d .inventory-list tbody tr:nth-child(even) {
-  background-color: #1c364b;
-  box-shadow: inset 0 0 16px #1df0ff;
+  background-color: #1b1f24;
+  box-shadow: inset 0 0 14px #1df0ff;
 }
 .sr3d .inventory-list tbody tr:last-child {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5/1.4142rem 100%, 0px calc(100% - 0.5/1.4142rem), 0px 0.5rem);
 }
 .sr3d .inventory-list th {
   font-weight: bold;
