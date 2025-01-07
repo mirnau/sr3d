@@ -1,8 +1,8 @@
-import { ActorDataService } from '../services/ActorDataService.js';
-import { CharacterCreationDialog } from '../dialogs/CharacterCreationDialog.js';
 import { baseAttributes, derivedAttributes, flags, itemCategory } from '../helpers/CommonConsts.js'
 import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
+import ActorDataService from '../services/ActorDataService.js';
 import EcgAnimator from '../helpers/EcgAnimator.js';
+import CharacterModel from '../dataModels/actor/CharacterModel.js';
 
 export default class CharacterSheet extends ActorSheet {
 
@@ -55,62 +55,6 @@ export default class CharacterSheet extends ActorSheet {
         this.newsRepeatCounter = 0;
 
         return ctx;
-    }
-
-    async render(force = false, options = {}) {
-        // Check if the creation dialog is completed
-        let creationCompleted = this.actor.getFlag(flags.namespace, flags.characterCreationCompleted);
-
-        // If the flag doesn't exist, initialize it
-        if (creationCompleted === undefined) {
-            console.log("Flag 'creationDialogCompleted' not found. Creating and setting it to false.");
-            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, false);
-            creationCompleted = false;
-        }
-
-        // If the creation is not completed, show the dialog
-        if (!creationCompleted) {
-            console.log("Character creation not completed. Showing creation dialog.");
-
-            const dialogResult = await this._showCharacterCreationDialog(this.actor);
-
-            // If the dialog is canceled, delete the actor and prevent rendering
-            if (!dialogResult) {
-                console.log(`Character creation canceled for actor: ${this.actor.name}. Deleting actor.`);
-                await this.actor.delete();
-                return; // Halt rendering by exiting the `render` method
-            }
-
-            // Set the flag to true after the dialog is completed
-            await this.actor.setFlag(flags.namespace, flags.characterCreationCompleted, true);
-            console.log("Character creation completed. Flag set to true.");
-        }
-        return super.render(force, options);
-    }
-
-    async _showCharacterCreationDialog(actor) {
-        // Fetch all items of type "metahuman" and "magic"
-        const metahumans = game.items.filter(item => item.type === "metahuman");
-        const magics = game.items.filter(item => item.type === "magic");
-
-        const allMetahumans = ActorDataService.getAllMetaHumans(metahumans);
-        const allMagics = ActorDataService.getAllMagics(magics);
-
-        // Data for priority tables
-        const priorities = ActorDataService.getPriorities();
-
-        // Store instance properties
-        const dialogData = {
-            actor: this.actor,
-            metahumans: allMetahumans,
-            magics: allMagics,
-            ...priorities
-        };
-        const content = await renderTemplate('systems/sr3d/templates/dialogs/character-creation-dialog.hbs', dialogData);
-
-        return new Promise((resolve) => {
-            new CharacterCreationDialog(dialogData, content, resolve).render(true);
-        });
     }
 
     activateListeners(html) {
@@ -252,46 +196,64 @@ export default class CharacterSheet extends ActorSheet {
             if (clickedIndex === 1 || clickedIndex === 11) {
                 const start = clickedIndex === 1 ? 1 : 11;
                 const end = clickedIndex === 1 ? 10 : 20;
-            
+        
                 const numCheckedInRange = html.find(`input[type='checkbox'][id^='healthBox']`)
                     .slice(start - 1, end) // Adjust for 0-based index
                     .filter(":checked").length;
-            
+        
                 if (numCheckedInRange === 0 && !isChecked) {
                     const siblingH4 = $(clicked).closest(".damage-input").find("h4");
                     if (siblingH4.length) {
-                        siblingH4.css("text-shadow", "");
+                        siblingH4.removeClass("lit").addClass("unlit");
                     }
                     return;
                 }
             }
 
-            if(clickedIndex < 11)
-            {
+            let degree = 0;
+       
+            if (clickedIndex < 11) {
+                degree = clickedIndex;
                 iterator(clickedIndex, 1, 10);
-            }else {
+            } else {
+                degree = clickedIndex % 10;
                 iterator(clickedIndex, 11, 20);
             }
+
+            this.actor.system.health.penalty = severity(degree);
+
+            function severity(degree) {
+                if (degree > 0 && degree < 3 )
+                    return 1;
+                else if ( degree <= 3 && degree < 6)
+                    return 2;
+                else if(degree >= 6 && degree < 10)
+                    return 3
+                else if(degree === 10)
+                    return 4;
+                else return 0;
+            }
         
-            function iterator(clickedIndex,start, end) {
+            function iterator(clickedIndex, start, end) {
                 for (let i = start; i <= end; i++) {
                     const box = html.find(`#healthBox${i}`);
                     if (i <= clickedIndex) {
                         box.prop("checked", true);
                         const siblingH4 = box.closest(".damage-input").find("h4");
                         if (siblingH4.length) {
-                            siblingH4.css("text-shadow", "0 0 8px #fff");
+                            siblingH4.removeClass("unlit").addClass("lit");
                         }
                     } else {
                         box.prop("checked", false);
                         const siblingH4 = box.closest(".damage-input").find("h4");
                         if (siblingH4.length) {
-                            siblingH4.css("text-shadow", "");
+                            siblingH4.removeClass("lit").addClass("unlit");
                         }
                     }
                 }
             }
         });
+        
     }
 
     

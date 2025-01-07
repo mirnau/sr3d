@@ -19,7 +19,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox1" name="healthBox1" />
                 <div class="damage-description stun">
-                    <h4 class="no-margin">Light</h4>
+                    <h4 class="no-margin unlit">Light</h4>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox3" name="healthBox3" />
                 <div class="damage-description stun">
-                    <h4 class="no-margin">Moderate</h4>
+                    <h4 class="no-margin unlit">Moderate</h4>
                 </div>
             </div>
             <div class="damage-input">
@@ -42,7 +42,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox6" name="healthBox6" />
                 <div class="damage-description stun">
-                    <h4 class="no-margin">Serious</h4>
+                    <h4 class="no-margin unlit">Serious</h4>
                 </div>
             </div>
             <div class="damage-input">
@@ -57,7 +57,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox10" name="healthBox10" />
                 <div class="damage-description stun">
-                    <h4 class="no-margin">Deadly</h4>
+                    <h4 class="no-margin unlit">Deadly</h4>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox11" name="healthBox11" />
                 <div class="damage-description physical">
-                    <h4 class="no-margin">Light</h4>
+                    <h4 class="no-margin unlit">Light</h4>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox13" name="healthBox13" />
                 <div class="damage-description physical">
-                    <h4 class="no-margin">Moderate</h4>
+                    <h4 class="no-margin unlit">Moderate</h4>
                 </div>
             </div>
             <div class="damage-input">
@@ -89,7 +89,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox16" name="healthBox16" />
                 <div class="damage-description physical">
-                    <h4 class="no-margin">Serious</h4>
+                    <h4 class="no-margin unlit">Serious</h4>
                 </div>
             </div>
             <div class="damage-input">
@@ -104,7 +104,7 @@
             <div class="damage-input">
                 <input type="checkbox" id="healthBox20" name="healthBox20" />
                 <div class="damage-description physical">
-                    <h4 class="no-margin">Deadly</h4>
+                    <h4 class="no-margin unlit">Deadly</h4>
                 </div>
             </div>
 
@@ -112,9 +112,17 @@
     </div>
     <div class="stat-card">
         <div class="stat-label">
-            {{system.overflow}}
+            Overflow{{system.overflow}}
         </div>
     </div>
+
+    <div class="stat-card">
+        <div class="stat-label">
+            Penalty{{system.overflow}}
+            Penalty{{system.overflow}}
+        </div>
+    </div>
+
 </div>
 <!--
 <div class="ecg-controls">

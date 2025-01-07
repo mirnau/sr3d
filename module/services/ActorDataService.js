@@ -1,7 +1,7 @@
 import { baseAttributes, derivedAttributes, dicePools } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
-export class ActorDataService {
+export default class ActorDataService {
     static prepareSkills(contents) {
         return {
             active: this._categorizeAndSortSkills(

@@ -1,4 +1,4 @@
-export default class HealthModel extends foundry.abstract.DataModel {
+export default class HealthModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       stun: new foundry.data.fields.ArrayField(
@@ -20,6 +20,11 @@ export default class HealthModel extends foundry.abstract.DataModel {
         }
       ),
       overflow: new foundry.data.fields.NumberField({
+        required: true,
+        initial: 0,
+        integer: true,
+      }),
+      penatly: new foundry.data.fields.NumberField({
         required: true,
         initial: 0,
         integer: true,

@@ -1,4 +1,4 @@
-export default class NewsBroadcastModel extends foundry.abstract.DataModel {
+export default class NewsBroadcastModel extends foundry.abstract.TypeDataModel {
     static defineSchema() {
         return {
             preparedNews: new foundry.data.fields.ArrayField(

@@ -54,6 +54,44 @@
             min-width: 5rem;
         }
 
+        @keyframes flicker {
+            0% {
+                text-shadow: 0 0 2px @h4-color, 0 0 10px @h4-color, 0 0 20px #fff;
+                opacity: 0.8;
+            }
+            20% {
+                text-shadow: none;
+                opacity: 0.6;
+            }
+            40% {
+                text-shadow: 0 0 2px @h4-color, 0 0 8px @h4-color, 0 0 15px #fff;
+                opacity: 1;
+            }
+            60% {
+                text-shadow: none;
+                opacity: 0.4;
+            }
+            80% {
+                text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
+                opacity: 1;
+            }
+            100% {
+                text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
+                opacity: 1;
+            }
+        }
+        
+        .lit {
+            animation: flicker 1s ease-in-out;
+            text-shadow: 0 0 12px @h4-color;
+        }
+        
+        .unlit {
+            text-shadow: none;
+            opacity: 0.2; /* Optional: You can adjust unlit styling to suit your needs */
+        }
+        
+
         .stun-damage,
         .physical-damage {
             display: flex;

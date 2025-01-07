@@ -125,7 +125,7 @@
             },
             "health": {
                 "health": "Health",
-                "damageTracker": "Damage Tracker"
+                "health": "Damage Tracker"
             },
             "possessions": {
                 "possessions": "Possessions",
@@ -145,8 +145,8 @@
                 "karmaPool": "Karma Pool",
                 "goodKarma": "Good Karma"
             },
-            "damageTracker": {
-                "damageTracker": "Damage Tracker",
+            "health": {
+                "health": "Damage Tracker",
                 "stun": "Stun",
                 "physical": "physical",
                 "owerflow": "overflow"

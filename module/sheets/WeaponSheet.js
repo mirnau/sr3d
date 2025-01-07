@@ -26,6 +26,7 @@ export default class WeaponSheet extends ItemSheet {
         ctx.weaponDamage = ItemDataService.weaponDamage(ctx);
         ctx.system.category = "apple";
         this.item.prepareData();
+
         return ctx;
     }
 

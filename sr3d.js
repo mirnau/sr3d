@@ -46,6 +46,7 @@ import NewsBroadcastModel from "./module/dataModels/actor/NewsBroadcastModel.js"
 import NewsBroadcastSheet from "./module/sheets/NewsBroadcastSheet.js";
 import TransactionSheet from "./module/sheets/TransactionSheet.js";
 import TransactionModel from "./module/dataModels/items/TransactionModel.js";
+import { displayCreationDialog, doNotRenderSheet } from "./module/hooks/preCreateActor/displayCreationDialog.js";
 
 //NOTE: Recursively gather .hbs files from the folder structure
 async function registerTemplatesFromPathsAsync() {
@@ -74,16 +75,15 @@ function registerHooks() {
         initMovementMasonry(app, html, data);
         initKarmaMasonry(app, html, data);
     });
-
+    
     Hooks.on(hooks.renderSR3DItemSheet, (app, html, data) => {
         initMetahumanMasonry(app, html, data);
     });
-
-
+    
+    
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
-    Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createItem, setItemFlags);
     Hooks.on(hooks.createItem, transferKarmatoActor);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
@@ -94,13 +94,18 @@ function registerHooks() {
     Hooks.on(hooks.renderCharacterSheet, displayNewsFeed);
     Hooks.on(hooks.renderCharacterSheet, injectFooter);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
-
+    
+    Hooks.on(hooks.createActor, setActorFlags);
+    Hooks.on(hooks.createActor, displayCreationDialog);
+    Hooks.on(hooks.preCreateActor, doNotRenderSheet);
+    
+    
     Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
     });
-
-
+    
+    
     // Attach Hooks for ActorSheet and ItemSheet
     Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
@@ -108,14 +113,14 @@ function registerHooks() {
             attachLightEffect(html, activeTheme);
         }
     });
-
+    
     Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
         }
     });
-
+    
     ////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////
@@ -153,18 +158,18 @@ function registerHooks() {
         // NOTE: Following pattern is necessary for databinding to work
         // https://foundryvtt.com/api/classes/foundry.abstract.TypeDataModel.html
         CONFIG.Actor.dataModels = {
-            "sr3d.character": CharacterModel,
-            "sr3d.newsbroadcast": NewsBroadcastModel
+            "character": CharacterModel,
+            "newsbroadcast": NewsBroadcastModel
         };
 
         CONFIG.Item.dataModels = {
-            "sr3d.weapon": WeaponModel,
-            "sr3d.ammunition": AmmunitionModel,
-            "sr3d.skill": SkillModel,
-            "sr3d.karma": KarmaModel,
-            "sr3d.metahuman": MetahumanModel,
-            "sr3d.magic": MagicModel,
-            "sr3d.transaction": TransactionModel
+            "weapon": WeaponModel,
+            "ammunition": AmmunitionModel,
+            "skill": SkillModel,
+            "karma": KarmaModel,
+            "metahuman": MetahumanModel,
+            "magic": MagicModel,
+            "transaction": TransactionModel
         }
 
         Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
@@ -178,7 +183,6 @@ function registerHooks() {
 
         Actors.registerSheet(flags.namespace, CharacterSheet, { types: ["character"], makeDefault: true });
         Actors.registerSheet(flags.namespace, NewsBroadcastSheet, { types: ["newsbroadcast"], makeDefault: true });
-
 
         registerTemplatesFromPathsAsync();
 

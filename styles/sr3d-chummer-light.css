@@ -1271,6 +1271,41 @@
 .sr3d .condition-monitor .condition-meter .checkbox-label {
   min-width: 5rem;
 }
+@keyframes flicker {
+  0% {
+    text-shadow: 0 0 2px #1df0ff, 0 0 10px #1df0ff, 0 0 20px #fff;
+    opacity: 0.8;
+  }
+  20% {
+    text-shadow: none;
+    opacity: 0.6;
+  }
+  40% {
+    text-shadow: 0 0 2px #1df0ff, 0 0 8px #1df0ff, 0 0 15px #fff;
+    opacity: 1;
+  }
+  60% {
+    text-shadow: none;
+    opacity: 0.4;
+  }
+  80% {
+    text-shadow: 0 0 4px #1df0ff, 0 0 12px #1df0ff, 0 0 25px #fff;
+    opacity: 1;
+  }
+  100% {
+    text-shadow: 0 0 4px #1df0ff, 0 0 12px #1df0ff, 0 0 25px #fff;
+    opacity: 1;
+  }
+}
+.sr3d .condition-monitor .condition-meter .lit {
+  animation: flicker 1s ease-in-out;
+  text-shadow: 0 0 12px #1df0ff;
+}
+.sr3d .condition-monitor .condition-meter .unlit {
+  text-shadow: none;
+  opacity: 0.2;
+  /* Optional: You can adjust unlit styling to suit your needs */
+}
 .sr3d .condition-monitor .condition-meter .stun-damage,
 .sr3d .condition-monitor .condition-meter .physical-damage {
   display: flex;

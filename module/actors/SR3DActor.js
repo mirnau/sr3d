@@ -114,6 +114,8 @@ export default class SR3DActor extends Actor {
   characterSetup() {
 
     SR3DLog.info("characterSetup entered", this.name);
+    console.log(this);
+    console.log(this.system);
 
     const attributes = this.system.attributes;
     const creation = this.system.creation;

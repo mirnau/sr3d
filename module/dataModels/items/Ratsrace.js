@@ -1,6 +1,6 @@
 import Transaction from './TransactionModel.js';
 
-export default class Ratsrace extends foundry.abstract.DataModel {
+export default class Ratsrace extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       // Transactions Array

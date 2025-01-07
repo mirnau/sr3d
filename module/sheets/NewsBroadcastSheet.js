@@ -13,6 +13,9 @@ export default class NewsBroadcastSheet extends ActorSheet {
         const ctx = super.getData(options);
         ctx.preparedNews = ctx.actor.system.preparedNews || [];
         ctx.rollingNews = ctx.actor.system.rollingNews || [];
+
+        console.log(ctx);
+
         return ctx;
     }
 

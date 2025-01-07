@@ -57,7 +57,7 @@ sr3d.actorTypes = {
 
 sr3d.health = {
     health: "sr3d.actor.health.health",
-    damageTracker: "sr3d.actor.health.damageTracker"
+    health: "sr3d.actor.health.health"
 }
 
 sr3d.ammunition = {
@@ -306,11 +306,11 @@ sr3d.karma = {
     goodKarma: "sr3d.actor.karma.goodKarma"
 };
 
-sr3d.damageTracker = {
-    damageTracker: "sr3d.actor.damageTracker.damageTracker",
-    stun: "sr3d.actor.damageTracker.stun",
-    physical: "sr3d.actor.damageTracker.physical",
-    overflow: "sr3d.actor.damageTracker.owerflow"
+sr3d.health = {
+    health: "sr3d.actor.health.health",
+    stun: "sr3d.actor.health.stun",
+    physical: "sr3d.actor.health.physical",
+    overflow: "sr3d.actor.health.owerflow"
 };
 
 sr3d.playerCharacter = "sr3d.actor.playerCharacter";

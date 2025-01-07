@@ -1,7 +1,7 @@
 import SimpleStat from "./SimpleStat.js";
 import ComplexStat from "./ComplexStat.js";
 
-export default class AttributesModel extends foundry.abstract.DataModel {
+export default class AttributesModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       // Attributes using ComplexStat (with meta)

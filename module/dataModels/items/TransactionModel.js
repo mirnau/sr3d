@@ -1,4 +1,4 @@
-export default class TransactionModel extends foundry.abstract.DataModel {
+export default class TransactionModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       amount: new foundry.data.fields.NumberField({
