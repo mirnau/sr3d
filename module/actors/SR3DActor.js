@@ -7,18 +7,18 @@ export default class SR3DActor extends Actor {
 
   adjustAttribute(attribute, amount) {
 
-  const system = this.system;
+    const system = this.system;
     let value = system.attributes[attribute].value;
     let currentPoints = system.creation.attributePoints;
 
-    if(!this.getFlag(flags.namespace, flags.attributesDone)) {
-      
+    if (!this.getFlag(flags.namespace, flags.attributesDone)) {
+
       if (currentPoints <= 0 && amount > 0) {
         ui.notifications.warn(game.i18n.localize("sr3d.characterCreation.spentAllAttributePoints"));
         new LockAttributesDialog(this).render(true);
         return;
-      }    
-      
+      }
+
       if ((amount > 0) || (amount < 0 && system.attributes[attribute].value > 1)) {
         system.attributes[attribute].value += amount;
         system.creation.attributePoints -= amount;
@@ -34,7 +34,7 @@ export default class SR3DActor extends Actor {
         new LockAttributesDialog(this).render(true);
         return;
       }
-      
+
     } else {
       //Karma points!
     }
@@ -117,7 +117,7 @@ export default class SR3DActor extends Actor {
 
     const attributes = this.system.attributes;
     const creation = this.system.creation;
-    
+
     baseAttributes.forEach((attr) => {
       if (attributes[attr].value === 0) {
         attributes[attr].value += 3;
@@ -131,6 +131,4 @@ export default class SR3DActor extends Actor {
     this.recalculateAttribute();
     this.update({ system: attributes });
   }
- 
 }
-

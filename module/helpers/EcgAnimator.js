@@ -1,47 +1,54 @@
+import { lerpColor } from "../sheets/Utilities.js";
+
 export default class EcgAnimator {
-    constructor(canvas, {
-        freq = 1,   // ~60 BPM
-        amp = 20,   // wave amplitude
+    constructor(lineCanvas, pointCanvas, {
+        freq = 1,
+        amp = 20,
         color = 'lime',
-        lineWidth = 2
+        lineWidth = 2,
+        bottomColor = '#00FFFF',
+        topColor = '#0000FF'
+
     } = {}) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
+        // Bottom canvas for ECG line
+        this.lineCanvas = lineCanvas;
+        this.lineCtx = lineCanvas.getContext('2d');
+
+        // Top canvas for cyan point
+        this.pointCanvas = pointCanvas;
+        this.pointCtx = pointCanvas.getContext('2d');
 
         // Dimensions
-        this.width = canvas.width;
-        this.height = canvas.height;
+        this.width = lineCanvas.width;
+        this.height = lineCanvas.height;
 
-        // Animation vars
-        this.phase = 0;    // Tracks horizontal offset
-        this.freq = freq;  // Initial frequency
-        this.amp = amp;    // Amplitude of the wave
+        // Wave parameters
+        this.phase = 0;
+        this.freq = freq;
+        this.amp = amp;
 
-        // Styling
         this.color = color;
         this.lineWidth = lineWidth;
 
         this._isAnimating = false;
         this._animFrame = null;
 
-        // Data buffer for previously drawn points
-        this.points = [];
+        // Store bottomColor and topColor
+        this.bottomColor = bottomColor;
+        this.topColor = topColor;
     }
 
-    // Start the animation loop
     start() {
         if (this._isAnimating) return;
         this._isAnimating = true;
         this._animate();
     }
 
-    // Stop the animation loop
     stop() {
         this._isAnimating = false;
         if (this._animFrame) cancelAnimationFrame(this._animFrame);
     }
 
-    // Adjust frequency and amplitude on the fly
     setFrequency(freq) { this.freq = freq; }
     setAmplitude(amp) { this.amp = amp; }
 
@@ -52,36 +59,49 @@ export default class EcgAnimator {
     }
 
     _drawEcg() {
-        const ctx = this.ctx;
+        const offsetX = 10; // Offset by 10 pixels to the left
+        const offsetY = 10; // Offset by 10 pixels to the left
 
-        // Shift canvas content to the left
-        const imageData = ctx.getImageData(1, 0, this.width - 1, this.height);
-        ctx.clearRect(0, 0, this.width, this.height); // Clear the canvas
-        ctx.putImageData(imageData, 0, 0); // Move content left by 1 pixel
+        // 1) Scroll the existing line image on the bottom canvas
+        const imageData = this.lineCtx.getImageData(1, 0, this.width - 1, this.height);
+        this.lineCtx.clearRect(0, 0, this.width, this.height);
+        this.lineCtx.putImageData(imageData, 0, 0);
 
-        // Calculate the new point at the rightmost edge
-        const x = this.width - 1;
-        const y = (this.height / 2) - this._getHeartY(this.phase);
+        // 2) Calculate new point
+        const x = this.width - 1 - offsetX; // Offset the x-coordinate
+        const y = (this.height / 2) + offsetY - this._getHeartY(this.phase);
 
-        // If there's no previous point, set it to the current point
         if (this.prevY === undefined) {
             this.prevY = y;
         }
 
-        // Draw the new line segment connecting the last point to the current one
-        ctx.beginPath();
-        ctx.moveTo(x - 1, this.prevY); // Start from the last point
-        ctx.lineTo(x, y); // Draw to the current point
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = this.lineWidth;
-        ctx.stroke();
+        // Normalize amplitude for color interpolation
+        const normalizedAmp = (this._getHeartY(this.phase) + this.amp) / (2 * this.amp); // Normalize to [0, 1]
+        const interpolatedColor = lerpColor(this.bottomColor, this.topColor, normalizedAmp); // Lime to Cyan
 
-        // Update the previous Y-value for the next frame
+        // 3) Draw the green line on bottom canvas
+        this.lineCtx.beginPath();
+        this.lineCtx.moveTo(x - 1, this.prevY);
+        this.lineCtx.lineTo(x, y);
+        this.lineCtx.strokeStyle = interpolatedColor; // Apply interpolated color
+        this.lineCtx.lineWidth = this.lineWidth;
+        this.lineCtx.stroke();
+
+        // 4) Clear top canvas, draw single cyan pixel
+        this.pointCtx.clearRect(0, 0, this.width, this.height);
+
+        // Draw a glowing cyan circle
+        const radius = 4; // Adjust for size
+        this.pointCtx.beginPath();
+        this.pointCtx.arc(x, y, radius, 0, 2 * Math.PI); // Draw the circle
+        
+        this.pointCtx.fillStyle = this.topColor; // Circle color
+        this.pointCtx.fill();
+
         this.prevY = y;
-
-        // Increment the phase to progress the wave
-        this.phase += 0.04 * this.freq; // Adjust phase increment based on frequency
+        this.phase += 0.04 * this.freq; // wave speed
     }
+
 
 
 

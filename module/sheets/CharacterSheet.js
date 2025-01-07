@@ -50,6 +50,7 @@ export default class CharacterSheet extends ActorSheet {
         console.log("Active Skills:", ctx.skills.active);
         console.log("Knowledge Skills:", ctx.skills.knowledge);
         console.log("Language Skills:", ctx.skills.language);
+        console.log(ctx);
 
         this.newsRepeatCounter = 0;
 
@@ -188,32 +189,44 @@ export default class CharacterSheet extends ActorSheet {
                 details.removeAttribute('open');
             }
         });
-
         ////////////////////////////////////////////////////////////////////
-        // Grab the canvas
+        // Grab both canvases
         const ecgCanvas = html.find('#ecg-canvas')[0];
-        if (!ecgCanvas) return;
+        const ecgPointCanvas = html.find('#ecg-point-canvas')[0];
 
-        // Get context
-        const ctx = ecgCanvas.getContext('2d');
+        if (!ecgCanvas || !ecgPointCanvas) return;
+
+        // Get contexts (not strictly needed if you only do it in EcgAnimator, 
+        // but we need them for resizing logic)
+        const ctxLine = ecgCanvas.getContext('2d');
+        const ctxPoint = ecgPointCanvas.getContext('2d');
 
         // Resize helper
         function resizeCanvas() {
+            // Bottom canvas
             ecgCanvas.width = ecgCanvas.offsetWidth * window.devicePixelRatio;
             ecgCanvas.height = ecgCanvas.offsetHeight * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            ctxLine.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            // Top canvas
+            ecgPointCanvas.width = ecgPointCanvas.offsetWidth * window.devicePixelRatio;
+            ecgPointCanvas.height = ecgPointCanvas.offsetHeight * window.devicePixelRatio;
+            ctxPoint.scale(window.devicePixelRatio, window.devicePixelRatio);
         }
 
         // Call it right away and on window resize
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Create your ECG animator instance
-        this.ecgAnimator = new EcgAnimator(ecgCanvas, {
+        // Create your ECG animator instance (assuming your updated EcgAnimator 
+        // accepts two canvases: one for lineCanvas, one for pointCanvas)
+        this.ecgAnimator = new EcgAnimator(ecgCanvas, ecgPointCanvas, {
             freq: 2,      // ~120 BPM
             amp: 30,      // bigger amplitude
             color: 'lime',
-            lineWidth: 2
+            lineWidth: 2,
+            bottomColor: '#32CD32',
+            topColor: '#00FFFF'
         });
 
         // Start the loop
@@ -229,9 +242,62 @@ export default class CharacterSheet extends ActorSheet {
             const val = Number(event.currentTarget.value);
             if (!isNaN(val)) this.ecgAnimator.setAmplitude(val);
         });
-        ////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////// 
+        
+        html.find("input[type='checkbox'][id^='healthBox']").on("change", (event) => {
+            const clicked = event.currentTarget;
+            const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
+            const isChecked = clicked.checked;
+        
+            if (clickedIndex === 1 || clickedIndex === 11) {
+                const start = clickedIndex === 1 ? 1 : 11;
+                const end = clickedIndex === 1 ? 10 : 20;
+            
+                const numCheckedInRange = html.find(`input[type='checkbox'][id^='healthBox']`)
+                    .slice(start - 1, end) // Adjust for 0-based index
+                    .filter(":checked").length;
+            
+                if (numCheckedInRange === 0 && !isChecked) {
+                    const siblingH4 = $(clicked).closest(".damage-input").find("h4");
+                    if (siblingH4.length) {
+                        siblingH4.css("text-shadow", "");
+                    }
+                    return;
+                }
+            }
 
+            if(clickedIndex < 11)
+            {
+                iterator(clickedIndex, 1, 10);
+            }else {
+                iterator(clickedIndex, 11, 20);
+            }
+        
+            function iterator(clickedIndex,start, end) {
+                for (let i = start; i <= end; i++) {
+                    const box = html.find(`#healthBox${i}`);
+                    if (i <= clickedIndex) {
+                        box.prop("checked", true);
+                        const siblingH4 = box.closest(".damage-input").find("h4");
+                        if (siblingH4.length) {
+                            siblingH4.css("text-shadow", "0 0 8px #fff");
+                        }
+                    } else {
+                        box.prop("checked", false);
+                        const siblingH4 = box.closest(".damage-input").find("h4");
+                        if (siblingH4.length) {
+                            siblingH4.css("text-shadow", "");
+                        }
+                    }
+                }
+            }
+        });
     }
+
+    
+
+    
+
 
     onNewsFeedIterationCompleted(html, event) {
 

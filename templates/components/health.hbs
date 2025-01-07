@@ -1,15 +1,132 @@
 <div class="ecg-container">
-  <canvas id="ecg-canvas" class="ecg-animation"></canvas>
+    <!-- Bottom canvas for green line -->
+    <canvas id="ecg-canvas" class="ecg-animation"></canvas>
+
+    <!-- Top canvas for cyan point -->
+    <canvas id="ecg-point-canvas"></canvas>
+
+    <div class="left-gradient"></div>
+    <div class="right-gradient"></div>
 </div>
+
+<div class="condition-monitor">
+    <div class="condition-meter">
+
+        <div class="stun-damage">
+
+            <h3 class="no-margin checkbox-label">Stun</h3>
+
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox1" name="healthBox1" />
+                <div class="damage-description stun">
+                    <h4 class="no-margin">Light</h4>
+                </div>
+            </div>
+
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox2" name="healthBox2" alt="Light Stun" />
+            </div>
+
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox3" name="healthBox3" />
+                <div class="damage-description stun">
+                    <h4 class="no-margin">Moderate</h4>
+                </div>
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox4" name="healthBox4" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox5" name="healthBox5" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox6" name="healthBox6" />
+                <div class="damage-description stun">
+                    <h4 class="no-margin">Serious</h4>
+                </div>
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox7" name="healthBox7" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox8" name="healthBox8" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox9" name="healthBox9" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox10" name="healthBox10" />
+                <div class="damage-description stun">
+                    <h4 class="no-margin">Deadly</h4>
+                </div>
+            </div>
+        </div>
+        <div class="physical-damage">
+
+            <h3 class="no-margin checkbox-label">Physical</h3>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox11" name="healthBox11" />
+                <div class="damage-description physical">
+                    <h4 class="no-margin">Light</h4>
+                </div>
+            </div>
+
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox12" name="healthBox12" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox13" name="healthBox13" />
+                <div class="damage-description physical">
+                    <h4 class="no-margin">Moderate</h4>
+                </div>
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox14" name="healthBox14" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox15" name="healthBox15" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox16" name="healthBox16" />
+                <div class="damage-description physical">
+                    <h4 class="no-margin">Serious</h4>
+                </div>
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox17" name="healthBox17" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox18" name="healthBox18" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox19" name="healthBox19" />
+            </div>
+            <div class="damage-input">
+                <input type="checkbox" id="healthBox20" name="healthBox20" />
+                <div class="damage-description physical">
+                    <h4 class="no-margin">Deadly</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">
+            {{system.overflow}}
+        </div>
+    </div>
+</div>
+<!--
 <div class="ecg-controls">
-  <label>
-    Frequency: 
-    <input type="range" class="ecg-frequency" step="0.1" min="0.1" max="10" value="1" />
-    <span class="ecg-frequency-value">1</span> Hz
-  </label>
-  <label>
-    Amplitude: 
-    <input type="range" class="ecg-amplitude" step="0.1" min="0" max="100" value="20" />
-    <span class="ecg-amplitude-value">20</span>
-  </label>
+    <label>
+        Frequency:
+        <input type="range" class="ecg-frequency" step="0.1" min="0.1" max="10" value="1" />
+        <span class="ecg-frequency-value">1</span> Hz
+    </label>
+    <label>
+        Amplitude:
+        <input type="range" class="ecg-amplitude" step="0.1" min="0" max="100" value="20" />
+        <span class="ecg-amplitude-value">20</span>
+    </label>
 </div>
+-->

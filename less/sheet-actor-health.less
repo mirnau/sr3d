@@ -13,14 +13,123 @@
 }
 
 .ecg-container {
-    border: 0rem;
-    width: 100%;
-    height: 5rem;
+    position: relative; // Ensure canvases stack properly
+    width: 100%; // Full width
+    height: 4rem; // Maintain consistent height
+    border: 0rem; // Reset border
+    box-shadow: inset 0 0 16px @highlight-color-primary;
+    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.ecg-container canvas {
+    position: absolute; // Stack canvases on top of each other
+    top: 0;
+    left: 0;
+    width: 100%; // Ensure canvases match container size
+    height: 100%;
+}
+
+#ecg-canvas {
+    z-index: 1; // Green line on the bottom
+}
+
+#ecg-point-canvas {
+    z-index: 2; // Cyan point on top
 }
 
 .ecg-animation {
     width: 100%;
     max-height: 5rem;
     border: 0;
-    
+}
+
+.condition-monitor {
+    .apply-flex-distribute(row); // Apply your reusable container mixin
+
+    .condition-meter {
+        .apply-flex-distribute(column); // Apply your reusable container mixin
+        justify-content: center; // Center rows vertically (y-axis)
+
+        .checkbox-label {
+            min-width: 5rem;
+        }
+
+        .stun-damage,
+        .physical-damage {
+            display: flex;
+            gap: 0.5rem; // Space between checkboxes
+            align-items: center; // Vertically align text and checkboxes
+            padding: 0.5rem;
+
+            .damage-input {
+                position: relative;
+                padding: 0rem;
+                margin: 0rem;
+
+                .damage-description {
+                    position: absolute;
+                    z-index: 5;
+                    left: 0;
+                
+                    &.stun {
+                        top: -1rem;
+                    }
+                
+                    &.physical {
+                        bottom: -1rem;
+                    }
+                }
+
+                input[type="checkbox"] {
+                    appearance: none;
+                    background-color: @default-sheet-border-color;
+                    position: relative;
+                    cursor: pointer;
+                    .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                    z-index: 1;
+
+                    // The border or "frame"
+                    &::before {
+                        pointer-events: none;
+                        content: '';
+                        position: absolute;
+                        top: 1px;
+                        left: 1px;
+                        width: calc(100% - 2px);
+                        height: calc(100% - 2px);
+                        background: @default-inner-background-color;
+                        .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                        z-index: -1;
+                    }
+
+                    // The checkmark or “ticked” effect
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 1rem;
+                        height: 1rem;
+                        display: none;
+                        .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                    }
+
+                    &:checked::after {
+                        display: block;
+                        box-shadow: inset 0 0 8px @highlight-color-primary;
+                    }
+                }
+
+            }
+        }
+
+        h3 {
+            margin: 0; // Reset margin for text alignment
+        }
+
+        .damage-type {
+            .apply-flex-distribute(column);
+        }
+    }
 }
