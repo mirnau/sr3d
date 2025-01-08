@@ -57,6 +57,13 @@ export default class CharacterSheet extends ActorSheet {
         return ctx;
     }
 
+    async render(force = false, options = {}) {
+        // Prevent unnecessary re-rendering
+        //if (!force) return;
+        await super.render(force, options);
+    }
+    
+
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -142,8 +149,8 @@ export default class CharacterSheet extends ActorSheet {
 
         // Get contexts (not strictly needed if you only do it in EcgAnimator, 
         // but we need them for resizing logic)
-        const ctxLine = ecgCanvas.getContext('2d');
-        const ctxPoint = ecgPointCanvas.getContext('2d');
+        const ctxLine = ecgCanvas.getContext('2d', {willReadFrequently: true});
+        const ctxPoint = ecgPointCanvas.getContext('2d', {willReadFrequently: true});
 
         // Resize helper
         function resizeCanvas() {
@@ -326,6 +333,11 @@ export default class CharacterSheet extends ActorSheet {
                 }
             });
         }
+
+        console.log("CLOSING DESTROYING STUFF");
+        console.log("CLOSING DESTROYING STUFF");
+        console.log("CLOSING DESTROYING STUFF");
+        console.log("CLOSING DESTROYING STUFF");
         return super.close(options);
     }
 

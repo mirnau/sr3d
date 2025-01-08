@@ -65,6 +65,7 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
+    
     Hooks.on(hooks.renderCharacterSheet, (app, html, data) => {
         initializeMasonryLayout(app, html, data);
         initActiveSkillMasonry(app, html, data);

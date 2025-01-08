@@ -12,11 +12,11 @@ export default class EcgAnimator {
     } = {}) {
         // Bottom canvas for ECG line
         this.lineCanvas = lineCanvas;
-        this.lineCtx = lineCanvas.getContext('2d');
+        this.lineCtx = lineCanvas.getContext('2d', { willReadFrequently: true });
 
         // Top canvas for cyan point
         this.pointCanvas = pointCanvas;
-        this.pointCtx = pointCanvas.getContext('2d');
+        this.pointCtx = pointCanvas.getContext('2d', { willReadFrequently: true });
 
         // Dimensions
         this.width = lineCanvas.width;
