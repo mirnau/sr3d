@@ -57,13 +57,6 @@ export default class CharacterSheet extends ActorSheet {
         return ctx;
     }
 
-    async render(force = false, options = {}) {
-        // Prevent unnecessary re-rendering
-        //if (!force) return;
-        await super.render(force, options);
-    }
-
-
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -94,10 +87,10 @@ export default class CharacterSheet extends ActorSheet {
             const attributes = actor.system.attributes;
             const direction = 1;
 
-            await actor.silentUpdateAttributes(attributeName, actor, attributes, this, direction);
+            await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
 
             // Recalculate dependent attributes ("pools" as attributes)
-            await actor.updateDerivedValues(attributeName, actor, attributes, this, direction);
+            await actor.updateDerivedValues(attributeName, attributes, this, direction);
 
         });
 
@@ -107,10 +100,10 @@ export default class CharacterSheet extends ActorSheet {
             const attributes = actor.system.attributes;
             const direction = -1;
 
-            await actor.silentUpdateAttributes(attributeName, actor, attributes, this, direction);
+            await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
             
             // Recalculate dependent attributes ("pools" as attributes)
-            await actor.updateDerivedValues(attributeName, actor, attributes, this, direction);
+            await actor.updateDerivedValues(attributeName, attributes, this, direction);
 
         });
 
@@ -203,74 +196,71 @@ export default class CharacterSheet extends ActorSheet {
             const val = Number(event.currentTarget.value);
             if (!isNaN(val)) this.ecgAnimator.setAmplitude(val);
         });
+
         //////////////////////////////////////////////////////////////////// 
 
-        html.find("input[type='checkbox'][id^='healthBox']").on("change", (event) => {
+        html.on("change", "input[type='checkbox'][id^='healthBox']", async (event) => {
             const clicked = event.currentTarget;
             const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
             const isChecked = clicked.checked;
-
-            if (clickedIndex === 1 || clickedIndex === 11) {
-                const start = clickedIndex === 1 ? 1 : 11;
-                const end = clickedIndex === 1 ? 10 : 20;
-
-                const numCheckedInRange = html.find(`input[type='checkbox'][id^='healthBox']`)
-                    .slice(start - 1, end) // Adjust for 0-based index
-                    .filter(":checked").length;
-
-                if (numCheckedInRange === 0 && !isChecked) {
-                    const siblingH4 = $(clicked).closest(".damage-input").find("h4");
-                    if (siblingH4.length) {
-                        siblingH4.removeClass("lit").addClass("unlit");
-                    }
-                    return;
+        
+            // Determine if it's stun or physical
+            const isStun = clickedIndex <= 10;
+            const rangeStart = isStun ? 1 : 11;
+            const rangeEnd = isStun ? 10 : 20;
+            const healthArrayKey = isStun ? "stun" : "physical";
+        
+            // Initialize the health array and updates object
+            const healthArray = [...this.actor.system.health[healthArrayKey]];
+            const updates = {};
+        
+            // Calculate new health array values and update visual states
+            for (let i = rangeStart; i <= rangeEnd; i++) {
+                const shouldCheck = i <= clickedIndex;
+                const arrayIndex = i - rangeStart;
+        
+                // Update the health array directly
+                healthArray[arrayIndex] = shouldCheck;
+        
+                // Update checkbox state and visual feedback
+                const box = html.find(`#healthBox${i}`);
+                box.prop("checked", shouldCheck);
+                const siblingH4 = box.closest(".damage-input").find("h4");
+                if (siblingH4.length) {
+                    siblingH4.toggleClass("lit", shouldCheck);
+                    siblingH4.toggleClass("unlit", !shouldCheck);
                 }
             }
+        
+            // Add the updated health array to the updates object
+            updates[`system.health.${healthArrayKey}`] = healthArray;
+        
+            // Update the penalty
+            const degree = clickedIndex % 10 || 10; // Normalize indices 11-20 to 1-10
 
-            let degree = 0;
+            console.log("degree");
+            console.log(degree);
 
-            if (clickedIndex < 11) {
-                degree = clickedIndex;
-                iterator(clickedIndex, 1, 10);
-            } else {
-                degree = clickedIndex % 10;
-                iterator(clickedIndex, 11, 20);
-            }
-
-            this.actor.system.health.penalty = severity(degree);
-
-            function severity(degree) {
-                if (degree > 0 && degree < 3)
-                    return 1;
-                else if (degree <= 3 && degree < 6)
-                    return 2;
-                else if (degree >= 6 && degree < 10)
-                    return 3
-                else if (degree === 10)
-                    return 4;
-                else return 0;
-            }
-
-            function iterator(clickedIndex, start, end) {
-                for (let i = start; i <= end; i++) {
-                    const box = html.find(`#healthBox${i}`);
-                    if (i <= clickedIndex) {
-                        box.prop("checked", true);
-                        const siblingH4 = box.closest(".damage-input").find("h4");
-                        if (siblingH4.length) {
-                            siblingH4.removeClass("unlit").addClass("lit");
-                        }
-                    } else {
-                        box.prop("checked", false);
-                        const siblingH4 = box.closest(".damage-input").find("h4");
-                        if (siblingH4.length) {
-                            siblingH4.removeClass("lit").addClass("unlit");
-                        }
-                    }
-                }
+            const penalty = calculateSeverity(degree);
+            updates["system.health.penalty"] = penalty;
+        
+            console.log(updates);
+        
+            // Persist updates silently
+            await this.actor.update(updates, { render: false });
+            console.log(this.actor.system.health);
+        
+            // Helper function to calculate severity
+            function calculateSeverity(degree) {
+                if (degree > 0 && degree < 3) return 1;
+                else if (degree >= 3 && degree < 6) return 2;
+                else if (degree >= 6 && degree < 10) return 3;
+                else if (degree === 10) return 4;
+                return 0;
             }
         });
-
+        
+        
     }
 
 

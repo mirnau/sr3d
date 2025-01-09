@@ -24,7 +24,7 @@ export default class HealthModel extends foundry.abstract.TypeDataModel {
         initial: 0,
         integer: true,
       }),
-      penatly: new foundry.data.fields.NumberField({
+      penalty: new foundry.data.fields.NumberField({ // Fix the typo here
         required: true,
         initial: 0,
         integer: true,

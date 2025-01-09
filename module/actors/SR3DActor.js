@@ -51,7 +51,6 @@ export default class SR3DActor extends Actor {
     }
   }
 
-
   async recalculateAttribute() {
     const system = this.system;
 
@@ -145,7 +144,7 @@ export default class SR3DActor extends Actor {
     this.update({ system: attributes });
   }
 
-  async silentUpdateAttributes(attributeName, actor, attributes, ref, direction = 1) {
+  async silentUpdateAttributes(attributeName, attributes, ref, direction = 1) {
 
     let total = attributes[attributeName].total;
     let mod = attributes[attributeName].mod;
@@ -155,16 +154,15 @@ export default class SR3DActor extends Actor {
 
     if (total > 1) {
 
-      await actor.update({ [`system.attributes.${attributeName}.total`]: total }, { render: false });
-      await actor.update({ [`system.attributes.${attributeName}.mod`]: mod }, { render: false });
+      await this.update({ [`system.attributes.${attributeName}.total`]: total }, { render: false });
+      await this.update({ [`system.attributes.${attributeName}.mod`]: mod }, { render: false });
 
       const elementSelector = `[data-attribute="${attributeName}"] .stat-value h1`;
       ref.element.find(elementSelector).text(`${total} / ${mod}`);
     }
   }
 
-
-  async silentUpdateDerivedValues(attributeName, actor, attributes, ctx, direction) {
+  async silentUpdateDerivedValues(attributeName, attributes, ctx, direction) {
 
     const quickness = attributes.quickness?.total || 0;
     const intelligence = attributes.intelligence?.total || 0;
@@ -175,7 +173,7 @@ export default class SR3DActor extends Actor {
 
     if (["quickness", "intelligence"].includes(attributeName)) {
       reaction = Math.floor((quickness + intelligence + 1) * .5);
-      await actor.update({
+      await this.update({
         [`system.attributes.reaction.total`]: reaction,
         [`system.attributes.reaction.mod`]: reaction
       }, { render: false });
@@ -187,7 +185,7 @@ export default class SR3DActor extends Actor {
     // Combat Pool (as an attribute)
     if (["quickness", "intelligence", "willpower"].includes(attributeName)) {
       const combatPool = Math.floor((quickness + intelligence + willpower + direction) * 0.5);
-      await actor.update({
+      await this.update({
         [`system.attributes.combat.total`]: combatPool,
         [`system.attributes.combat.mod`]: combatPool
       }, { render: false });
@@ -199,7 +197,7 @@ export default class SR3DActor extends Actor {
     // Astral Pool (as an attribute)
     if (["charisma", "intelligence", "willpower"].includes(attributeName)) {
       const astralPool = Math.floor((charisma + intelligence + willpower + direction) * 0.5);
-      await actor.update({
+      await this.update({
         [`system.attributes.astral.total`]: astralPool,
         [`system.attributes.astral.mod`]: astralPool
       }, { render: false });
@@ -211,7 +209,7 @@ export default class SR3DActor extends Actor {
     //Spell Pool (as an attribute)
     if (["magic", "intelligence", "willpower"].includes(attributeName)) {
       const spellPool = Math.floor((intelligence + willpower + magic + direction) * 0.3333);
-      await actor.update({ [`system.attributes.spell.total`]: spellPool }, { render: false });
+      await this.update({ [`system.attributes.spell.total`]: spellPool }, { render: false });
       const elementSelector = `[data-attribute="spell"] .stat-value h1`;
       ctx.element.find(elementSelector).text(`${spellPool} / ${spellPool}`);
     }
@@ -219,9 +217,9 @@ export default class SR3DActor extends Actor {
 
     // Hacking Pool (as an attribute)
     if (["intelligence"].includes(attributeName)) {
-      const mpcp = actor.system.cyberdeck?.mpcp || 0; // Assume MPCP value is stored in the cyberdeck system
+      const mpcp = this.actor.system.cyberdeck?.mpcp || 0; // Assume MPCP value is stored in the cyberdeck system
       const hackingPool = Math.floor((intelligence + mpcp + direction) * 0.3333);
-      await actor.update({
+      await this.update({
         [`system.attributes.hacking.total`]: hackingPool,
         [`system.attributes.hacking.mod`]: hackingPool
       }, { render: false });
@@ -232,9 +230,9 @@ export default class SR3DActor extends Actor {
 
     // Control Pool (as an attribute)
     if (["reaction"].includes(attributeName)) {
-      const vcrModifier = actor.system.cyberware?.vcr || 0; // Assume VCR value is stored in cyberware system
+      const vcrModifier = this.actor.system.cyberware?.vcr || 0; // Assume VCR value is stored in cyberware system
       const controlPool = Math.floor(reaction + vcrModifier);
-      await actor.update({
+      await this.update({
         [`system.attributes.control.total`]: controlPool,
         [`system.attributes.control.mod`]: controlPool
       }, { render: false });

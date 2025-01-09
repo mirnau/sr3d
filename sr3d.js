@@ -65,7 +65,7 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
-    
+
     Hooks.on(hooks.renderCharacterSheet, (app, html, data) => {
         initializeMasonryLayout(app, html, data);
         initActiveSkillMasonry(app, html, data);
@@ -76,12 +76,12 @@ function registerHooks() {
         initMovementMasonry(app, html, data);
         initKarmaMasonry(app, html, data);
     });
-    
+
     Hooks.on(hooks.renderSR3DItemSheet, (app, html, data) => {
         initMetahumanMasonry(app, html, data);
     });
-    
-    
+
+
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
@@ -95,18 +95,18 @@ function registerHooks() {
     Hooks.on(hooks.renderCharacterSheet, displayNewsFeed);
     Hooks.on(hooks.renderCharacterSheet, injectFooter);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
-    
+
     Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createActor, displayCreationDialog);
     Hooks.on(hooks.preCreateActor, doNotRenderSheet);
-    
-    
+
+
     Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
     });
-    
-    
+
+
     // Attach Hooks for ActorSheet and ItemSheet
     Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
@@ -114,17 +114,57 @@ function registerHooks() {
             attachLightEffect(html, activeTheme);
         }
     });
-    
+
     Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
         }
     });
-    
+
     ////////////////////////////////////////////////////////
-    
-    
+
+    //Updating the healthboxes on start
+    Hooks.on("renderCharacterSheet", (app, html, data) => {
+        let actor = app.actor;
+
+        const stunArray = [...actor.system.health.stun];
+        const physicalArray = [...actor.system.health.physical];
+
+        for (let i = 1; i <= 10; i++) {
+            const checkbox = html.find(`#healthBox${i}`)[0];
+            if (!checkbox) {
+                console.warn(`Checkbox healthBox${i} not found`);
+                continue;
+            }
+
+            const isChecked = stunArray[i - 1];
+            checkbox.checked = isChecked;
+
+            const siblingH4 = checkbox.closest(".damage-input")?.querySelector("h4");
+            if (siblingH4) {
+                siblingH4.classList.toggle("lit", isChecked);
+                siblingH4.classList.toggle("unlit", !isChecked);
+            }
+        }
+
+        for (let i = 11; i <= 20; i++) {
+            const checkbox = html.find(`#healthBox${i}`)[0];
+            if (!checkbox) {
+                console.warn(`Checkbox healthBox${i} not found`);
+                continue;
+            }
+
+            const isChecked = physicalArray[i - 11];
+            checkbox.checked = isChecked;
+
+            const siblingH4 = checkbox.closest(".damage-input")?.querySelector("h4");
+            if (siblingH4) {
+                siblingH4.classList.toggle("lit", isChecked);
+                siblingH4.classList.toggle("unlit", !isChecked);
+            }
+        }
+    });
 
     ////////////////////////////////////////////////////////
 
@@ -147,7 +187,7 @@ function registerHooks() {
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.itemTypes)) {
             CONFIG.Item.typeLabels[type] = game.i18n.localize(locKey);
         }
-
+    
         // NOTE: Updating FVVT's Actor dropdown menus
         CONFIG.Actor.typeLabels = {};
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.actorTypes)) {
@@ -211,26 +251,26 @@ function registerHooks() {
         Handlebars.registerHelper('add', function (...args) {
             // Remove the last argument (options object from Handlebars)
             args.pop();
-        
+
             // Parse all arguments as numbers and sum them
             const total = args.reduce((sum, value) => {
                 const number = parseFloat(value);
                 return !isNaN(number) ? sum + number : sum;
             }, 0);
-        
+
             return total; // Return the numeric sum
         });
-        
+
 
         Handlebars.registerHelper('multiply', (value, factor) => {
             return Number(value * factor); // Converts and limits to 1 decimal places
         });
-        
+
         Handlebars.registerHelper("currency", function (value) {
             return `¥${Number(value).toLocaleString()}`;
         });
 
-        
+
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
         });
