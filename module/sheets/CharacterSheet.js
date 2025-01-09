@@ -62,7 +62,7 @@ export default class CharacterSheet extends ActorSheet {
         //if (!force) return;
         await super.render(force, options);
     }
-    
+
 
     activateListeners(html) {
         super.activateListeners(html);
@@ -88,19 +88,30 @@ export default class CharacterSheet extends ActorSheet {
                 });
         });
 
-        // Increment attribute
-        html.find('.increment-attribute').click((event) => {
-            const attribute = event.currentTarget.dataset.attribute;
-            this.actor.adjustAttribute(attribute, 1);
-            this._updateButtons(attribute);
+        html.find('.increment-attribute').click(async (event) => {
+            const attributeName = event.currentTarget.dataset.attribute;
+            const actor = this.actor;
+            const attributes = actor.system.attributes;
+            const direction = 1;
+
+            await actor.silentUpdateAttributes(attributeName, actor, attributes, this, direction);
+
+            // Recalculate dependent attributes ("pools" as attributes)
+            await actor.updateDerivedValues(attributeName, actor, attributes, this, direction);
 
         });
 
-        // Decrement attribute
-        html.find('.decrement-attribute').click((event) => {
-            const attribute = event.currentTarget.dataset.attribute;
-            this.actor.adjustAttribute(attribute, -1);
-            this._updateButtons(attribute);
+        html.find('.decrement-attribute').click(async (event) => {
+            const attributeName = event.currentTarget.dataset.attribute;
+            const actor = this.actor;
+            const attributes = actor.system.attributes;
+            const direction = -1;
+
+            await actor.silentUpdateAttributes(attributeName, actor, attributes, this, direction);
+            
+            // Recalculate dependent attributes ("pools" as attributes)
+            await actor.updateDerivedValues(attributeName, actor, attributes, this, direction);
+
         });
 
         html.on('click', '.delete-owned-instance', async (event) => {
@@ -149,8 +160,8 @@ export default class CharacterSheet extends ActorSheet {
 
         // Get contexts (not strictly needed if you only do it in EcgAnimator, 
         // but we need them for resizing logic)
-        const ctxLine = ecgCanvas.getContext('2d', {willReadFrequently: true});
-        const ctxPoint = ecgPointCanvas.getContext('2d', {willReadFrequently: true});
+        const ctxLine = ecgCanvas.getContext('2d', { willReadFrequently: true });
+        const ctxPoint = ecgPointCanvas.getContext('2d', { willReadFrequently: true });
 
         // Resize helper
         function resizeCanvas() {
@@ -169,8 +180,7 @@ export default class CharacterSheet extends ActorSheet {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Create your ECG animator instance (assuming your updated EcgAnimator 
-        // accepts two canvases: one for lineCanvas, one for pointCanvas)
+        // Create your ECG animator instance, two canvases: one for lineCanvas, one for pointCanvas)
         this.ecgAnimator = new EcgAnimator(ecgCanvas, ecgPointCanvas, {
             freq: 2,      // ~120 BPM
             amp: 30,      // bigger amplitude
@@ -194,20 +204,20 @@ export default class CharacterSheet extends ActorSheet {
             if (!isNaN(val)) this.ecgAnimator.setAmplitude(val);
         });
         //////////////////////////////////////////////////////////////////// 
-        
+
         html.find("input[type='checkbox'][id^='healthBox']").on("change", (event) => {
             const clicked = event.currentTarget;
             const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
             const isChecked = clicked.checked;
-        
+
             if (clickedIndex === 1 || clickedIndex === 11) {
                 const start = clickedIndex === 1 ? 1 : 11;
                 const end = clickedIndex === 1 ? 10 : 20;
-        
+
                 const numCheckedInRange = html.find(`input[type='checkbox'][id^='healthBox']`)
                     .slice(start - 1, end) // Adjust for 0-based index
                     .filter(":checked").length;
-        
+
                 if (numCheckedInRange === 0 && !isChecked) {
                     const siblingH4 = $(clicked).closest(".damage-input").find("h4");
                     if (siblingH4.length) {
@@ -218,7 +228,7 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             let degree = 0;
-       
+
             if (clickedIndex < 11) {
                 degree = clickedIndex;
                 iterator(clickedIndex, 1, 10);
@@ -230,17 +240,17 @@ export default class CharacterSheet extends ActorSheet {
             this.actor.system.health.penalty = severity(degree);
 
             function severity(degree) {
-                if (degree > 0 && degree < 3 )
+                if (degree > 0 && degree < 3)
                     return 1;
-                else if ( degree <= 3 && degree < 6)
+                else if (degree <= 3 && degree < 6)
                     return 2;
-                else if(degree >= 6 && degree < 10)
+                else if (degree >= 6 && degree < 10)
                     return 3
-                else if(degree === 10)
+                else if (degree === 10)
                     return 4;
                 else return 0;
             }
-        
+
             function iterator(clickedIndex, start, end) {
                 for (let i = start; i <= end; i++) {
                     const box = html.find(`#healthBox${i}`);
@@ -260,12 +270,8 @@ export default class CharacterSheet extends ActorSheet {
                 }
             }
         });
-        
+
     }
-
-    
-
-    
 
 
     onNewsFeedIterationCompleted(html, event) {

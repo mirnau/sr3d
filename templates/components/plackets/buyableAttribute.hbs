@@ -1,6 +1,6 @@
 <!-- systems/sr3d/templates/components/plackets/buyableAttribute.hbs -->
 
-<div class="stat-card">
+<div class="stat-card" data-attribute="{{name}}">
     <div>
         <h4>{{localize (concat "sr3d.actor.attributes." name)}}</h4>
     </div>
@@ -23,3 +23,4 @@
         {{/if}}
     </div>
 </div>
+
