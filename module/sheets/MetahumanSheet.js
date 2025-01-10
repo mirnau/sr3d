@@ -32,7 +32,6 @@ export default class MetahumanSheet extends ItemSheet {
         return ctx;
     }
     
-
     _getMetahumanData(ctx) {
         ctx.lifespan = ItemDataService.lifespan(ctx);
         ctx.height = ItemDataService.height(ctx);
