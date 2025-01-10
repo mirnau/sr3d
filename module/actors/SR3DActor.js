@@ -217,7 +217,7 @@ export default class SR3DActor extends Actor {
 
     // Hacking Pool (as an attribute)
     if (["intelligence"].includes(attributeName)) {
-      const mpcp = this.actor.system.cyberdeck?.mpcp || 0; // Assume MPCP value is stored in the cyberdeck system
+      const mpcp = this.system.cyberdeck?.mpcp || 0; // Assume MPCP value is stored in the cyberdeck system
       const hackingPool = Math.floor((intelligence + mpcp + direction) * 0.3333);
       await this.update({
         [`system.attributes.hacking.total`]: hackingPool,
@@ -230,7 +230,7 @@ export default class SR3DActor extends Actor {
 
     // Control Pool (as an attribute)
     if (["reaction"].includes(attributeName)) {
-      const vcrModifier = this.actor.system.cyberware?.vcr || 0; // Assume VCR value is stored in cyberware system
+      const vcrModifier = this.system.cyberware?.vcr || 0; // Assume VCR value is stored in cyberware system
       const controlPool = Math.floor(reaction + vcrModifier);
       await this.update({
         [`system.attributes.control.total`]: controlPool,

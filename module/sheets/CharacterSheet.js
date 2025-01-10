@@ -88,7 +88,7 @@ export default class CharacterSheet extends ActorSheet {
             const direction = 1;
 
             await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-            await actor.updateDerivedValues(attributeName, attributes, this, direction);
+            await actor.silentUpdateDerivedValues(attributeName, attributes, this, direction);
 
         });
 
@@ -99,7 +99,7 @@ export default class CharacterSheet extends ActorSheet {
             const direction = -1;
 
             await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-            await actor.updateDerivedValues(attributeName, attributes, this, direction);
+            await actor.silentUpdateDerivedValues(attributeName, attributes, this, direction);
 
         });
 
@@ -318,10 +318,6 @@ export default class CharacterSheet extends ActorSheet {
             });
         }
 
-        console.log("CLOSING DESTROYING STUFF");
-        console.log("CLOSING DESTROYING STUFF");
-        console.log("CLOSING DESTROYING STUFF");
-        console.log("CLOSING DESTROYING STUFF");
         return super.close(options);
     }
 
