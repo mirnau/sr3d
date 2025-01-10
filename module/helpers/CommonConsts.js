@@ -35,7 +35,8 @@ export const hooks = {
     renderDialog: "renderDialog",
     createActor: "createActor",
     updateActor: "updateActor",
-    ready: "ready"
+    ready: "ready",
+    preCreateActor: "preCreateActor"
 };
 
 export const skillConfig = {

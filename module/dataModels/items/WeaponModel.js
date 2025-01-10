@@ -1,7 +1,7 @@
 import CommodityModel from "./components/Commodity.js";
 import PortabilityModel from "./components/Portability.js";
 
-export default class WeaponModel extends foundry.abstract.DataModel {
+export default class WeaponModel extends foundry.abstract.TypeDataModel {
     static defineSchema() {
         return {
             damage: new foundry.data.fields.StringField({

@@ -1,7 +1,7 @@
 import { baseAttributes, derivedAttributes, dicePools } from "../helpers/CommonConsts.js";
 import SR3DLog from "../SR3DLog.js";
 
-export class ActorDataService {
+export default class ActorDataService {
     static prepareSkills(contents) {
         return {
             active: this._categorizeAndSortSkills(
@@ -128,6 +128,16 @@ export class ActorDataService {
             attributePriorities: { A: 30, B: 27, C: 24, D: 21, E: 18 },
             skillsPriorities: { A: 50, B: 40, C: 34, D: 30, E: 27 },
             resourcesPriorities: { A: 1000000, B: 400000, C: 90000, D: 20000, E: 5000 }
+        };
+    }
+
+    static getTransactions(items) {
+        const transactions = items.filter(item => item.type === "transaction");
+        return {
+            all: transactions,
+            assets: transactions.filter(item => item.system.type === "Asset"),
+            expenses: transactions.filter(item => item.system.type === "Expense"),
+            debts: transactions.filter(item => item.system.type === "Debt"),
         };
     }
 }

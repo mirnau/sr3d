@@ -30,17 +30,34 @@ sr3d.itemTypes = {
     karma: "sr3d.createItem.karma"
 }
 
+sr3d.transaction = { 
+    transaction: "sr3d.item.transaction.transaction",
+    transactions: "sr3d.item.transaction.transactions",
+    amount: "sr3d.item.transaction.amount",
+    recurrent: "sr3d.item.transaction.recurrent",
+    type: "sr3d.item.transaction.type",
+    description: "sr3d.item.transaction.description",
+    assets: "sr3d.item.transaction.assets",
+    asset: "sr3d.item.transaction.asset",
+    expenses: "sr3d.item.transaction.expenses",
+    expense: "sr3d.item.transaction.expense",
+    debts: "sr3d.item.transaction.debts",
+    debt: "sr3d.item.transaction.debt",
+    payment: "sr3d.item.transaction.payment",
+    type: "sr3d.item.transaction.type",
+    interest: "sr3d.item.transaction.interest",
+    creditor: "sr3d.item.transaction.creditor",
+    total: "sr3d.item.transaction.total",
+    creditstick: "sr3d.item.transaction.creditstick"
+}
+
 sr3d.actorTypes = {
     playerCharacter: "sr3d.actorTypes.playerCharacter",
 }
 
 sr3d.health = {
     health: "sr3d.actor.health.health",
-    damageTracker: "sr3d.actor.health.damageTracker"
-}
-
-sr3d.budget = {
-    budget: "sr3d.actor.budget.budget"
+    health: "sr3d.actor.health.health"
 }
 
 sr3d.ammunition = {
@@ -211,7 +228,7 @@ sr3d.character = {
     looks: "sr3d.actor.character.looks",
     quote: "sr3d.actor.character.quote",
     ratsrace: "sr3d.actor.character.ratsrace",
-    income: "sr3d.actor.character.income",
+    asset: "sr3d.actor.character.asset",
     post: "sr3d.actor.character.post",
     expenses: "sr3d.actor.character.expenses",
     debts: "sr3d.actor.character.debts",
@@ -289,11 +306,11 @@ sr3d.karma = {
     goodKarma: "sr3d.actor.karma.goodKarma"
 };
 
-sr3d.damageTracker = {
-    damageTracker: "sr3d.actor.damageTracker.damageTracker",
-    stun: "sr3d.actor.damageTracker.stun",
-    physical: "sr3d.actor.damageTracker.physical",
-    overflow: "sr3d.actor.damageTracker.owerflow"
+sr3d.health = {
+    health: "sr3d.actor.health.health",
+    stun: "sr3d.actor.health.stun",
+    physical: "sr3d.actor.health.physical",
+    overflow: "sr3d.actor.health.owerflow"
 };
 
 sr3d.playerCharacter = "sr3d.actor.playerCharacter";

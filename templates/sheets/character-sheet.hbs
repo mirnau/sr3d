@@ -8,7 +8,6 @@
             <div class="inner-background-container">
                 <!-- Fake shadow (behind inner background) -->
                 <div class="fake-shadow"></div>
-                <!-- Inner content -->
                 <div class="inner-background">
                     <h1>{{localize "sr3d.sheet.dossier"}}</h1>
                     {{> "systems/sr3d/templates/components/dossier.hbs"}}
@@ -59,8 +58,8 @@
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h1>{{localize "sr3d.actor.health.damageTracker"}}</h1>
-                    <p>Health Goes here</p>
+                    <h1>{{localize "sr3d.actor.health.health"}}</h1>
+                    {{> "systems/sr3d/templates/components/health.hbs"}}
                 </div>
             </div>
         </div>
@@ -82,15 +81,13 @@
             </div>
         </div>
 
-        <!-- Budget Section -->
+        <!-- Ratsrace Section -->
         <div class="sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h1>{{localize "sr3d.actor.budget.budget"}}</h1>
-                    <p>Income: {{system.budget.income}}</p>
-                    <p>Expenses: {{system.budget.expenses}}</p>
-                    <p>Debts: {{system.budget.debts}}</p>
+                    <h1>{{localize @root.config.character.ratsrace}}</h1>
+                    {{> "systems/sr3d/templates/components/ratsrace.hbs"}}  
                 </div>
             </div>
         </div>

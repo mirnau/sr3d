@@ -1,6 +1,6 @@
 // src/item/data/components/CreationModel.js
 
-export default class Creation extends foundry.abstract.DataModel {
+export default class Creation extends foundry.abstract.TypeDataModel {
     static defineSchema() {
       return {
         attributePoints: new foundry.data.fields.NumberField({

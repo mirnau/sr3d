@@ -21,5 +21,6 @@ export function initializeMasonryLayout(app, html, data) {
     };
 
     // Assign a new observer to the actor
+    actor.mainLayoutResizeObserver?.disconnect();
     actor.mainLayoutResizeObserver = observeMasonryResize(actor, masonryResizeConfig, true);
 }

@@ -32,17 +32,19 @@
 
     }
 
-
     .inner-background {
         .apply-container();
         position: relative;
         z-index: 10;
     }
 
+    .editor,
     .editor-field {
 
         z-index: 100;
         min-height: 10rem;
+        height: 100%;
+        color: @text-color;
         .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
     }
 

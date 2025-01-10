@@ -1,0 +1,157 @@
+.sr3d.sheet.character {
+    .broadcaster-sheet {
+        h1 {
+            text-indent: 0rem;
+            text-align: left;
+        }
+
+        .sheet-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* Vertically center the items */
+            padding: 0.5rem;
+            /* Adjust as needed */
+            margin: 0;
+            /* Remove default margins */
+
+            .image-mask {
+                position: static;
+                /* Reset positioning */
+                transform: none;
+                /* Remove translation */
+                width: 64px;
+                height: 64px;
+                max-width: 5rem;
+
+                img.small {
+                    /* Remove the constraints that force the image to fill the container */
+                    position: static;
+                    /* Reset positioning */
+                    transform: none;
+                    /* Remove translation */
+                    min-width: auto;
+                    /* Allow natural width */
+                    min-height: auto;
+                    /* Allow natural height */
+
+                    /* Set the desired size */
+                    width: 64px;
+                    height: 64px;
+
+                    /* Adjust object-fit if necessary */
+                    object-fit: contain;
+                    /* or 'cover' based on your preference */
+                }
+            }
+
+            .actor-info {
+                display: flex;
+                flex-direction: column;
+                align-items: left;
+
+                .broadcast-toggle {
+                    display: flex;
+                    /* Enable Flexbox */
+                    align-items: left;
+                    /* Center items vertically */
+                    gap: 10px;
+                    /* Add space between elements */
+
+                    .toggle-input {
+                        appearance: none;
+                        /* Remove default checkbox styles */
+                        width: 20px;
+                        height: 20px;
+                        border: 2px solid cyan;
+                        /* Default cyan color for non-active */
+                        border-radius: 4px;
+                        /* Optional: make it rounded */
+                        background-color: transparent;
+                        /* Transparent background by default */
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        /* Smooth transition for color change */
+                    }
+
+                    .toggle-input:checked {
+                        border-color: @highlight-color-primary;
+                        /* Change border to magenta when active */
+                        background-color: @highlight-color-primary;
+                        /* Fill magenta color when active */
+                    }
+
+                }
+
+            }
+        }
+
+        .news-area {
+            display: flex;
+            /* Enables Flexbox for centering */
+            flex-direction: column;
+            /* Stacks children vertically */
+            align-items: center;
+            /* Centers children horizontally */
+            justify-content: center;
+            /* Centers children vertically */
+            gap: 1rem;
+            /* Adds spacing between the child elements */
+
+            .links {
+                display: flex;
+                /* Enables Flexbox */
+                flex-direction: row;
+                /* Arranges links horizontally */
+                justify-content: center;
+                /* Centers links horizontally */
+                align-items: center;
+                /* Centers links vertically */
+                gap: 1rem;
+                /* Adds spacing between arrows */
+            }
+
+            .list-box {
+                width: 100%;
+                padding: 0.5rem;
+                display: flex;
+                /* Enables Flexbox */
+                flex-direction: column;
+                /* Stacks the `<h3>` and `<select>` vertically */
+                align-items: center;
+                /* Centers content horizontally */
+                text-align: center;
+                /* Centers text inside the `<h3>` */
+
+                h3 {
+                    margin: 0;
+                    /* Removes extra spacing */
+                }
+
+
+                option {
+                    white-space: normal;
+                    /* Allows text wrapping */
+                    overflow-wrap: break-word;
+                    /* Breaks long words */
+                    padding: 0.25rem;
+                    text-indent: 0rem;
+
+                    &:nth-child(odd) {
+                        background-color: @secondary-color;
+                        /* Color for odd options */
+                        color: @text-color;
+                        /* Ensure text is readable */
+                    }
+
+                    &:nth-child(even) {
+                        background-color: @primary-color;
+                        /* Color for even options */
+                        color: @text-color;
+                        /* Ensure text is readable */
+                    }
+                }
+            }
+        }
+    }
+}

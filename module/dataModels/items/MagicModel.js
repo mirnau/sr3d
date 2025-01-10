@@ -1,4 +1,4 @@
-export default class MagicModel extends foundry.abstract.DataModel {
+export default class MagicModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       type: new foundry.data.fields.StringField({

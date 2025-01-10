@@ -93,22 +93,26 @@
             line-height: 0rem;
             display: inline-block;
             position: absolute;
-            animation: scroll-left 25s linear infinite;
+            animation: scroll-left var(--seconds) linear;
             align-items: center;
             text-align: center;
             white-space: nowrap;
 
         }
 
+        --percentBegin: 150%;
+        --percentEnd: 150%;
+        --seconds: 25s;
+
         /* Keyframes for the scrolling effect */
         @keyframes scroll-left {
             0% {
-                transform: translateX(150%);
+                transform: translateX(var(--percentBegin));
                 /* Start off-screen to the right */
             }
 
             100% {
-                transform: translateX(-150%);
+                transform: translateX(var(--percentEnd));
                 /* End off-screen to the left */
             }
         }

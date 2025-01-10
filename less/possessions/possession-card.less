@@ -44,6 +44,7 @@
         padding: 0;
         border: none;
         background-color: transparent;
+
     }
 
     /* Remove border from rows */
@@ -59,7 +60,12 @@
         padding: 0rem;
         border: none;
         text-align: left;
+    }
 
+    a.creditor {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     tbody tr:first-child {
@@ -68,17 +74,19 @@
 
     /* Style alternating rows */
     tbody tr:nth-child(odd) {
-        box-shadow: inset 0 0 16px @highlight-color-primary;
+        box-shadow: inset 0 0 14px @highlight-color-primary;
         background-color: @primary-color;
     }
 
     tbody tr:nth-child(even) {
-        background-color: @secondary-color;
-        box-shadow: inset 0 0 16px @highlight-color-primary;
+        background-color: @primary-color;
+        box-shadow: inset 0 0 14px @highlight-color-primary;
     }
 
     tbody tr:last-child {
-        .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+
+        
+        .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5/1.4142rem);
     }
 
     /* Optional: Adjust font and layout for visibility */

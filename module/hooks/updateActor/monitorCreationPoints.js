@@ -1,28 +1,19 @@
 import { flags } from "../../helpers/CommonConsts.js";
 import ExitPointAssignmentDialog from "../../dialogs/ExitPointAssignmentDialog.js"
+import SR3DLog from "../../SR3DLog.js";
 
 export async function monitorCreationPoints(actor, updatedData, options, userId) {
-    console.log("monitorCreationPoints Called", { actor, updatedData });
 
-    if (!actor) {
-        console.warn("No actor provided to monitorCreationPoints");
-        return;
-    }
-
-    // Ensure the flag is properly checked
-    const creationStateFlag = !actor.getFlag(flags.namespace, flags.isCharacterCreationState);
-    console.log("Character Creation State Flag:", creationStateFlag);
-
-    // Skip if creation is already complete
-    if (creationStateFlag) {
-        console.log("Skipping monitorCreationPoints: Character creation already marked complete.");
-        return;
-    }
-
-    // Check the actor's creation data
     const creation = actor.system.creation;
-    if (!creation) {
-        console.error("Actor does not have a creation object", actor);
+    if (!creation) { 
+        SR3DLog.info("No points -> Early exit.", monitorCreationPoints.name);
+        return; 
+    }
+    
+    const creationStateFlag = !actor.getFlag(flags.namespace, flags.isCharacterCreationState);
+    
+    if (creationStateFlag) {
+        SR3DLog.info("Character creation complete -> Early exit.", monitorCreationPoints.name);
         return;
     }
 
@@ -34,15 +25,7 @@ export async function monitorCreationPoints(actor, updatedData, options, userId)
         activePoints === 0 &&
         knowledgePoints === 0 &&
         languagePoints === 0;
-
-    console.log("Creation Points Check:", {
-        attributePoints,
-        activePoints,
-        knowledgePoints,
-        languagePoints,
-        allPointsZero,
-    });
-
+    
     if (allPointsZero) {
         const isDone = await new Promise((resolve) => {
             console.log("Rendering ExitPointAssignmentDialog...");

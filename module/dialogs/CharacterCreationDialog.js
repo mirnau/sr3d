@@ -1,8 +1,9 @@
 import SR3DLog from "../SR3DLog.js";
 import Prioritizer from "../services/Prioritizer.js";
 import { getRandomBellCurveWithMode, randomInRange } from "../sheets/Utilities.js";
+import CharacterModel from "../dataModels/actor/CharacterModel.js";
 
-export class CharacterCreationDialog extends Dialog {
+export default class CharacterCreationDialog extends Dialog {
     constructor(dialogData, content, resolve) {
         super({
             title: "Character Creation",
@@ -247,62 +248,74 @@ export class CharacterCreationDialog extends Dialog {
     }
 
     async _handleDialogSubmit(html, dialogData) {
-
         // Fetch selected values from the HTML
         const selectedMetahumanId = html.find('[name="metahuman"]').val();
         const selectedMagicId = html.find('[name="magic"]').val();
         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
-
+    
         // Retrieve age, height, and weight values from sliders
         const selectedAge = html.find('#slider-age').val();
         const selectedHeight = html.find('#slider-height').val();
         const selectedWeight = html.find('#slider-weight').val();
-
+    
         // Assign selected points and resources
         const systemUpdates = {
             "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
             "system.creation.activePoints": dialogData.skillsPriorities[selectedSkillsPriority],
-            "system.ratsrace.income.post": {
+            "system.profile.age": selectedAge,
+            "system.profile.height": selectedHeight,
+            "system.profile.weight": selectedWeight,
+        };
+    
+        const transactionData = {
+            name: "Starter's Credit Stick", // Name of the embedded item
+            type: "transaction",
+            system: {
                 amount: dialogData.resourcesPriorities[selectedResourcesPriority],
                 recurrent: false,
+                isCreditStick: true,
+                type: "Asset", // Set the type to one of the valid choices
+                description: "A pile of electronic cash to start with", // Optional: add a description
+                creditorID: "",
+                creditorName: "",
+                interestPerMonth: 0.0,
             },
-            "system.age": selectedAge,
-            "system.height": selectedHeight,
-            "system.weight": selectedWeight,
         };
-
+    
+        await dialogData.actor.createEmbeddedDocuments("Item", [transactionData]);
+    
         // Log selected values for debugging
         SR3DLog.inspect("Selected Metahuman ID", selectedMetahumanId);
         SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicId);
-
+    
         // Handle Metahuman item creation
         if (selectedMetahumanId) {
             const metahumanItem = game.items.get(selectedMetahumanId);
             if (metahumanItem) {
-                await actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
+                await dialogData.actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
                 SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
             }
         }
-
+    
         // Handle Magic Tradition item creation
         if (selectedMagicId) {
             const magicItem = game.items.get(selectedMagicId);
             if (magicItem) {
-                await actor.createEmbeddedDocuments("Item", [magicItem.toObject()]);
+                await dialogData.actor.createEmbeddedDocuments("Item", [magicItem.toObject()]);
                 SR3DLog.success(`Magic Tradition item created on actor: ${magicItem.name}`, "Actor Creation");
             }
         }
-
+    
         // Apply updates to the actor's system
         await dialogData.actor.update(systemUpdates);
-
+    
         // Force recalculation of derived stats
         if (dialogData.actor.characterSetup) {
             dialogData.actor.characterSetup();
         }
-
+    
         SR3DLog.success("Character creation process completed successfully.", "CharacterCreationDialog");
     }
 

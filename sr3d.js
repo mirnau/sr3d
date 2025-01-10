@@ -42,6 +42,11 @@ import KarmaModel from "./module/dataModels/items/KarmaModel.js";
 import MetahumanModel from "./module/dataModels/items/Metahuman.js";
 import MagicModel from "./module/dataModels/items/MagicModel.js";
 import CharacterModel from "./module/dataModels/actor/CharacterModel.js";
+import NewsBroadcastModel from "./module/dataModels/actor/NewsBroadcastModel.js";
+import NewsBroadcastSheet from "./module/sheets/NewsBroadcastSheet.js";
+import TransactionSheet from "./module/sheets/TransactionSheet.js";
+import TransactionModel from "./module/dataModels/items/TransactionModel.js";
+import { displayCreationDialog, doNotRenderSheet } from "./module/hooks/preCreateActor/displayCreationDialog.js";
 
 //NOTE: Recursively gather .hbs files from the folder structure
 async function registerTemplatesFromPathsAsync() {
@@ -60,6 +65,7 @@ async function registerTemplatesFromPathsAsync() {
 
 function registerHooks() {
 
+
     Hooks.on(hooks.renderCharacterSheet, (app, html, data) => {
         initializeMasonryLayout(app, html, data);
         initActiveSkillMasonry(app, html, data);
@@ -75,10 +81,10 @@ function registerHooks() {
         initMetahumanMasonry(app, html, data);
     });
 
+
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
-    Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createItem, setItemFlags);
     Hooks.on(hooks.createItem, transferKarmatoActor);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
@@ -90,6 +96,11 @@ function registerHooks() {
     Hooks.on(hooks.renderCharacterSheet, injectFooter);
     Hooks.once(hooks.ready, scopeCssToProject); //Redundant?
 
+    Hooks.on(hooks.createActor, setActorFlags);
+    Hooks.on(hooks.createActor, displayCreationDialog);
+    Hooks.on(hooks.preCreateActor, doNotRenderSheet);
+
+
     Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";
         setTheme(savedTheme); // Apply the saved theme on startup
@@ -97,14 +108,14 @@ function registerHooks() {
 
 
     // Attach Hooks for ActorSheet and ItemSheet
-    Hooks.on(hooks.renderSR3DActorSheet, (app, html) => {
+    Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
         }
     });
 
-    Hooks.on(hooks.renderSR3DItemSheet, (app, html) => {
+    Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
         if (["chummer-dark", "chummer-light"].includes(activeTheme)) {
             attachLightEffect(html, activeTheme);
@@ -112,6 +123,48 @@ function registerHooks() {
     });
 
     ////////////////////////////////////////////////////////
+
+    //Updating the healthboxes on start
+    Hooks.on("renderCharacterSheet", (app, html, data) => {
+        let actor = app.actor;
+
+        const stunArray = [...actor.system.health.stun];
+        const physicalArray = [...actor.system.health.physical];
+
+        for (let i = 1; i <= 10; i++) {
+            const checkbox = html.find(`#healthBox${i}`)[0];
+            if (!checkbox) {
+                console.warn(`Checkbox healthBox${i} not found`);
+                continue;
+            }
+
+            const isChecked = stunArray[i - 1];
+            checkbox.checked = isChecked;
+
+            const siblingH4 = checkbox.closest(".damage-input")?.querySelector("h4");
+            if (siblingH4) {
+                siblingH4.classList.toggle("lit", isChecked);
+                siblingH4.classList.toggle("unlit", !isChecked);
+            }
+        }
+
+        for (let i = 11; i <= 20; i++) {
+            const checkbox = html.find(`#healthBox${i}`)[0];
+            if (!checkbox) {
+                console.warn(`Checkbox healthBox${i} not found`);
+                continue;
+            }
+
+            const isChecked = physicalArray[i - 11];
+            checkbox.checked = isChecked;
+
+            const siblingH4 = checkbox.closest(".damage-input")?.querySelector("h4");
+            if (siblingH4) {
+                siblingH4.classList.toggle("lit", isChecked);
+                siblingH4.classList.toggle("unlit", !isChecked);
+            }
+        }
+    });
 
     ////////////////////////////////////////////////////////
 
@@ -134,7 +187,7 @@ function registerHooks() {
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.itemTypes)) {
             CONFIG.Item.typeLabels[type] = game.i18n.localize(locKey);
         }
-
+    
         // NOTE: Updating FVVT's Actor dropdown menus
         CONFIG.Actor.typeLabels = {};
         for (const [type, locKey] of Object.entries(CONFIG.sr3d.actorTypes)) {
@@ -148,16 +201,18 @@ function registerHooks() {
         // NOTE: Following pattern is necessary for databinding to work
         // https://foundryvtt.com/api/classes/foundry.abstract.TypeDataModel.html
         CONFIG.Actor.dataModels = {
-            "sr3d.character": CharacterModel
+            "character": CharacterModel,
+            "newsbroadcast": NewsBroadcastModel
         };
 
         CONFIG.Item.dataModels = {
-            "sr3d.weapon": WeaponModel,
-            "sr3d.ammunition": AmmunitionModel,
-            "sr3d.skill": SkillModel,
-            "sr3d.karma": KarmaModel,
-            "sr3d.metahuman": MetahumanModel,
-            "sr3d.magic": MagicModel
+            "weapon": WeaponModel,
+            "ammunition": AmmunitionModel,
+            "skill": SkillModel,
+            "karma": KarmaModel,
+            "metahuman": MetahumanModel,
+            "magic": MagicModel,
+            "transaction": TransactionModel
         }
 
         Items.registerSheet(flags.namespace, WeaponSheet, { types: ["weapon"], makeDefault: true });
@@ -165,13 +220,56 @@ function registerHooks() {
         Items.registerSheet(flags.namespace, KarmaSheet, { types: ["karma"], makeDefault: true });
         Items.registerSheet(flags.namespace, MetahumanSheet, { types: ["metahuman"], makeDefault: true });
         Items.registerSheet(flags.namespace, SkillSheet, { types: ["skill"], makeDefault: true });
+        Items.registerSheet(flags.namespace, TransactionSheet, { types: ["transaction"], makeDefault: true });
 
         Items.registerSheet(flags.namespace, MagicSheet, { types: ["magic"], makeDefault: true });
 
-        Actors.registerSheet(flags.sr3d, CharacterSheet, { makeDefault: true });
-
+        Actors.registerSheet(flags.namespace, CharacterSheet, { types: ["character"], makeDefault: true });
+        Actors.registerSheet(flags.namespace, NewsBroadcastSheet, { types: ["newsbroadcast"], makeDefault: true });
 
         registerTemplatesFromPathsAsync();
+
+        Handlebars.registerHelper('sum', function (field, ...args) {
+            args.pop(); // Remove the options argument
+
+            let total = 0;
+
+            args.forEach(array => {
+                if (Array.isArray(array)) {
+                    array.forEach(item => {
+                        const value = parseFloat(foundry.utils.getProperty(item, field));
+                        if (!isNaN(value)) {
+                            total += value;
+                        }
+                    });
+                }
+            });
+
+            return Number(total);
+        });
+
+        Handlebars.registerHelper('add', function (...args) {
+            // Remove the last argument (options object from Handlebars)
+            args.pop();
+
+            // Parse all arguments as numbers and sum them
+            const total = args.reduce((sum, value) => {
+                const number = parseFloat(value);
+                return !isNaN(number) ? sum + number : sum;
+            }, 0);
+
+            return total; // Return the numeric sum
+        });
+
+
+        Handlebars.registerHelper('multiply', (value, factor) => {
+            return Number(value * factor); // Converts and limits to 1 decimal places
+        });
+
+        Handlebars.registerHelper("currency", function (value) {
+            return `¥${Number(value).toLocaleString()}`;
+        });
+
 
         Handlebars.registerHelper("repeat", function (n, content) {
             return Array(n).fill(null).map((_, i) => content.fn(i)).join('');
@@ -181,13 +279,6 @@ function registerHooks() {
             arg1 === arg2 ? options.fn(this) : options.inverse(this)
         );
 
-        Handlebars.registerHelper("currency", function (value) {
-            return `¥${Number(value).toLocaleString()}`;
-        });
-
-        Handlebars.registerHelper('multiply', (value, factor) => {
-            return (value * factor).toFixed(1); // Converts and limits to 1 decimal places
-        });
 
         Handlebars.registerHelper("isDossierOpen", function (actor) {
             return actor.getFlag(flags.namespace, flags.isDossierPanelOpened);
@@ -196,11 +287,7 @@ function registerHooks() {
         Handlebars.registerHelper("isShoppingStateActive", function (actor) {
             return actor.getFlag(flags.namespace, flags.isShoppingStateActive);
         });
-        /*
-                Handlebars.registerHelper('getProperty', function (obj, attr) {
-                    return obj[attr];
-                });
-        */
+
         Handlebars.registerHelper('log', function (value) {
             SR3DLog.inspect(`Handlebars log ${value}:`, "handlebars helper");
             return ''; // Handlebars requires the helper to return something

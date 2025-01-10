@@ -1,4 +1,4 @@
-export default class SimpleStat extends foundry.abstract.DataModel {
+export default class SimpleStat extends foundry.abstract.TypeDataModel {
     static defineSchema() {
       return {
         total: new foundry.data.fields.NumberField({

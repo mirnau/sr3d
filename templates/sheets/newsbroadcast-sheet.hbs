@@ -1,0 +1,86 @@
+<form class="{{cssClass}} sr3d sheet character" data-form="sheet" autocomplete="off">
+
+    <section class="broadcaster-sheet">
+        <div class="sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <header class="sheet-header">
+                        <div class="image-mask">
+                            <img class="small" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64"
+                                width="64" />
+                        </div>
+                        <div class="actor-info">
+
+                            <div class="editable-actor-name" contenteditable="true"
+                                oninput="this.nextElementSibling.value = this.textContent.trim()">
+                                <h1 class="no-margin">{{actor.name}}</h1>
+                            </div>
+                            <input type="hidden" name="actor.name" value="{{actor.name}}">
+
+
+                            <div class="broadcast-toggle">
+
+                                <p>Broadcasting:</p>
+                                <input type="checkbox" id="broadcasting-toggle" name="system.isBroadcasting"
+                                    class="toggle-input" {{#if actor.system.isBroadcasting}}checked{{/if}} />
+
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </div>
+
+        <div class="sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="news-input">
+                        <input type="text" id="headline-input" placeholder="Write a headline" />
+                        <a id="add-edit-prepared-news" class="link-button" title="Add Headline">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <a id="delete-edit-prepared-news" class="link-button" title="Delete Headline">
+                            <i class="fas fa-trash-can"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sheet-component">
+            <div class="inner-background-container">
+                <div class="fake-shadow"></div>
+                <div class="inner-background">
+                    <div class="news-area">
+                        <div class="list-box">
+                            <h3>Prepared Headlines</h3>
+                            <select id="prepared-news" size="5" multiple>
+                                {{#each preparedNews}}
+                                <option value="{{@index}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="links">
+                            <a id="to-rolling-news" title="Move to Rolling News">
+                                <h1 class="no-margin"><i class="fas fa-arrow-down"></i></h1>
+                            </a>
+                            <a id="to-prepared-news" title="Move to Prepared News">
+                                <h1 class="no-margin"><i class="fas fa-arrow-up"></i></h1>
+                            </a>
+                        </div>
+                        <div class="list-box">
+                            <h3>Rolling Headlines</h3>
+                            <select id="rolling-news" size="5" multiple>
+                                {{#each rollingNews}}
+                                <option value="{{@index}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

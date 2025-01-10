@@ -1,6 +1,6 @@
 <!-- systems/sr3d/templates/components/plackets/derivedAttribute.hbs -->
 
-<div class="stat-card">
+<div class="stat-card" data-attribute="{{name}}">
     <div>
         <h4>{{localize (concat "sr3d.actor.attributes." name)}}</h4>
     </div>
@@ -8,7 +8,6 @@
         <div class="stat-value">
             <h1>
                 {{data.total}}
-
                 {{#if data.mod}}
                 / {{data.mod}}
                 {{/if}}

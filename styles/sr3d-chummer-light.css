@@ -13,10 +13,14 @@
   position: relative;
   z-index: 10;
 }
+.sr3d .sr3d.sheet.item .editor,
+.sr3d .sr3d.sheet.character .editor,
 .sr3d .sr3d.sheet.item .editor-field,
 .sr3d .sr3d.sheet.character .editor-field {
   z-index: 100;
   min-height: 10rem;
+  height: 100%;
+  color: #c8d3f5;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
 .sr3d .sr3d.sheet.item .window-content,
@@ -209,6 +213,8 @@
   background: transparent;
   background-image: none;
 }
+.sr3d .sr3d.sheet.item input[type="number"],
+.sr3d .sr3d.sheet.character input[type="number"],
 .sr3d .sr3d.sheet.item input[type="text"],
 .sr3d .sr3d.sheet.character input[type="text"] {
   background-color: #1c364b;
@@ -660,6 +666,7 @@
   z-index: 10;
   box-sizing: border-box;
   clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0rem);
+  backdrop-filter: blur(8px);
 }
 .sr3d .sheet-component {
   box-sizing: border-box;
@@ -1205,6 +1212,309 @@
   background-color: #1b1f24;
   box-shadow: inset 0 0 8px #1df0ff;
 }
+.sr3d .total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.sr3d #ecg-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sr3d #ecg-canvas {
+  width: 100%;
+}
+.sr3d #controls {
+  margin-top: 10px;
+}
+.sr3d .ecg-container {
+  position: relative;
+  width: 100%;
+  height: 4rem;
+  border: 0rem;
+  box-shadow: inset 0 0 16px #1df0ff;
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .ecg-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.sr3d #ecg-canvas {
+  z-index: 1;
+}
+.sr3d #ecg-point-canvas {
+  z-index: 2;
+}
+.sr3d .ecg-animation {
+  width: 100%;
+  max-height: 5rem;
+  border: 0;
+}
+.sr3d .condition-monitor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.sr3d .condition-monitor .condition-meter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+  justify-content: center;
+}
+.sr3d .condition-monitor .condition-meter .checkbox-label {
+  min-width: 5rem;
+}
+@keyframes flicker {
+  0% {
+    text-shadow: 0 0 2px #1df0ff, 0 0 10px #1df0ff, 0 0 20px #fff;
+    opacity: 0.8;
+  }
+  20% {
+    text-shadow: none;
+    opacity: 0.6;
+  }
+  40% {
+    text-shadow: 0 0 2px #1df0ff, 0 0 8px #1df0ff, 0 0 15px #fff;
+    opacity: 1;
+  }
+  60% {
+    text-shadow: none;
+    opacity: 0.4;
+  }
+  80% {
+    text-shadow: 0 0 4px #1df0ff, 0 0 12px #1df0ff, 0 0 25px #fff;
+    opacity: 1;
+  }
+  100% {
+    text-shadow: 0 0 4px #1df0ff, 0 0 12px #1df0ff, 0 0 25px #fff;
+    opacity: 1;
+  }
+}
+.sr3d .condition-monitor .condition-meter .lit {
+  animation: flicker 1s ease-in-out;
+  text-shadow: 0 0 12px #1df0ff;
+}
+.sr3d .condition-monitor .condition-meter .unlit {
+  text-shadow: none;
+  opacity: 0.2;
+  /* Optional: You can adjust unlit styling to suit your needs */
+}
+.sr3d .condition-monitor .condition-meter .stun-damage,
+.sr3d .condition-monitor .condition-meter .physical-damage {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input {
+  position: relative;
+  padding: 0rem;
+  margin: 0rem;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.stun,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.stun {
+  top: -1rem;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.physical,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.physical {
+  bottom: -1rem;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"],
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"] {
+  appearance: none;
+  background-color: #e792cb;
+  position: relative;
+  cursor: pointer;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+  z-index: 1;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::before,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::before {
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  background: #1b1f24;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+  z-index: -1;
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::after,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1rem;
+  height: 1rem;
+  display: none;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+}
+.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]:checked::after,
+.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]:checked::after {
+  display: block;
+  box-shadow: inset 0 0 8px #1df0ff;
+}
+.sr3d .condition-monitor .condition-meter h3 {
+  margin: 0;
+}
+.sr3d .condition-monitor .condition-meter .damage-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet h1 {
+  text-indent: 0rem;
+  text-align: left;
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Vertically center the items */
+  padding: 0.5rem;
+  /* Adjust as needed */
+  margin: 0;
+  /* Remove default margins */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .image-mask {
+  position: static;
+  /* Reset positioning */
+  transform: none;
+  /* Remove translation */
+  width: 64px;
+  height: 64px;
+  max-width: 5rem;
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .image-mask img.small {
+  /* Remove the constraints that force the image to fill the container */
+  position: static;
+  /* Reset positioning */
+  transform: none;
+  /* Remove translation */
+  min-width: auto;
+  /* Allow natural width */
+  min-height: auto;
+  /* Allow natural height */
+  /* Set the desired size */
+  width: 64px;
+  height: 64px;
+  /* Adjust object-fit if necessary */
+  object-fit: contain;
+  /* or 'cover' based on your preference */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .actor-info {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .actor-info .broadcast-toggle {
+  display: flex;
+  /* Enable Flexbox */
+  align-items: left;
+  /* Center items vertically */
+  gap: 10px;
+  /* Add space between elements */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .actor-info .broadcast-toggle .toggle-input {
+  appearance: none;
+  /* Remove default checkbox styles */
+  width: 20px;
+  height: 20px;
+  border: 2px solid cyan;
+  /* Default cyan color for non-active */
+  border-radius: 4px;
+  /* Optional: make it rounded */
+  background-color: transparent;
+  /* Transparent background by default */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* Smooth transition for color change */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .sheet-header .actor-info .broadcast-toggle .toggle-input:checked {
+  border-color: #1df0ff;
+  /* Change border to magenta when active */
+  background-color: #1df0ff;
+  /* Fill magenta color when active */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area {
+  display: flex;
+  /* Enables Flexbox for centering */
+  flex-direction: column;
+  /* Stacks children vertically */
+  align-items: center;
+  /* Centers children horizontally */
+  justify-content: center;
+  /* Centers children vertically */
+  gap: 1rem;
+  /* Adds spacing between the child elements */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .links {
+  display: flex;
+  /* Enables Flexbox */
+  flex-direction: row;
+  /* Arranges links horizontally */
+  justify-content: center;
+  /* Centers links horizontally */
+  align-items: center;
+  /* Centers links vertically */
+  gap: 1rem;
+  /* Adds spacing between arrows */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .list-box {
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  /* Enables Flexbox */
+  flex-direction: column;
+  /* Stacks the `<h3>` and `<select>` vertically */
+  align-items: center;
+  /* Centers content horizontally */
+  text-align: center;
+  /* Centers text inside the `<h3>` */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .list-box h3 {
+  margin: 0;
+  /* Removes extra spacing */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .list-box option {
+  white-space: normal;
+  /* Allows text wrapping */
+  overflow-wrap: break-word;
+  /* Breaks long words */
+  padding: 0.25rem;
+  text-indent: 0rem;
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .list-box option:nth-child(odd) {
+  background-color: #1c364b;
+  /* Color for odd options */
+  color: #c8d3f5;
+  /* Ensure text is readable */
+}
+.sr3d .sr3d.sheet.character .broadcaster-sheet .news-area .list-box option:nth-child(even) {
+  background-color: #1b1f24;
+  /* Color for even options */
+  color: #c8d3f5;
+  /* Ensure text is readable */
+}
 .sr3d .item-create {
   position: absolute;
   right: 1.5rem;
@@ -1578,19 +1888,24 @@
   border: none;
   text-align: left;
 }
+.sr3d .inventory-list a.creditor {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .sr3d .inventory-list tbody tr:first-child {
   padding-left: 0.5rem;
 }
 .sr3d .inventory-list tbody tr:nth-child(odd) {
-  box-shadow: inset 0 0 16px #1df0ff;
+  box-shadow: inset 0 0 14px #1df0ff;
   background-color: #1b1f24;
 }
 .sr3d .inventory-list tbody tr:nth-child(even) {
-  background-color: #1c364b;
-  box-shadow: inset 0 0 16px #1df0ff;
+  background-color: #1b1f24;
+  box-shadow: inset 0 0 14px #1df0ff;
 }
 .sr3d .inventory-list tbody tr:last-child {
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5/1.4142rem 100%, 0px calc(100% - 0.5/1.4142rem), 0px 0.5rem);
 }
 .sr3d .inventory-list th {
   font-weight: bold;
@@ -1600,6 +1915,22 @@
 .sr3d .inventory-list td {
   padding: 0.25rem;
   /* Adjust data cell padding */
+}
+.sr3d .transaction-sheet .stat-card {
+  /* The second div inside .stat-card is the container holding the yen sign + input */
+}
+.sr3d .transaction-sheet .stat-card > div:nth-of-type(2) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sr3d .transaction-sheet .stat-card > div:nth-of-type(2) h1 {
+  margin: 0;
+  /* in case .no-margin isn't enough */
+  display: inline-block;
+}
+.sr3d .transaction-sheet .stat-card > div:nth-of-type(2) input {
+  display: inline-block;
 }
 @font-face {
   font-family: 'Neonderthaw';
@@ -1784,6 +2115,9 @@
 .sr3d .sr3d .window-header {
   background-color: transparent;
   align-content: center;
+  --percentBegin: 150%;
+  --percentEnd: 150%;
+  --seconds: 25s;
   /* Keyframes for the scrolling effect */
 }
 .sr3d .sr3d .window-header h4.window-title {
@@ -1847,18 +2181,18 @@
   line-height: 0rem;
   display: inline-block;
   position: absolute;
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left var(--seconds) linear;
   align-items: center;
   text-align: center;
   white-space: nowrap;
 }
 @keyframes scroll-left {
   0% {
-    transform: translateX(150%);
+    transform: translateX(var(--percentBegin));
     /* Start off-screen to the right */
   }
   100% {
-    transform: translateX(-150%);
+    transform: translateX(var(--percentEnd));
     /* End off-screen to the left */
   }
 }

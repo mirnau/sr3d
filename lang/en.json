@@ -94,7 +94,7 @@
                 "looks": "Looks",
                 "quote": "Quote",
                 "ratsrace": "Rat's Race",
-                "income": "Income",
+                "asset": "Asset",
                 "post": "Post",
                 "expenses": "Expenses",
                 "debts": "Debts",
@@ -125,10 +125,7 @@
             },
             "health": {
                 "health": "Health",
-                "damageTracker": "Damage Tracker"
-            },
-            "budget": {
-                "budget": "Budget"
+                "health": "Damage Tracker"
             },
             "possessions": {
                 "possessions": "Possessions",
@@ -148,8 +145,8 @@
                 "karmaPool": "Karma Pool",
                 "goodKarma": "Good Karma"
             },
-            "damageTracker": {
-                "damageTracker": "Damage Tracker",
+            "health": {
+                "health": "Damage Tracker",
                 "stun": "Stun",
                 "physical": "physical",
                 "owerflow": "overflow"
@@ -195,6 +192,27 @@
                 "newMetaHuman": "New Metahuman",
                 "description": "Enter the text for the metahuman here..."
             },
+            "transaction": {
+                "transaction": "Transaction",
+                "amount": "Amount",
+                "recipient": "Recipient",
+                "sender": "Sender",
+                "date": "Date",
+                "description": "Description",
+                "asset": "Asset",
+                "assets": "Assets",
+                "expense": "Expense",
+                "expenses": "Expenses",
+                "debt": "Debt",
+                "debts": "Debts",
+                "type": "Type",
+                "recurrent": "Recurrent",
+                "interest": "Interest",
+                "creditor": "Creditor",
+                "total": "Total",
+                "creditstick": "CreditStick"
+            },
+
             "vehicle": {
                 "handling": "Handling",
                 "speed": "Speed",
