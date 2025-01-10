@@ -39,7 +39,7 @@ import WeaponModel from "./module/dataModels/items/WeaponModel.js";
 import AmmunitionModel from "./module/dataModels/items/SkillModel.js";
 import SkillModel from "./module/dataModels/items/SkillModel.js";
 import KarmaModel from "./module/dataModels/items/KarmaModel.js";
-import MetahumanModel from "./module/dataModels/items/Metahuman.js";
+import MetahumanModel from "./module/dataModels/items/MetahumanModel.js";
 import MagicModel from "./module/dataModels/items/MagicModel.js";
 import CharacterModel from "./module/dataModels/actor/CharacterModel.js";
 import NewsBroadcastModel from "./module/dataModels/actor/NewsBroadcastModel.js";

@@ -3,23 +3,23 @@ export default class MagicModel extends foundry.abstract.TypeDataModel {
     return {
       type: new foundry.data.fields.StringField({
         required: false,
-        default: ""
+        initial: ""
       }),
       focus: new foundry.data.fields.StringField({
         required: false,
-        default: ""
+        initial: ""
       }),
       drainResistanceAttribute: new foundry.data.fields.StringField({
         required: false,
-        default: ""
+        initial: ""
       }),
       totem: new foundry.data.fields.StringField({
         required: false,
-        default: ""
+        initial: ""
       }),
       priority: new foundry.data.fields.StringField({
         required: false,
-        default: ""
+        initial: ""
       })
     };
   }
