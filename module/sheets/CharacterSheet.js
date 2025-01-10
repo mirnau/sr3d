@@ -88,8 +88,6 @@ export default class CharacterSheet extends ActorSheet {
             const direction = 1;
 
             await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-
-            // Recalculate dependent attributes ("pools" as attributes)
             await actor.updateDerivedValues(attributeName, attributes, this, direction);
 
         });
@@ -101,8 +99,6 @@ export default class CharacterSheet extends ActorSheet {
             const direction = -1;
 
             await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-            
-            // Recalculate dependent attributes ("pools" as attributes)
             await actor.updateDerivedValues(attributeName, attributes, this, direction);
 
         });
@@ -238,13 +234,8 @@ export default class CharacterSheet extends ActorSheet {
             // Update the penalty
             const degree = clickedIndex % 10 || 10; // Normalize indices 11-20 to 1-10
 
-            console.log("degree");
-            console.log(degree);
-
             const penalty = calculateSeverity(degree);
             updates["system.health.penalty"] = penalty;
-        
-            console.log(updates);
         
             // Persist updates silently
             await this.actor.update(updates, { render: false });
@@ -259,10 +250,7 @@ export default class CharacterSheet extends ActorSheet {
                 return 0;
             }
         });
-        
-        
     }
-
 
     onNewsFeedIterationCompleted(html, event) {
 
@@ -424,4 +412,3 @@ export default class CharacterSheet extends ActorSheet {
 
 
 }
-
