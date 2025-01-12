@@ -867,7 +867,7 @@
 .sr3d .possessions-tabs .possession-utility-bar .tabs .item {
   flex: 1;
   text-align: center;
-  background-color: #27303d;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   cursor: pointer;
   transition: background-color 0.3s ease;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
@@ -876,12 +876,12 @@
   margin: 0;
 }
 .sr3d .possessions-tabs .possession-utility-bar .tabs .item:hover {
-  background-color: #27303d;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   box-shadow: inset 0 0 15px #e792cb;
   transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .possessions-tabs .possession-utility-bar .tabs .item.active {
-  background-color: #24354d;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   font-weight: bold;
   box-shadow: inset 0 0 15px #4df083;
   transition: box-shadow 0.4s ease-in-out;
@@ -891,7 +891,7 @@
   text-shadow: #4df083;
 }
 .sr3d .possessions-tabs .possessions-tab-content {
-  background-color: #24354d;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   min-height: 2rem;
   clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
 }
@@ -912,7 +912,7 @@
 .sr3d .skills-tabs .skill-utility-bar .tabs .item {
   flex: 1;
   text-align: center;
-  background-color: #27303d;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   cursor: pointer;
   transition: background-color 0.3s ease;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0rem), calc(100% - 0rem) 100%, 0rem 100%, 0px calc(100% - 0rem), 0px 0.5rem);
@@ -921,12 +921,12 @@
   margin: 0;
 }
 .sr3d .skills-tabs .skill-utility-bar .tabs .item:hover {
-  background-color: #27303d;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   box-shadow: inset 0 0 15px #e792cb;
   transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active {
-  background-color: #24354d;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   font-weight: bold;
   box-shadow: inset 0 0 15px #4df083;
   transition: box-shadow 0.4s ease-in-out;
@@ -936,7 +936,7 @@
   text-shadow: #4df083;
 }
 .sr3d .skills-tabs .tab-content {
-  background-color: #24354d;
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   min-height: 2rem;
   clip-path: polygon(0rem 0px, calc(100% - 0rem) 0px, 100% 0rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 1rem 100%, 0px calc(100% - 1rem), 0px 0rem);
 }
@@ -988,7 +988,7 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: #1c364b;
+  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);

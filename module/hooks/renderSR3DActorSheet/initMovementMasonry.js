@@ -10,11 +10,11 @@ export function initMovementMasonry(app, html, data) {
     const actor = app.actor;
 
     // Ensure previous observer is cleared
-    if (!actor.movementSkillsResizeObserver) {
+    if (actor.movementSkillsResizeObserver) {
+        actor.movementSkillsResizeObserver.disconnect();
         actor.movementSkillsResizeObserver = null;
     }
 
-    // Configuration for masonry resize behavior
     const masonryResizeConfig = {
         html: html,
         parentSelector: '.movement-masonry-grid',

@@ -4,8 +4,9 @@ export function initLanguageSkillMasonry(app, html, data) {
 
     const actor = app.actor;
 
-    if (!actor.languageSkillsResizeObserver) 
-        actor.languageSkillsResizeObserver = null; //I assume this has to be destroyed from the actor
+    if (actor.languageSkillsResizeObserver) 
+        actor.languageSkillsResizeObserver.disconnect();
+        actor.languageSkillsResizeObserver = null;
 
 
         const masonryResizeConfig = {
@@ -14,8 +15,6 @@ export function initLanguageSkillMasonry(app, html, data) {
             childSelector: '.language-skill-category',
             gridSizerSelector: '.language-grid-sizer',
             gutterSizerSelector: '.language-gutter-sizer',
-            itemCSSVar: '--language-computed-item-width',
-            gutterCSSVar: '--language-gutter-width',
             observer: actor.languageSkillsResizeObserver //keeping the reference so we can reach it from the actor
         };
 

@@ -10,7 +10,8 @@ export function initKarmaMasonry(app, html, data) {
     const actor = app.actor;
 
     // Ensure previous observer is cleared
-    if (!actor.karmaSkillsResizeObserver) {
+    if (actor.karmaSkillsResizeObserver) {
+        actor.karmaSkillsResizeObserver.disconnect();
         actor.karmaSkillsResizeObserver = null;
     }
 
@@ -21,7 +22,6 @@ export function initKarmaMasonry(app, html, data) {
         childSelector: '.stat-card',
         gridSizerSelector: '.karma-grid-sizer',
         gutterSizerSelector: '.karma-gutter-sizer',
-        itemCSSVar: '--karma-grid-sizer',
         observer: actor.karmaSkillsResizeObserver
     };
 

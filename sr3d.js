@@ -75,6 +75,10 @@ function registerHooks() {
         initDicepoolMasonry(app, html, data);
         initMovementMasonry(app, html, data);
         initKarmaMasonry(app, html, data);
+
+        //NOTE: intital computation
+        app.actor.silentUpdateDerivedValues("intelligence", html, 0);
+        app.actor.silentUpdateDerivedValues("reaction", html, 0);
     });
 
     Hooks.on(hooks.renderSR3DItemSheet, (app, html, data) => {
@@ -99,7 +103,6 @@ function registerHooks() {
     Hooks.on(hooks.createActor, setActorFlags);
     Hooks.on(hooks.createActor, displayCreationDialog);
     Hooks.on(hooks.preCreateActor, doNotRenderSheet);
-
 
     Hooks.once(hooks.ready, () => {
         const savedTheme = game.settings.get("sr3d", "theme") || "chummer-dark";

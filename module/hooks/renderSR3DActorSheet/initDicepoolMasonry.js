@@ -10,7 +10,8 @@ export function initDicepoolMasonry(app, html, data) {
     const actor = app.actor;
 
     // Ensure previous observer is cleared
-    if (!actor.dicepoolSkillsResizeObserver) {
+    if (actor.dicepoolSkillsResizeObserver) {
+        actor.dicepoolSkillsResizeObserver.disconnect();
         actor.dicepoolSkillsResizeObserver = null;
     }
 
@@ -21,7 +22,6 @@ export function initDicepoolMasonry(app, html, data) {
         childSelector: '.stat-card',
         gridSizerSelector: '.dicepool-grid-sizer',
         gutterSizerSelector: '.dicepool-gutter-sizer',
-        itemCSSVar: '--dicepool-grid-sizer',
         observer: actor.dicepoolSkillsResizeObserver
     };
 

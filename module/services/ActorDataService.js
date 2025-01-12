@@ -90,34 +90,26 @@ export default class ActorDataService {
     // NOTE: Character Creation starts here
 
     static getAllMetaHumans(metahumans) {
-        console.log("Input metahumans data:", metahumans); // Log the input data
-        return [
-            { priority: "E", name: "Human", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
-            ...metahumans.map(metahuman => {
-                const foundryitemid = metahuman.id; // Extract the ID
-
-                return {
-                    foundryitemid, // Foundry's built-in object ID
-                    priority: metahuman.priority, // Extract priority from system data
-                    name: metahuman.name, // Use the object's name
-                };
-            })
-        ];
+        return metahumans.map(metahuman => {
+            return {
+                name: metahuman.name,
+                foundryitemid : metahuman.id,
+                priority: metahuman.system.priority,
+            };
+        });
     }
 
     static getAllMagics(magics) {
-        console.log("Input magics data:", magics); // Log the input data
         return [
-            { priority: "E", name: "Unawakened", foundryitemid: "E-foundryItemId" }, // Hardcoded option without an ID
+            { priority: "E", name: "Unawakened", foundryitemid: "E-foundryItemId" },
             { priority: "D", name: "Unawakened", foundryitemid: "D-foundryItemId" },
             { priority: "C", name: "Unawakened", foundryitemid: "C-foundryItemId" },
-            ...magics.map(tradition => {
-                const foundryitemid = tradition.id; // Extract the ID
+            ...magics.map(magic => {
 
                 return {
-                    foundryitemid, // Foundry's built-in object ID
-                    priority: tradition.priority, // Extract priority from system data
-                    name: tradition.name, // Use the object's name
+                    foundryitemid: magic.id, 
+                    name: magic.name, 
+                    priority: magic.system.priority, 
                 };
             })
         ];

@@ -139,16 +139,16 @@ export default class MetahumanModel extends foundry.abstract.TypeDataModel {
         // Vision
         vision: new foundry.data.fields.SchemaField({
           visionType: new foundry.data.fields.StringField({
-            required: false,
+            required: true,
             initial: ""
           }),
           description: new foundry.data.fields.StringField({
-            required: false,
+            required: true,
             initial: ""
           }),
           rules: new foundry.data.fields.SchemaField({
             darknessPenaltyNegation: new foundry.data.fields.StringField({
-              required: false,
+              required: true,
               initial: ""
             })
           })
@@ -156,13 +156,13 @@ export default class MetahumanModel extends foundry.abstract.TypeDataModel {
   
         // Priority
         priority: new foundry.data.fields.StringField({
-          required: false,
+          required: true,
           initial: ""
         }),
   
         // Description
         description: new foundry.data.fields.StringField({
-          required: false,
+          required: true,
           initial: ""
         })
       };

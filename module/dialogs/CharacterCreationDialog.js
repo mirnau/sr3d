@@ -254,12 +254,12 @@ export default class CharacterCreationDialog extends Dialog {
         const selectedAttributePriority = html.find('[name="attributePriority"]').val();
         const selectedSkillsPriority = html.find('[name="skillsPriority"]').val();
         const selectedResourcesPriority = html.find('[name="resourcesPriority"]').val();
-    
+
         // Retrieve age, height, and weight values from sliders
         const selectedAge = html.find('#slider-age').val();
         const selectedHeight = html.find('#slider-height').val();
         const selectedWeight = html.find('#slider-weight').val();
-    
+
         // Assign selected points and resources
         const systemUpdates = {
             "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
@@ -268,7 +268,7 @@ export default class CharacterCreationDialog extends Dialog {
             "system.profile.height": selectedHeight,
             "system.profile.weight": selectedWeight,
         };
-    
+
         const transactionData = {
             name: "Starter's Credit Stick", // Name of the embedded item
             type: "transaction",
@@ -283,22 +283,23 @@ export default class CharacterCreationDialog extends Dialog {
                 interestPerMonth: 0.0,
             },
         };
-    
+
         await dialogData.actor.createEmbeddedDocuments("Item", [transactionData]);
-    
+
         // Log selected values for debugging
         SR3DLog.inspect("Selected Metahuman ID", selectedMetahumanId);
         SR3DLog.inspect("Selected Magic Tradition ID", selectedMagicId);
-    
+
         // Handle Metahuman item creation
         if (selectedMetahumanId) {
             const metahumanItem = game.items.get(selectedMetahumanId);
             if (metahumanItem) {
-                await dialogData.actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
+                const metahuman = await dialogData.actor.createEmbeddedDocuments("Item", [metahumanItem.toObject()]);
                 SR3DLog.success(`Metahuman item created on actor: ${metahumanItem.name}`, "Actor Creation");
+                console.log("Created and retrieved directly:", metahuman);
             }
         }
-    
+
         // Handle Magic Tradition item creation
         if (selectedMagicId) {
             const magicItem = game.items.get(selectedMagicId);
@@ -307,15 +308,15 @@ export default class CharacterCreationDialog extends Dialog {
                 SR3DLog.success(`Magic Tradition item created on actor: ${magicItem.name}`, "Actor Creation");
             }
         }
-    
+
         // Apply updates to the actor's system
         await dialogData.actor.update(systemUpdates);
-    
+
         // Force recalculation of derived stats
         if (dialogData.actor.characterSetup) {
             dialogData.actor.characterSetup();
         }
-    
+
         SR3DLog.success("Character creation process completed successfully.", "CharacterCreationDialog");
     }
 
@@ -328,28 +329,15 @@ export default class CharacterCreationDialog extends Dialog {
 
         let selectedMetahumanItem = game.items.get(idNumberOrIdentifier);
 
-        if (!selectedMetahumanItem) selectedMetahumanItem = null;
-
-        // Initialize default age range and mode
-        let ageMin = 0, ageMax = 0, modeAge = 0;
-
-        // Update age range based on the selected Metahuman item
-        if (selectedMetahumanItem) {
-            ageMin = selectedMetahumanItem.system.lifespan.min;
-            modeAge = selectedMetahumanItem.system.lifespan.average;
-            ageMax = selectedMetahumanItem.system.lifespan.max;
-        } else {
-            ageMin = 5;
-            ageMax = 100;
-            modeAge = 30;
-        }
+        const ageMin = selectedMetahumanItem.system.lifespan.min;
+        const modeAge = selectedMetahumanItem.system.lifespan.average;
+        const ageMax = selectedMetahumanItem.system.lifespan.max;
 
         if (ageMin === 0 && ageMax === 0 && modeAge === 0) {
             console.warn("No age data found for the selected metahuman item.");
             ui.notifications.warn("No age data found for the selected metahuman item.");
         }
 
-        ui.notifications.warn("")
         // Generate a random age within the range
         const randomAge = getRandomBellCurveWithMode(ageMin, ageMax, modeAge);
 

@@ -2,6 +2,7 @@ import { flags } from '../helpers/CommonConsts.js'
 import SR3DLog from '../SR3DLog.js'
 import { LockAttributesDialog } from '../dialogs/LockAttributesDialog.js';
 import { baseAttributes } from '../helpers/CommonConsts.js';
+import ItemDataService from '../services/ItemDataService.js'
 
 export default class SR3DActor extends Actor {
 
@@ -16,56 +17,52 @@ export default class SR3DActor extends Actor {
     }
   }
 
-  adjustAttribute(attribute, amount) {
+  async handleCreationPoints(attributeName, element, direction) {
 
-    const system = this.system;
-    let value = system.attributes[attribute].value;
-    let currentPoints = system.creation.attributePoints;
+    const attributeSelector = ".attribute-point-value.attributePoints";
 
-    if (!this.getFlag(flags.namespace, flags.attributesDone)) {
+    this.silentUpdateAttributes(attributeName, element, direction);
+    this.silentUpdateDerivedValues(attributeName, element, direction);
 
-      if (currentPoints <= 0 && amount > 0) {
-        ui.notifications.warn(game.i18n.localize("sr3d.characterCreation.spentAllAttributePoints"));
-        new LockAttributesDialog(this).render(true);
-        return;
-      }
+    const attributePoints = this.getCreationPoints(attributeSelector);
 
-      if ((amount > 0) || (amount < 0 && system.attributes[attribute].value > 1)) {
-        system.attributes[attribute].value += amount;
-        system.creation.attributePoints -= amount;
-      }
-
-      value = system.attributes[attribute].value;
-      currentPoints = system.creation.attributePoints;
-
-      this.update({ system: system });
-      this.recalculateAttribute();
-
-      if (amount > 0 && currentPoints < amount) {
-        new LockAttributesDialog(this).render(true);
-        return;
-      }
-
-    } else {
-      //Karma points!
+    if (attributePoints < 1) {
+      new LockAttributesDialog(this).render(true);
     }
+  }
+
+  getCreationPoints(selector) {
+    return parseInt(document.querySelector(selector).textContent.trim(), 10);
+  }
+
+  setCreationPoints(value, pointsName, selector) {
+    document.querySelector(selector).textContent = value;
+    this.update({ [`system.creation.${pointsName}`]: value }, { render: false });
+  }
+
+  canGoblinizeTo(metaHumanItem) {
+
+    const character = this.system;
+
+    for (const a of baseAttributes) {
+      if (metaHumanItem.system.modifiers[a] < 0 && character[a].value + metaHumanItem.system.modifiers[a] < 1) {
+        return false; // Prevent goblinization if the result would drop below 1
+      }
+    }
+    return true; // All validations passed
   }
 
   async recalculateAttribute() {
     const system = this.system;
 
-    let metahumanItem = this.items.find(item => item.type === "metahuman") || null;
+    const metahumanItem = this.items.find(item => item.type === "metahuman");
 
-
-    if (metahumanItem) {
-
-      system.attributes.body.meta = metahumanItem.system.modifiers.body;
-      system.attributes.quickness.meta = metahumanItem.system.modifiers.quickness;
-      system.attributes.strength.meta = metahumanItem.system.modifiers.strength;
-      system.attributes.charisma.meta = metahumanItem.system.modifiers.charisma;
-      system.attributes.intelligence.meta = metahumanItem.system.modifiers.intelligence;
-      system.attributes.willpower.meta = metahumanItem.system.modifiers.willpower;
-    }
+    system.attributes.body.meta = metahumanItem.system.modifiers.body;
+    system.attributes.quickness.meta = metahumanItem.system.modifiers.quickness;
+    system.attributes.strength.meta = metahumanItem.system.modifiers.strength;
+    system.attributes.charisma.meta = metahumanItem.system.modifiers.charisma;
+    system.attributes.intelligence.meta = metahumanItem.system.modifiers.intelligence;
+    system.attributes.willpower.meta = metahumanItem.system.modifiers.willpower;
 
     system.attributes.body.total = system.attributes.body.value + system.attributes.body.meta;
     system.attributes.quickness.total = system.attributes.quickness.value + system.attributes.quickness.meta;
@@ -94,38 +91,22 @@ export default class SR3DActor extends Actor {
 
     system.attributes.reaction.total = Math.floor((system.attributes.quickness.mod + system.attributes.intelligence.mod) * 0.5);
 
-    await this.update({ system: system }, { render: false });
+    await this.update({ system: system }, { render: true });
+
     SR3DLog.info("Stats recalculated", this.name);
 
     return system;
   }
 
-  canGoblinizeTo(metaHumanItem) {
-
-    const character = this.system;
-
-    for (const a of baseAttributes) {
-      if (metaHumanItem.system.modifiers[a] < 0 && character[a].value + metaHumanItem.system.modifiers[a] < 1) {
-        return false; // Prevent goblinization if the result would drop below 1
-      }
-    }
-
-
-    return true; // All validations passed
-  }
 
   awakenToMagic() {
-    const character = this.system;
-    character.attributes.magic.value = 6;
-    this.recalculateAttribute();
+    this.update({ ['system.attributes.magic.value']: 6 });
+    SR3DLog.success("Character Awakened To Magic", this.name);
   }
 
-
-  characterSetup() {
+  async characterSetup() {
 
     SR3DLog.info("characterSetup entered", this.name);
-    console.log(this);
-    console.log(this.system);
 
     const attributes = this.system.attributes;
     const creation = this.system.creation;
@@ -138,32 +119,54 @@ export default class SR3DActor extends Actor {
     });
 
     attributes.essence.value = 6;
-    attributes.magic.value = 0;
 
+    let magic = this.items.find(item => item.type === "magic") || [];
+    attributes.magic.value = magic.length > 0 ? 6 : 0; 
+    
     this.recalculateAttribute();
-    this.update({ system: attributes });
+
+    await this.update({
+      [`system.creation`]: creation
+    }, { render: true });
+
   }
 
-  async silentUpdateAttributes(attributeName, attributes, ref, direction = 1) {
+  async silentUpdateAttributes(attributeName, element, direction) {
+    const attrsSelector = ".attribute-point-value.attributePoints";
+    let attributePoints = this.getCreationPoints(attrsSelector);
 
-    let total = attributes[attributeName].total;
-    let mod = attributes[attributeName].mod;
+    if (attributePoints > 0 || direction < 0) {
+        const attributes = this.system.attributes;
+        let total = attributes[attributeName].total;
+        let mod = attributes[attributeName].mod;
 
-    total += direction;
-    mod += direction;
+        total += direction;
+        mod += direction;
 
-    if (total > 1) {
+        if (total > 1) {
+            attributePoints -= direction;
+            this.setCreationPoints(attributePoints, attributeName, attrsSelector);
 
-      await this.update({ [`system.attributes.${attributeName}.total`]: total }, { render: false });
-      await this.update({ [`system.attributes.${attributeName}.mod`]: mod }, { render: false });
+            await this.update({ [`system.attributes.${attributeName}.total`]: total }, { render: false });
+            await this.update({ [`system.attributes.${attributeName}.mod`]: mod }, { render: false });
 
-      const elementSelector = `[data-attribute="${attributeName}"] .stat-value h1`;
-      ref.element.find(elementSelector).text(`${total} / ${mod}`);
+            if (attributeName === "intelligence") {
+                const knowledgePoints = total * 5;
+                const languagePoints = Math.floor(total * 1.5);
+                const kptsSelector = ".attribute-point-value.knowledgePoints";
+                const lptsSelector = ".attribute-point-value.languagePoints";
+                this.setCreationPoints(knowledgePoints, "knowledgePoints", kptsSelector);
+                this.setCreationPoints(languagePoints, "languagePoints", lptsSelector);
+            }
+
+            const elementSelector = `[data-attribute="${attributeName}"] .stat-value h1`;
+            element.find(elementSelector).text(`${total} / ${mod}`);
+        }
     }
-  }
+}
 
-  async silentUpdateDerivedValues(attributeName, attributes, ctx, direction) {
-
+  async silentUpdateDerivedValues(attributeName, html, direction) {
+    const attributes = this.system.attributes;
     const quickness = attributes.quickness?.total || 0;
     const intelligence = attributes.intelligence?.total || 0;
     const charisma = attributes.intelligence?.total || 0;
@@ -172,14 +175,14 @@ export default class SR3DActor extends Actor {
     let reaction = 0;
 
     if (["quickness", "intelligence"].includes(attributeName)) {
-      reaction = Math.floor((quickness + intelligence + 1) * .5);
+      reaction = Math.floor((quickness + intelligence + direction) * .5);
       await this.update({
         [`system.attributes.reaction.total`]: reaction,
         [`system.attributes.reaction.mod`]: reaction
       }, { render: false });
 
       const elementSelector = `[data-attribute="reaction"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${reaction} / ${reaction}`);
+      html.find(elementSelector).text(`${reaction} / ${reaction}`);
     }
 
     // Combat Pool (as an attribute)
@@ -191,7 +194,7 @@ export default class SR3DActor extends Actor {
       }, { render: false });
 
       const elementSelector = `[data-attribute="combat"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${combatPool} / ${combatPool}`);
+      html.find(elementSelector).text(`${combatPool} / ${combatPool}`);
     }
 
     // Astral Pool (as an attribute)
@@ -203,7 +206,7 @@ export default class SR3DActor extends Actor {
       }, { render: false });
 
       const elementSelector = `[data-attribute="astral"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${astralPool} / ${astralPool}`);
+      html.find(elementSelector).text(`${astralPool} / ${astralPool}`);
     }
 
     //Spell Pool (as an attribute)
@@ -211,7 +214,7 @@ export default class SR3DActor extends Actor {
       const spellPool = Math.floor((intelligence + willpower + magic + direction) * 0.3333);
       await this.update({ [`system.attributes.spell.total`]: spellPool }, { render: false });
       const elementSelector = `[data-attribute="spell"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${spellPool} / ${spellPool}`);
+      html.find(elementSelector).text(`${spellPool} / ${spellPool}`);
     }
 
 
@@ -225,7 +228,7 @@ export default class SR3DActor extends Actor {
       }, { render: false });
 
       const elementSelector = `[data-attribute="hacking"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${hackingPool} / ${hackingPool}`);
+      html.find(elementSelector).text(`${hackingPool} / ${hackingPool}`);
     }
 
     // Control Pool (as an attribute)
@@ -238,7 +241,7 @@ export default class SR3DActor extends Actor {
       }, { render: false });
 
       const elementSelector = `[data-attribute="control"] .stat-value h1`;
-      ctx.element.find(elementSelector).text(`${controlPool} / ${controlPool}`);
+      html.find(elementSelector).text(`${controlPool} / ${controlPool}`);
     }
   }
 }

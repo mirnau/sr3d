@@ -5,7 +5,8 @@ export function initializeMasonryLayout(app, html, data) {
     const actor = app.actor;
 
     // Ensure previous observer is cleared
-    if (!actor.mainLayoutResizeObserver) {
+    if (actor.mainLayoutResizeObserver) {
+        actor.mainLayoutResizeObserver.disconnect();
         actor.mainLayoutResizeObserver = null;
     }
 

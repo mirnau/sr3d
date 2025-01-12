@@ -10,7 +10,8 @@ export function initAttributesMasonry(app, html, data) {
     const actor = app.actor;
 
     // Ensure previous observer is cleared
-    if (!actor.attributeSkillsResizeObserver) {
+    if (actor.attributeSkillsResizeObserver) {
+        actor.attributeSkillsResizeObserver.disconnect();
         actor.attributeSkillsResizeObserver = null;
     }
 

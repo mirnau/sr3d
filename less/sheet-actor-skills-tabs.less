@@ -11,7 +11,7 @@
             .item {
                 flex: 1;
                 text-align: center;
-                background-color: @tab-idle;
+                background: @tab-idle;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
                 .clipped-corners(0.5rem, 0.5rem, 0rem, 0rem);
@@ -21,7 +21,7 @@
                 }
 
                 &:hover {
-                    background-color: @tab-idle;
+                    background: @tab-idle;
                     box-shadow: @tab-neon-border;
                     transition: box-shadow 0.4s ease-in-out;
                 }
@@ -32,7 +32,7 @@
                         text-shadow: @active-tab-text-shadow;
                     }
 
-                    background-color: @tab-active;
+                    background: @tab-active;
                     font-weight: bold;
                     box-shadow: @tab-neon-border-active;
                     transition: box-shadow 0.4s ease-in-out;
@@ -42,7 +42,7 @@
     }
 
     .tab-content {
-        background-color: @tab-active;
+        background: @tab-active;
         min-height: 2rem;
 
         .tab {

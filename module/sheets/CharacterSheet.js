@@ -68,6 +68,7 @@ export default class CharacterSheet extends ActorSheet {
 
         document.addEventListener('newsFeedIterationCompleted', this.onNewsFeedIterationCompleted.bind(this, html));
 
+        //NOTE: restores the document link
         html.find('.document-id-link-injection').click((event) => {
             event.preventDefault();
             const actorUuid = this.actor.uuid; // Get the actor's UUID
@@ -83,24 +84,24 @@ export default class CharacterSheet extends ActorSheet {
 
         html.find('.increment-attribute').click(async (event) => {
             const attributeName = event.currentTarget.dataset.attribute;
-            const actor = this.actor;
-            const attributes = actor.system.attributes;
             const direction = 1;
 
-            await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-            await actor.silentUpdateDerivedValues(attributeName, attributes, this, direction);
-
+            if (!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
+                this.actor.handleCreationPoints(attributeName, this.element, direction);
+            } else {
+                //Karma implementation
+            }
         });
 
         html.find('.decrement-attribute').click(async (event) => {
             const attributeName = event.currentTarget.dataset.attribute;
-            const actor = this.actor;
-            const attributes = actor.system.attributes;
             const direction = -1;
 
-            await actor.silentUpdateAttributes(attributeName, attributes, this, direction);
-            await actor.silentUpdateDerivedValues(attributeName, attributes, this, direction);
-
+            if (!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
+                this.actor.handleCreationPoints(attributeName, this.element, direction);
+            } else {
+                //Karma implementation
+            }
         });
 
         html.on('click', '.delete-owned-instance', async (event) => {
@@ -199,25 +200,25 @@ export default class CharacterSheet extends ActorSheet {
             const clicked = event.currentTarget;
             const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
             const isChecked = clicked.checked;
-        
+
             // Determine if it's stun or physical
             const isStun = clickedIndex <= 10;
             const rangeStart = isStun ? 1 : 11;
             const rangeEnd = isStun ? 10 : 20;
             const healthArrayKey = isStun ? "stun" : "physical";
-        
+
             // Initialize the health array and updates object
             const healthArray = [...this.actor.system.health[healthArrayKey]];
             const updates = {};
-        
+
             // Calculate new health array values and update visual states
             for (let i = rangeStart; i <= rangeEnd; i++) {
                 const shouldCheck = i <= clickedIndex;
                 const arrayIndex = i - rangeStart;
-        
+
                 // Update the health array directly
                 healthArray[arrayIndex] = shouldCheck;
-        
+
                 // Update checkbox state and visual feedback
                 const box = html.find(`#healthBox${i}`);
                 box.prop("checked", shouldCheck);
@@ -227,20 +228,20 @@ export default class CharacterSheet extends ActorSheet {
                     siblingH4.toggleClass("unlit", !shouldCheck);
                 }
             }
-        
+
             // Add the updated health array to the updates object
             updates[`system.health.${healthArrayKey}`] = healthArray;
-        
+
             // Update the penalty
             const degree = clickedIndex % 10 || 10; // Normalize indices 11-20 to 1-10
 
             const penalty = calculateSeverity(degree);
             updates["system.health.penalty"] = penalty;
-        
+
             // Persist updates silently
             await this.actor.update(updates, { render: false });
             console.log(this.actor.system.health);
-        
+
             // Helper function to calculate severity
             function calculateSeverity(degree) {
                 if (degree > 0 && degree < 3) return 1;

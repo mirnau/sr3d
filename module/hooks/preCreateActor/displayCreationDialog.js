@@ -32,6 +32,7 @@ async function _showCharacterCreationDialog(actor) {
 
     let metahumans = game.items.filter(item => item.type === "metahuman");
 
+    //NOTE: If the system has no human item, one must be creted
     if (metahumans.length === 0) {
         const humanItem = ItemDataService.getDefaultHumanItem();
         Item.create(humanItem);

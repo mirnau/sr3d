@@ -34,15 +34,20 @@ export default class Randomizer {
             D: 18
         };
 
+        const metahumans = game.items.filter(item => item.type === "metahuman");
+        const availablePriorities = metahumans.map(m => m.system.priority);
+
         const validMetahumanPriorities = priorities.filter((p) => ["E", "C", "D"].includes(p));
 
-        if (validMetahumanPriorities.length === 0) {
-            throw new Error("No valid Metahuman priorities available.");
-        }
-
         const weightedPool = validMetahumanPriorities.flatMap((priority) => Array(weights[priority]).fill(priority));
-        const chosenPriority = weightedPool[Math.floor(Math.random() * weightedPool.length)];
-        priorities.splice(priorities.indexOf(chosenPriority), 1);
+        let chosenPriority = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+
+        ["E", "C", "D"].forEach((element) => {
+            if(chosenPriority === element && !availablePriorities.includes(chosenPriority)) {
+                return chosenPriority = this._assignMetahumanPriority(priorities);
+            }
+        });
+
         return chosenPriority;
     }
 
@@ -54,23 +59,25 @@ export default class Randomizer {
             D: 32,
             E: 32,
         };
-    
+
+        const magics = game.items.filter(item => item.type === "magic");
+        const availablePriorites = magics.map(m => m.system.priority);
+  
         const weightedPool = priorities.flatMap((priority) => Array(weights[priority]).fill(priority));
 
-        const chosenPriority = weightedPool[Math.floor(Math.random() * weightedPool.length)];
-    
-        priorities.splice(priorities.indexOf(chosenPriority), 1);
-    
+        let chosenPriority = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+
+        ["A", "B"].forEach((element) => {
+            if(chosenPriority === element && !availablePriorites.includes(chosenPriority)) {
+                return chosenPriority = this._assignMagicPriority(priorities);
+            }
+        });
+  
         return chosenPriority;
     }
 
     _assignRemainingPriority(priorities) {
-        if (priorities.length === 0) {
-            throw new Error("No valid priorities remaining.");
-        }
-
         const chosenPriority = priorities[Math.floor(Math.random() * priorities.length)];
-        priorities.splice(priorities.indexOf(chosenPriority), 1);
         return chosenPriority;
     }
 }
