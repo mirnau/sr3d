@@ -250,78 +250,109 @@ export default class CharacterSheet extends ActorSheet {
 
     async _onHealthBoxChange(html, event) {
         const clicked = event.currentTarget;
-        const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
-      
-        const isStun = clickedIndex <= 10;  
-        const healthArrayKey = isStun ? "stun" : "physical";
-      
-        const localIndex = isStun 
-          ? (clickedIndex - 1) 
-          : (clickedIndex - 11);
-      
-        const healthArray = [...this.actor.system.health[healthArrayKey]];
-        const wasChecked = healthArray[localIndex];
-        const willBeChecked = clicked.checked;
-        const updates = {};
-      
-        const checkedCount = healthArray.filter(Boolean).length;
-      
-        if (wasChecked && !willBeChecked && checkedCount === 1) {
-          healthArray[localIndex] = false;
-      
-          clicked.checked = false;
-          const siblingH4 = $(clicked).closest(".damage-input").find("h4");
-          if (siblingH4.length) {
-            siblingH4.removeClass("lit").addClass("unlit");
-          }
-      
-        } else {
-          for (let i = 0; i < 10; i++) {
-            const shouldCheck = i <= localIndex;
-            healthArray[i] = shouldCheck;
-      
-            const globalId = isStun ? (i + 1) : (i + 11);
-            const box = html.find(`#healthBox${globalId}`);
-            box.prop("checked", shouldCheck);
-      
-            const siblingH4 = box.closest(".damage-input").find("h4");
-            if (siblingH4.length) {
-              siblingH4.toggleClass("lit", shouldCheck);
-              siblingH4.toggleClass("unlit", !shouldCheck);
-            }
-          }
-        }
-      
-        updates[`system.health.${healthArrayKey}`] = healthArray;
-        const degree = clickedIndex % 10 || 10;
-        const penalty = this._calculateSeverity(degree); 
-        updates["system.health.penalty"] = penalty;
-        await this.actor.update(updates, { render: false });
-      }
-      
 
-    _calculateSeverity = (degree) => {
-        if (degree > 0 && degree < 3) {
-          this._setPace(2, 20);
-          return 1;
+
+        const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
+
+        const isStun = clickedIndex <= 10;
+        const healthArrayKey = isStun ? "stun" : "physical";
+
+        const localIndex = isStun ? (clickedIndex - 1) : (clickedIndex - 11);
+
+        const stunArray = [...this.actor.system.health.stun];
+        const physicalArray = [...this.actor.system.health.physical];
+
+        const currentArray = isStun ? stunArray : physicalArray;
+
+        const wasChecked = currentArray[localIndex];
+        const willBeChecked = clicked.checked;
+
+        const checkedCount = currentArray.filter(Boolean).length;
+
+        if (wasChecked && !willBeChecked && checkedCount === 1) {
+            currentArray[localIndex] = false;
+            clicked.checked = false;
+            const siblingH4 = $(clicked).closest(".damage-input").find("h4");
+            siblingH4.removeClass("lit").addClass("unlit");
+        }
+        else {
+            for (let i = 0; i < 10; i++) {
+                const shouldCheck = i <= localIndex;
+                currentArray[i] = shouldCheck;
+
+                const globalId = isStun ? (i + 1) : (i + 11);
+                const box = html.find(`#healthBox${globalId}`);
+                box.prop("checked", shouldCheck);
+
+                const siblingH4 = box.closest(".damage-input").find("h4");
+                if (siblingH4.length) {
+                    siblingH4.toggleClass("lit", shouldCheck);
+                    siblingH4.toggleClass("unlit", !shouldCheck);
+                }
+            }
+        }
+
+        if (isStun) {
+            this.actor.system.health.stun = stunArray;
+        } else {
+            this.actor.system.health.physical = physicalArray;
+        }
+
+        const degreeStun = stunArray.filter(Boolean).length;
+        const degreePhysical = physicalArray.filter(Boolean).length;
+        const maxDegree = Math.max(degreeStun, degreePhysical);
+
+        const penalty = this.calculateSeverity(maxDegree);
+        html.find('.health-penalty').text(penalty);
+
+        await this.actor.update({
+            ["system.health.stun"]: stunArray,
+            ["system.health.physical"]: physicalArray,
+            ["system.health.penalty"]: penalty
+        }, { render: false });
+    }
+
+
+    updateHealthOnStart(html) {
+        const stunArray = [...this.actor.system.health.stun];
+        const physicalArray = [...this.actor.system.health.physical];
+
+        const degreeStun = stunArray.filter(Boolean).length;
+        const degreePhysical = physicalArray.filter(Boolean).length;
+        const maxDegree = Math.max(degreeStun, degreePhysical);
+
+        const penalty = this.calculateSeverity(maxDegree);
+        html.find('.health-penalty').text(penalty);
+    }
+
+    calculateSeverity(degree = 0) {
+        if (degree === 0) {
+            this._setPace(1.5, 20);
+            return 0;
+        }
+        else if (degree > 0 && degree < 3) {
+            this._setPace(2, 20);
+            return 1;
         }
         else if (degree >= 3 && degree < 6) {
-          this._setPace(4, 25);
-          return 2;
+            this._setPace(4, 25);
+            return 2;
         }
-        else if (degree >= 6 && degree < 10) {
-          this._setPace(8, 35);
-          return 3;
+        else if (degree >= 6 && degree < 9) {
+            this._setPace(8, 35);
+            return 3;
         }
-        else if (degree === 9) return 4;
-        {
-          this._setPace(1, 8);
-          return 4;
+        else if (degree === 9) {
+            this._setPace(10, 40);
+            return 4;
         }
-        this._setPace(2, 15);
-        return 0;
-      };
-    
+        else {
+            this._setPace(1, 8);
+            return 4;
+        }
+    };
+
+
     _setPace(frequency, amplitude) {
         this.ecgAnimator.setFrequency(frequency);
         this.ecgAnimator.setAmplitude(amplitude);

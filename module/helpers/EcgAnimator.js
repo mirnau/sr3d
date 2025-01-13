@@ -2,7 +2,7 @@ import { lerpColor } from "../sheets/Utilities.js";
 
 export default class EcgAnimator {
     constructor(lineCanvas, pointCanvas, {
-        freq = 1,
+        freq = 1.5,
         amp = 20,
         color = 'lime',
         lineWidth = 2,

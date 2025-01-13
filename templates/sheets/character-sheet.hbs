@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-         <!-- Dice Pools Section -->
+        <!-- Dice Pools Section -->
         <div class="sheet-component">
 
             <div class="inner-background-container">
@@ -50,15 +50,14 @@
 
         <!-- Health Section -->
         <div class="sheet-component two-span-selectable">
-            <div class="karma-heart">
-                <h1>
-                    <i class="fa-solid fa-heart"></i>
-                </h1>
-            </div>
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
-                    <h1>{{localize "sr3d.actor.health.health"}}</h1>
+                    <h1 class="header-icon">{{localize "sr3d.actor.health.health"}}
+                        <span class="karma-heart">
+                            <i class="fa-solid fa-staff-snake"></i>
+                        </span>
+                    </h1>
                     {{> "systems/sr3d/templates/components/health.hbs"}}
                 </div>
             </div>
@@ -87,12 +86,10 @@
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <h1>{{localize @root.config.character.ratsrace}}</h1>
-                    {{> "systems/sr3d/templates/components/ratsrace.hbs"}}  
+                    {{> "systems/sr3d/templates/components/ratsrace.hbs"}}
                 </div>
             </div>
         </div>
-
-
 
         <!-- Tabs Navigation and Content Sections -->
         <div class="sheet-component two-span-selectable">
@@ -100,7 +97,7 @@
                 <div class="fake-shadow"></div>
                 <div class="inner-background">
                     <h1>{{localize "sr3d.actor.possessions.possessions"}}</h1>
-                       {{> "systems/sr3d/templates/components/possessions.hbs"}}                    
+                    {{> "systems/sr3d/templates/components/possessions.hbs"}}
                 </div>
             </div>
         </div>
@@ -109,9 +106,13 @@
         <div class="sheet-component">
             <div class="inner-background-container">
                 <div class="fake-shadow"></div>
+
                 <div class="inner-background">
-                    <h1>
+                    <h1 class="header-icon">
                         {{localize "sr3d.actor.karma.karma"}}
+                        <span class="karma-heart header-icon">
+                            <i class="fa-solid fa-heart-circle-bolt"></i>
+                        </span>
                     </h1>
                     {{> "systems/sr3d/templates/components/karma.hbs"}}
                 </div>

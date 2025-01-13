@@ -79,6 +79,7 @@ function registerHooks() {
         //NOTE: intital computation
         app.actor.silentUpdateDerivedValues("intelligence", html, 0);
         app.actor.silentUpdateDerivedValues("reaction", html, 0);
+        app.updateHealthOnStart(html);
     });
 
     Hooks.on(hooks.renderSR3DItemSheet, (app, html, data) => {
