@@ -45,12 +45,8 @@ export default class CharacterSheet extends ActorSheet {
         ctx.derivedAttributes = ActorDataService.getDerivedAttributes(ctx.actor.system.attributes);
         ctx.dicePools = ActorDataService.getDicePools(ctx.actor.system.attributes);
 
-
-
-        console.log("Active Skills:", ctx.skills.active);
-        console.log("Knowledge Skills:", ctx.skills.knowledge);
-        console.log("Language Skills:", ctx.skills.language);
-        console.log(ctx);
+        //Permissions
+        ctx.canViewBackground = game.user.isGM || this.actor.testUserPermission(game.user, "OWNER");
 
         this.newsRepeatCounter = 0;
 
@@ -65,6 +61,52 @@ export default class CharacterSheet extends ActorSheet {
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
         html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
+
+
+        html.find(".journal-entry-link").on("click", async (event) => {
+            event.preventDefault();
+        
+            const character = this.actor; // Get the current actor
+            let journalEntryUuid = character.system.journalEntryUuid;
+        
+            if (journalEntryUuid) {
+                // Try to fetch the existing journal entry using UUID
+                const journalEntry = await fromUuid(journalEntryUuid);
+                if (journalEntry) {
+                    journalEntry.sheet.render(true);
+                    return;
+                } else {
+                    console.warn(`Journal entry UUID '${journalEntryUuid}' not found. Creating a new one.`);
+                }
+            }
+        
+            // Retrieve the list of owners
+            const owners = Object.entries(character.ownership).filter(([userId, level]) => level >= foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
+            const ownerIds = owners.map(([userId]) => userId);
+        
+            // If no journal entry exists, create one
+            const journalEntry = await JournalEntry.create({
+                name: `Background: ${character.name}`,
+                folder: null,
+                ownership: {
+                    default: foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, // Deny permission to everyone else by default
+                    ...Object.fromEntries(ownerIds.map(id => [id, foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER])), // Grant owner-level permissions to all owners
+                },
+            });
+        
+            console.log(journalEntry);
+        
+            // Save the journal entry UUID on the character
+            await character.update({
+                "system.journalEntryUuid": journalEntry.uuid,
+            });
+        
+            // Open the new journal entry
+            journalEntry.sheet.render(true);
+        });
+        
+        
+
 
         document.addEventListener('newsFeedIterationCompleted', this.onNewsFeedIterationCompleted.bind(this, html));
 
@@ -240,9 +282,7 @@ export default class CharacterSheet extends ActorSheet {
 
             // Persist updates silently
             await this.actor.update(updates, { render: false });
-            console.log(this.actor.system.health);
 
-            // Helper function to calculate severity
             function calculateSeverity(degree) {
                 if (degree > 0 && degree < 3) return 1;
                 else if (degree >= 3 && degree < 6) return 2;

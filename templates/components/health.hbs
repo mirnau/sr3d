@@ -109,31 +109,32 @@
             </div>
         </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-label">
-            Overflow{{system.overflow}}
+
+    <div class="health-card-container">
+        <div class="health-card">
+            <div>
+                <h4 class="no-margin">{{localize "sr3d.actor.health.penalty"}}</h4>
+            </div>
+            <div class="stat-label">
+                <div class="stat-value">
+                    <h1 class="no-margin">
+                        0
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="health-card">
+            <div>
+                <h4 class="no-margin">{{localize "sr3d.actor.health.overflow"}}</h4>
+            </div>
+            <div class="stat-label">
+                <div class="stat-value">
+                    <h1 class="no-margin">
+                        0
+                    </h1>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="stat-card">
-        <div class="stat-label">
-            Penalty{{system.overflow}}
-            Penalty{{system.overflow}}
-        </div>
-    </div>
-
 </div>
-<!--
-<div class="ecg-controls">
-    <label>
-        Frequency:
-        <input type="range" class="ecg-frequency" step="0.1" min="0.1" max="10" value="1"/>
-        <span class="ecg-frequency-value">1</span> Hz
-    </label>
-    <label>
-        Amplitude:
-        <input type="range" class="ecg-amplitude" step="0.1" min="0" max="100" value="20"/>
-        <span class="ecg-amplitude-value">20</span>
-    </label>
-</div>
--->

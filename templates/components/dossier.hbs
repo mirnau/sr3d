@@ -6,12 +6,19 @@
     </div>
     {{else}}
     <div class="version-two image-mask">
-        <img class="" src="{{actor.img}}" data-edit="img" title="{{item.name}}"/>
+        <img class="" src="{{actor.img}}" data-edit="img" title="{{item.name}}" />
     </div>
     {{/if}}
 
     <details class="component-details">
-        <summary>Toggle View</summary>
+        <summary>
+                {{localize "sr3d.sheet.details"}}
+        </summary>
+
+        <div>
+            <input type="text" id="actor-name" name="name" value="{{actor.name}}" />
+        </div>
+
         <div>
             <h3>
                 {{localize "sr3d.actor.character.metahumanType"}}:
@@ -42,23 +49,12 @@
         </div>
     </details>
 
-    <div>
-        <label for="actor-name">{{localize "sr3d.actor.character.name"}}</label>
-        <input type="text" id="actor-name" name="name" value="{{actor.name}}" />
-    </div>
+    <!-- Notes / description block -->
 
-    <div>
-        <label for="pronouns">{{localize "sr3d.actor.character.pronouns"}}</label>
-        <input type="text" id="pronouns" name="system.pronouns" value="{{system.pronouns}}" />
-    </div>
+    <a class="journal-entry-link">
+        <h3>
+            {{localize "sr3d.sheet.viewbackground"}}
+        </h3>
+    </a>
 
-    <div>
-        <label for="looks">{{localize "sr3d.actor.character.looks"}}</label>
-        <input type="text" id="looks" name="system.looks" value="{{system.looks}}" />
-    </div>
-
-    <div>
-        <label for="quote">{{localize "sr3d.actor.character.quote"}}</label>
-        <input type="text" id="quote" name="system.quote" value="{{system.quote}}" />
-    </div>
 </div>

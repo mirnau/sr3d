@@ -12,6 +12,10 @@ export default class CharacterModel extends foundry.abstract.TypeDataModel {
       creation: new foundry.data.fields.SchemaField(Creation.defineSchema()),
       karma: new foundry.data.fields.SchemaField(KarmaModel.defineSchema()),
       health: new foundry.data.fields.SchemaField(HealthModel.defineSchema()),
+      journalEntryUuid: new foundry.data.fields.StringField({
+        required: false,
+        initial: "",
+      }),
     };
   }
 }

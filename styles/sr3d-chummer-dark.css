@@ -183,6 +183,9 @@
 .sr3d .sr3d.window-app.sr3d {
   background: none;
 }
+.sr3d .sheet-masonry-grid {
+  backdrop-filter: blur(2px);
+}
 .sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
@@ -218,7 +221,7 @@
 .sr3d .sr3d.sheet.item input[type="text"],
 .sr3d .sr3d.sheet.character input[type="text"] {
   background-color: #1c364b;
-  box-shadow: inset 0 0 10px #4df083;
+  box-shadow: inset 0 0 10px #3ed199;
   border: none;
 }
 .sr3d .sr3d.sheet.item img,
@@ -425,7 +428,7 @@
 .sr3d .sr3d.sheet.item h3,
 .sr3d .sr3d.sheet.character h3 {
   text-transform: uppercase;
-  color: #4df083;
+  color: #3ed199;
   border: none;
   text-shadow: 0 0 10px #45d06b, 0 0 20px #e6ff8d;
 }
@@ -445,12 +448,12 @@
 .sr3d .sr3d.sheet.item h5,
 .sr3d .sr3d.sheet.character h5 {
   text-transform: uppercase;
-  color: #4df083;
+  color: #3ed199;
 }
 .sr3d .sr3d.sheet.item h6,
 .sr3d .sr3d.sheet.character h6 {
   text-transform: uppercase;
-  color: #4df083;
+  color: #3ed199;
 }
 .sr3d .sr3d.sheet.item select,
 .sr3d .sr3d.sheet.character select,
@@ -781,14 +784,14 @@
   background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
 }
 .sr3d .attribute-masonry-grid .stat-card .stat-label {
-  background-color: #1c364b;
+  background: #1c364b;
 }
 .sr3d .attribute-masonry-grid .stat-card .stat-label .decrement-attribute,
 .sr3d .attribute-masonry-grid .stat-card .stat-label .increment-attribute {
   justify-content: center;
   text-align: center;
   font-size: 0.8rem;
-  color: #1df0ff;
+  color: #1b1f24;
   cursor: pointer;
   margin: 0.25rem;
 }
@@ -883,12 +886,12 @@
 .sr3d .possessions-tabs .possession-utility-bar .tabs .item.active {
   background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   font-weight: bold;
-  box-shadow: inset 0 0 15px #4df083;
+  box-shadow: inset 0 0 15px #3ed199;
   transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .possessions-tabs .possession-utility-bar .tabs .item.active h2 {
-  color: #4df083;
-  text-shadow: #4df083;
+  color: #3ed199;
+  text-shadow: #3ed199;
 }
 .sr3d .possessions-tabs .possessions-tab-content {
   background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
@@ -928,12 +931,12 @@
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active {
   background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   font-weight: bold;
-  box-shadow: inset 0 0 15px #4df083;
+  box-shadow: inset 0 0 15px #3ed199;
   transition: box-shadow 0.4s ease-in-out;
 }
 .sr3d .skills-tabs .skill-utility-bar .tabs .item.active h2 {
-  color: #4df083;
-  text-shadow: #4df083;
+  color: #3ed199;
+  text-shadow: #3ed199;
 }
 .sr3d .skills-tabs .tab-content {
   background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
@@ -988,7 +991,7 @@
   min-height: 2rem;
   margin-bottom: 0.25rem;
   padding: 0.5rem;
-  background-color: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
+  background: repeating-linear-gradient(0deg, rgba(81, 106, 134, 0.6) 1px, rgba(57, 77, 100, 0.6) 5px, rgba(31, 44, 66, 0.6) 2px);
   justify-content: space-between;
   gap: 0rem;
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
@@ -1229,20 +1232,33 @@
 .sr3d #controls {
   margin-top: 10px;
 }
-.sr3d .ecg-container {
-  position: relative;
-  width: 100%;
-  height: 4rem;
-  border: 0rem;
-  box-shadow: inset 0 0 16px #1df0ff;
-  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
-}
 .sr3d .ecg-container canvas {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+.sr3d .ecg-container {
+  background-color: #e792cb;
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  border: 0rem;
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+}
+.sr3d .ecg-container::before {
+  box-shadow: inset 0 0 12px #1df0ff;
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
+  z-index: -1;
+  background: #1c364b;
 }
 .sr3d #ecg-canvas {
   z-index: 1;
@@ -1255,21 +1271,23 @@
   max-height: 5rem;
   border: 0;
 }
-.sr3d .condition-monitor {
+.sr3d .sr3d.sheet.character .condition-monitor {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
+  margin: 0rem;
+  padding: 0rem;
 }
-.sr3d .condition-monitor .condition-meter {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem;
   justify-content: center;
 }
-.sr3d .condition-monitor .condition-meter .checkbox-label {
-  min-width: 5rem;
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .checkbox-label {
+  min-width: 4rem;
 }
 @keyframes flicker {
   0% {
@@ -1297,53 +1315,54 @@
     opacity: 1;
   }
 }
-.sr3d .condition-monitor .condition-meter .lit {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .lit {
   animation: flicker 1s ease-in-out;
   text-shadow: 0 0 12px #1df0ff;
 }
-.sr3d .condition-monitor .condition-meter .unlit {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .unlit {
   text-shadow: none;
   opacity: 0.2;
   /* Optional: You can adjust unlit styling to suit your needs */
 }
-.sr3d .condition-monitor .condition-meter .stun-damage,
-.sr3d .condition-monitor .condition-meter .physical-damage {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   padding: 0.5rem;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input {
   position: relative;
   padding: 0rem;
   margin: 0rem;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description {
   position: absolute;
   z-index: 5;
   left: 0;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.stun,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.stun {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.stun,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.stun {
   top: -1rem;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.physical,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.physical {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.physical,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.physical {
   bottom: -1rem;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"],
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"] {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"],
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"] {
   appearance: none;
   background-color: #e792cb;
   position: relative;
   cursor: pointer;
   clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
   z-index: 1;
+  min-width: 0.5rem;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::before,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::before {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::before,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::before {
   pointer-events: none;
   content: '';
   position: absolute;
@@ -1355,8 +1374,8 @@
   clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
   z-index: -1;
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::after,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::after {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]::after,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -1367,19 +1386,50 @@
   display: none;
   clip-path: polygon(0.25rem 0px, calc(100% - 0.25rem) 0px, 100% 0.25rem, 100% calc(100% - 0.25rem), calc(100% - 0.25rem) 100%, 0.25rem 100%, 0px calc(100% - 0.25rem), 0px 0.25rem);
 }
-.sr3d .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]:checked::after,
-.sr3d .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]:checked::after {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input input[type="checkbox"]:checked::after,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input input[type="checkbox"]:checked::after {
   display: block;
-  box-shadow: inset 0 0 8px #1df0ff;
+  box-shadow: inset 0 0 8px #ff0095;
 }
-.sr3d .condition-monitor .condition-meter h3 {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage h3,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage h3 {
   margin: 0;
 }
-.sr3d .condition-monitor .condition-meter .damage-type {
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-type,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-type {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container:last-child {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 2.01533rem), calc(100% - 2.01533rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card {
+  clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
+  transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+  margin-top: 0.5rem;
+  min-width: 5rem;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 16px #1df0ff;
+  position: relative;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card .stat-value {
+  margin: 0;
+  text-align: center;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card h4,
+.sr3d .sr3d.sheet.character .condition-monitor .health-card h1 {
+  text-align: center;
+  text-indent: 0rem;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card select,
+.sr3d .sr3d.sheet.character .condition-monitor .health-card .stat-label {
+  align-items: center;
+  justify-content: center;
+  background-color: #1c364b;
+  box-shadow: inset 0 0 16px #1df0ff;
+  transition: box-shadow 0.3s ease-in;
 }
 .sr3d .sr3d.sheet.character .broadcaster-sheet h1 {
   text-indent: 0rem;

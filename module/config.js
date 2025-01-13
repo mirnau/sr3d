@@ -10,7 +10,9 @@ sr3d.sheet ={
     undoSpecialization: "sr3d.sheet.undoSpecialization",
     confirmSkill: "sr3d.sheet.confirmSkill",
     undo: "sr3d.sheet.undo",
-    notes: "sr3d.sheet.notes"
+    notes: "sr3d.sheet.notes",
+    details: "sr3d.sheet.details",
+    viewbackground: "sr3d.sheet.viewbackground"
 }
 
 sr3d.itemTypes = {
@@ -57,7 +59,12 @@ sr3d.actorTypes = {
 
 sr3d.health = {
     health: "sr3d.actor.health.health",
-    health: "sr3d.actor.health.health"
+    light: "sr3d.actor.health.light",
+    moderate: "sr3d.actor.health.moderate",
+    severe: "sr3d.actor.health.severe",
+    deadly: "sr3d.actor.health.deadly",
+    penalty: "sr3d.actor.health.penalty",
+    overflow: "sr3d.actor.health.overflow"
 }
 
 sr3d.ammunition = {

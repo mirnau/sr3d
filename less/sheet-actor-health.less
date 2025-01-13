@@ -12,21 +12,36 @@
     margin-top: 10px;
 }
 
-.ecg-container {
-    position: relative; // Ensure canvases stack properly
-    width: 100%; // Full width
-    height: 4rem; // Maintain consistent height
-    border: 0rem; // Reset border
-    box-shadow: inset 0 0 16px @highlight-color-primary;
-    .clipped-corners(0.5rem, 0.5rem, 0.5rem, 0.5rem);
-}
-
 .ecg-container canvas {
     position: absolute; // Stack canvases on top of each other
     top: 0;
     left: 0;
     width: 100%; // Ensure canvases match container size
     height: 100%;
+}
+
+.ecg-container {
+    position: relative;
+    background-color: @accent-cherry-blossom;
+    position: relative; // Ensure canvases stack properly
+    width: 100%; // Full width
+    height: 3rem; // Maintain consistent height
+    border: 0rem; // Reset border
+    .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+
+    &::before {
+        box-shadow: inset 0 0 12px @highlight-color-primary;
+        pointer-events: none;
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: calc(100% - 2px);
+        height: calc(100% - 2px);
+        .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+        z-index: -1;
+        background: @secondary-color;
+    }
 }
 
 #ecg-canvas {
@@ -43,131 +58,182 @@
     border: 0;
 }
 
-.condition-monitor {
-    .apply-flex-distribute(row); // Apply your reusable container mixin
-
-    .condition-meter {
-        .apply-flex-distribute(column); // Apply your reusable container mixin
-        justify-content: center; // Center rows vertically (y-axis)
-
-        .checkbox-label {
-            min-width: 5rem;
-        }
-
-        @keyframes flicker {
-            0% {
-                text-shadow: 0 0 2px @h4-color, 0 0 10px @h4-color, 0 0 20px #fff;
-                opacity: 0.8;
-            }
-            20% {
-                text-shadow: none;
-                opacity: 0.6;
-            }
-            40% {
-                text-shadow: 0 0 2px @h4-color, 0 0 8px @h4-color, 0 0 15px #fff;
-                opacity: 1;
-            }
-            60% {
-                text-shadow: none;
-                opacity: 0.4;
-            }
-            80% {
-                text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
-                opacity: 1;
-            }
-            100% {
-                text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
-                opacity: 1;
-            }
-        }
+.sr3d.sheet.character {
+    .condition-monitor {
+        .apply-flex-distribute(row); // Apply your reusable container mixin
         
-        .lit {
-            animation: flicker 1s ease-in-out;
-            text-shadow: 0 0 12px @h4-color;
-        }
-        
-        .unlit {
-            text-shadow: none;
-            opacity: 0.2; /* Optional: You can adjust unlit styling to suit your needs */
-        }
-        
+        margin: 0rem;
+        padding: 0rem;
 
-        .stun-damage,
-        .physical-damage {
-            display: flex;
-            gap: 0.5rem; // Space between checkboxes
-            align-items: center; // Vertically align text and checkboxes
-            padding: 0.5rem;
+        .condition-meter {
+            .apply-flex-distribute(column); // Apply your reusable container mixin
+            justify-content: center; // Center rows vertically (y-axis)
 
-            .damage-input {
-                position: relative;
-                padding: 0rem;
-                margin: 0rem;
+            .checkbox-label {
+                min-width: 4rem;
+            }
 
-                .damage-description {
-                    position: absolute;
-                    z-index: 5;
-                    left: 0;
-                
-                    &.stun {
-                        top: -1rem;
-                    }
-                
-                    &.physical {
-                        bottom: -1rem;
-                    }
+            @keyframes flicker {
+                0% {
+                    text-shadow: 0 0 2px @h4-color, 0 0 10px @h4-color, 0 0 20px #fff;
+                    opacity: 0.8;
                 }
 
-                input[type="checkbox"] {
-                    appearance: none;
-                    background-color: @default-sheet-border-color;
+                20% {
+                    text-shadow: none;
+                    opacity: 0.6;
+                }
+
+                40% {
+                    text-shadow: 0 0 2px @h4-color, 0 0 8px @h4-color, 0 0 15px #fff;
+                    opacity: 1;
+                }
+
+                60% {
+                    text-shadow: none;
+                    opacity: 0.4;
+                }
+
+                80% {
+                    text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
+                    opacity: 1;
+                }
+
+                100% {
+                    text-shadow: 0 0 4px @h4-color, 0 0 12px @h4-color, 0 0 25px #fff;
+                    opacity: 1;
+                }
+            }
+
+            .lit {
+                animation: flicker 1s ease-in-out;
+                text-shadow: 0 0 12px @h4-color;
+            }
+
+            .unlit {
+                text-shadow: none;
+                opacity: 0.2;
+                /* Optional: You can adjust unlit styling to suit your needs */
+            }
+
+
+            .stun-damage,
+            .physical-damage {
+                display: flex;
+                gap: 0.5rem; // Space between checkboxes
+                align-items: center; // Vertically align text and checkboxes
+                padding: 0.5rem;
+
+                .damage-input {
                     position: relative;
-                    cursor: pointer;
-                    .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
-                    z-index: 1;
+                    padding: 0rem;
+                    margin: 0rem;
 
-                    // The border or "frame"
-                    &::before {
-                        pointer-events: none;
-                        content: '';
+                    .damage-description {
                         position: absolute;
-                        top: 1px;
-                        left: 1px;
-                        width: calc(100% - 2px);
-                        height: calc(100% - 2px);
-                        background: @default-inner-background-color;
-                        .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
-                        z-index: -1;
+                        z-index: 5;
+                        left: 0;
+
+                        &.stun {
+                            top: -1rem;
+                        }
+
+                        &.physical {
+                            bottom: -1rem;
+                        }
                     }
 
-                    // The checkmark or “ticked” effect
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        width: 1rem;
-                        height: 1rem;
-                        display: none;
+                    input[type="checkbox"] {
+                        appearance: none;
+                        background-color: @default-sheet-border-color;
+                        position: relative;
+                        cursor: pointer;
                         .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                        z-index: 1;
+                        min-width: 0.5rem;
+
+                        // The border or "frame"
+                        &::before {
+                            pointer-events: none;
+                            content: '';
+                            position: absolute;
+                            top: 1px;
+                            left: 1px;
+                            width: calc(100% - 2px);
+                            height: calc(100% - 2px);
+                            background: @default-inner-background-color;
+                            .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                            z-index: -1;
+                        }
+
+                        // The checkmark or “ticked” effect
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: 1rem;
+                            height: 1rem;
+                            display: none;
+                            .clipped-corners(0.25rem, 0.25rem, 0.25rem, 0.25rem);
+                        }
+
+                        &:checked::after {
+                            display: block;
+                            box-shadow: inset 0 0 8px @accent-color;
+                        }
                     }
 
-                    &:checked::after {
-                        display: block;
-                        box-shadow: inset 0 0 8px @highlight-color-primary;
-                    }
                 }
 
+                h3 {
+                    margin: 0; // Reset margin for text alignment
+                }
+
+                .damage-type {
+                    .apply-flex-distribute(column);
+                }
             }
+
         }
 
-        h3 {
-            margin: 0; // Reset margin for text alignment
+        .health-card-container:last-child {
+            .clipped-corners(0.5rem, 0.5rem, 1.9*1.0607rem, 0.5rem);
         }
 
-        .damage-type {
-            .apply-flex-distribute(column);
+        .health-card {
+
+
+            .clipped-corners(0.5rem, 0.5rem, 1rem, 0.5rem);
+            transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
+            margin-top: 0.5rem;
+            min-width: 5rem;
+            background-color: @secondary-color;
+            box-shadow: inset 0 0 16px @highlight-color-primary;
+            position: relative;
+
+            .stat-value {
+                margin: 0;
+                text-align: center;
+            }
+
+            h4,
+            h1 {
+                text-align: center;
+                text-indent: 0rem;
+            }
+
+            select,
+            .stat-label {
+                align-items: center;
+                justify-content: center;
+                background-color: @secondary-color;
+                box-shadow: inset 0 0 16px @highlight-color-primary;
+                transition: box-shadow 0.3s ease-in;
+
+   
+            }
         }
     }
 }

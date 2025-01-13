@@ -52,19 +52,11 @@ export default class Profile extends foundry.abstract.TypeDataModel {
         integer: true,
       }),
 
-      // Looks
-      looks: new foundry.data.fields.StringField({
-        required: false,
-        initial: "Handsome I bet",
-      }),
-
       // Quote
       quote: new foundry.data.fields.StringField({
         required: false,
         initial: "Alea iacta es",
       }),
-
-
     };
   }
 }

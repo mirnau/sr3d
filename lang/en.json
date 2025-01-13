@@ -18,10 +18,10 @@
             "forbidden": "Forbidden"
         },
         "firingMode": {
-            "singleshot": "Single Shot",     
+            "singleshot": "Single Shot",
             "semiauto": "Semi Auto",
-            "burstfire": "Burst Fire",        
-            "fullauto": "Full Auto"     
+            "burstfire": "Burst Fire",
+            "fullauto": "Full Auto"
         },
         "createItem": {
             "weapon": "Weapon",
@@ -43,11 +43,11 @@
             "playerCharacter": "Player Character"
         },
         "weaponDamage": {
-            "stun": "Stun", 
-            "light": "Light",   
+            "stun": "Stun",
+            "light": "Light",
             "moderate": "Moderate",
-            "serious": "Serious", 
-            "deadly": "Deadly"  
+            "serious": "Serious",
+            "deadly": "Deadly"
         },
         "sheet": {
             "addSkill": "Add a skill",
@@ -59,7 +59,9 @@
             "undoSpecialization": "Undo Specialisation",
             "confirmSkill": "Confirm Skill Purchase",
             "undo": "Undo",
-            "notes": "Notes"
+            "notes": "Notes",
+            "details": "Details",
+            "viewbackground": "View Background"
         },
         "characterCreation": {
             "instruction": "Humans are weighted at 64% and magic users at 4%.",
@@ -125,7 +127,14 @@
             },
             "health": {
                 "health": "Health",
-                "health": "Damage Tracker"
+                "light": "Light",
+                "moderate": "Moderate",
+                "severe": "Severe",
+                "deadly": "Deadly",
+                "penalty": "Penalty",
+                "overflow": "Overflow",
+                "stun": "Stun",
+                "physical": "physical"
             },
             "possessions": {
                 "possessions": "Possessions",
@@ -144,12 +153,6 @@
                 "karma": "Karma",
                 "karmaPool": "Karma Pool",
                 "goodKarma": "Good Karma"
-            },
-            "health": {
-                "health": "Damage Tracker",
-                "stun": "Stun",
-                "physical": "physical",
-                "owerflow": "overflow"
             },
             "languageSkills": {
                 "name": "Name",
@@ -212,7 +215,6 @@
                 "total": "Total",
                 "creditstick": "CreditStick"
             },
-
             "vehicle": {
                 "handling": "Handling",
                 "speed": "Speed",
