@@ -51,6 +51,8 @@ export default class EcgAnimator {
 
     setFrequency(freq) { this.freq = freq; }
     setAmplitude(amp) { this.amp = amp; }
+    setTopColor(color) {this.topColor = color};
+    setBottomColor(color) {this.bottomColor = color};
 
     _animate = () => {
         if (!this._isAnimating) return;
@@ -101,9 +103,6 @@ export default class EcgAnimator {
         this.prevY = y;
         this.phase += 0.04 * this.freq; // wave speed
     }
-
-
-
 
     _getHeartY(phase) {
         const t = phase;
