@@ -24,7 +24,9 @@ export default class SkillModel extends foundry.abstract.TypeDataModel {
                     required: true,
                     default: ""
                 }),
-                specializations: createSpecializationSchema()
+                specializations:
+                    createSpecializationSchema({ initial: [] })
+
             }),
 
             knowledgeSkill: new foundry.data.fields.SchemaField({
@@ -37,7 +39,9 @@ export default class SkillModel extends foundry.abstract.TypeDataModel {
                     required: true,
                     default: "intelligence"
                 }),
-                specializations: createSpecializationSchema()
+                specializations:
+                    createSpecializationSchema({ initial: [] })
+
             }),
 
             languageSkill: new foundry.data.fields.SchemaField({
@@ -47,7 +51,9 @@ export default class SkillModel extends foundry.abstract.TypeDataModel {
                         default: 0,
                         integer: true
                     }),
-                    specializations: createSpecializationSchema()
+                    specializations:
+                        createSpecializationSchema({ initial: [] })
+
                 }),
                 read: new foundry.data.fields.SchemaField({
                     value: new foundry.data.fields.NumberField({
@@ -55,7 +61,9 @@ export default class SkillModel extends foundry.abstract.TypeDataModel {
                         default: 0,
                         integer: true
                     }),
-                    specializations: createSpecializationSchema()
+                    specializations:
+                        createSpecializationSchema({ initial: [] })
+
                 }),
                 write: new foundry.data.fields.SchemaField({
                     value: new foundry.data.fields.NumberField({
@@ -63,7 +71,9 @@ export default class SkillModel extends foundry.abstract.TypeDataModel {
                         default: 0,
                         integer: true
                     }),
-                    specializations: createSpecializationSchema()
+                    specializations:
+                        createSpecializationSchema({ initial: [] })
+
                 })
             }),
 

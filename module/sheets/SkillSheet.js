@@ -121,12 +121,30 @@ export default class SR3DItemSheet extends ItemSheet {
         });
     }
 
-    // DEBUG: Show the form data in the console
     async _updateObject(event, formData) {
-        console.log("Form Data Submitted:", formData);
-        await this.object.update(formData);
+        try {
+            console.log("DEBUG: Form Data Submitted:", formData);
+    
+            // Check if the object is embedded or standalone
+            if (this.object.isEmbedded) {
+                console.log("Updating embedded object:", this.object);
+            } else {
+                console.log("Updating standalone object:", this.object);
+            }
+    
+            // Call the update method
+            await this.object.update(formData);
+    
+            console.log("Form Data Successfully Updated:", formData);
+        } catch (error) {
+            console.error("Error while updating object:");
+            console.error("Form Data:", formData);
+            console.error("Error Message:", error.message);
+            console.error("Error Stack:", error.stack);
+            throw error; // Propagate the error for further handling if necessary
+        }
     }
-
+    
     // Handler for Active Skill linked attribute changes
     async _onActiveSkillLinkedAttributeChange(event) {
         const dropdown = event.currentTarget;

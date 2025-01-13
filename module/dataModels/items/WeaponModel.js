@@ -6,20 +6,20 @@ export default class WeaponModel extends foundry.abstract.TypeDataModel {
         return {
             damage: new foundry.data.fields.StringField({
                 required: true,
-                default: "N/A",
+                initial: "N/A",
             }),
             mode: new foundry.data.fields.StringField({
                 required: true,
-                default: "semi-automatic",
+                initial: "semi-automatic",
             }),
             range: new foundry.data.fields.NumberField({
                 required: true,
-                default: 0,
+                initial: 0,
                 integer: true,
             }),
             recoilComp: new foundry.data.fields.NumberField({
                 required: true,
-                default: 0.0,
+                initial: 0.0,
             }),
             currentClipId: new foundry.data.fields.StringField({
                 required: false,

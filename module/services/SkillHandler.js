@@ -63,65 +63,65 @@ export default class SkillHandler {
 
     async onAddSpecialization(event) {
         event.preventDefault();
-    
+
         const container = event.currentTarget.closest('div[data-skill-type]');
         const { skillType, subSkill } = container.dataset;
         const specializationsPath = this._resolveSpecializationsPath(skillType, subSkill);
-    
+
         // Get current specializations and add a new one
         let specializations = this._getSpecializations(specializationsPath);
         const inputField = container.querySelector('input[type="text"]');
         const specializationName = (inputField?.value?.trim()) || "A New Skill Specialization";
-    
+
         // Prevent duplicates
         if (specializations.some(spec => spec.name.toLowerCase() === specializationName.toLowerCase())) {
             ui.notifications.warn("A specialization with this name already exists.");
             return;
         }
-    
+
         // Add the new specialization
         specializations.push(new SkillSpecializationModel({ name: specializationName, value: 0 }));
 
-    
+
         // Update the system values through `_updateSystemValues`
         await this._updateSystemValues({ [specializationsPath]: specializations });
-    
+
         // Clear the input field
         if (inputField) inputField.value = '';
-    
+
         // Refresh the sheet to reflect changes
         this.item.sheet.render(true);
     }
-    
-    
+
+
 
     async onDeleteSpecialization(event) {
         event.preventDefault();
-    
+
         const confirmed = await this._confirmDeletion();
         if (!confirmed) {
             ui.notifications.info("Specialization deletion canceled.");
             return;
         }
-    
+
         const button = event.currentTarget;
         const container = button.closest(".specialization-container");
         const index = parseInt(container.dataset.index, 10);
         const skillContainer = button.closest('div[data-skill-type]');
         const { skillType, subSkill } = skillContainer.dataset;
         const specializationsPath = this._resolveSpecializationsPath(skillType, subSkill);
-    
+
         // Get current specializations and remove the selected one
         let specializations = this._getSpecializations(specializationsPath);
         if (index >= 0 && index < specializations.length) {
             specializations = [...specializations.slice(0, index), ...specializations.slice(index + 1)];
             await this._updateSystemValues({ [specializationsPath]: specializations });
         }
-    
+
         // Refresh the sheet to reflect changes
         this.item.sheet.render(true);
     }
-    
+
     async onBuySpecialization(event, index) {
         event.preventDefault();
 
@@ -181,7 +181,7 @@ export default class SkillHandler {
         let specializations = this._getSpecializations(specializationsPath);
 
         const specialization = specializations[index];
-        
+
         if (!this._isValidSpecialization(specialization)) {
             return;
         }
@@ -191,13 +191,13 @@ export default class SkillHandler {
         specialization.value = 0; // INFO: Reset specialization value to indicate it's undone
         const updatedSkillValue = skillValue + 1; // INFO: Restore one skill point
 
-                   await this._updateSystemValues({
-                [skillKey]: updatedSkillValue,
-                [specializationsPath]: specializations
-            });
+        await this._updateSystemValues({
+            [skillKey]: updatedSkillValue,
+            [specializationsPath]: specializations
+        });
 
-            // Refresh the item sheet to reflect changes
-            this.item.sheet.render(true);
+        // Refresh the item sheet to reflect changes
+        this.item.sheet.render(true);
     }
 
     _getSkillConfig(skillType, subSkill = null) {
@@ -212,19 +212,17 @@ export default class SkillHandler {
                 return null;
             }
             // Return the subSkillConfig directly for language skills
-            return subSkillConfig; 
+            return subSkillConfig;
         }
-    
+
         const config = skillConfig[skillType];
         if (!config) {
             console.error(`Unknown skill type: "${skillType}". SKILL_CONFIG does not have this key.`);
             return null;
         }
-        
+
         return config;
     }
-    
-    
 
     _getAvailablePoints(pointsKey) {
         const key = pointsKey.split(".").pop();
@@ -286,19 +284,21 @@ export default class SkillHandler {
     async _updateSystemValues(updateData) {
         try {
             console.log("Updating System Values:", updateData);
-    
+
+
             if (this.item.isEmbedded) {
                 // Update the embedded item in the actor's items collection
                 await this.actor.updateEmbeddedDocuments("Item", [{ _id: this.item.id, ...updateData }]);
+
             } else {
                 // Directly update the item if it’s not embedded
                 await this.item.update(updateData);
             }
-    
+
             console.log("System Values Updated Successfully:", updateData);
         } catch (error) {
             console.error("Failed to update system values:", error);
         }
     }
-    
+
 }

@@ -3,11 +3,11 @@ export default class PortabilityModel extends foundry.abstract.TypeDataModel {
         return {
             conceal: new foundry.data.fields.NumberField({
                 required: true,
-                default: 0,
+                initial: 0,
             }),
             weight: new foundry.data.fields.NumberField({
                 required: true,
-                default: 0.0,
+                initial: 0.0,
             }),
         };
     }

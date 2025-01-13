@@ -3,7 +3,7 @@ export default class KarmaModel extends foundry.abstract.TypeDataModel {
       return {
         value: new foundry.data.fields.NumberField({
           required: true,
-          default: 0,
+          initial: 0,
           integer: true
         })
       };
