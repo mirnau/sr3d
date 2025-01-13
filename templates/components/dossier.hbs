@@ -2,16 +2,17 @@
 
     {{#if (isDossierOpen actor)}}
     <div class="version-one image-mask">
-        <img class="" src="{{system.img}}" />
+        <img class="" src="{{system.profile.img}}" />
     </div>
     {{else}}
     <div class="version-two image-mask">
-        <img class="" src="{{actor.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     </div>
     {{/if}}
 
     <details class="component-details">
-        <summary>
+        <summary class="details-foldout">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
                 {{localize "sr3d.sheet.details"}}
         </summary>
 
@@ -22,33 +23,31 @@
         <div>
             <h3>
                 {{localize "sr3d.actor.character.metahumanType"}}:
-            </h3>
-            {{system.metaHumanity}}
-        </div>
-
-        <div>
-            <h3>
-                {{localize "sr3d.actor.character.age"}}: {{system.age}}
+            <span>{{system.profile.metaHumanity}}</span>
             </h3>
         </div>
 
         <div>
             <h3>
-                {{localize "sr3d.actor.character.height"}}: {{system.height}} cm ({{multiply
-                system.height 0.0328084}}
+                {{localize "sr3d.actor.character.age"}}: {{system.profile.age}}
+            </h3>
+        </div>
+
+        <div>
+            <h3>
+                {{localize "sr3d.actor.character.height"}}: {{system.profile.height}} cm ({{multiply
+                system.profile.height 0.0328084}}
                 feet)
             </h3>
         </div>
 
         <div>
             <h3>
-                {{localize "sr3d.actor.character.weight"}}: {{system.weight}} kg ({{multiply
-                system.weight 0.157473}}
+                {{localize "sr3d.actor.character.weight"}}: {{system.profile.weight}} kg ({{multiply
+                system.profile.weight 0.157473}}
                 stones)
             </h3>
         </div>
-    </details>
-
     <!-- Notes / description block -->
 
     <a class="journal-entry-link">
@@ -56,5 +55,5 @@
             {{localize "sr3d.sheet.viewbackground"}}
         </h3>
     </a>
-
+    </details>
 </div>

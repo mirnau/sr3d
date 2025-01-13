@@ -266,7 +266,7 @@ function registerHooks() {
 
 
         Handlebars.registerHelper('multiply', (value, factor) => {
-            return Number(value * factor); // Converts and limits to 1 decimal places
+            return Number((value * factor).toFixed(2)); // Converts and limits to 1 decimal places
         });
 
         Handlebars.registerHelper("currency", function (value) {

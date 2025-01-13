@@ -264,9 +264,9 @@ export default class CharacterCreationDialog extends Dialog {
         const systemUpdates = {
             "system.creation.attributePoints": dialogData.attributePriorities[selectedAttributePriority],
             "system.creation.activePoints": dialogData.skillsPriorities[selectedSkillsPriority],
-            "system.profile.age": selectedAge,
-            "system.profile.height": selectedHeight,
-            "system.profile.weight": selectedWeight,
+            "system.profile.age": Number(selectedAge),
+            "system.profile.height": Number(selectedHeight),
+            "system.profile.weight": Number(selectedWeight),
         };
 
         const transactionData = {

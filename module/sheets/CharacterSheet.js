@@ -44,6 +44,8 @@ export default class CharacterSheet extends ActorSheet {
         ctx.baseAttributes = ActorDataService.getBaseAttributes(ctx.actor.system.attributes);
         ctx.derivedAttributes = ActorDataService.getDerivedAttributes(ctx.actor.system.attributes);
         ctx.dicePools = ActorDataService.getDicePools(ctx.actor.system.attributes);
+        ctx.system.profile.img = ActorDataService.getMetaHumanImageAdress(ctx.actor.items.contents);
+        ctx.system.profile.metaHumanity = ActorDataService.getMetaHumanityName(ctx.actor.items.contents);
 
         //Permissions
         ctx.canViewBackground = game.user.isGM || this.actor.testUserPermission(game.user, "OWNER");
@@ -61,14 +63,16 @@ export default class CharacterSheet extends ActorSheet {
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
         html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
+        html.on("change", "input[type='checkbox'][id^='healthBox']", this._onHealthBoxChange.bind(this, html));
+
 
 
         html.find(".journal-entry-link").on("click", async (event) => {
             event.preventDefault();
-        
+
             const character = this.actor; // Get the current actor
             let journalEntryUuid = character.system.journalEntryUuid;
-        
+
             if (journalEntryUuid) {
                 // Try to fetch the existing journal entry using UUID
                 const journalEntry = await fromUuid(journalEntryUuid);
@@ -79,11 +83,11 @@ export default class CharacterSheet extends ActorSheet {
                     console.warn(`Journal entry UUID '${journalEntryUuid}' not found. Creating a new one.`);
                 }
             }
-        
+
             // Retrieve the list of owners
             const owners = Object.entries(character.ownership).filter(([userId, level]) => level >= foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
             const ownerIds = owners.map(([userId]) => userId);
-        
+
             // If no journal entry exists, create one
             const journalEntry = await JournalEntry.create({
                 name: `Background: ${character.name}`,
@@ -93,19 +97,17 @@ export default class CharacterSheet extends ActorSheet {
                     ...Object.fromEntries(ownerIds.map(id => [id, foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER])), // Grant owner-level permissions to all owners
                 },
             });
-        
+
             console.log(journalEntry);
-        
+
             // Save the journal entry UUID on the character
             await character.update({
                 "system.journalEntryUuid": journalEntry.uuid,
             });
-        
+
             // Open the new journal entry
             journalEntry.sheet.render(true);
         });
-        
-        
 
 
         document.addEventListener('newsFeedIterationCompleted', this.onNewsFeedIterationCompleted.bind(this, html));
@@ -183,6 +185,8 @@ export default class CharacterSheet extends ActorSheet {
                 details.removeAttribute('open');
             }
         });
+
+
         ////////////////////////////////////////////////////////////////////
         // Grab both canvases
         const ecgCanvas = html.find('#ecg-canvas')[0];
@@ -195,22 +199,38 @@ export default class CharacterSheet extends ActorSheet {
         const ctxLine = ecgCanvas.getContext('2d', { willReadFrequently: true });
         const ctxPoint = ecgPointCanvas.getContext('2d', { willReadFrequently: true });
 
-        // Resize helper
         function resizeCanvas() {
-            // Bottom canvas
-            ecgCanvas.width = ecgCanvas.offsetWidth * window.devicePixelRatio;
-            ecgCanvas.height = ecgCanvas.offsetHeight * window.devicePixelRatio;
+            // Bottom canvas dimensions
+            const ecgCanvasWidth = ecgCanvas.offsetWidth * window.devicePixelRatio;
+            const ecgCanvasHeight = ecgCanvas.offsetHeight * window.devicePixelRatio;
+
+            if (ecgCanvas.width !== ecgCanvasWidth || ecgCanvas.height !== ecgCanvasHeight) {
+                ecgCanvas.width = ecgCanvasWidth;
+                ecgCanvas.height = ecgCanvasHeight;
+            }
+
+            // You can reset + scale on *every* resize call
+            ctxLine.setTransform(1, 0, 0, 1, 0, 0);
             ctxLine.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-            // Top canvas
-            ecgPointCanvas.width = ecgPointCanvas.offsetWidth * window.devicePixelRatio;
-            ecgPointCanvas.height = ecgPointCanvas.offsetHeight * window.devicePixelRatio;
+            // Top canvas dimensions
+            const ecgPointCanvasWidth = ecgPointCanvas.offsetWidth * window.devicePixelRatio;
+            const ecgPointCanvasHeight = ecgPointCanvas.offsetHeight * window.devicePixelRatio;
+
+            if (ecgPointCanvas.width !== ecgPointCanvasWidth || ecgPointCanvas.height !== ecgPointCanvasHeight) {
+                ecgPointCanvas.width = ecgPointCanvasWidth;
+                ecgPointCanvas.height = ecgPointCanvasHeight;
+            }
+
+            ctxPoint.setTransform(1, 0, 0, 1, 0, 0);
             ctxPoint.scale(window.devicePixelRatio, window.devicePixelRatio);
         }
 
+
         // Call it right away and on window resize
         resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        ecgCanvas.addEventListener('resize', resizeCanvas);
+        ecgPointCanvas.addEventListener('resize', resizeCanvas);
 
         // Create your ECG animator instance, two canvases: one for lineCanvas, one for pointCanvas)
         this.ecgAnimator = new EcgAnimator(ecgCanvas, ecgPointCanvas, {
@@ -225,73 +245,83 @@ export default class CharacterSheet extends ActorSheet {
         // Start the loop
         this.ecgAnimator.start();
 
-        // Hook up frequency/amplitude controls
-        html.find('.ecg-frequency').on('change', (event) => {
-            const val = Number(event.currentTarget.value);
-            if (!isNaN(val)) this.ecgAnimator.setFrequency(val);
-        });
-
-        html.find('.ecg-amplitude').on('change', (event) => {
-            const val = Number(event.currentTarget.value);
-            if (!isNaN(val)) this.ecgAnimator.setAmplitude(val);
-        });
-
         //////////////////////////////////////////////////////////////////// 
-
-        html.on("change", "input[type='checkbox'][id^='healthBox']", async (event) => {
-            const clicked = event.currentTarget;
-            const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
-            const isChecked = clicked.checked;
-
-            // Determine if it's stun or physical
-            const isStun = clickedIndex <= 10;
-            const rangeStart = isStun ? 1 : 11;
-            const rangeEnd = isStun ? 10 : 20;
-            const healthArrayKey = isStun ? "stun" : "physical";
-
-            // Initialize the health array and updates object
-            const healthArray = [...this.actor.system.health[healthArrayKey]];
-            const updates = {};
-
-            // Calculate new health array values and update visual states
-            for (let i = rangeStart; i <= rangeEnd; i++) {
-                const shouldCheck = i <= clickedIndex;
-                const arrayIndex = i - rangeStart;
-
-                // Update the health array directly
-                healthArray[arrayIndex] = shouldCheck;
-
-                // Update checkbox state and visual feedback
-                const box = html.find(`#healthBox${i}`);
-                box.prop("checked", shouldCheck);
-                const siblingH4 = box.closest(".damage-input").find("h4");
-                if (siblingH4.length) {
-                    siblingH4.toggleClass("lit", shouldCheck);
-                    siblingH4.toggleClass("unlit", !shouldCheck);
-                }
-            }
-
-            // Add the updated health array to the updates object
-            updates[`system.health.${healthArrayKey}`] = healthArray;
-
-            // Update the penalty
-            const degree = clickedIndex % 10 || 10; // Normalize indices 11-20 to 1-10
-
-            const penalty = calculateSeverity(degree);
-            updates["system.health.penalty"] = penalty;
-
-            // Persist updates silently
-            await this.actor.update(updates, { render: false });
-
-            function calculateSeverity(degree) {
-                if (degree > 0 && degree < 3) return 1;
-                else if (degree >= 3 && degree < 6) return 2;
-                else if (degree >= 6 && degree < 10) return 3;
-                else if (degree === 10) return 4;
-                return 0;
-            }
-        });
     }
+
+    async _onHealthBoxChange(html, event) {
+        const clicked = event.currentTarget;
+        const clickedIndex = parseInt(clicked.id.replace("healthBox", ""), 10);
+        const isChecked = clicked.checked;
+
+        // Determine if it's stun or physical
+        const isStun = clickedIndex <= 10;
+        const rangeStart = isStun ? 1 : 11;
+        const rangeEnd = isStun ? 10 : 20;
+        const healthArrayKey = isStun ? "stun" : "physical";
+
+        // Initialize the health array and updates object
+        const healthArray = [...this.actor.system.health[healthArrayKey]];
+        const updates = {};
+
+        // Calculate new health array values and update visual states
+        for (let i = rangeStart; i <= rangeEnd; i++) {
+            const shouldCheck = i <= clickedIndex;
+            const arrayIndex = i - rangeStart;
+
+            // Update the health array directly
+            healthArray[arrayIndex] = shouldCheck;
+
+            // Update checkbox state and visual feedback
+            const box = html.find(`#healthBox${i}`);
+            box.prop("checked", shouldCheck);
+            const siblingH4 = box.closest(".damage-input").find("h4");
+            if (siblingH4.length) {
+                siblingH4.toggleClass("lit", shouldCheck);
+                siblingH4.toggleClass("unlit", !shouldCheck);
+            }
+        }
+
+        
+        // Persist updates silently
+        await this.actor.update(updates, { render: false });
+        
+        const calculateSeverity = (degree) => {
+            if (degree > 0 && degree < 3) {
+                console.log("Was 2 Fired");
+                return 1;
+            }
+            else if (degree >= 3 && degree < 6) {
+                this._setPace(4, 25);
+                return 2;
+            }
+            else if (degree >= 6 && degree < 10) {
+                this._setPace(8, 30);
+                return 3;
+            }
+            else if (degree === 9) return 4;
+            {
+                this._setPace(1, 5);
+                return 4;
+            }
+            this._setPace(2, 15);
+            return 0;
+        }
+
+        // Add the updated health array to the updates object
+        updates[`system.health.${healthArrayKey}`] = healthArray;
+
+        // Update the penalty
+        const degree = clickedIndex % 10 || 10; // Normalize indices 11-20 to 1-10
+
+        const penalty = calculateSeverity(degree);
+        updates["system.health.penalty"] = penalty;
+    }
+    
+    _setPace(frequency, amplitude) {
+        this.ecgAnimator.setFrequency(frequency);
+        this.ecgAnimator.setAmplitude(amplitude);
+    }
+
 
     onNewsFeedIterationCompleted(html, event) {
 

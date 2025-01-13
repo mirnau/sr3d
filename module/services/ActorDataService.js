@@ -123,6 +123,15 @@ export default class ActorDataService {
         };
     }
 
+    static getMetaHumanImageAdress(items) {
+        const metahumans = items.filter(item => item.type === "metahuman");
+        return metahumans[0].img;
+    }
+    static getMetaHumanityName(items) {
+        const metahumans = items.filter(item => item.type === "metahuman");
+        return metahumans[0].name;
+    }
+
     static getTransactions(items) {
         const transactions = items.filter(item => item.type === "transaction");
         return {

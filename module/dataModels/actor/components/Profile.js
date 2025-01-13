@@ -16,7 +16,7 @@ export default class Profile extends foundry.abstract.TypeDataModel {
 
       metaHumanity: new foundry.data.fields.StringField({
         required: false,
-        initial: "Human",
+        initial: "",
       }),
 
       // Image

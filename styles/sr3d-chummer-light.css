@@ -1,3 +1,9 @@
+.sr3d .sr3d.sheet.item .details-foldout,
+.sr3d .sr3d.sheet.character .details-foldout {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
 .sr3d .sr3d.sheet.item .inner-background-container,
 .sr3d .sr3d.sheet.character .inner-background-container {
   position: relative;
@@ -189,6 +195,10 @@
 .sr3d .sr3d.sheet.item,
 .sr3d .sr3d.sheet.character {
   box-shadow: none;
+}
+.sr3d .sr3d.sheet.item .details-foldout,
+.sr3d .sr3d.sheet.character .details-foldout {
+  text-shadow: 0 0 10px #ff0095;
 }
 .sr3d .sr3d.sheet.item a,
 .sr3d .sr3d.sheet.character a {
@@ -419,6 +429,8 @@
   width: 100%;
   text-align: center;
 }
+.sr3d .sr3d.sheet.item summary,
+.sr3d .sr3d.sheet.character summary,
 .sr3d .sr3d.sheet.item h2,
 .sr3d .sr3d.sheet.character h2 {
   text-transform: uppercase;
