@@ -64,6 +64,7 @@ export default class CharacterSheet extends ActorSheet {
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
         html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
         html.on("change", "input[type='checkbox'][id^='healthBox']", this._onHealthBoxChange.bind(this, html));
+        //html.find('.overflow-button.plus').on('click', this.incrementOverFlow.bind(this));
 
 
 

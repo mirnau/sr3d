@@ -1,6 +1,6 @@
 <section class="active-skill-section" data-skill-type="activeSkill">
 
-<!-- Item Common Header Start -->
+    <!-- Item Common Header Start -->
     <div class="simple-item-header">
         <div class="item-image">
             <img class="small" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
@@ -34,7 +34,7 @@
 
     <input type="text" class="item-name" name="name" placeholder="{{localize 'Name'}}" value="{{item.name}}" />
 
-<!-- Item Common Header End -->
+    <!-- Item Common Header End -->
 
     <div class="skill-type" data-skill-type="activeSkill">
 
@@ -72,44 +72,41 @@
 
             <div class="specializations-list">
 
-                    {{#each system.activeSkill.specializations}}
+                {{#each system.activeSkill.specializations}}
 
-                    <div class="specialization-container" data-index="{{@index}}">
-                        <div class="specialization-card">
-                            <!-- Name Input -->
-                            <input type="text" name="system.activeSkill.specializations.{{@index}}.name"
-                                value="{{this.name}}" />
+                <div class="specialization-container" data-index="{{@index}}">
+                    <div class="specialization-card">
+                        <!-- Name Input -->
+                        <input type="text" name="system.activeSkill.specializations.{{@index}}.name"
+                            value="{{this.name}}" />
 
-                            <!-- Display the value in a div -->
-                            <div class="specialization-value" contenteditable="false"
-                                oninput="this.nextElementSibling.value = this.innerText">
-                                <h1 class="no-margin">{{this.value}}</h1>
-                            </div>
-
-                            <!-- Hidden input to store the value -->
-                            <input type="hidden" name="system.activeSkill.specializations.{{@index}}.value"
-                                value="{{this.value}}" />
+                        <!-- Display the value in a div -->
+                        <div class="specialization-value" contenteditable="false"
+                            oninput="this.nextElementSibling.value = this.innerText">
+                            <h1 class="no-margin">{{this.value}}</h1>
                         </div>
 
-                        <div class="specialization-actions" data-index="{{@index}}">
-                            <a class="delete-specialization" title="Delete Specialization">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                            <a class="buy-specialization" title="{{localize 'sr3d.sheet.purchaseSpecialization'}}">
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
-                            <a class="undo-specialization" title="{{localize 'sr3d.sheet.undoSpecialization'}}">
-                                <i class="fas fa-undo-alt"></i>
-                            </a>
-                        </div>
+                        <!-- Hidden input to store the value -->
+                        <input type="hidden" name="system.activeSkill.specializations.{{@index}}.value"
+                            value="{{this.value}}" />
                     </div>
 
-                    {{else}}
-                    <div>Create a speciality by pressing the "+" icon.</div>
-                    {{/each}}
+                    <div class="specialization-actions" data-index="{{@index}}">
+                        <a class="delete-specialization" title="Delete Specialization">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                        <a class="buy-specialization" title="{{localize 'sr3d.sheet.purchaseSpecialization'}}">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <a class="undo-specialization" title="{{localize 'sr3d.sheet.undoSpecialization'}}">
+                            <i class="fas fa-undo-alt"></i>
+                        </a>
+                    </div>
+                </div>
 
-
-
+                {{else}}
+                <div>Create a speciality by pressing the "+" icon.</div>
+                {{/each}}
             </div>
         </div>
         {{/if}}

@@ -1289,10 +1289,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
+  flex-wrap: wrap;
   margin: 0rem;
   padding: 0rem;
 }
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter {
+  min-height: 6rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1342,13 +1345,26 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0rem;
+  margin: 0rem;
+  flex-wrap: wrap;
+  row-gap: 1rem;
 }
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input,
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input {
+  align-items: center;
   position: relative;
-  padding: 0rem;
-  margin: 0rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .overflow-button,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .overflow-button,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .checkbox,
+.sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .checkbox {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
 }
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description,
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description {
@@ -1358,7 +1374,7 @@
 }
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.stun,
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.stun {
-  top: -1rem;
+  top: -1.1rem;
 }
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .stun-damage .damage-input .damage-description.physical,
 .sr3d .sr3d.sheet.character .condition-monitor .condition-meter .physical-damage .damage-input .damage-description.physical {
@@ -1418,7 +1434,12 @@
 .sr3d .sr3d.sheet.character .condition-monitor .health-card-container:last-child {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 2.01533rem), calc(100% - 2.01533rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
 }
-.sr3d .sr3d.sheet.character .condition-monitor .health-card {
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container {
+  display: flex;
+  flex-direction: row;
+  display: inline-block;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card {
   clip-path: polygon(0.5rem 0px, calc(100% - 0.5rem) 0px, 100% 0.5rem, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0.5rem 100%, 0px calc(100% - 0.5rem), 0px 0.5rem);
   transition: transform 1.3s ease, width 1.3s ease, height 1.3s ease, background-color 1.3s ease;
   margin-top: 0.5rem;
@@ -1426,18 +1447,24 @@
   background-color: #1c364b;
   box-shadow: inset 0 0 16px #1df0ff;
   position: relative;
+  padding: 0;
+  height: auto;
 }
-.sr3d .sr3d.sheet.character .condition-monitor .health-card .stat-value {
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card > * {
   margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card .stat-value {
   text-align: center;
 }
-.sr3d .sr3d.sheet.character .condition-monitor .health-card h4,
-.sr3d .sr3d.sheet.character .condition-monitor .health-card h1 {
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card h4,
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card h1 {
   text-align: center;
-  text-indent: 0rem;
+  text-indent: 0;
 }
-.sr3d .sr3d.sheet.character .condition-monitor .health-card select,
-.sr3d .sr3d.sheet.character .condition-monitor .health-card .stat-label {
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card select,
+.sr3d .sr3d.sheet.character .condition-monitor .health-card-container .health-card .stat-label {
   align-items: center;
   justify-content: center;
   background-color: #1c364b;
