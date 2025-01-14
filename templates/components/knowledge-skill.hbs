@@ -59,7 +59,7 @@
                     <div class="specialization-container" data-index="{{@index}}">
                         <div class="specialization-card">
                             <!-- Name Input -->
-                            <input type="text" name="system.knowledgeSkill.specializations.[{{@index}}].name"
+                            <input type="text" name="system.knowledgeSkill.specializations.{{@index}}.name"
                                 value="{{this.name}}" />
 
                             <!-- Display the value in a div -->
@@ -69,7 +69,7 @@
                             </div>
 
                             <!-- Hidden input to store the value -->
-                            <input type="hidden" name="system.knowledgeSkill.specializations.[{{@index}}].value"
+                            <input type="hidden" name="system.knowledgeSkill.specializations.{{@index}}.value"
                                 value="{{this.value}}"/>
                         </div>
 

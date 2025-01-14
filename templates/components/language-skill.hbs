@@ -61,7 +61,7 @@
                 {{#each system.languageSkill.speak.specializations}}
                 <div class="specialization-container" data-index="{{@index}}">
                     <div class="specialization-card">
-                        <input type="text" name="system.languageSkill.speak.specializations.[{{@index}}].name" value="{{this.name}}" />
+                        <input type="text" name="system.languageSkill.speak.specializations.{{@index}}.name" value="{{this.name}}" />
                         <div class="specialization-value">
                             {{#if this.value}}
                             <div>
@@ -130,7 +130,7 @@
                 {{#each system.languageSkill.read.specializations}}
                 <div class="specialization-container" data-index="{{@index}}">
                     <div class="specialization-card">
-                        <input type="text" name="system.languageSkill.read.specializations.[{{@index}}].name" value="{{this.name}}" />
+                        <input type="text" name="system.languageSkill.read.specializations.{{@index}}.name" value="{{this.name}}" />
                         <div class="specialization-value">
                             {{#if this.value}}
                             <div>
@@ -199,7 +199,7 @@
                 {{#each system.languageSkill.write.specializations}}
                 <div class="specialization-container" data-index="{{@index}}">
                     <div class="specialization-card">
-                        <input type="text" name="system.languageSkill.write.specializations.[{{@index}}].name" value="{{this.name}}" />
+                        <input type="text" name="system.languageSkill.write.specializations.{{@index}}.name" value="{{this.name}}" />
                         <div class="specialization-value">
                             {{#if this.value}}
                             <div>
