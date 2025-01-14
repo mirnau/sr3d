@@ -1,8 +1,3 @@
-import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
-import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
-import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
-import ItemDataService from "../services/ItemDataService.js";
-
 import SR3DLog from '../SR3DLog.js'
 
 export default class KarmaSheet extends ItemSheet {

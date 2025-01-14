@@ -86,7 +86,6 @@ function registerHooks() {
         initMetahumanMasonry(app, html, data);
     });
 
-
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
@@ -110,7 +109,6 @@ function registerHooks() {
         setTheme(savedTheme); // Apply the saved theme on startup
     });
 
-
     // Attach Hooks for ActorSheet and ItemSheet
     Hooks.on(hooks.renderCharacterSheet, (app, html) => {
         const activeTheme = game.settings.get("sr3d", "theme");
@@ -128,6 +126,9 @@ function registerHooks() {
 
     ////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////
+    
+    
     //Updating the healthboxes on start
     Hooks.on("renderCharacterSheet", (app, html, data) => {
         let actor = app.actor;
@@ -170,7 +171,6 @@ function registerHooks() {
         }
     });
 
-    ////////////////////////////////////////////////////////
 
 
     function setItemFlags(item, options, userId) {
