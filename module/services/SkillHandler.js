@@ -26,10 +26,12 @@ export default class SkillHandler {
 
         if (availablePoints > currentPoints) {
             await Promise.all([
-                await this.actor.update({ [pointsKey]: availablePoints - 1 }),
+                await this.actor.update({ [pointsKey]: availablePoints - 1 }, { render: false }),
                 await this._updateItemSystemValues({ [skillKey]: skillValue + 1 })
             ]);
             this._updateCreationPointSidebar(-1);
+            this._updateSkillValueCharacterSheet(this.item._id, +1);
+            this._updateSkillValueItemSheet(this.item._id, +1);
             ui.notifications.info(`Successfully purchased ${this.item.name}.`);
         } else {
             console.warn('Not enough points to purchase the skill.');
@@ -53,15 +55,16 @@ export default class SkillHandler {
 
         if (skillValue > 0) {
             await Promise.all([
-                this.actor.update({ [pointsKey]: availablePoints + 1 }),
+                this.actor.update({ [pointsKey]: availablePoints + 1 }, { render: false }),
                 this._updateItemSystemValues({ [skillKey]: skillValue - 1 })
             ]);
             this._updateCreationPointSidebar(1);
+            this._updateSkillValueCharacterSheet(this.item._id, -1);
+            this._updateSkillValueItemSheet(this.item._id, -1);
         } else {
             ui.notifications.warn('Skill value cannot be reduced further.');
         }
     }
-
 
     async onAddSpecialization(event) {
         event.preventDefault();
@@ -86,13 +89,10 @@ export default class SkillHandler {
 
 
         // Update the system values through `_updateSystemValues`
-        await this._updateItemSystemValues({ [specializationsPath]: specializations });
+        await this._updateItemSystemValues({ [specializationsPath]: specializations }, true);
 
         // Clear the input field
         if (inputField) inputField.value = '';
-
-        // Refresh the sheet to reflect changes
-        this.item.sheet.render(true);
     }
 
     async onDeleteSpecialization(event) {
@@ -115,7 +115,7 @@ export default class SkillHandler {
         let specializations = this._getSpecializations(specializationsPath);
         if (index >= 0 && index < specializations.length) {
             specializations = [...specializations.slice(0, index), ...specializations.slice(index + 1)];
-            await this._updateItemSystemValues({ [specializationsPath]: specializations });
+            await this._updateItemSystemValues({ [specializationsPath]: specializations }, true);
         }
 
         // Refresh the sheet to reflect changes
@@ -161,8 +161,6 @@ export default class SkillHandler {
             [skillKey]: updatedSkillValue,
             [specializationsPath]: specializations
         });
-
-        this.item.sheet.render(true);
     }
 
     async onUndoSpecialization(event, index) {
@@ -287,20 +285,43 @@ export default class SkillHandler {
             languagePointsEl.textContent = parseInt(languagePointsEl.textContent) + direction;
         }
     }
+
+    _updateSkillValueCharacterSheet(skillId, direction) {
+        const skillElement = document.querySelector(`.skill-card[data-id="${skillId}"] .skill-value h1`);
+        if (skillElement) {
+            skillElement.textContent = parseInt(skillElement.textContent) + direction;
+        }
+    }
+
+    _updateSkillValueItemSheet(skillId, direction) {
+        const skillValueElement = document.querySelector(`.skill-value[data-id="${skillId}"]`);
+        if (skillValueElement) {
+          const currentValue = parseInt(skillValueElement.textContent) || 0;
+          skillValueElement.textContent = currentValue + direction;
+        }
+      }
+      
     
-    async _updateItemSystemValues(updateData) {
+    _updateSpecializationValueCharacterSheet(skillId, specializationIndex, direction) {
+        const specializationElement = document.querySelector(`.skill-card[data-id="${skillId}"] .specializations .skill-specialization-card:nth-child(${specializationIndex + 1}) .specialization-value h1`);
+        if (specializationElement) {
+            specializationElement.textContent = parseInt(specializationElement.textContent) + direction;
+        }
+    }
+    
+    async _updateItemSystemValues(updateData, triggerRerender = false) {
         try {
             console.log("Updating System Values:", updateData);
 
 
             if (this.item.isEmbedded) {
-                // Update the embedded item in the actor's items collection
-                await this.actor.updateEmbeddedDocuments("Item", [{ _id: this.item.id, ...updateData }]);
-
+                // Update the embedded item in the actor's items collection without re-rendering
+                await this.actor.updateEmbeddedDocuments("Item", [{ _id: this.item.id, ...updateData }], { render: triggerRerender });
             } else {
-                // Directly update the item if it’s not embedded
+                // Directly update the item without re-rendering
                 await this.item.update(updateData);
             }
+            
 
             console.log("System Values Updated Successfully:", updateData);
         } catch (error) {

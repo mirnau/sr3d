@@ -149,7 +149,7 @@ export default class ItemDataService {
                 name: "Human",
                 type: "metahuman",
                 system: {
-                    lifespan: { min: 10, average: 30, max: 100 },
+                    lifespan: { min: 10, average: 30, max: 80 },
                     physical: {
                         height: { min: 150, average: 170, max: 200 },
                         weight: { min: 50, average: 70, max: 120 }

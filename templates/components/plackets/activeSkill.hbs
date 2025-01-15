@@ -7,7 +7,7 @@
   </div>
 
   {{#each this}}
-  <div class="skill-card">
+  <div class="skill-card" data-id="{{this._id}}">
 
     {{#if (isShoppingStateActive actor)}}
     <div class="edit-icon">
