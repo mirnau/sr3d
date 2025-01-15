@@ -1,7 +1,7 @@
 import { defaultImages } from "../helpers/ItemImagePaths.js";
 
 export class CreateSkillDialog extends Dialog {
-    constructor(resolve, htmlTemplate, ctx) {
+    constructor(resolve, htmlTemplate, item) {
         super({
             title: "Select Skill Type",
             content: htmlTemplate,
@@ -9,39 +9,40 @@ export class CreateSkillDialog extends Dialog {
                 confirm: {
                     label: "Confirm",
                     callback: async (html) => {
-                        const selectedType = html.find('input[name="skillType"]:checked').val();
-                        console.log("Confirm button clicked, selectedType:", selectedType);
-
-                        if (selectedType) {
-                            if (ctx?.item) {
-                                // Update the existing item with the selected type
-                                await ctx.item.update({
-                                    "system.skillType": selectedType,
-                                    img: defaultImages.skill[selectedType] || defaultImages.default,
-                                    ...this._getItemData(selectedType), // Add structure defaults
-                                    "system.initialized": true,
-                                });
-                                console.log("Skill successfully updated with type:", selectedType);
-                                resolve(true);
-                            } else {
-                                // Create a new item structure based on the selected type
-                                const itemData = this._getItemData(selectedType);
-                                console.log("New skill data prepared:", itemData);
-                                resolve(itemData);
-                            }
+                      const selectedType = html.find('input[name="skillType"]:checked').val();
+                      console.log("Confirm button clicked, selectedType:", selectedType);
+                  
+                      if (selectedType) {
+                        if (this.item && this.item.id) {
+                          // Update the existing item with the selected type
+                          await this.item.update({
+                            "system.skillType": selectedType,
+                            img: defaultImages.skill[selectedType] || defaultImages.default,
+                            ...this._getItemData(selectedType), // Add structure defaults
+                            "system.initialized": true,
+                          });
+                          console.log("Skill successfully updated with type:", selectedType);
+                          resolve(true);
                         } else {
-                            console.warn("No skill type selected. Aborting.");
-                            resolve(null);
+                          // Create a new item structure based on the selected type
+                          const itemData = this._getItemData(selectedType);
+                          console.log("New skill data prepared:", itemData);
+                          resolve(itemData); // Return the prepared item data
                         }
+                      } else {
+                        console.warn("No skill type selected. Aborting.");
+                        resolve(null);
+                      }
                     },
-                },
+                  },
+                  
                 cancel: {
                     label: "Cancel",
                     callback: async () => {
                         console.log("Cancel button clicked.");
-                        if (ctx?.item) {
-                            console.log("Deleting uninitialized item:", ctx.item.name);
-                            await ctx.item.delete();
+                        if (item) {
+                            console.log("Deleting uninitialized item:", item.name);
+                            await item.delete();
                         }
                         resolve(null);
                     },

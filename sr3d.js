@@ -47,6 +47,7 @@ import NewsBroadcastSheet from "./module/sheets/NewsBroadcastSheet.js";
 import TransactionSheet from "./module/sheets/TransactionSheet.js";
 import TransactionModel from "./module/dataModels/items/TransactionModel.js";
 import { displayCreationDialog, doNotRenderSheet } from "./module/hooks/preCreateActor/displayCreationDialog.js";
+import { handleCreateSkill } from "./module/sheets/itemHandlers/handleRenderSkills.js";
 
 //NOTE: Recursively gather .hbs files from the folder structure
 async function registerTemplatesFromPathsAsync() {
@@ -89,7 +90,7 @@ function registerHooks() {
     Hooks.on(hooks.preCreateItem, onItemCreateIconChange);
     Hooks.on(hooks.preCreateItem, enforceSingleMetahumanLimit);
     Hooks.on(hooks.preCreateItem, enforceSingleMagic);
-    Hooks.on(hooks.createItem, setItemFlags);
+    Hooks.on(hooks.createItem, handleCreateSkill);
     Hooks.on(hooks.createItem, transferKarmatoActor);
     Hooks.on(hooks.updateActor, updateActorCreationPoints);
     Hooks.on(hooks.updateActor, monitorCreationPoints);
@@ -170,14 +171,6 @@ function registerHooks() {
             }
         }
     });
-
-
-
-    function setItemFlags(item, options, userId) {
-        SR3DLog.info("Initiating Item Flags", "setItemFlags.js");
-
-        item.setFlag(flags.namespace, flags.isInitialized, false);
-    }
 
     Hooks.once(hooks.init, function () {
 

@@ -1,4 +1,4 @@
-import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
+import { handleCreateSkill } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
 import ItemDataService from "../services/ItemDataService.js";
@@ -54,15 +54,6 @@ export default class SR3DItemSheet extends ItemSheet {
         ctx.weight = ItemDataService.weight(ctx);
         ctx.attributeModifiers = ItemDataService.attributeModifiers(ctx);
         ctx.attributeLimits = ItemDataService.attributeLimits(ctx);
-    }
-
-    async render(force = false, options = {}) {
-
-        if (this.item.type === "skill") {
-            await handleRenderSkills(this);
-        }
-
-        return super.render(force, options);
     }
 
     close(options = {}) {

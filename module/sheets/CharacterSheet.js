@@ -1,5 +1,4 @@
 import { baseAttributes, derivedAttributes, flags, itemCategory } from '../helpers/CommonConsts.js'
-import { CreateSkillDialog } from '../dialogs/CreateSkillDialog.js';
 import ActorDataService from '../services/ActorDataService.js';
 import EcgAnimator from '../helpers/EcgAnimator.js';
 import CharacterModel from '../dataModels/actor/CharacterModel.js';
@@ -59,14 +58,11 @@ export default class CharacterSheet extends ActorSheet {
         super.activateListeners(html);
 
         html.find(".item-create").click(this._onItemCreate.bind(this));
-        // html.find(".delete-skill").click(this._onDeleteSkill.bind(this));
         html.find(".edit-skill").click(this._onEditSkill.bind(this));
         html.find(".component-details").on("toggle", this._onDetailPanelOpened.bind(this, "toggle"));
         html.find('.open-owned-item').on('click', this._openOwnedInstance.bind(this));
         html.on("change", "input[type='checkbox'][id^='healthBox']", this._onHealthBoxChange.bind(this, html));
         //html.find('.overflow-button.plus').on('click', this.incrementOverFlow.bind(this));
-
-
 
         html.find(".journal-entry-link").on("click", async (event) => {
             event.preventDefault();
@@ -106,7 +102,6 @@ export default class CharacterSheet extends ActorSheet {
                 "system.journalEntryUuid": journalEntry.uuid,
             });
 
-            // Open the new journal entry
             journalEntry.sheet.render(true);
         });
 
@@ -129,6 +124,7 @@ export default class CharacterSheet extends ActorSheet {
 
         html.find('.increment-attribute').click(async (event) => {
             const attributeName = event.currentTarget.dataset.attribute;
+
             const direction = 1;
 
             if (!this.actor.getFlag(flags.namespace, flags.attributesDone)) {
@@ -226,7 +222,6 @@ export default class CharacterSheet extends ActorSheet {
             ctxPoint.setTransform(1, 0, 0, 1, 0, 0);
             ctxPoint.scale(window.devicePixelRatio, window.devicePixelRatio);
         }
-
 
         // Call it right away and on window resize
         resizeCanvas();
@@ -477,21 +472,13 @@ export default class CharacterSheet extends ActorSheet {
                 return;
             }
 
-            const htmlTemplate = await renderTemplate('systems/sr3d/templates/dialogs/skill-creation-dialog.hbs');
-            const ctx = { item: null, actor: this.actor }; // No item yet created
-
-            console.log("Creating skill. Showing dialog.");
-            const dialogResult = await new Promise((resolve) => {
-                new CreateSkillDialog(resolve, htmlTemplate, ctx).render(true);
-            });
-
-            if (!dialogResult) {
-                console.log("Skill creation canceled.");
-                return;
-            }
+            const skillData = {
+                type: "skill", // Specify the type of the item
+                name: "New Skill", // Optionally provide a name
+              };
 
             // Create the skill item
-            const createdItems = await this.actor.createEmbeddedDocuments("Item", [dialogResult]);
+            const createdItems = await this.actor.createEmbeddedDocuments("Item", [skillData]);
 
             if (createdItems.length > 0) {
                 const createdItem = createdItems[0]; // Retrieve the first created item
@@ -513,6 +500,4 @@ export default class CharacterSheet extends ActorSheet {
             console.warn(`Unhandled item type: ${itemType}`);
         }
     }
-
-
 }

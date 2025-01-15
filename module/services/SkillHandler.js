@@ -25,10 +25,11 @@ export default class SkillHandler {
         const skillValue = this._getSkillValue(skillKey);
 
         if (availablePoints > currentPoints) {
-            await this._updateActorAndItem(
-                { [pointsKey]: availablePoints - 1 },
-                { [skillKey]: skillValue + 1 }
-            );
+            await Promise.all([
+                await this.actor.update({ [pointsKey]: availablePoints - 1 }),
+                await this._updateItemSystemValues({ [skillKey]: skillValue + 1 })
+            ]);
+            this._updateCreationPointSidebar(-1);
             ui.notifications.info(`Successfully purchased ${this.item.name}.`);
         } else {
             console.warn('Not enough points to purchase the skill.');
@@ -53,8 +54,9 @@ export default class SkillHandler {
         if (skillValue > 0) {
             await Promise.all([
                 this.actor.update({ [pointsKey]: availablePoints + 1 }),
-                this._updateSystemValues({ [skillKey]: skillValue - 1 })
+                this._updateItemSystemValues({ [skillKey]: skillValue - 1 })
             ]);
+            this._updateCreationPointSidebar(1);
         } else {
             ui.notifications.warn('Skill value cannot be reduced further.');
         }
@@ -84,7 +86,7 @@ export default class SkillHandler {
 
 
         // Update the system values through `_updateSystemValues`
-        await this._updateSystemValues({ [specializationsPath]: specializations });
+        await this._updateItemSystemValues({ [specializationsPath]: specializations });
 
         // Clear the input field
         if (inputField) inputField.value = '';
@@ -92,8 +94,6 @@ export default class SkillHandler {
         // Refresh the sheet to reflect changes
         this.item.sheet.render(true);
     }
-
-
 
     async onDeleteSpecialization(event) {
         event.preventDefault();
@@ -115,7 +115,7 @@ export default class SkillHandler {
         let specializations = this._getSpecializations(specializationsPath);
         if (index >= 0 && index < specializations.length) {
             specializations = [...specializations.slice(0, index), ...specializations.slice(index + 1)];
-            await this._updateSystemValues({ [specializationsPath]: specializations });
+            await this._updateItemSystemValues({ [specializationsPath]: specializations });
         }
 
         // Refresh the sheet to reflect changes
@@ -157,7 +157,7 @@ export default class SkillHandler {
         specialization.value = skillValue + 1;
         const updatedSkillValue = skillValue - 1;
 
-        await this._updateSystemValues({
+        await this._updateItemSystemValues({
             [skillKey]: updatedSkillValue,
             [specializationsPath]: specializations
         });
@@ -191,7 +191,7 @@ export default class SkillHandler {
         specialization.value = 0; // INFO: Reset specialization value to indicate it's undone
         const updatedSkillValue = skillValue + 1; // INFO: Restore one skill point
 
-        await this._updateSystemValues({
+        await this._updateItemSystemValues({
             [skillKey]: updatedSkillValue,
             [specializationsPath]: specializations
         });
@@ -255,14 +255,6 @@ export default class SkillHandler {
         return specialization && typeof specialization.value !== "undefined";
     }
 
-    async _updateActorAndItem(actorData, itemData) {
-        try {
-            await Promise.all([this.actor.update(actorData), this.item.update(itemData)]);
-        } catch (error) {
-            console.error(`Failed to update: ${error.message}`);
-        }
-    }
-
     async _confirmDeletion() {
         return new Promise((resolve) => {
             const dialog = new ProceedWithDelete(resolve);
@@ -281,7 +273,22 @@ export default class SkillHandler {
         return skillPathMap[skillType] || null;
     }
 
-    async _updateSystemValues(updateData) {
+    _updateCreationPointSidebar(direction) {
+        if (this.item.system.skillType === 'activeSkill') {
+            const activePointsEl = document.querySelector('.attribute-point-value.activePoints');
+            activePointsEl.textContent = parseInt(activePointsEl.textContent) + direction;
+        }
+        if (this.item.system.skillType === 'knowledgeSkill') {
+            const knowledgePointsEl = document.querySelector('.attribute-point-value.knowledgePoints');
+            knowledgePointsEl.textContent = parseInt(knowledgePointsEl.textContent) + direction;
+        }
+        if (this.item.system.skillType === 'languageSkill') {
+            const languagePointsEl = document.querySelector('.attribute-point-value.languagePoints');
+            languagePointsEl.textContent = parseInt(languagePointsEl.textContent) + direction;
+        }
+    }
+    
+    async _updateItemSystemValues(updateData) {
         try {
             console.log("Updating System Values:", updateData);
 

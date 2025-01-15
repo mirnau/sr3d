@@ -1,4 +1,4 @@
-import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
+import { handleCreateSkill } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
 import ItemDataService from "../services/ItemDataService.js";
@@ -35,7 +35,7 @@ export default class SR3DItemSheet extends ItemSheet {
         return ctx;
     }
     async render(force = false, options = {}) {
-        await handleRenderSkills(this);
+        await handleCreateSkill(this);
         return super.render(force, options);
     }
 
@@ -57,14 +57,11 @@ export default class SR3DItemSheet extends ItemSheet {
     activateListeners(html) {
         super.activateListeners(html);
 
-        //Works as expected
         html.find('.buy-skill').click(this.item.onBuySkill.bind(this.item));
         html.find('.undo-skill').click(this.item.onUndoSkill.bind(this.item));
 
-        //Left to check:
         html.find('.buy-specialization').click(event => this.item.onBuySpecialization(event));
         html.find('.undo-specialization').click(event => this.item.onUndoSpecialization(event));
-
 
         html.find('.add-specialization').click(this.item.onAddSpecialization.bind(this.item));
         html.find('.delete-specialization').click(this.item.onDeleteSpecialization.bind(this.item));
@@ -163,14 +160,4 @@ export default class SR3DItemSheet extends ItemSheet {
             actor.sheet.render(); // Trigger a re-render of the actor sheet
         }
     }
-
-    /*
-    _resolveSpecializationsPath(skillType, subfield = null) {
-        if (skillType === "languageSkill" && subfield) {
-            return `system.skill.languageSkill.${subfield}.specializations`;
-        }
-        return `system.skill.${skillType}.specializations`;
-    }
-
-   */
 }

@@ -1,4 +1,4 @@
-import { handleRenderSkills } from "./itemHandlers/handleRenderSkills.js";
+import { handleCreateSkill } from "./itemHandlers/handleRenderSkills.js";
 import { baseAttributeDropdown } from "../helpers/CommonConsts.js";
 import ProceedWithDelete from "../dialogs/ProcedeWithDelete.js";
 import ItemDataService from "../services/ItemDataService.js";
