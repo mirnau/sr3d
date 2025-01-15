@@ -2,6 +2,10 @@
 
 SR3D is a Shadowrun Third Edition Homebrew game system. In Foundry Virtual Tabletop (VTT), a game system is essentially a modular software package that defines the rules, mechanics, and data structures for a specific tabletop role-playing game (TTRPG). 
 
+## YouTube-video showing this project, click the image!
+
+[![Watch the video](https://img.youtube.com/vi/YPmnX_Gp1uk/0.jpg)](https://youtu.be/YPmnX_Gp1uk)
+
 ## What is Shadowrun Third Edition
 Shadowrun 3rd Edition is a cyberpunk-fantasy tabletop role-playing game set in a dystopian future where magic has returned, blending high-tech with arcane powers. Released in 1998, it refines the core mechanics of its predecessors, focusing on the interplay between hacking, combat, and magical systems. Players take on roles like hackers (deckers), street samurai, or spell-slinging mages, navigating a gritty world dominated by megacorporations, cyber-enhanced mercenaries, and ancient, awakened creatures. The game uses a d6 dice pool system, emphasizing strategic planning and resource management while diving deep into rich lore and immersive world-building.
 
