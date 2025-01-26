@@ -1,5 +1,8 @@
 # SR3D
 
+This project has been replaced by a new iteration:
+sr3e
+
 SR3D is a Shadowrun Third Edition Homebrew game system. In Foundry Virtual Tabletop (VTT), a game system is essentially a modular software package that defines the rules, mechanics, and data structures for a specific tabletop role-playing game (TTRPG). 
 
 ## YouTube-video showing this project, click the image!
